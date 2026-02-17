@@ -1,0 +1,34 @@
+.cm-category-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+}
+
+.cm-category-toggle__label {
+  font-size: 16px;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black);
+  line-height: 1.5;
+}
+
+.cm-category-toggle__icon {
+  font-size: 40px !important;
+}
+
+.cm-category-toggle__icon--on {
+  color: var(--color-primary-default);
+}
+
+.cm-category-toggle__icon--off {
+  color: var(--color-neutral-600);
+}
+
+.cm-category-toggle:hover .cm-category-toggle__icon--off {
+  color: var(--color-neutral-700);
+}

@@ -1,0 +1,85 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Icons" />
+
+# Icons
+
+We use **@mui/icons-material** (Material Design icons) throughout the system.
+
+## Installation
+
+```bash
+npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+```
+
+## Usage
+
+```tsx
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
+
+// Default 24px
+<SearchIcon />
+
+// Sized via fontSize prop
+<SearchIcon fontSize="small" />  // 20px
+<SearchIcon fontSize="large" />  // 35px
+
+// Custom size via sx or style
+<SearchIcon style={{ fontSize: 16 }} />
+```
+
+## Icon Size Tokens
+
+Map MUI's sizing to our design tokens:
+
+| Token | Value | MUI equivalent |
+|-------|-------|----------------|
+| `--icon-sm` | 16px | `style={{ fontSize: 16 }}` |
+| `--icon-md` | 20px | `fontSize="small"` |
+| `--icon-lg` | 24px | default |
+| `--icon-xl` | 32px | `style={{ fontSize: 32 }}` |
+| `--icon-xxl` | 40px | `style={{ fontSize: 40 }}` |
+
+## Icons In Use
+
+### Navigation
+| Icon | Import | Used in |
+|------|--------|---------|
+| Home | `@mui/icons-material/Home` | SidebarNav |
+| Summarize | `@mui/icons-material/Summarize` | SidebarNav (Reports) |
+| Campaign | `@mui/icons-material/Campaign` | SidebarNav (Communication) |
+| AccountCircle | `@mui/icons-material/AccountCircle` | SidebarNav (Camper) |
+| Badge | `@mui/icons-material/Badge` | SidebarNav (Staff) |
+| School | `@mui/icons-material/School` | SidebarNav (Alumni) |
+| Paid | `@mui/icons-material/Paid` | SidebarNav (Financial) |
+| Book | `@mui/icons-material/Book` | SidebarNav (Accounts) |
+| MedicalServices | `@mui/icons-material/MedicalServices` | SidebarNav (Medical) |
+| DirectionsBusFilled | `@mui/icons-material/DirectionsBusFilled` | SidebarNav (Travel) |
+| Event | `@mui/icons-material/Event` | SidebarNav (Scheduling) |
+| Settings | `@mui/icons-material/Settings` | SidebarNav (Admin) |
+| Menu / MenuOpen | `@mui/icons-material/Menu` | SidebarNav toggle |
+
+### Actions & UI
+| Icon | Import | Used in |
+|------|--------|---------|
+| Search | `@mui/icons-material/Search` | SearchBar, TopNav |
+| Close | `@mui/icons-material/Close` | SearchBar, SidePanel |
+| Tune | `@mui/icons-material/Tune` | Reports customize |
+| Star / StarBorder | `@mui/icons-material/Star` | Report favorites |
+| Notifications | `@mui/icons-material/Notifications` | TopNav |
+| ArrowDropDown | `@mui/icons-material/ArrowDropDown` | TopNav avatar |
+| ToggleOn / ToggleOff | `@mui/icons-material/ToggleOn` | CategoryToggle |
+
+### Data Table
+| Icon | Import | Used in |
+|------|--------|---------|
+| ImportExport | `@mui/icons-material/ImportExport` | Sort (inactive) |
+| ArrowUpward / ArrowDownward | `@mui/icons-material/ArrowUpward` | Sort (active) |
+| CheckBoxOutlineBlank / CheckBox | `@mui/icons-material/CheckBoxOutlineBlank` | Row selection |
+| MoreHoriz | `@mui/icons-material/MoreHoriz` | Row actions |
+| ChevronLeft / ChevronRight | `@mui/icons-material/ChevronLeft` | Pagination |
+
+## Browse All
+
+Full icon catalog: [MUI Material Icons](https://mui.com/material-ui/material-icons/)

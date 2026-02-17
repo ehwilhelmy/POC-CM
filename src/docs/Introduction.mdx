@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Documentation/Introduction" />
+
+# CampMinder Design System
+
+A prototype component library and design token system for the CampMinder platform.
+
+## Tech Stack
+
+| Layer | Tool |
+|-------|------|
+| Framework | React 19 + TypeScript |
+| Build | Vite 7.3 |
+| Styling | Plain CSS + CSS Custom Properties |
+| Icons | @mui/icons-material |
+| Class composition | clsx |
+| Documentation | Storybook 10.2 |
+
+## Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Start Storybook
+npm run storybook
+```
+
+## Component Conventions
+
+Every component lives in its own folder:
+
+```
+src/components/ComponentName/
+  ComponentName.tsx          # React component
+  ComponentName.css          # Styles using design tokens
+  ComponentName.stories.tsx  # Storybook stories
+  index.ts                   # Barrel export
+```
+
+**CSS naming:** BEM-like with `cm-` prefix — `.cm-button`, `.cm-button--primary`, `.cm-button__label`
+
+**Tokens:** All colors, spacing, typography, and shadows use CSS custom properties from `src/theme/tokens.css`. Never hardcode values.

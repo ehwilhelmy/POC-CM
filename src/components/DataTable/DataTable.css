@@ -1,0 +1,223 @@
+.cm-table-wrapper {
+  overflow-x: auto;
+  font-family: var(--font-family-body);
+  background: var(--color-white);
+}
+
+.cm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ── Header ── */
+.cm-table__th {
+  text-align: left;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-default);
+  text-transform: uppercase;
+  letter-spacing: 0.035px;
+  line-height: 20px;
+  background: var(--color-neutral-300);
+  border-top: 1px solid var(--color-neutral-500);
+  border-bottom: 2px solid var(--color-neutral-500);
+  white-space: nowrap;
+}
+
+.cm-table__th--sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.cm-table__th--sortable:hover {
+  background: var(--color-neutral-400);
+}
+
+.cm-table__th--checkbox {
+  width: 40px;
+  text-align: center;
+  padding: 10px 8px;
+}
+
+.cm-table__th--actions {
+  width: 40px;
+}
+
+.cm-table__th-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cm-table__sort-icon {
+  color: var(--color-neutral-600);
+}
+
+.cm-table__sort-icon--active {
+  color: var(--color-primary-default);
+}
+
+/* ── Sticky Columns (checkbox + first column) ── */
+.cm-table__sticky {
+  position: sticky;
+  z-index: 1;
+}
+
+.cm-table__sticky--checkbox {
+  left: 0;
+}
+
+.cm-table__sticky--name {
+  left: 40px;
+  border-right: 1px solid var(--color-neutral-500);
+}
+
+/* Inherit row background on sticky cells */
+.cm-table__row .cm-table__sticky {
+  background: inherit;
+}
+
+thead .cm-table__sticky {
+  z-index: 2;
+  background: var(--color-neutral-300);
+}
+
+.cm-table__th--sortable.cm-table__sticky--name:hover {
+  background: var(--color-neutral-400);
+}
+
+/* ── Body Rows ── */
+.cm-table__row {
+  background: var(--color-white);
+  box-shadow: 0 1px 0 0 #d9d9d9;
+}
+
+.cm-table__row--alt {
+  background: var(--color-neutral-200);
+}
+
+.cm-table__row:hover {
+  background: var(--color-purple-100);
+}
+
+.cm-table__row--alt:hover {
+  background: var(--color-purple-100);
+}
+
+.cm-table__row--selected {
+  background: var(--color-purple-100);
+}
+
+/* ── Body Cells ── */
+.cm-table__td {
+  padding: 10px;
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-black);
+  letter-spacing: -0.012px;
+  line-height: 16px;
+}
+
+.cm-table__td--checkbox {
+  text-align: center;
+  padding: 10px 8px;
+}
+
+.cm-table__td--link {
+  font-size: 14px;
+  color: var(--color-primary-default);
+  text-decoration: underline;
+  cursor: pointer;
+  letter-spacing: -0.014px;
+  line-height: 20px;
+}
+
+.cm-table__td--actions {
+  width: 40px;
+  text-align: center;
+  padding: 10px 8px;
+}
+
+/* ── Checkbox button ── */
+.cm-table__checkbox-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-neutral-900);
+}
+
+.cm-table__checkbox-icon {
+  font-size: 24px;
+}
+
+/* ── Action button ── */
+.cm-table__action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-neutral-800);
+}
+
+.cm-table__action-btn:hover {
+  color: var(--color-primary-default);
+}
+
+/* ── Pagination ── */
+.cm-table__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 1px solid var(--color-neutral-500);
+  background: var(--color-neutral-300);
+}
+
+.cm-table__page-info {
+  font-size: 12px;
+  color: var(--color-neutral-800);
+}
+
+.cm-table__page-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.cm-table__page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-neutral-500);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  color: var(--color-neutral-800);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.cm-table__page-btn:hover:not(:disabled) {
+  border-color: var(--color-primary-default);
+  color: var(--color-primary-default);
+}
+
+.cm-table__page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cm-table__page-current {
+  font-size: 12px;
+  color: var(--color-neutral-800);
+  font-weight: var(--font-weight-medium);
+}

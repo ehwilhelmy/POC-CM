@@ -1,0 +1,62 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Shadows" />
+
+# Shadows & Elevation
+
+Three shadow levels for layering and depth. Defined in `src/theme/tokens.css`.
+
+## Elevation Scale
+
+<div style={{ display: 'flex', gap: 32, marginTop: 16 }}>
+  {[
+    { token: '--shadow-sm', value: '0 1px 2px rgba(0, 0, 0, 0.05)', label: 'Small' },
+    { token: '--shadow-md', value: '0 4px 6px rgba(0, 0, 0, 0.07)', label: 'Medium' },
+    { token: '--shadow-lg', value: '0 10px 15px rgba(0, 0, 0, 0.1)', label: 'Large' },
+  ].map(s => (
+    <div key={s.token} style={{ textAlign: 'center' }}>
+      <div style={{
+        width: 160,
+        height: 96,
+        background: '#ffffff',
+        borderRadius: 8,
+        boxShadow: s.value,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 13,
+        color: '#808080',
+      }}>
+        {s.label}
+      </div>
+      <code style={{ fontSize: 11, color: '#505050', marginTop: 8, display: 'block' }}>{s.token}</code>
+      <div style={{ fontSize: 10, color: '#a0a0a0', marginTop: 2 }}>{s.value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+## When to Use
+
+| Level | Token | Use case |
+|-------|-------|----------|
+| Subtle | `--shadow-sm` | Cards, inputs at rest |
+| Default | `--shadow-md` | Hover states, dropdowns |
+| Elevated | `--shadow-lg` | Modals, side panels, floating elements |
+
+### Usage
+
+```css
+.cm-card {
+  box-shadow: var(--shadow-sm);
+}
+
+.cm-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.cm-sidepanel {
+  box-shadow: var(--shadow-lg);
+}
+```

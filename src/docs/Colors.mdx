@@ -1,0 +1,179 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Colors" />
+
+# Colors
+
+All colors are defined as CSS custom properties in `src/theme/tokens.css`. Use semantic tokens in components whenever possible.
+
+## Neutral
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+  {[
+    { name: '100', var: '--color-neutral-100', hex: '#ffffff' },
+    { name: '200', var: '--color-neutral-200', hex: '#f3f3f3' },
+    { name: '300', var: '--color-neutral-300', hex: '#f0f0f0' },
+    { name: '400', var: '--color-neutral-400', hex: '#dddddd' },
+    { name: '500', var: '--color-neutral-500', hex: '#cccccc' },
+    { name: '600', var: '--color-neutral-600', hex: '#a0a0a0' },
+    { name: '700', var: '--color-neutral-700', hex: '#808080' },
+    { name: '800', var: '--color-neutral-800', hex: '#505050' },
+    { name: '900', var: '--color-neutral-900', hex: '#282828' },
+    { name: '1000', var: '--color-neutral-1000', hex: '#000000' },
+  ].map(c => (
+    <div key={c.var} style={{ textAlign: 'center' }}>
+      <div style={{ width: '100%', height: 48, borderRadius: 8, background: c.hex, border: '1px solid #ddd' }} />
+      <div style={{ fontSize: 11, marginTop: 4, color: '#505050' }}>{c.name}</div>
+      <div style={{ fontSize: 10, color: '#808080' }}>{c.hex}</div>
+    </div>
+  ))}
+</div>
+
+## Purple (Primary Brand)
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+  {[
+    { name: '100', var: '--color-purple-100', hex: '#efe8f7' },
+    { name: '200', var: '--color-purple-200', hex: '#ded0ef' },
+    { name: '300', var: '--color-purple-300', hex: '#c9b1e5' },
+    { name: '400', var: '--color-purple-400', hex: '#ad8bd7' },
+    { name: '500', var: '--color-purple-500', hex: '#9264ca' },
+    { name: '600', var: '--color-purple-600', hex: '#773dbd' },
+    { name: '700', var: '--color-purple-700', hex: '#603fa3' },
+    { name: '800', var: '--color-purple-800', hex: '#380f8c' },
+    { name: '900', var: '--color-purple-900', hex: '#381a69' },
+    { name: '1000', var: '--color-purple-1000', hex: '#27065c' },
+  ].map(c => (
+    <div key={c.var} style={{ textAlign: 'center' }}>
+      <div style={{ width: '100%', height: 48, borderRadius: 8, background: c.hex }} />
+      <div style={{ fontSize: 11, marginTop: 4, color: '#505050' }}>{c.name}</div>
+      <div style={{ fontSize: 10, color: '#808080' }}>{c.hex}</div>
+    </div>
+  ))}
+</div>
+
+## Orange
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+  {[
+    { name: '100', hex: '#fff4e4' },
+    { name: '200', hex: '#ffeac9' },
+    { name: '300', hex: '#ffdba5' },
+    { name: '400', hex: '#ffca78' },
+    { name: '500', hex: '#ffb84b' },
+    { name: '600', hex: '#ffa61e' },
+    { name: '700', hex: '#eb991c' },
+    { name: '800', hex: '#cc8518' },
+    { name: '900', hex: '#ad7114' },
+    { name: '1000', hex: '#996412' },
+  ].map(c => (
+    <div key={c.name} style={{ textAlign: 'center' }}>
+      <div style={{ width: '100%', height: 48, borderRadius: 8, background: c.hex, border: '1px solid #eee' }} />
+      <div style={{ fontSize: 11, marginTop: 4, color: '#505050' }}>{c.name}</div>
+      <div style={{ fontSize: 10, color: '#808080' }}>{c.hex}</div>
+    </div>
+  ))}
+</div>
+
+## Red
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+  {[
+    { name: '100', hex: '#f9e7e0' },
+    { name: '200', hex: '#f3cec2' },
+    { name: '300', hex: '#ebae99' },
+    { name: '400', hex: '#e28566' },
+    { name: '500', hex: '#d85d33' },
+    { name: '600', hex: '#ce3400' },
+    { name: '700', hex: '#be3000' },
+    { name: '800', hex: '#a52a00' },
+    { name: '900', hex: '#8c2300' },
+    { name: '1000', hex: '#7c1f00' },
+  ].map(c => (
+    <div key={c.name} style={{ textAlign: 'center' }}>
+      <div style={{ width: '100%', height: 48, borderRadius: 8, background: c.hex }} />
+      <div style={{ fontSize: 11, marginTop: 4, color: '#505050' }}>{c.name}</div>
+      <div style={{ fontSize: 10, color: '#808080' }}>{c.hex}</div>
+    </div>
+  ))}
+</div>
+
+## Green
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+  {[
+    { name: '100', hex: '#e6f1e7' },
+    { name: '200', hex: '#cde2ce' },
+    { name: '300', hex: '#accfae' },
+    { name: '400', hex: '#82b785' },
+    { name: '500', hex: '#599f5d' },
+    { name: '600', hex: '#2f8734' },
+    { name: '700', hex: '#2b7c30' },
+    { name: '800', hex: '#266c2a' },
+    { name: '900', hex: '#205c23' },
+    { name: '1000', hex: '#1c511f' },
+  ].map(c => (
+    <div key={c.name} style={{ textAlign: 'center' }}>
+      <div style={{ width: '100%', height: 48, borderRadius: 8, background: c.hex }} />
+      <div style={{ fontSize: 11, marginTop: 4, color: '#505050' }}>{c.name}</div>
+      <div style={{ fontSize: 10, color: '#808080' }}>{c.hex}</div>
+    </div>
+  ))}
+</div>
+
+## Blue
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 8 }}>
+  {[
+    { name: '100', hex: '#e4edf9' },
+    { name: '200', hex: '#cadaf3' },
+    { name: '300', hex: '#a7c2eb' },
+    { name: '400', hex: '#7aa3e0' },
+    { name: '500', hex: '#4e85d6' },
+    { name: '600', hex: '#2266cc' },
+    { name: '700', hex: '#1f5ebc' },
+    { name: '800', hex: '#1b52a3' },
+    { name: '900', hex: '#17458b' },
+    { name: '1000', hex: '#143d7a' },
+  ].map(c => (
+    <div key={c.name} style={{ textAlign: 'center' }}>
+      <div style={{ width: '100%', height: 48, borderRadius: 8, background: c.hex }} />
+      <div style={{ fontSize: 11, marginTop: 4, color: '#505050' }}>{c.name}</div>
+      <div style={{ fontSize: 10, color: '#808080' }}>{c.hex}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Semantic Tokens
+
+Use these in components instead of the base palette values.
+
+| Token | Purpose | Maps to |
+|-------|---------|---------|
+| `--color-primary-default` | Primary buttons, active states | purple-800 |
+| `--color-primary-hover` | Primary hover | purple-900 |
+| `--color-primary-pressed` | Primary pressed | purple-800 |
+| `--color-primary-focus-border` | Focus rings | purple-500 |
+| `--color-secondary-default` | Secondary button bg | neutral-100 |
+| `--color-secondary-hover` | Secondary hover | purple-100 |
+| `--color-secondary-pressed` | Secondary pressed | purple-200 |
+| `--color-secondary-text-border` | Secondary text/border | purple-800 |
+| `--color-page-background` | Page background | #f9fafe |
+| `--color-divider` | Borders, dividers | neutral-500 |
+| `--color-input-border` | Input borders | neutral-600 |
+| `--color-information` | Info states | blue-600 |
+| `--color-error` | Error states | red-700 |
+| `--color-warning` | Warning states | orange-700 |
+| `--color-success` | Success states | green-700 |
+
+### Usage
+
+```css
+/* Do this */
+.cm-button { background: var(--color-primary-default); }
+
+/* Not this */
+.cm-button { background: #380f8c; }
+```

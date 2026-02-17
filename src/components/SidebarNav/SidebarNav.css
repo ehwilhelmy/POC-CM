@@ -1,0 +1,94 @@
+.cm-sidebar {
+  width: 168px;
+  min-height: 100vh;
+  background: linear-gradient(152.45deg, #851936 -26.73%, #590e39 5.17%, #25023d 42.09%);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family-body);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.cm-sidebar--collapsed {
+  width: 56px;
+}
+
+/* ── Header with toggle ── */
+.cm-sidebar__header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+  height: 56px;
+  box-sizing: border-box;
+}
+
+.cm-sidebar__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  padding: 0;
+}
+
+.cm-sidebar--collapsed .cm-sidebar__header {
+  justify-content: center;
+}
+
+/* ── List ── */
+.cm-sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Link items ── */
+.cm-sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  letter-spacing: -0.014px;
+  line-height: 20px;
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+}
+
+.cm-sidebar__link--collapsed {
+  justify-content: center;
+  padding: 14px 18px;
+}
+
+.cm-sidebar__link:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--color-white);
+}
+
+.cm-sidebar__link--active {
+  background: rgba(255, 255, 255, 0.32);
+  color: var(--color-white);
+}
+
+.cm-sidebar__link--active:hover {
+  background: rgba(255, 255, 255, 0.32);
+  color: var(--color-white);
+}
+
+/* ── Icon ── */
+.cm-sidebar__icon {
+  flex-shrink: 0;
+}
+
+/* ── Label ── */
+.cm-sidebar__label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

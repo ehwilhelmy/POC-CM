@@ -1,0 +1,148 @@
+:root {
+  /* ── Base Colors: Neutral ── */
+  --color-neutral-100: #ffffff;
+  --color-neutral-200: #f3f3f3;
+  --color-neutral-300: #f0f0f0;
+  --color-neutral-400: #dddddd;
+  --color-neutral-500: #cccccc;
+  --color-neutral-600: #a0a0a0;
+  --color-neutral-700: #808080;
+  --color-neutral-800: #505050;
+  --color-neutral-900: #282828;
+  --color-neutral-1000: #000000;
+
+  /* ── Base Colors: Purple ── */
+  --color-purple-100: #efe8f7;
+  --color-purple-200: #ded0ef;
+  --color-purple-300: #c9b1e5;
+  --color-purple-400: #ad8bd7;
+  --color-purple-500: #9264ca;
+  --color-purple-600: #773dbd;
+  --color-purple-700: #603fa3;
+  --color-purple-800: #380f8c;
+  --color-purple-900: #381a69;
+  --color-purple-1000: #27065c;
+
+  /* ── Base Colors: Orange ── */
+  --color-orange-100: #fff4e4;
+  --color-orange-200: #ffeac9;
+  --color-orange-300: #ffdba5;
+  --color-orange-400: #ffca78;
+  --color-orange-500: #ffb84b;
+  --color-orange-600: #ffa61e;
+  --color-orange-700: #eb991c;
+  --color-orange-800: #cc8518;
+  --color-orange-900: #ad7114;
+  --color-orange-1000: #996412;
+
+  /* ── Base Colors: Red ── */
+  --color-red-100: #f9e7e0;
+  --color-red-200: #f3cec2;
+  --color-red-300: #ebae99;
+  --color-red-400: #e28566;
+  --color-red-500: #d85d33;
+  --color-red-600: #ce3400;
+  --color-red-700: #be3000;
+  --color-red-800: #a52a00;
+  --color-red-900: #8c2300;
+  --color-red-1000: #7c1f00;
+
+  /* ── Base Colors: Green ── */
+  --color-green-100: #e6f1e7;
+  --color-green-200: #cde2ce;
+  --color-green-300: #accfae;
+  --color-green-400: #82b785;
+  --color-green-500: #599f5d;
+  --color-green-600: #2f8734;
+  --color-green-700: #2b7c30;
+  --color-green-800: #266c2a;
+  --color-green-900: #205c23;
+  --color-green-1000: #1c511f;
+
+  /* ── Base Colors: Blue ── */
+  --color-blue-100: #e4edf9;
+  --color-blue-200: #cadaf3;
+  --color-blue-300: #a7c2eb;
+  --color-blue-400: #7aa3e0;
+  --color-blue-500: #4e85d6;
+  --color-blue-600: #2266cc;
+  --color-blue-700: #1f5ebc;
+  --color-blue-800: #1b52a3;
+  --color-blue-900: #17458b;
+  --color-blue-1000: #143d7a;
+
+  /* ── Semantic Colors: Campminder Theme ── */
+  --color-primary-default: var(--color-purple-800);
+  --color-primary-hover: var(--color-purple-900);
+  --color-primary-pressed: var(--color-purple-800);
+  --color-primary-focus-border: var(--color-purple-500);
+  --color-secondary-background: var(--color-purple-500);
+  --color-secondary-text-border: var(--color-purple-800);
+  --color-secondary-default: var(--color-neutral-100);
+  --color-secondary-hover: var(--color-purple-100);
+  --color-secondary-pressed: var(--color-purple-200);
+  --color-secondary-menu-hover: var(--color-purple-300);
+  --color-link-text: var(--color-purple-1000);
+  --color-divider: var(--color-neutral-500);
+  --color-page-background: #f9fafe;
+  --color-white: var(--color-neutral-100);
+  --color-black: var(--color-neutral-1000);
+  --color-dark-gray: var(--color-neutral-800);
+  --color-medium-gray: var(--color-neutral-600);
+  --color-light-gray: var(--color-neutral-300);
+  --color-input-border: var(--color-neutral-600);
+  --color-information: var(--color-blue-600);
+  --color-error: var(--color-red-700);
+  --color-warning: var(--color-orange-700);
+  --color-success: var(--color-green-700);
+
+  /* ── Spacing ── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-xxl: 32px;
+  --space-xxxl: 40px;
+
+  /* ── Border Radius ── */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-xxl: 16px;
+
+  /* ── Icon Sizes ── */
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+  --icon-xl: 32px;
+  --icon-xxl: 40px;
+
+  /* ── Typography ── */
+  --font-family-title: 'Jaini Purva', serif;
+  --font-family-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-xxl: 24px;
+  --font-size-xxxl: 32px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
