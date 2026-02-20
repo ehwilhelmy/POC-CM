@@ -16,12 +16,14 @@ export interface SidebarNavProps {
   items: NavItem[];
   collapsed?: boolean;
   onToggleCollapse?: () => void;
+  onNavigate?: (href: string) => void;
 }
 
 export const SidebarNav: React.FC<SidebarNavProps> = ({
   items,
   collapsed = false,
   onToggleCollapse,
+  onNavigate,
 }) => {
   return (
     <nav className={clsx('cm-sidebar', { 'cm-sidebar--collapsed': collapsed })}>
@@ -48,6 +50,12 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
                   'cm-sidebar__link--collapsed': collapsed,
                 })}
                 title={collapsed ? item.label : undefined}
+                onClick={(e) => {
+                  if (onNavigate && item.href) {
+                    e.preventDefault();
+                    onNavigate(item.href);
+                  }
+                }}
               >
                 {Icon && <Icon className="cm-sidebar__icon" />}
                 {!collapsed && (

@@ -1,1 +1,1 @@
-export { StaffPipeline } from './StaffPipeline';
+export { StaffPipelinePage } from './StaffPipeline';

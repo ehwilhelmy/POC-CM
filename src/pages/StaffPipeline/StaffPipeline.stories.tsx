@@ -1,15 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StaffPipeline } from './StaffPipeline';
+import { MemoryRouter } from 'react-router-dom';
+import { StaffPipelinePage } from './StaffPipeline';
 
-const meta: Meta<typeof StaffPipeline> = {
+const meta: Meta<typeof StaffPipelinePage> = {
   title: 'Prototypes/Staff Pipeline',
-  component: StaffPipeline,
+  component: StaffPipelinePage,
   parameters: {
     layout: 'fullscreen',
   },
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <div style={{ padding: '24px 32px', fontFamily: 'var(--font-family-body)' }}>
+          <Story />
+        </div>
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default meta;
-type Story = StoryObj<typeof StaffPipeline>;
+type Story = StoryObj<typeof StaffPipelinePage>;
 
 export const HiringPipeline: Story = {};

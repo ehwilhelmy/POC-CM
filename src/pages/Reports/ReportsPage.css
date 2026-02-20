@@ -1,0 +1,199 @@
+/* ── Toolbar ── */
+.cm-reports__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.cm-reports__search {
+  position: relative;
+  width: 342px;
+}
+
+.cm-reports__search-input {
+  width: 100%;
+  height: 48px;
+  padding: 12px 48px 12px 16px;
+  border: 1px solid var(--color-neutral-700);
+  border-radius: 50px;
+  background: var(--color-white);
+  font-family: var(--font-family-body);
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-neutral-900);
+  box-sizing: border-box;
+}
+
+.cm-reports__search-input::placeholder {
+  color: var(--color-neutral-800);
+}
+
+.cm-reports__search-input:focus {
+  outline: none;
+  border-color: var(--color-primary-default);
+  box-shadow: 0 0 0 2px rgba(56, 15, 140, 0.15);
+}
+
+.cm-reports__search-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-primary-default);
+  pointer-events: none;
+}
+
+.cm-reports__customize-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border: 1px solid var(--color-primary-default);
+  border-radius: 8px;
+  background: var(--color-white);
+  font-family: var(--font-family-body);
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-default);
+  cursor: pointer;
+  letter-spacing: 0.04px;
+}
+
+.cm-reports__customize-btn:hover {
+  background: var(--color-purple-100);
+}
+
+/* ── Tabs ── */
+.cm-reports__tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--color-neutral-600);
+}
+
+.cm-reports__tab {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border: none;
+  border-bottom: 1px solid var(--color-neutral-600);
+  background: transparent;
+  font-family: var(--font-family-body);
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-neutral-800);
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.cm-reports__tab:hover {
+  color: var(--color-primary-default);
+}
+
+.cm-reports__tab--active {
+  border-bottom: 3px solid var(--color-primary-default);
+  color: var(--color-primary-default);
+  font-weight: var(--font-weight-semibold);
+}
+
+.cm-reports__tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--color-primary-default);
+  color: var(--color-white);
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ── Sections ── */
+.cm-reports__sections {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cm-reports__section-title {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-default);
+  letter-spacing: -0.014px;
+  line-height: 20px;
+  margin: 0 0 12px 0;
+}
+
+/* ── Card Grid ── */
+.cm-reports__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+/* ── Report Card ── */
+.cm-reports__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 84px;
+  padding: 12px;
+  border: 1px solid var(--color-neutral-700);
+  border-radius: 8px;
+  background: var(--color-white);
+  box-sizing: border-box;
+}
+
+.cm-reports__card:hover {
+  border-color: var(--color-primary-default);
+  cursor: pointer;
+}
+
+.cm-reports__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.cm-reports__card-name {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-default);
+  line-height: 20px;
+  letter-spacing: -0.014px;
+}
+
+.cm-reports__star-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cm-reports__star--filled {
+  color: var(--color-primary-default);
+}
+
+.cm-reports__star--empty {
+  color: var(--color-neutral-600);
+}
+
+.cm-reports__star--empty:hover {
+  color: var(--color-primary-default);
+}
+
+/* ── Category Toggle List ── */
+.cm-reports__category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
