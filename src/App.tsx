@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppShell } from './layouts/AppShell';
 import { ReportsPage } from './pages/Reports';
 import { StaffPipelinePage } from './pages/StaffPipeline';
@@ -18,7 +18,7 @@ import {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {/* Auth flows — standalone, no AppShell */}
         <Route path="/auth" element={<AuthIndex />} />
@@ -48,7 +48,7 @@ function App() {
           <Route path="/admin" element={<PlaceholderPage title="Admin" />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
