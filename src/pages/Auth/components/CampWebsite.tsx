@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import campHero from '@/assets/camp-hero.jpg';
+import campLogo from '@/assets/camp-tall-pines-logo.svg';
 
 interface CampWebsiteProps {
   onPortalClick: () => void;
@@ -23,12 +24,8 @@ export const CampWebsite: React.FC<CampWebsiteProps> = ({ onPortalClick }) => {
 
       {/* Navigation */}
       <header className="flex items-center justify-between px-8 py-4 bg-white border-b border-gray-200">
-        <button className="flex items-center gap-2.5" onClick={onPortalClick}>
-          <div className="flex items-center justify-center w-9 h-9">
-            <svg viewBox="0 0 32 32" fill="none" width="28" height="28">
-              <path d="M16 2L6 18h6l-4 12 18-16h-7l5-12H16z" fill="#2d6a4f" />
-            </svg>
-          </div>
+        <button className="flex items-center gap-3" onClick={onPortalClick}>
+          <img src={campLogo} alt="Camp Tall Pines" className="w-11 h-11" />
           <div className="flex flex-col leading-none">
             <span className="text-[11px] font-bold tracking-[0.2em] text-[#2d6a4f] uppercase">Camp</span>
             <span className="text-[18px] font-extrabold tracking-[0.12em] text-[#2d6a4f] uppercase">Tall Pines</span>
@@ -155,7 +152,10 @@ export const CampWebsite: React.FC<CampWebsiteProps> = ({ onPortalClick }) => {
       <footer className="bg-gray-900 text-gray-400">
         <div className="max-w-5xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between gap-10">
           <div className="space-y-3">
-            <span className="text-white font-bold text-lg tracking-wide">CAMP TALL PINES</span>
+            <div className="flex items-center gap-3">
+              <img src={campLogo} alt="Camp Tall Pines" className="w-12 h-12 rounded-full bg-white/10" />
+              <span className="text-white font-bold text-lg tracking-wide">CAMP TALL PINES</span>
+            </div>
             <p className="text-sm leading-relaxed">
               1247 Pine Ridge Road<br />
               Lake Placid, NY 12946

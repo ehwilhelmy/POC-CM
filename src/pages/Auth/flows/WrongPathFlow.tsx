@@ -44,29 +44,30 @@ export const WrongPathFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Welcome</h1>
           <p className="cm-auth-subtitle">
-            The parent arrives at auth but isn't sure if they have an account. They guess.
+            Log in to {CAMP.name} with your email to continue.
           </p>
           <div className="cm-auth-form">
             <button
               className="cm-auth-btn cm-auth-btn--primary"
 
-              onClick={() => { setWrongChoice('signup'); setStep('signup-duplicate'); }}
-            >
-              Create Account
-            </button>
-            <p style={{ textAlign: 'center', fontSize: 13, color: '#808080', margin: 0 }}>
-              (they actually have an existing account)
-            </p>
-            <div className="cm-auth-divider">or</div>
-            <button
-              className="cm-auth-btn cm-auth-btn--secondary"
               onClick={() => { setWrongChoice('login'); setStep('login-no-account'); }}
             >
-              Sign In
+              Continue
             </button>
-            <p style={{ textAlign: 'center', fontSize: 13, color: '#808080', margin: 0 }}>
-              (they actually don't have an account yet)
-            </p>
+          </div>
+          <p className="cm-auth-signup-prompt">
+            Don&rsquo;t have an account?{' '}
+            <button className="cm-auth-link" onClick={() => { setWrongChoice('signup'); setStep('signup-duplicate'); }}>
+              Sign up
+            </button>
+          </p>
+          <div className="cm-auth-warning-banner">
+            <WarningAmberIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
+            <span>
+              <strong>This is the current experience.</strong> The parent must choose between
+              Sign In and Sign Up before entering their email. They don't know which path
+              to pick.
+            </span>
           </div>
         </>
       )}

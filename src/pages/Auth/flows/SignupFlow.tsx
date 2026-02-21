@@ -25,10 +25,8 @@ export const SignupFlow: React.FC = () => {
             Join Camp Tall Pines on CampMinder. It only takes a minute.
           </p>
           <div className="cm-auth-form">
-            <div style={{ display: 'flex', gap: 12 }}>
-              <TextInput label="First name" placeholder="Jane" />
-              <TextInput label="Last name" placeholder="Smith" />
-            </div>
+            <TextInput label="First name" placeholder="Jane" />
+            <TextInput label="Last name" placeholder="Smith" />
             <TextInput
               label="Email address"
               placeholder="parent@example.com"

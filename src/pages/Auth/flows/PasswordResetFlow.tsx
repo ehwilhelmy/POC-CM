@@ -14,12 +14,9 @@ export const PasswordResetFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('request');
 
-  const stepIndex = { request: 0, 'check-email': 1, 'new-password': 2, success: 3 };
-
   return (
     <AuthLayout
       camp={CAMP}
-      step={{ current: stepIndex[step], total: 4 }}
       onBack={
         step === 'request'
           ? () => navigate('/auth')

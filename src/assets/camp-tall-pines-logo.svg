@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="96" fill="#2d6a4f" stroke="#d4a843" stroke-width="4"/>
+  <circle cx="100" cy="100" r="88" fill="none" stroke="#d4a843" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+  <!-- Mountains background -->
+  <path d="M20 130 L60 75 L85 105 L100 70 L115 105 L140 75 L180 130Z" fill="#245c44" opacity="0.6"/>
+
+  <!-- Left tall pine -->
+  <g fill="#d4a843">
+    <!-- trunk -->
+    <rect x="56" y="115" width="5" height="22" rx="1"/>
+    <!-- branches -->
+    <path d="M58.5 60 L44 95 L52 90 L42 115 L52 110 L46 125 L71 125 L65 110 L75 115 L65 90 L73 95Z"/>
+    <!-- star/detail on top -->
+    <circle cx="58.5" cy="57" r="2.5"/>
+  </g>
+
+  <!-- Right tall pine (taller) -->
+  <g fill="#d4a843">
+    <rect x="127" y="108" width="5" height="29" rx="1"/>
+    <path d="M129.5 48 L113 88 L122 82 L110 110 L122 104 L115 127 L144 127 L137 104 L149 110 L137 82 L146 88Z"/>
+    <circle cx="129.5" cy="45" r="2.5"/>
+  </g>
+
+  <!-- Small pine center-right -->
+  <g fill="#d4a843" opacity="0.7">
+    <rect x="99" y="120" width="3.5" height="17" rx="1"/>
+    <path d="M100.5 88 L91 108 L96 105 L89 122 L112 122 L105 105 L110 108Z"/>
+  </g>
+
+  <!-- Lake water waves -->
+  <g stroke="#d4a843" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M25 142 Q35 138, 45 142 Q55 146, 65 142 Q75 138, 85 142 Q95 146, 105 142 Q115 138, 125 142 Q135 146, 145 142 Q155 138, 165 142 Q175 146, 180 142"/>
+    <path d="M30 150 Q40 146, 50 150 Q60 154, 70 150 Q80 146, 90 150 Q100 154, 110 150 Q120 146, 130 150 Q140 154, 150 150 Q160 146, 175 150"/>
+    <path d="M40 157 Q50 154, 60 157 Q70 160, 80 157 Q90 154, 100 157 Q110 160, 120 157 Q130 154, 140 157 Q150 160, 165 157"/>
+  </g>
+
+  <!-- Canoe on lake -->
+  <g fill="#d4a843">
+    <path d="M78 139 Q88 133, 98 133 Q108 133, 118 139 Q108 141, 98 141 Q88 141, 78 139Z"/>
+    <!-- Paddle -->
+    <rect x="95" y="122" width="2" height="16" rx="0.5" transform="rotate(-12 96 130)"/>
+    <ellipse cx="94" cy="121" rx="3.5" ry="5" transform="rotate(-12 94 121)"/>
+  </g>
+
+  <!-- "CAMP" text top arc -->
+  <path id="topArc" d="M40 90 A65 65 0 0 1 160 90" fill="none"/>
+  <text font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#d4a843" letter-spacing="6">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">CAMP</textPath>
+  </text>
+
+  <!-- "TALL PINES" text bottom arc -->
+  <path id="bottomArc" d="M30 155 A80 80 0 0 0 170 155" fill="none"/>
+  <text font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#d4a843" letter-spacing="3.5">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">TALL PINES</textPath>
+  </text>
+
+  <!-- Est. text -->
+  <text x="100" y="180" font-family="Georgia, serif" font-size="8" fill="#d4a843" text-anchor="middle" letter-spacing="2" opacity="0.8">EST. 1962</text>
+
+  <!-- Small stars -->
+  <circle cx="38" cy="70" r="1.5" fill="#d4a843" opacity="0.6"/>
+  <circle cx="162" cy="70" r="1.5" fill="#d4a843" opacity="0.6"/>
+  <circle cx="100" cy="35" r="2" fill="#d4a843" opacity="0.7"/>
+</svg>

@@ -1,71 +1,84 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './AuthLayout.css';
 
 export interface CampBranding {
   name: string;
   accentColor: string;
   initials: string;
+  logoUrl?: string;
+  backgroundUrl?: string;
 }
 
 export interface AuthLayoutProps {
   children: React.ReactNode;
   camp?: CampBranding;
   onBack?: () => void;
-  step?: { current: number; total: number };
 }
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({
   children,
   camp,
   onBack,
-  step,
 }) => {
-  return (
-    <div className="cm-auth">
-      <div className="cm-auth__card">
-        {camp && (
-          <div
-            className="cm-auth__camp-header"
-            style={{ backgroundColor: camp.accentColor }}
-          >
-            <div className="cm-auth__camp-logo">{camp.initials}</div>
-            <span className="cm-auth__camp-name">{camp.name}</span>
-          </div>
-        )}
+  const [showNotes, setShowNotes] = useState(false);
 
+  return (
+    <div
+      className={clsx('cm-auth', camp && 'cm-auth--branded', !showNotes && 'cm-auth--hide-notes')}
+      style={camp ? {
+        '--camp-accent': camp.accentColor,
+        ...(camp.backgroundUrl ? { '--camp-bg': `url(${camp.backgroundUrl})` } : {}),
+      } as React.CSSProperties : undefined}
+    >
+      {/* Camp branding above the card (Auth0 page template zone) */}
+      {camp && (
+        <div className="cm-auth__branding">
+          {camp.logoUrl ? (
+            <img src={camp.logoUrl} alt={camp.name} className="cm-auth__branding-logo" />
+          ) : (
+            <div className="cm-auth__branding-initials">{camp.initials}</div>
+          )}
+          <span className="cm-auth__branding-name">{camp.name}</span>
+        </div>
+      )}
+
+      <div className="cm-auth__card">
         <div className="cm-auth__body">
+          {children}
+
           {onBack && (
             <button className="cm-auth__back" onClick={onBack}>
-              &larr; Back
+              Go back
             </button>
           )}
-
-          {step && (
-            <div className="cm-auth__steps">
-              {Array.from({ length: step.total }, (_, i) => (
-                <div
-                  key={i}
-                  className={clsx('cm-auth__step-dot', {
-                    'cm-auth__step-dot--active': i === step.current,
-                    'cm-auth__step-dot--completed': i < step.current,
-                  })}
-                />
-              ))}
-            </div>
-          )}
-
-          {children}
-        </div>
-
-        <div className="cm-auth__footer">
-          <div className="cm-auth__wordmark">
-            <LockOutlinedIcon className="cm-auth__wordmark-lock" sx={{ fontSize: 12 }} />
-            Powered by CampMinder
-          </div>
         </div>
       </div>
+
+      {/* Below-card zone (Auth0 page template) */}
+      <p className="cm-auth__terms">
+        By signing in, you agree to CampMinder&rsquo;s{' '}
+        <button className="cm-auth__terms-link">Terms of Service</button> and{' '}
+        <button className="cm-auth__terms-link">Privacy Policy</button>.
+      </p>
+      <div className="cm-auth__wordmark">
+        <LockOutlinedIcon className="cm-auth__wordmark-lock" sx={{ fontSize: 12 }} />
+        Powered by CampMinder
+      </div>
+
+      <button
+        className="cm-auth__notes-fab"
+        onClick={() => setShowNotes((v) => !v)}
+        title={showNotes ? 'Hide design notes' : 'Show design notes'}
+      >
+        {showNotes
+          ? <VisibilityOffIcon sx={{ fontSize: 16 }} />
+          : <VisibilityIcon sx={{ fontSize: 16 }} />
+        }
+      </button>
     </div>
   );
 };

@@ -75,7 +75,6 @@ export const CampBrandedFlow: React.FC = () => {
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
-              style={{ backgroundColor: selectedCamp.accentColor }}
               onClick={() => setStep('success')}
             >
               Sign In

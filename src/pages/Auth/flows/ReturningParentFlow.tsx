@@ -36,9 +36,9 @@ export const ReturningParentFlow: React.FC = () => {
     >
       {(step === 'login' || step === 'login-error') && (
         <>
-          <h1 className="cm-auth-title">Welcome back</h1>
+          <h1 className="cm-auth-title">Welcome</h1>
           <p className="cm-auth-subtitle">
-            Sign in to your {CAMP.name} parent account.
+            Log in to {CAMP.name} with your email to continue.
           </p>
 
           {step === 'login-error' && (
@@ -61,7 +61,7 @@ export const ReturningParentFlow: React.FC = () => {
 
           <div className="cm-auth-form">
             <TextInput
-              label="Email address"
+              label="Email address *"
               placeholder="yourname@email.com"
               type="email"
               error={step === 'login-error' ? ' ' : undefined}
@@ -83,25 +83,23 @@ export const ReturningParentFlow: React.FC = () => {
                 }
               }}
             >
-              Sign In
+              Continue
             </button>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <button
-                className="cm-auth-link"
-                onClick={() => navigate('/auth/forgot-password')}
-              >
-                Forgot password?
-              </button>
-              <button
-                className="cm-auth-link"
-                onClick={() => navigate('/auth/new-parent')}
-              >
-                Create account
-              </button>
-            </div>
-
+            <button
+              className="cm-auth-link"
+              onClick={() => navigate('/auth/forgot-password')}
+            >
+              Forgot password?
+            </button>
           </div>
+
+          <p className="cm-auth-signup-prompt">
+            Don&rsquo;t have an account?{' '}
+            <button className="cm-auth-link" onClick={() => navigate('/auth/new-parent')}>
+              Sign up
+            </button>
+          </p>
 
           {/* Testing toggle */}
           <label className="cm-auth-test-toggle">

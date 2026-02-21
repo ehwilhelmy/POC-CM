@@ -41,12 +41,11 @@ export const MultiCampFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Welcome</h1>
           <p className="cm-auth-subtitle">
-            This parent has kids at two different camps, both using CampMinder.
-            They enter their email to sign in.
+            Log in to CampMinder with your email to continue.
           </p>
           <div className="cm-auth-form">
             <TextInput
-              label="Email address"
+              label="Email address *"
               value="jane.smith@email.com"
               type="email"
             />
@@ -57,6 +56,12 @@ export const MultiCampFlow: React.FC = () => {
               Continue
             </button>
           </div>
+          <p className="cm-auth-signup-prompt">
+            Don&rsquo;t have an account?{' '}
+            <button className="cm-auth-link" onClick={() => setStep('which-camp')}>
+              Sign up
+            </button>
+          </p>
         </>
       )}
 

@@ -16,9 +16,6 @@ export const UnifiedEntryFlow: React.FC = () => {
   const [email, setEmail] = useState('');
   const [simulateNew, setSimulateNew] = useState(false);
 
-  const stepIndex = { email: 0, 'existing-user': 1, 'new-user': 1, success: 2 };
-  const totalSteps = 3;
-
   const handleEmailContinue = () => {
     setStep(simulateNew ? 'new-user' : 'existing-user');
   };
@@ -30,18 +27,17 @@ export const UnifiedEntryFlow: React.FC = () => {
   return (
     <AuthLayout
       camp={CAMP}
-      step={{ current: stepIndex[step], total: totalSteps }}
       onBack={step !== 'email' && step !== 'success' ? handleBack : undefined}
     >
       {step === 'email' && (
         <>
           <h1 className="cm-auth-title">Welcome</h1>
           <p className="cm-auth-subtitle">
-            Enter your email to sign in or create an account.
+            Log in to {CAMP.name} with your email to continue.
           </p>
           <div className="cm-auth-form">
             <TextInput
-              label="Email address"
+              label="Email address *"
               placeholder="parent@example.com"
               type="email"
               value={email}
@@ -54,27 +50,17 @@ export const UnifiedEntryFlow: React.FC = () => {
             >
               Continue
             </button>
-
-            <div className="cm-auth-divider">or</div>
-
-            <button className="cm-auth-btn cm-auth-btn--secondary" onClick={handleEmailContinue}>
-              Continue with Google
-            </button>
           </div>
 
+          <p className="cm-auth-signup-prompt">
+            Don&rsquo;t have an account?{' '}
+            <button className="cm-auth-link" onClick={handleEmailContinue}>
+              Sign up
+            </button>
+          </p>
+
           {/* Testing toggle for prototype */}
-          <label
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              fontSize: 12,
-              color: '#808080',
-              cursor: 'pointer',
-              paddingTop: 4,
-              borderTop: '1px dashed #ddd',
-            }}
-          >
+          <label className="cm-auth-test-toggle">
             <input
               type="checkbox"
               checked={simulateNew}
@@ -130,10 +116,8 @@ export const UnifiedEntryFlow: React.FC = () => {
               value={email || 'newparent@example.com'}
               disabled
             />
-            <div style={{ display: 'flex', gap: 12 }}>
-              <TextInput label="First name" placeholder="Jane" />
-              <TextInput label="Last name" placeholder="Smith" />
-            </div>
+            <TextInput label="First name" placeholder="Jane" />
+            <TextInput label="Last name" placeholder="Smith" />
             <TextInput
               label="Password"
               placeholder="Create a password"

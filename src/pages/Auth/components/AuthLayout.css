@@ -1,6 +1,7 @@
 /* ── Full-page auth background (Auth0 Universal Login style) ── */
 .cm-auth {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
@@ -10,12 +11,34 @@
   padding: var(--space-xl);
 }
 
+/* ── Branded background (when camp context is available) ── */
+.cm-auth--branded {
+  position: relative;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--camp-accent) 92%, #000) 0%,
+      var(--camp-accent) 40%,
+      color-mix(in srgb, var(--camp-accent) 85%, #fff) 100%
+    );
+}
+
+/* Background image overlay (Auth0 Organizations background_url) */
+.cm-auth--branded::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--camp-bg, none) center / cover no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
 /* ── Auth card ── */
 .cm-auth__card {
   width: 100%;
   max-width: 400px;
   background: #ffffff;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.04),
     0 1px 3px rgba(0, 0, 0, 0.08),
@@ -23,31 +46,89 @@
   overflow: hidden;
 }
 
-/* ── Camp branding header ── */
-.cm-auth__camp-header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-lg) var(--space-xl);
-  color: #ffffff;
+.cm-auth--branded .cm-auth__card {
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.cm-auth__camp-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-lg);
+/* ── Camp branding above card (Auth0 page template zone) ── */
+.cm-auth--branded > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cm-auth__branding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.cm-auth__branding-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+}
+
+.cm-auth__branding-initials {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
   background: rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-sm);
-  flex-shrink: 0;
+  font-size: var(--font-size-xl);
+  color: #ffffff;
 }
 
-.cm-auth__camp-name {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
+.cm-auth__branding-name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Terms below card (Auth0 page template zone) ── */
+.cm-auth__terms {
+  margin-top: var(--space-lg);
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  max-width: 400px;
+  line-height: var(--line-height-normal);
+}
+
+.cm-auth:not(.cm-auth--branded) .cm-auth__terms {
+  color: var(--color-neutral-600);
+}
+
+.cm-auth__terms-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-family-body);
+  font-size: inherit;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.cm-auth__terms-link:hover {
+  color: #ffffff;
+}
+
+.cm-auth:not(.cm-auth--branded) .cm-auth__terms-link {
+  color: #635dff;
+}
+
+.cm-auth:not(.cm-auth--branded) .cm-auth__terms-link:hover {
+  color: #4a44e0;
 }
 
 /* ── Card body ── */
@@ -58,69 +139,44 @@
   gap: var(--space-xl);
 }
 
-/* ── Back button ── */
+/* ── Back link (Auth0 style — bottom of card) ── */
 .cm-auth__back {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
   background: none;
   border: none;
   padding: 0;
   font-family: var(--font-family-body);
   font-size: var(--font-size-sm);
-  color: var(--color-neutral-600);
+  font-weight: var(--font-weight-medium);
+  color: #635dff;
   cursor: pointer;
-  align-self: flex-start;
-  margin-bottom: calc(-1 * var(--space-sm));
+  align-self: center;
+  text-decoration: none;
 }
 
 .cm-auth__back:hover {
-  color: var(--color-neutral-900);
+  text-decoration: underline;
 }
 
-/* ── Step indicator ── */
-.cm-auth__steps {
-  display: flex;
-  gap: var(--space-sm);
-  justify-content: center;
-  margin-bottom: calc(-1 * var(--space-sm));
+.cm-auth--branded .cm-auth__back {
+  color: var(--camp-accent);
 }
 
-.cm-auth__step-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-neutral-400);
-  transition: background-color 0.2s ease, width 0.2s ease;
-}
-
-.cm-auth__step-dot--active {
-  background: #1a1a1a;
-  width: 24px;
-  border-radius: 4px;
-}
-
-.cm-auth__step-dot--completed {
-  background: #1a1a1a;
-}
-
-/* ── Footer ── */
-.cm-auth__footer {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-md) var(--space-xxl) var(--space-lg);
-  border-top: 1px solid #f0f0f0;
-}
-
+/* ── Wordmark below card ── */
 .cm-auth__wordmark {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
+  margin-top: var(--space-md);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.2px;
-  color: #a0a0a0;
+  color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
+}
+
+.cm-auth:not(.cm-auth--branded) .cm-auth__wordmark {
+  color: var(--color-neutral-600);
 }
 
 .cm-auth__wordmark-lock {
@@ -137,7 +193,7 @@
 }
 
 .cm-auth .cm-text-input__field:focus {
-  border-color: #1a1a1a;
+  border-color: #635dff;
   box-shadow: none;
 }
 
@@ -159,6 +215,7 @@
   color: var(--color-neutral-900);
   margin: 0;
   line-height: var(--line-height-tight);
+  text-align: center;
 }
 
 .cm-auth-subtitle {
@@ -166,6 +223,7 @@
   color: var(--color-neutral-700);
   margin: calc(-1 * var(--space-sm)) 0 0;
   line-height: var(--line-height-normal);
+  text-align: center;
 }
 
 .cm-auth-form {
@@ -189,6 +247,13 @@
 
 .cm-auth-link:hover {
   text-decoration: underline;
+}
+
+.cm-auth-signup-prompt {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-700);
+  margin: 0;
+  text-align: center;
 }
 
 .cm-auth-divider {
@@ -291,12 +356,25 @@
 }
 
 .cm-auth-btn--primary {
-  background: #1a1a1a;
+  background: #635dff;
   color: #ffffff;
 }
 
 .cm-auth-btn--primary:hover {
-  background: #333333;
+  background: #4a44e0;
+}
+
+/* Branded variants — use camp accent color */
+.cm-auth--branded .cm-auth-btn--primary {
+  background: var(--camp-accent);
+}
+
+.cm-auth--branded .cm-auth-btn--primary:hover {
+  background: color-mix(in srgb, var(--camp-accent) 85%, #000);
+}
+
+.cm-auth--branded .cm-auth-link {
+  color: var(--camp-accent);
 }
 
 .cm-auth-btn--secondary {
@@ -365,6 +443,41 @@
   cursor: pointer;
 }
 
+/* ── Notes FAB (fixed bottom-right) ── */
+.cm-auth__notes-fab {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  opacity: 0.4;
+}
+
+.cm-auth__notes-fab:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+}
+
+/* ── Hide notes mode ── */
+.cm-auth--hide-notes .cm-auth-info-banner,
+.cm-auth--hide-notes .cm-auth-warning-banner,
+.cm-auth--hide-notes .cm-auth-error-banner,
+.cm-auth--hide-notes .cm-auth-test-toggle {
+  display: none;
+}
+
 /* ── Responsive: Tablet ── */
 @media (max-width: 768px) {
   .cm-auth {
@@ -384,14 +497,44 @@
     background: #ffffff;
   }
 
+  .cm-auth--branded {
+    background: #ffffff;
+  }
+
+  .cm-auth__branding {
+    flex-direction: row;
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: 0;
+    background: var(--camp-accent, #1a1a1a);
+  }
+
+  .cm-auth__branding-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .cm-auth__branding-initials {
+    width: 36px;
+    height: 36px;
+    font-size: var(--font-size-md);
+  }
+
+  .cm-auth__branding-name {
+    font-size: var(--font-size-md);
+  }
+
   .cm-auth__card {
     max-width: none;
     border-radius: 0;
     box-shadow: none;
-    min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 0;
     display: flex;
     flex-direction: column;
+    flex: 1;
+  }
+
+  .cm-auth--branded .cm-auth__card {
+    box-shadow: none;
   }
 
   .cm-auth__body {
@@ -400,22 +543,9 @@
     gap: var(--space-lg);
   }
 
-  .cm-auth__camp-header {
-    padding: var(--space-md) var(--space-lg);
-  }
-
-  .cm-auth__camp-logo {
-    width: 32px;
-    height: 32px;
-    font-size: var(--font-size-xs);
-  }
-
-  .cm-auth__camp-name {
-    font-size: var(--font-size-md);
-  }
-
-  .cm-auth__footer {
-    padding: var(--space-md) var(--space-lg);
+  .cm-auth__terms {
+    padding: var(--space-sm) var(--space-lg) var(--space-lg);
+    color: var(--color-neutral-600);
   }
 
   .cm-auth-title {

@@ -45,13 +45,13 @@ export const MigratedParentFlow: React.FC = () => {
     >
       {step === 'login-attempt' && (
         <>
-          <h1 className="cm-auth-title">Welcome back</h1>
+          <h1 className="cm-auth-title">Welcome</h1>
           <p className="cm-auth-subtitle">
-            Sign in to your {CAMP.name} parent account.
+            Log in to {CAMP.name} with your email to continue.
           </p>
           <div className="cm-auth-form">
             <TextInput
-              label="Email address"
+              label="Email address *"
               value="jane.smith@email.com"
               type="email"
             />
@@ -66,9 +66,13 @@ export const MigratedParentFlow: React.FC = () => {
 
               onClick={() => setStep('password-fail')}
             >
-              Sign In
+              Continue
             </button>
           </div>
+          <p className="cm-auth-signup-prompt">
+            Don&rsquo;t have an account?{' '}
+            <button className="cm-auth-link">Sign up</button>
+          </p>
         </>
       )}
 

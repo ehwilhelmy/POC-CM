@@ -21,10 +21,6 @@ export const GuestAccountFlow: React.FC = () => {
   return (
     <AuthLayout
       camp={CAMP}
-      step={{
-        current: ['invite-email', 'click-link', 'create-account', 'confusion', 'success'].indexOf(step),
-        total: 5,
-      }}
       onBack={
         step === 'click-link'
           ? () => setStep('invite-email')
@@ -94,13 +90,13 @@ export const GuestAccountFlow: React.FC = () => {
 
       {step === 'click-link' && (
         <>
-          <h1 className="cm-auth-title">Create your account</h1>
+          <h1 className="cm-auth-title">Welcome</h1>
           <p className="cm-auth-subtitle">
-            Create a CampMinder account to view Tommy's profile at {CAMP.name}.
+            Log in to {CAMP.name} with your email to continue.
           </p>
           <div className="cm-auth-form">
             <TextInput
-              label="Email address"
+              label="Email address *"
               placeholder="grandma@email.com"
               type="email"
             />
@@ -111,11 +107,17 @@ export const GuestAccountFlow: React.FC = () => {
               Continue
             </button>
           </div>
+          <p className="cm-auth-signup-prompt">
+            Don&rsquo;t have an account?{' '}
+            <button className="cm-auth-link" onClick={() => setStep('create-account')}>
+              Sign up
+            </button>
+          </p>
           <div className="cm-auth-warning-banner">
             <WarningAmberIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
             <span>
-              Grandma just wants to see photos. She doesn't understand why she needs a
-              "CampMinder account." Different mental model from primary caregivers.
+              Grandma just wants to see photos. She doesn't understand why she needs to
+              "Log in to {CAMP.name}." Different mental model from primary caregivers.
             </span>
           </div>
         </>
@@ -128,10 +130,8 @@ export const GuestAccountFlow: React.FC = () => {
             Fill in your details to complete your account.
           </p>
           <div className="cm-auth-form">
-            <div style={{ display: 'flex', gap: 12 }}>
-              <TextInput label="First name" placeholder="Margaret" />
-              <TextInput label="Last name" placeholder="Smith" />
-            </div>
+            <TextInput label="First name" placeholder="Margaret" />
+            <TextInput label="Last name" placeholder="Smith" />
             <TextInput
               label="Password"
               placeholder="Create a password"

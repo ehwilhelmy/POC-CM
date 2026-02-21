@@ -1,4 +1,6 @@
 import type { CampBranding } from './components/AuthLayout';
+import campTallPinesLogo from '@/assets/camp-tall-pines-logo.svg';
+import campTallPinesBg from '@/assets/camp-bg.jpeg';
 
 /**
  * Shared camp brand config — single source of truth.
@@ -8,6 +10,8 @@ export const CAMP_TALL_PINES: CampBranding = {
   name: 'Camp Tall Pines',
   accentColor: '#2d6a4f',
   initials: 'TP',
+  logoUrl: campTallPinesLogo,
+  backgroundUrl: campTallPinesBg,
 };
 
 export const CAMP_SUNSHINE: CampBranding = {
