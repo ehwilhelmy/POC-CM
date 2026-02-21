@@ -21,13 +21,12 @@ import {
   CreditCard,
   ChevronRight,
 } from '@mui/icons-material';
-import type { SvgIconComponent } from '@mui/material';
 import campBg from '@/assets/camp-bg.jpeg';
 import campLogo from '@/assets/camp-tall-pines-logo.svg';
 import './CampInTouchDashboard.css';
 
 interface DashboardLink {
-  icon: SvgIconComponent;
+  icon: typeof Description;
   iconColor: string;
   label: string;
 }
