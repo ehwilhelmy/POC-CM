@@ -11,6 +11,7 @@ export interface TextInputProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
+  ref?: React.Ref<HTMLInputElement>;
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
@@ -22,6 +23,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   value,
   onChange,
   type = 'text',
+  ref,
 }) => {
   return (
     <div className={clsx('cm-text-input', { 'cm-text-input--error': error, 'cm-text-input--disabled': disabled })}>
@@ -33,6 +35,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         disabled={disabled}
         value={value}
         onChange={onChange}
+        ref={ref}
       />
       {error && <span className="cm-text-input__error">{error}</span>}
       {!error && helperText && <span className="cm-text-input__helper">{helperText}</span>}

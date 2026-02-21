@@ -1,0 +1,97 @@
+/* ── Floating Email Popup ── */
+
+/* Backdrop */
+.cm-email-popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+.cm-email-popup-backdrop--visible {
+  opacity: 1;
+}
+
+/* Panel */
+.cm-email-popup {
+  position: fixed;
+  bottom: 0;
+  left: 24px;
+  width: 420px;
+  height: 520px;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.18);
+  transform: translateY(100%);
+  transition: transform 0.25s ease-out;
+  overflow: hidden;
+}
+
+.cm-email-popup--open {
+  transform: translateY(0);
+}
+
+/* Close button */
+.cm-email-popup__close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: #5f6368;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 0;
+  transition: background-color 0.15s ease;
+}
+
+.cm-email-popup__close:hover {
+  background: #f1f3f4;
+}
+
+/* Gmail inbox inside the popup fills the panel */
+.cm-email-popup .cm-gmail-inbox {
+  height: 100%;
+}
+
+/* ── Trigger button on the auth card (outline, camp-branded) ── */
+.cm-email-popup-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: var(--space-md) var(--space-xl);
+  border: 2px solid var(--camp-accent, var(--color-primary-default));
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--camp-accent, var(--color-primary-default));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.cm-email-popup-trigger:hover {
+  background: var(--camp-accent, var(--color-primary-default));
+  color: #ffffff;
+}
+
+.cm-email-popup-trigger:active {
+  background: var(--camp-accent, var(--color-primary-default));
+  color: #ffffff;
+  opacity: 0.9;
+}

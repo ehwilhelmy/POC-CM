@@ -1,26 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { CampWebsite } from '../components/CampWebsite';
 import { AuthLayout } from '../components/AuthLayout';
+import { EmailPopup } from '../components/EmailPopup';
+import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { TextInput } from '../../../components/TextInput';
 import { CAMP } from '../campBrand';
+import './EmailPreviewFlow.css';
 
 type Step =
   | 'camp-website'
   | 'email-entry'
   | 'verify-code'
   | 'create-account'
-  | 'welcome';
+  | 'welcome'
+  | 'dashboard';
 
 export const NewParentFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('camp-website');
   const [email, setEmail] = useState('jane.smith@email.com');
+  const [emailOpen, setEmailOpen] = useState(false);
+  const [codeCopied, setCodeCopied] = useState(false);
+  const codeInputRef = useRef<HTMLInputElement>(null);
 
   if (step === 'camp-website') {
     return <CampWebsite onPortalClick={() => setStep('email-entry')} />;
+  }
+
+  if (step === 'dashboard') {
+    return (
+      <CampInTouchDashboard
+        firstName="Jane"
+        onHome={() => setStep('camp-website')}
+        onRestart={() => setStep('camp-website')}
+        onBackToFlows={() => navigate('/auth')}
+      />
+    );
   }
 
   return (
@@ -36,7 +54,7 @@ export const NewParentFlow: React.FC = () => {
               : undefined
       }
     >
-      {/* Step 1: Identifier-first entry (same screen for login AND signup) */}
+      {/* Step 1: Identifier-first entry */}
       {step === 'email-entry' && (
         <>
           <h1 className="cm-auth-title">Welcome</h1>
@@ -75,7 +93,7 @@ export const NewParentFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 2: Verify email with 6-digit code (Auth0 signup-id prompt) */}
+      {/* Step 2: Verify code */}
       {step === 'verify-code' && (
         <>
           <h1 className="cm-auth-title">Verify your identity</h1>
@@ -83,18 +101,74 @@ export const NewParentFlow: React.FC = () => {
             We&rsquo;ve sent an email with your code to:<br />
             <strong>{email}</strong>
           </p>
+
           <div className="cm-auth-form">
             <TextInput
               label="Enter the 6-digit code *"
               placeholder="000000"
+              ref={codeInputRef}
             />
-            <button
-              className="cm-auth-btn cm-auth-btn--primary"
-              onClick={() => setStep('create-account')}
-            >
-              Continue
-            </button>
+            {codeCopied ? (
+              <button
+                className="cm-auth-btn cm-auth-btn--primary"
+                onClick={() => setStep('create-account')}
+              >
+                Continue
+              </button>
+            ) : (
+              <button
+                className="cm-email-popup-trigger"
+                onClick={() => setEmailOpen(true)}
+              >
+                Check your email
+              </button>
+            )}
           </div>
+
+          <EmailPopup
+            open={emailOpen}
+            onClose={() => setEmailOpen(false)}
+            senderName={`${CAMP.name} via CampMinder`}
+            senderEmail="noreply@campminder.com"
+            subject={`Your verification code — ${CAMP.name}`}
+            accentColor={CAMP.accentColor}
+            verificationCode="523816"
+            onCodeCopied={() => {
+              setCodeCopied(true);
+              codeInputRef.current?.focus();
+            }}
+          >
+            <div className="cm-email__camp-banner" style={{ backgroundColor: CAMP.accentColor }}>
+              {CAMP.logoUrl ? (
+                <img
+                  src={CAMP.logoUrl}
+                  alt={CAMP.name}
+                  style={{ width: 36, height: 36, borderRadius: '50%' }}
+                />
+              ) : (
+                <div className="cm-email__camp-banner-logo">{CAMP.initials}</div>
+              )}
+              <span className="cm-email__camp-banner-name">{CAMP.name}</span>
+            </div>
+            <div className="cm-email__content">
+              <p className="cm-email__greeting">Hi there,</p>
+              <p>
+                Your verification code for <strong>{CAMP.name}</strong> on
+                CampMinder is:
+              </p>
+              <p className="cm-email__muted">
+                This code expires in 10 minutes. If you didn&rsquo;t request
+                this, you can safely ignore this email.
+              </p>
+            </div>
+            <div className="cm-email__footer">
+              <span className="cm-email__footer-brand">Powered by CampMinder</span>
+              <span className="cm-email__footer-links">
+                Help Center &middot; Privacy Policy
+              </span>
+            </div>
+          </EmailPopup>
+
           <p className="cm-auth-signup-prompt">
             Didn&rsquo;t receive a code?{' '}
             <button className="cm-auth-link">Resend</button>
@@ -102,15 +176,15 @@ export const NewParentFlow: React.FC = () => {
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
             <span>
-              <strong>Email verified inline.</strong> No more blocking &ldquo;check your
-              inbox&rdquo; dead end. The parent verifies ownership with a code right here,
-              then moves on to set up their account.
+              <strong>Real-world email flow.</strong> Click &ldquo;Check your email&rdquo;
+              to see the Gmail popup — find the code, click to copy, then paste it
+              into the input. Just like real life.
             </span>
           </div>
         </>
       )}
 
-      {/* Step 3: Set password + name (Auth0 signup-password prompt) */}
+      {/* Step 3: Set password + name */}
       {step === 'create-account' && (
         <>
           <h1 className="cm-auth-title">Create your account</h1>
@@ -165,6 +239,7 @@ export const NewParentFlow: React.FC = () => {
           </div>
           <button
             className="cm-auth-btn cm-auth-btn--primary"
+            onClick={() => setStep('dashboard')}
           >
             Go to My Dashboard
           </button>
