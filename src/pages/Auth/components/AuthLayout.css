@@ -1,0 +1,428 @@
+/* ── Full-page auth background (Auth0 Universal Login style) ── */
+.cm-auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #f2f2f2;
+  font-family: var(--font-family-body);
+  padding: var(--space-xl);
+}
+
+/* ── Auth card ── */
+.cm-auth__card {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+/* ── Camp branding header ── */
+.cm-auth__camp-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  color: #ffffff;
+}
+
+.cm-auth__camp-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+}
+
+.cm-auth__camp-name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ── Card body ── */
+.cm-auth__body {
+  padding: var(--space-xxl) var(--space-xxl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* ── Back button ── */
+.cm-auth__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-600);
+  cursor: pointer;
+  align-self: flex-start;
+  margin-bottom: calc(-1 * var(--space-sm));
+}
+
+.cm-auth__back:hover {
+  color: var(--color-neutral-900);
+}
+
+/* ── Step indicator ── */
+.cm-auth__steps {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-bottom: calc(-1 * var(--space-sm));
+}
+
+.cm-auth__step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-neutral-400);
+  transition: background-color 0.2s ease, width 0.2s ease;
+}
+
+.cm-auth__step-dot--active {
+  background: #1a1a1a;
+  width: 24px;
+  border-radius: 4px;
+}
+
+.cm-auth__step-dot--completed {
+  background: #1a1a1a;
+}
+
+/* ── Footer ── */
+.cm-auth__footer {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xxl) var(--space-lg);
+  border-top: 1px solid #f0f0f0;
+}
+
+.cm-auth__wordmark {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  color: #a0a0a0;
+  text-transform: uppercase;
+}
+
+.cm-auth__wordmark-lock {
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* ── Auth0-style input overrides (scoped to auth screens) ── */
+.cm-auth .cm-text-input__field {
+  padding: 12px 14px;
+  font-size: 16px;
+  border: 1px solid #c9cace;
+  border-radius: 6px;
+}
+
+.cm-auth .cm-text-input__field:focus {
+  border-color: #1a1a1a;
+  box-shadow: none;
+}
+
+.cm-auth .cm-text-input--error .cm-text-input__field:focus {
+  border-color: var(--color-error);
+  box-shadow: none;
+}
+
+.cm-auth .cm-text-input__label {
+  font-size: 13px;
+  color: #282828;
+  font-weight: 500;
+}
+
+/* ── Shared form styles for auth pages ── */
+.cm-auth-title {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+.cm-auth-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-700);
+  margin: calc(-1 * var(--space-sm)) 0 0;
+  line-height: var(--line-height-normal);
+}
+
+.cm-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.cm-auth-link {
+  font-size: var(--font-size-sm);
+  color: #635dff;
+  font-weight: var(--font-weight-medium);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  text-align: left;
+  text-decoration: none;
+}
+
+.cm-auth-link:hover {
+  text-decoration: underline;
+}
+
+.cm-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--color-neutral-600);
+  font-size: var(--font-size-xs);
+}
+
+.cm-auth-divider::before,
+.cm-auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-neutral-400);
+}
+
+.cm-auth-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.cm-auth-success__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-green-100);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cm-auth-info-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-blue-100);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  color: var(--color-blue-800);
+  line-height: var(--line-height-normal);
+}
+
+.cm-auth-info-banner__icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cm-auth-error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-red-100);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  color: var(--color-red-800);
+  line-height: var(--line-height-normal);
+}
+
+.cm-auth-error-banner__icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cm-auth-warning-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-orange-100);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  color: var(--color-orange-800);
+  line-height: var(--line-height-normal);
+}
+
+/* ── Full-width auth button (Auth0 style) ── */
+.cm-auth-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: 14px var(--space-xl);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  line-height: var(--line-height-tight);
+}
+
+.cm-auth-btn--primary {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.cm-auth-btn--primary:hover {
+  background: #333333;
+}
+
+.cm-auth-btn--secondary {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #ccc;
+}
+
+.cm-auth-btn--secondary:hover {
+  background: #f5f5f5;
+  border-color: #999;
+}
+
+/* ── Camp selection cards ── */
+.cm-auth-camp-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border: 2px solid var(--color-neutral-400);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  font-family: var(--font-family-body);
+  width: 100%;
+  text-align: left;
+}
+
+.cm-auth-camp-card:hover {
+  background: var(--color-neutral-200);
+}
+
+.cm-auth-camp-card__logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.cm-auth-camp-card__name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+}
+
+/* ── Prototype testing controls ── */
+.cm-auth-test-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #808080;
+  cursor: pointer;
+  padding-top: var(--space-sm);
+  border-top: 1px dashed var(--color-neutral-400);
+}
+
+.cm-auth-test-toggle input {
+  cursor: pointer;
+}
+
+/* ── Responsive: Tablet ── */
+@media (max-width: 768px) {
+  .cm-auth {
+    padding: var(--space-lg);
+  }
+
+  .cm-auth__body {
+    padding: var(--space-xl) var(--space-xl) var(--space-lg);
+  }
+}
+
+/* ── Responsive: Mobile ── */
+@media (max-width: 480px) {
+  .cm-auth {
+    padding: 0;
+    align-items: stretch;
+    background: #ffffff;
+  }
+
+  .cm-auth__card {
+    max-width: none;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cm-auth__body {
+    padding: var(--space-xl) var(--space-lg) var(--space-lg);
+    flex: 1;
+    gap: var(--space-lg);
+  }
+
+  .cm-auth__camp-header {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .cm-auth__camp-logo {
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-size-xs);
+  }
+
+  .cm-auth__camp-name {
+    font-size: var(--font-size-md);
+  }
+
+  .cm-auth__footer {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .cm-auth-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .cm-auth-btn {
+    padding: 12px var(--space-lg);
+  }
+}

@@ -1,0 +1,152 @@
+/* ── Auth index page ── */
+.cm-auth-index {
+  min-height: 100vh;
+  background: var(--color-page-background);
+  font-family: var(--font-family-body);
+  padding: var(--space-xxxl) var(--space-xl);
+}
+
+.cm-auth-index__container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxl);
+}
+
+/* ── Header ── */
+.cm-auth-index__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.cm-auth-index__wordmark {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.5px;
+}
+
+.cm-auth-index__wordmark-camp {
+  color: var(--color-primary-default);
+}
+
+.cm-auth-index__wordmark-minder {
+  color: var(--color-neutral-700);
+}
+
+.cm-auth-index__title {
+  font-size: var(--font-size-xxxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  margin: var(--space-sm) 0 0;
+}
+
+.cm-auth-index__subtitle {
+  font-size: var(--font-size-md);
+  color: var(--color-neutral-700);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Flow cards grid ── */
+.cm-auth-index__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.cm-auth-index__card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-neutral-400);
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-family-body);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cm-auth-index__card:hover {
+  border-color: var(--color-primary-default);
+  box-shadow: 0 2px 12px rgba(56, 15, 140, 0.12);
+}
+
+.cm-auth-index__card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg);
+  background: var(--color-purple-100);
+  color: var(--color-primary-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cm-auth-index__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  min-width: 0;
+}
+
+.cm-auth-index__card-tag {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-default);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cm-auth-index__card-title {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+  margin: 0;
+}
+
+.cm-auth-index__card-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-700);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+/* ── Card number badge ── */
+.cm-auth-index__card-number {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Section titles ── */
+.cm-auth-index__section-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-800);
+  margin: 0 0 var(--space-lg);
+}
+
+/* ── Narrow grid for reference tools ── */
+.cm-auth-index__grid--narrow {
+  grid-template-columns: repeat(2, 1fr);
+}

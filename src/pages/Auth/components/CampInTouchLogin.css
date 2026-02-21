@@ -1,0 +1,127 @@
+/* ── Unbranded CampInTouch login (current state) ── */
+.cm-cit {
+  min-height: 100vh;
+  background: #d5d5d5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-body);
+  padding: var(--space-xl);
+  gap: var(--space-xl);
+}
+
+.cm-cit__brand {
+  font-size: 22px;
+  font-weight: var(--font-weight-bold);
+  color: #1a1a1a;
+  letter-spacing: -0.3px;
+}
+
+/* ── Card ── */
+.cm-cit__card {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: var(--space-xxl);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.cm-cit__title {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0;
+}
+
+.cm-cit__subtitle {
+  font-size: var(--font-size-sm);
+  color: #666;
+  text-align: center;
+  margin: calc(-1 * var(--space-md)) 0 0;
+  line-height: var(--line-height-normal);
+}
+
+/* ── Form ── */
+.cm-cit__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.cm-cit__input {
+  width: 100%;
+  padding: 14px var(--space-lg);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+  color: #1a1a1a;
+}
+
+.cm-cit__input::placeholder {
+  color: #999;
+}
+
+.cm-cit__input:focus {
+  border-color: #1a1a1a;
+}
+
+.cm-cit__btn {
+  width: 100%;
+  padding: 14px;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  background: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.cm-cit__btn:hover {
+  background: #333;
+}
+
+/* ── Sign up link ── */
+.cm-cit__signup-text {
+  font-size: var(--font-size-sm);
+  color: #666;
+  text-align: center;
+  margin: 0;
+}
+
+.cm-cit__signup-link {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: #1a1a1a;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* ── Terms ── */
+.cm-cit__terms {
+  font-size: var(--font-size-xs);
+  color: #888;
+  text-align: center;
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.cm-cit__terms-link {
+  text-decoration: underline;
+  cursor: default;
+}

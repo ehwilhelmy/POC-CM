@@ -3,11 +3,36 @@ import { AppShell } from './layouts/AppShell';
 import { ReportsPage } from './pages/Reports';
 import { StaffPipelinePage } from './pages/StaffPipeline';
 import { PlaceholderPage } from './pages/Placeholder';
+import {
+  AuthIndex,
+  NewParentFlow,
+  ReturningParentFlow,
+  ForgotPasswordFlow,
+  MigratedParentFlow,
+  WrongPathFlow,
+  GuestAccountFlow,
+  MultiCampFlow,
+  EmailPreviewFlow,
+  AccountLookupFlow,
+} from './pages/Auth';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Auth flows — standalone, no AppShell */}
+        <Route path="/auth" element={<AuthIndex />} />
+        <Route path="/auth/new-parent" element={<NewParentFlow />} />
+        <Route path="/auth/returning-parent" element={<ReturningParentFlow />} />
+        <Route path="/auth/forgot-password" element={<ForgotPasswordFlow />} />
+        <Route path="/auth/migrated" element={<MigratedParentFlow />} />
+        <Route path="/auth/wrong-path" element={<WrongPathFlow />} />
+        <Route path="/auth/guest" element={<GuestAccountFlow />} />
+        <Route path="/auth/multi-camp" element={<MultiCampFlow />} />
+        <Route path="/auth/emails" element={<EmailPreviewFlow />} />
+        <Route path="/auth/account-lookup" element={<AccountLookupFlow />} />
+
+        {/* Main app — wrapped in AppShell */}
         <Route element={<AppShell />}>
           <Route path="/" element={<Navigate to="/reports" replace />} />
           <Route path="/reports" element={<ReportsPage />} />

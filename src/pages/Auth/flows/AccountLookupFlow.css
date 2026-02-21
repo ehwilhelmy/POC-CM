@@ -1,0 +1,117 @@
+/* ── Preset links for testing ── */
+.cm-lookup__presets {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  padding-top: var(--space-xs);
+  border-top: 1px dashed var(--color-neutral-400);
+}
+
+.cm-lookup__presets-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-700);
+}
+
+/* ── Result card ── */
+.cm-lookup__result {
+  border: 1px solid var(--color-neutral-400);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.cm-lookup__result-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.cm-lookup__icon {
+  font-size: 28px !important;
+  flex-shrink: 0;
+}
+
+.cm-lookup__icon--verified {
+  color: var(--color-success);
+}
+
+.cm-lookup__icon--unverified {
+  color: var(--color-warning);
+}
+
+.cm-lookup__icon--not-found {
+  color: var(--color-neutral-600);
+}
+
+.cm-lookup__result-title {
+  display: block;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+}
+
+.cm-lookup__result-email {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-700);
+}
+
+/* ── Detail rows ── */
+.cm-lookup__details {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-neutral-300);
+}
+
+.cm-lookup__detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-neutral-300);
+}
+
+.cm-lookup__detail-row:last-child {
+  border-bottom: none;
+}
+
+.cm-lookup__detail-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-700);
+}
+
+.cm-lookup__detail-value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-900);
+}
+
+/* ── Status badge ── */
+.cm-lookup__badge {
+  display: inline-block;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.cm-lookup__badge--verified {
+  background: var(--color-green-100);
+  color: var(--color-success);
+}
+
+.cm-lookup__badge--unverified {
+  background: var(--color-orange-100);
+  color: var(--color-warning);
+}
+
+/* ── Not found hint ── */
+.cm-lookup__not-found-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-700);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
