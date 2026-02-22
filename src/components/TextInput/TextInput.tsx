@@ -10,6 +10,7 @@ export interface TextInputProps {
   helperText?: string;
   error?: string;
   disabled?: boolean;
+  readOnly?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
@@ -22,6 +23,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   helperText,
   error,
   disabled = false,
+  readOnly = false,
   value,
   onChange,
   type = 'text',
@@ -32,7 +34,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   const inputType = isPassword && showPassword ? 'text' : type;
 
   return (
-    <div className={clsx('cm-text-input', { 'cm-text-input--error': error, 'cm-text-input--disabled': disabled })}>
+    <div className={clsx('cm-text-input', { 'cm-text-input--error': error, 'cm-text-input--disabled': disabled, 'cm-text-input--readonly': readOnly })}>
       {label && <label className="cm-text-input__label">{label}</label>}
       <div className="cm-text-input__wrapper">
         <input
@@ -40,6 +42,7 @@ export const TextInput: React.FC<TextInputProps> = ({
           type={inputType}
           placeholder={placeholder}
           disabled={disabled}
+          readOnly={readOnly}
           value={value}
           onChange={onChange}
           ref={ref}

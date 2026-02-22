@@ -57,6 +57,18 @@
   cursor: not-allowed;
 }
 
+.cm-text-input--readonly .cm-text-input__field {
+  background: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+  cursor: default;
+  border-color: var(--color-neutral-400);
+}
+
+.cm-text-input--readonly .cm-text-input__field:focus {
+  box-shadow: none;
+  border-color: var(--color-neutral-400);
+}
+
 .cm-text-input__toggle {
   position: absolute;
   right: 8px;

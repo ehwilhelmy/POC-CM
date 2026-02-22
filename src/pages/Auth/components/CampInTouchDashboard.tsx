@@ -86,11 +86,13 @@ const SECTIONS: DashboardSection[] = [
 interface CampInTouchDashboardProps {
   firstName?: string;
   onHome?: () => void;
+  onLinkClick?: Record<string, () => void>;
 }
 
 export const CampInTouchDashboard: React.FC<CampInTouchDashboardProps> = ({
   firstName = 'Jane',
   onHome,
+  onLinkClick,
 }) => {
   return (
     <div className="cm-cit-dash">
@@ -166,17 +168,26 @@ export const CampInTouchDashboard: React.FC<CampInTouchDashboardProps> = ({
           <div className="cm-cit-dash__section" key={section.title}>
             <h2 className="cm-cit-dash__section-title">{section.title}</h2>
             <div className="cm-cit-dash__link-group">
-              {section.links.map((link) => (
-                <div className="cm-cit-dash__link-row" key={link.label}>
-                  <link.icon
-                    className="cm-cit-dash__link-icon"
-                    style={{ color: link.iconColor }}
-                    fontSize="small"
-                  />
-                  <span className="cm-cit-dash__link-label">{link.label}</span>
-                  <ChevronRight className="cm-cit-dash__link-chevron" fontSize="small" />
-                </div>
-              ))}
+              {section.links.map((link) => {
+                const clickHandler = onLinkClick?.[link.label];
+                const Tag = clickHandler ? 'button' : 'div';
+                return (
+                  <Tag
+                    className={`cm-cit-dash__link-row${clickHandler ? ' cm-cit-dash__link-row--clickable' : ''}`}
+                    key={link.label}
+                    onClick={clickHandler}
+                    type={clickHandler ? 'button' : undefined}
+                  >
+                    <link.icon
+                      className="cm-cit-dash__link-icon"
+                      style={{ color: link.iconColor }}
+                      fontSize="small"
+                    />
+                    <span className="cm-cit-dash__link-label">{link.label}</span>
+                    <ChevronRight className="cm-cit-dash__link-chevron" fontSize="small" />
+                  </Tag>
+                );
+              })}
             </div>
           </div>
         ))}

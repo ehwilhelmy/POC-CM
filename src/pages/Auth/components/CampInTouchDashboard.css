@@ -206,6 +206,29 @@
   border-bottom: none;
 }
 
+.cm-cit-dash__link-row--clickable {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #eee;
+  font-family: var(--font-family-body);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.cm-cit-dash__link-row--clickable:last-child {
+  border-bottom: none;
+}
+
+.cm-cit-dash__link-row--clickable:hover {
+  background-color: #eef5f1;
+}
+
+.cm-cit-dash__link-row--clickable .cm-cit-dash__link-label {
+  text-decoration: none;
+}
+
 .cm-cit-dash__link-icon {
   flex-shrink: 0;
 }
