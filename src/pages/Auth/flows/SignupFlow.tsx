@@ -3,15 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { AuthLayout } from '../components/AuthLayout';
+import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
+import { PasswordRequirements } from '../components/PasswordRequirements';
+import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
-import { Button } from '../../../components/Button';
 import { CAMP } from '../campBrand';
 
-type Step = 'form' | 'welcome';
+type Step = 'form' | 'welcome' | 'dashboard';
 
 export const SignupFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('form');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const { allValid } = usePasswordValidation(password, confirmPassword);
+
+  if (step === 'dashboard') {
+    return (
+      <CampInTouchDashboard
+        firstName="Jane"
+        onHome={() => navigate('/auth')}
+      />
+    );
+  }
 
   return (
     <AuthLayout
@@ -31,15 +46,27 @@ export const SignupFlow: React.FC = () => {
               label="Email address"
               placeholder="parent@example.com"
               type="email"
+              value={signupEmail}
+              onChange={(e) => setSignupEmail(e.target.value)}
             />
             <TextInput
               label="Password"
               placeholder="Create a password"
               type="password"
-              helperText="At least 8 characters with a number and symbol"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
+            <TextInput
+              label="Confirm password"
+              placeholder="Re-enter your password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <PasswordRequirements password={password} confirmPassword={confirmPassword} />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!allValid || !signupEmail.trim()}
               onClick={() => setStep('welcome')}
             >
               Create Account
@@ -79,11 +106,11 @@ export const SignupFlow: React.FC = () => {
             </span>
           </div>
 
-          <Button variant="secondary" onClick={() => setStep('form')}>
-            Restart Flow
-          </Button>
-          <button className="cm-auth-link" onClick={() => navigate('/auth')}>
-            &larr; Back to all flows
+          <button
+            className="cm-auth-btn cm-auth-btn--primary"
+            onClick={() => setStep('dashboard')}
+          >
+            Go to My Dashboard
           </button>
         </div>
       )}

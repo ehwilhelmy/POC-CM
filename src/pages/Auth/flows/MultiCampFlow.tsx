@@ -4,6 +4,7 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { AuthLayout } from '../components/AuthLayout';
+import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { TextInput } from '../../../components/TextInput';
 import { CAMP_TALL_PINES, CAMP_SUNSHINE } from '../campBrand';
 
@@ -13,7 +14,8 @@ type Step =
   | 'password'
   | 'wrong-camp'
   | 'camp-picker'
-  | 'success';
+  | 'success'
+  | 'dashboard';
 
 const CAMPS = [CAMP_TALL_PINES, CAMP_SUNSHINE];
 
@@ -21,6 +23,15 @@ export const MultiCampFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('email-entry');
   const [selectedCamp, setSelectedCamp] = useState(CAMPS[0]);
+
+  if (step === 'dashboard') {
+    return (
+      <CampInTouchDashboard
+        firstName="Jane"
+        onHome={() => navigate('/auth')}
+      />
+    );
+  }
 
   return (
     <AuthLayout
@@ -212,13 +223,10 @@ export const MultiCampFlow: React.FC = () => {
             Same account, different camp context. No re-authentication needed.
           </p>
           <button
-            className="cm-auth-btn cm-auth-btn--secondary"
-            onClick={() => { setStep('email-entry'); setSelectedCamp(CAMPS[0]); }}
+            className="cm-auth-btn cm-auth-btn--primary"
+            onClick={() => setStep('dashboard')}
           >
-            Restart Flow
-          </button>
-          <button className="cm-auth-link" onClick={() => navigate('/auth')}>
-            &larr; Back to all flows
+            Go to My Dashboard
           </button>
         </div>
       )}

@@ -5,9 +5,12 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { CampWebsite } from '../components/CampWebsite';
+import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { AuthLayout } from '../components/AuthLayout';
 import { EmailPopup } from '../components/EmailPopup';
 import { ClickableCode } from '../components/GmailInbox';
+import { PasswordRequirements } from '../components/PasswordRequirements';
+import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
 import { CAMP } from '../campBrand';
 import './EmailPreviewFlow.css';
@@ -21,7 +24,8 @@ type Step =
   | 'reset-password'
   | 'check-email'
   | 'new-password'
-  | 'success';
+  | 'success'
+  | 'dashboard';
 
 export const MigratedParentFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -29,10 +33,24 @@ export const MigratedParentFlow: React.FC = () => {
   const [emailOpen, setEmailOpen] = useState(false);
   const [codeCopied, setCodeCopied] = useState(false);
   const codeInputRef = useRef<HTMLInputElement>(null);
+  const [loginPassword, setLoginPassword] = useState('');
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const { allValid } = usePasswordValidation(password, confirmPassword);
 
   if (step === 'camp-website') {
     return (
       <CampWebsite onPortalClick={() => setStep('email-entry')} />
+    );
+  }
+
+  if (step === 'dashboard') {
+    return (
+      <CampInTouchDashboard
+        firstName="Jane"
+        onHome={() => navigate('/auth')}
+      />
     );
   }
 
@@ -92,10 +110,13 @@ export const MigratedParentFlow: React.FC = () => {
               label="Password"
               placeholder="Enter your password"
               type="password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
               helperText="Using their old campminder password..."
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!loginPassword.trim()}
               onClick={() => setStep('password-error')}
             >
               Continue
@@ -122,10 +143,13 @@ export const MigratedParentFlow: React.FC = () => {
               label="Password"
               placeholder="Enter your password"
               type="password"
-              error=" "
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+              error="The email or password for this account is incorrect"
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!loginPassword.trim()}
               onClick={() => setStep('confusion')}
             >
               Try Again
@@ -168,10 +192,13 @@ export const MigratedParentFlow: React.FC = () => {
             <TextInput
               label="Password"
               type="password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
               error="Incorrect password"
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!loginPassword.trim()}
               onClick={() => setStep('reset-password')}
             >
               Reset My Password
@@ -226,10 +253,13 @@ export const MigratedParentFlow: React.FC = () => {
               label="Enter the 6-digit code *"
               placeholder="000000"
               ref={codeInputRef}
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
             />
             {codeCopied ? (
               <button
                 className="cm-auth-btn cm-auth-btn--primary"
+                disabled={!code.trim()}
                 onClick={() => setStep('new-password')}
               >
                 Continue
@@ -314,16 +344,22 @@ export const MigratedParentFlow: React.FC = () => {
           <div className="cm-auth-form">
             <TextInput
               label="New password"
-              placeholder="At least 8 characters"
+              placeholder="Enter new password"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <TextInput
               label="Confirm password"
               placeholder="Re-enter password"
               type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
+            <PasswordRequirements password={password} confirmPassword={confirmPassword} />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!allValid}
               onClick={() => setStep('success')}
             >
               Update Password
@@ -351,13 +387,10 @@ export const MigratedParentFlow: React.FC = () => {
             </span>
           </div>
           <button
-            className="cm-auth-btn cm-auth-btn--secondary"
-            onClick={() => setStep('camp-website')}
+            className="cm-auth-btn cm-auth-btn--primary"
+            onClick={() => setStep('dashboard')}
           >
-            Restart Flow
-          </button>
-          <button className="cm-auth-link" onClick={() => navigate('/auth')}>
-            &larr; Back to all flows
+            Go to My Dashboard
           </button>
         </div>
       )}

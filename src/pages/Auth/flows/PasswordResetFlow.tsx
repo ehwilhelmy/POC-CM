@@ -3,16 +3,31 @@ import { useNavigate } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { AuthLayout } from '../components/AuthLayout';
+import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
+import { PasswordRequirements } from '../components/PasswordRequirements';
+import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
-import { Button } from '../../../components/Button';
 
 const CAMP = { name: 'Camp Tall Pines', accentColor: '#2d6a4f', initials: 'TP' };
 
-type Step = 'request' | 'check-email' | 'new-password' | 'success';
+type Step = 'request' | 'check-email' | 'new-password' | 'success' | 'dashboard';
 
 export const PasswordResetFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('request');
+  const [resetEmail, setResetEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const { allValid } = usePasswordValidation(password, confirmPassword);
+
+  if (step === 'dashboard') {
+    return (
+      <CampInTouchDashboard
+        firstName="Jane"
+        onHome={() => navigate('/auth')}
+      />
+    );
+  }
 
   return (
     <AuthLayout
@@ -36,9 +51,12 @@ export const PasswordResetFlow: React.FC = () => {
               label="Email address"
               placeholder="parent@example.com"
               type="email"
+              value={resetEmail}
+              onChange={(e) => setResetEmail(e.target.value)}
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!resetEmail.trim()}
               onClick={() => setStep('check-email')}
             >
               Send Reset Link
@@ -95,15 +113,20 @@ export const PasswordResetFlow: React.FC = () => {
               label="New password"
               placeholder="Enter new password"
               type="password"
-              helperText="At least 8 characters with a number and symbol"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <TextInput
               label="Confirm password"
               placeholder="Re-enter new password"
               type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
+            <PasswordRequirements password={password} confirmPassword={confirmPassword} />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!allValid}
               onClick={() => setStep('success')}
             >
               Reset Password
@@ -123,15 +146,9 @@ export const PasswordResetFlow: React.FC = () => {
           </p>
           <button
             className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => navigate('/auth/camp-login')}
+            onClick={() => setStep('dashboard')}
           >
-            Sign In
-          </button>
-          <Button variant="secondary" onClick={() => setStep('request')}>
-            Restart Flow
-          </Button>
-          <button className="cm-auth-link" onClick={() => navigate('/auth')}>
-            &larr; Back to all flows
+            Go to My Dashboard
           </button>
         </div>
       )}

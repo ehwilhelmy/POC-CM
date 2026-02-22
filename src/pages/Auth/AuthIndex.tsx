@@ -24,7 +24,7 @@ interface FlowCard {
 const journeys: FlowCard[] = [
   {
     id: 1,
-    title: 'New Caregiver',
+    title: 'New Caretaker',
     description:
       'Gets invite from camp, visits camp website, registers, creates account, gets verified, lands in portal.',
     route: '/auth/new-parent',
@@ -33,7 +33,7 @@ const journeys: FlowCard[] = [
   },
   {
     id: 2,
-    title: 'Returning Caregiver',
+    title: 'Returning Caretaker',
     description:
       'Returns to camp site, signs in. Success path + error paths (wrong password, confusion).',
     route: '/auth/returning-parent',
@@ -51,7 +51,7 @@ const journeys: FlowCard[] = [
   },
   {
     id: 4,
-    title: 'Migrated Caregiver',
+    title: 'Migrated Caretaker',
     description:
       'Returning from last year, doesn\'t know the system changed. Old password doesn\'t work. No idea they were migrated to Auth0.',
     route: '/auth/migrated',
@@ -71,16 +71,16 @@ const journeys: FlowCard[] = [
     id: 6,
     title: 'Guest Account',
     description:
-      'Non-primary caregiver (grandparent, co-parent) gets an invite. Different flow, different confusion.',
+      'Non-primary caretaker (grandparent, co-parent) gets an invite. Different flow, different confusion.',
     route: '/auth/guest',
     icon: <SupervisorAccountIcon />,
     tag: 'Broken Messages',
   },
   {
     id: 7,
-    title: 'Multi-Camp Caregiver',
+    title: 'Multi-Camp Caretaker',
     description:
-      'Caregiver with kids at two camps. Which camp are they logging into? Which account?',
+      'Caretaker with kids at two camps. Which camp are they logging into? Which account?',
     route: '/auth/multi-camp',
     icon: <GroupsIcon />,
     tag: 'Account Status Confusion',
@@ -116,13 +116,13 @@ export const AuthIndex: React.FC = () => {
           <img src={logoSrc} alt="campminder" className="cm-auth-index__logo" />
           <h1 className="cm-auth-index__title">Auth Flow Prototypes</h1>
           <p className="cm-auth-index__subtitle">
-            Caregiver journey prototypes for user testing. Each flow walks through
+            Caretaker journey prototypes for user testing. Each flow walks through
             a real scenario camp staff are dealing with after the Auth0 migration.
           </p>
         </div>
 
         <div>
-          <h2 className="cm-auth-index__section-title">Caregiver Journeys</h2>
+          <h2 className="cm-auth-index__section-title">Caretaker Journeys</h2>
           <div className="cm-auth-index__grid">
             {journeys.map((flow) => (
               <button

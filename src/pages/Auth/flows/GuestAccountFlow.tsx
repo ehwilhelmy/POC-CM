@@ -4,6 +4,9 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { AuthLayout } from '../components/AuthLayout';
+import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
+import { PasswordRequirements } from '../components/PasswordRequirements';
+import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
 import { CAMP } from '../campBrand';
 
@@ -12,11 +15,25 @@ type Step =
   | 'click-link'
   | 'create-account'
   | 'confusion'
-  | 'success';
+  | 'success'
+  | 'dashboard';
 
 export const GuestAccountFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('invite-email');
+  const [guestEmail, setGuestEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const { allValid } = usePasswordValidation(password, confirmPassword);
+
+  if (step === 'dashboard') {
+    return (
+      <CampInTouchDashboard
+        firstName="Margaret"
+        onHome={() => navigate('/auth')}
+      />
+    );
+  }
 
   return (
     <AuthLayout
@@ -35,7 +52,7 @@ export const GuestAccountFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Guest Invite Email</h1>
           <p className="cm-auth-subtitle">
-            Grandma received this email from the primary caregiver. She needs to
+            Grandma received this email from the primary caretaker. She needs to
             create an account to see photos and updates.
           </p>
 
@@ -99,9 +116,12 @@ export const GuestAccountFlow: React.FC = () => {
               label="Email address *"
               placeholder="grandma@email.com"
               type="email"
+              value={guestEmail}
+              onChange={(e) => setGuestEmail(e.target.value)}
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!guestEmail.trim()}
               onClick={() => setStep('create-account')}
             >
               Continue
@@ -117,7 +137,7 @@ export const GuestAccountFlow: React.FC = () => {
             <WarningAmberIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
             <span>
               Grandma just wants to see photos. She doesn't understand why she needs to
-              "Log in to {CAMP.name}." Different mental model from primary caregivers.
+              "Log in to {CAMP.name}." Different mental model from primary caretakers.
             </span>
           </div>
         </>
@@ -136,14 +156,24 @@ export const GuestAccountFlow: React.FC = () => {
               label="Password"
               placeholder="Create a password"
               type="password"
-              helperText="At least 8 characters"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
+            <TextInput
+              label="Confirm password"
+              placeholder="Re-enter your password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <PasswordRequirements password={password} confirmPassword={confirmPassword} />
             <TextInput
               label="Relationship to camper"
               placeholder="Grandmother"
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!allValid}
               onClick={() => setStep('confusion')}
             >
               Create Account
@@ -203,13 +233,10 @@ export const GuestAccountFlow: React.FC = () => {
             </span>
           </div>
           <button
-            className="cm-auth-btn cm-auth-btn--secondary"
-            onClick={() => setStep('invite-email')}
+            className="cm-auth-btn cm-auth-btn--primary"
+            onClick={() => setStep('dashboard')}
           >
-            Restart Flow
-          </button>
-          <button className="cm-auth-link" onClick={() => navigate('/auth')}>
-            &larr; Back to all flows
+            Go to My Dashboard
           </button>
         </div>
       )}

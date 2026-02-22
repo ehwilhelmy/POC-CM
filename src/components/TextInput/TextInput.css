@@ -11,7 +11,14 @@
   color: var(--color-dark-gray);
 }
 
+.cm-text-input__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .cm-text-input__field {
+  width: 100%;
   padding: var(--space-sm) var(--space-md);
   font-size: var(--font-size-md);
   font-family: var(--font-family-body);
@@ -21,6 +28,10 @@
   color: var(--color-neutral-900);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
   outline: none;
+}
+
+.cm-text-input__field--has-toggle {
+  padding-right: 40px;
 }
 
 .cm-text-input__field::placeholder {
@@ -44,6 +55,25 @@
   background: var(--color-neutral-200);
   color: var(--color-medium-gray);
   cursor: not-allowed;
+}
+
+.cm-text-input__toggle {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-medium-gray);
+  border-radius: var(--radius-sm);
+  transition: color 0.15s ease;
+}
+
+.cm-text-input__toggle:hover {
+  color: var(--color-dark-gray);
 }
 
 .cm-text-input__helper {

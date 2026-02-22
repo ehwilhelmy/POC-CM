@@ -7,6 +7,8 @@ import { AuthLayout } from '../components/AuthLayout';
 import { EmailPopup } from '../components/EmailPopup';
 import { ClickableCode } from '../components/GmailInbox';
 import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
+import { PasswordRequirements } from '../components/PasswordRequirements';
+import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
 import { CAMP } from '../campBrand';
 import './EmailPreviewFlow.css';
@@ -26,6 +28,10 @@ export const NewParentFlow: React.FC = () => {
   const [emailOpen, setEmailOpen] = useState(false);
   const [codeCopied, setCodeCopied] = useState(false);
   const codeInputRef = useRef<HTMLInputElement>(null);
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const { allValid } = usePasswordValidation(password, confirmPassword);
 
   if (step === 'camp-website') {
     return <CampWebsite onPortalClick={() => setStep('email-entry')} />;
@@ -35,9 +41,7 @@ export const NewParentFlow: React.FC = () => {
     return (
       <CampInTouchDashboard
         firstName="Jane"
-        onHome={() => setStep('camp-website')}
-        onRestart={() => setStep('camp-website')}
-        onBackToFlows={() => navigate('/auth')}
+        onHome={() => navigate('/auth')}
       />
     );
   }
@@ -72,6 +76,7 @@ export const NewParentFlow: React.FC = () => {
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!email.trim()}
               onClick={() => setStep('verify-code')}
             >
               Continue
@@ -108,10 +113,13 @@ export const NewParentFlow: React.FC = () => {
               label="Enter the 6-digit code *"
               placeholder="000000"
               ref={codeInputRef}
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
             />
             {codeCopied ? (
               <button
                 className="cm-auth-btn cm-auth-btn--primary"
+                disabled={!code.trim()}
                 onClick={() => setStep('create-account')}
               >
                 Continue
@@ -207,11 +215,22 @@ export const NewParentFlow: React.FC = () => {
             <TextInput label="Last name" placeholder="Smith" />
             <TextInput
               label="Password"
-              placeholder="At least 8 characters"
+              placeholder="Create a password"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
+            <TextInput
+              label="Confirm password"
+              placeholder="Re-enter your password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <PasswordRequirements password={password} confirmPassword={confirmPassword} />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!allValid}
               onClick={() => setStep('welcome')}
             >
               Create Account
@@ -253,12 +272,6 @@ export const NewParentFlow: React.FC = () => {
             onClick={() => setStep('dashboard')}
           >
             Go to My Dashboard
-          </button>
-          <button className="cm-auth-link" onClick={() => setStep('camp-website')}>
-            Restart flow
-          </button>
-          <button className="cm-auth-link" onClick={() => navigate('/auth')}>
-            &larr; Back to all flows
           </button>
         </div>
       )}

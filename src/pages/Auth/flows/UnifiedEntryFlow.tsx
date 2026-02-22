@@ -3,18 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { AuthLayout } from '../components/AuthLayout';
+import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
+import { PasswordRequirements } from '../components/PasswordRequirements';
+import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
-import { Button } from '../../../components/Button';
 
 import { CAMP } from '../campBrand';
 
-type Step = 'email' | 'existing-user' | 'new-user' | 'success';
+type Step = 'email' | 'existing-user' | 'new-user' | 'success' | 'dashboard';
 
 export const UnifiedEntryFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('email');
   const [email, setEmail] = useState('');
   const [simulateNew, setSimulateNew] = useState(false);
+  const [loginPassword, setLoginPassword] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const { allValid } = usePasswordValidation(password, confirmPassword);
 
   const handleEmailContinue = () => {
     setStep(simulateNew ? 'new-user' : 'existing-user');
@@ -24,10 +30,19 @@ export const UnifiedEntryFlow: React.FC = () => {
     if (step === 'existing-user' || step === 'new-user') setStep('email');
   };
 
+  if (step === 'dashboard') {
+    return (
+      <CampInTouchDashboard
+        firstName="Jane"
+        onHome={() => navigate('/auth')}
+      />
+    );
+  }
+
   return (
     <AuthLayout
       camp={CAMP}
-      onBack={step !== 'email' && step !== 'success' ? handleBack : undefined}
+      onBack={step !== 'email' && step !== 'success' && step !== 'dashboard' ? handleBack : undefined}
     >
       {step === 'email' && (
         <>
@@ -46,6 +61,7 @@ export const UnifiedEntryFlow: React.FC = () => {
 
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!email.trim()}
               onClick={handleEmailContinue}
             >
               Continue
@@ -87,9 +103,12 @@ export const UnifiedEntryFlow: React.FC = () => {
               label="Password"
               placeholder="Enter your password"
               type="password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!loginPassword.trim()}
               onClick={() => setStep('success')}
             >
               Sign In
@@ -122,10 +141,20 @@ export const UnifiedEntryFlow: React.FC = () => {
               label="Password"
               placeholder="Create a password"
               type="password"
-              helperText="At least 8 characters"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
+            <TextInput
+              label="Confirm password"
+              placeholder="Re-enter your password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <PasswordRequirements password={password} confirmPassword={confirmPassword} />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!allValid}
               onClick={() => setStep('success')}
             >
               Create Account
@@ -153,11 +182,11 @@ export const UnifiedEntryFlow: React.FC = () => {
               ? 'Your account has been created. Welcome to Camp Tall Pines.'
               : 'Welcome back to Camp Tall Pines.'}
           </p>
-          <Button variant="secondary" onClick={() => { setStep('email'); setEmail(''); }}>
-            Restart Flow
-          </Button>
-          <button className="cm-auth-link" onClick={() => navigate('/auth')}>
-            &larr; Back to all flows
+          <button
+            className="cm-auth-btn cm-auth-btn--primary"
+            onClick={() => setStep('dashboard')}
+          >
+            Go to My Dashboard
           </button>
         </div>
       )}

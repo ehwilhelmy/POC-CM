@@ -86,15 +86,11 @@ const SECTIONS: DashboardSection[] = [
 interface CampInTouchDashboardProps {
   firstName?: string;
   onHome?: () => void;
-  onRestart?: () => void;
-  onBackToFlows?: () => void;
 }
 
 export const CampInTouchDashboard: React.FC<CampInTouchDashboardProps> = ({
   firstName = 'Jane',
   onHome,
-  onRestart,
-  onBackToFlows,
 }) => {
   return (
     <div className="cm-cit-dash">
@@ -115,7 +111,7 @@ export const CampInTouchDashboard: React.FC<CampInTouchDashboardProps> = ({
               onClick={onHome}
               type="button"
             >
-              Home
+              Return to Index
             </button>
           </div>
         </div>
@@ -185,21 +181,6 @@ export const CampInTouchDashboard: React.FC<CampInTouchDashboardProps> = ({
           </div>
         ))}
 
-        {/* Prototype nav */}
-        {(onRestart || onBackToFlows) && (
-          <div className="cm-cit-dash__proto-nav">
-            {onRestart && (
-              <button className="cm-cit-dash__proto-link" onClick={onRestart}>
-                Restart flow
-              </button>
-            )}
-            {onBackToFlows && (
-              <button className="cm-cit-dash__proto-link" onClick={onBackToFlows}>
-                &larr; Back to all flows
-              </button>
-            )}
-          </div>
-        )}
       </div>
       </div>
     </div>

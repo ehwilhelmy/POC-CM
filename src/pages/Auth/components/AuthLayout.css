@@ -377,6 +377,19 @@
   color: var(--camp-accent);
 }
 
+.cm-auth-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cm-auth-btn--primary:disabled:hover {
+  background: #635dff;
+}
+
+.cm-auth--branded .cm-auth-btn--primary:disabled:hover {
+  background: var(--camp-accent);
+}
+
 .cm-auth-btn--secondary {
   background: #ffffff;
   color: #1a1a1a;

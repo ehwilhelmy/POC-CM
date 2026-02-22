@@ -3,18 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { AuthLayout } from '../components/AuthLayout';
 import type { CampBranding } from '../components/AuthLayout';
+import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { TextInput } from '../../../components/TextInput';
-import { Button } from '../../../components/Button';
 import { ALL_CAMPS } from '../campBrand';
 
 const CAMPS = ALL_CAMPS;
 
-type Step = 'pick-camp' | 'login' | 'success';
+type Step = 'pick-camp' | 'login' | 'success' | 'dashboard';
 
 export const CampBrandedFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('pick-camp');
   const [selectedCamp, setSelectedCamp] = useState<CampBranding>(CAMPS[0]);
+
+  if (step === 'dashboard') {
+    return (
+      <CampInTouchDashboard
+        firstName="Jane"
+        onHome={() => navigate('/auth')}
+      />
+    );
+  }
 
   if (step === 'pick-camp') {
     return (
@@ -44,9 +53,6 @@ export const CampBrandedFlow: React.FC = () => {
             </button>
           ))}
         </div>
-        <button className="cm-auth-link" onClick={() => navigate('/auth')}>
-          &larr; Back to all flows
-        </button>
       </AuthLayout>
     );
   }
@@ -106,11 +112,11 @@ export const CampBrandedFlow: React.FC = () => {
           <p className="cm-auth-subtitle">
             You're signed in to {selectedCamp.name}.
           </p>
-          <Button variant="secondary" onClick={() => setStep('pick-camp')}>
-            Try Another Camp
-          </Button>
-          <button className="cm-auth-link" onClick={() => navigate('/auth')}>
-            &larr; Back to all flows
+          <button
+            className="cm-auth-btn cm-auth-btn--primary"
+            onClick={() => setStep('dashboard')}
+          >
+            Go to My Dashboard
           </button>
         </div>
       )}
