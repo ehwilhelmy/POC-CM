@@ -49,7 +49,7 @@ const FAKE_EMAILS = [
 ];
 
 /** Clickable verification code with copy-to-clipboard + "Copied!" flash */
-const ClickableCode: React.FC<{
+export const ClickableCode: React.FC<{
   code: string;
   accentColor: string;
   onCopied?: (code: string) => void;
@@ -245,15 +245,6 @@ export const GmailInbox: React.FC<GmailInboxProps> = ({
               {/* Email body */}
               <div className="cm-gmail-inbox__reader-body">
                 {children}
-                {verificationCode && (
-                  <div style={{ textAlign: 'center', margin: '16px 0' }}>
-                    <ClickableCode
-                      code={verificationCode}
-                      accentColor={accentColor}
-                      onCopied={onCodeCopied}
-                    />
-                  </div>
-                )}
               </div>
             </div>
           )}

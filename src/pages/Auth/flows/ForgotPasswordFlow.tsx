@@ -4,6 +4,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { AuthLayout } from '../components/AuthLayout';
 import { EmailPopup } from '../components/EmailPopup';
+import { ClickableCode } from '../components/GmailInbox';
 import { TextInput } from '../../../components/TextInput';
 import { CAMP } from '../campBrand';
 import './EmailPreviewFlow.css';
@@ -126,6 +127,16 @@ export const ForgotPasswordFlow: React.FC = () => {
                 Your password reset code for <strong>{CAMP.name}</strong> on
                 CampMinder is:
               </p>
+              <div style={{ textAlign: 'center', margin: '16px 0' }}>
+                <ClickableCode
+                  code="847291"
+                  accentColor={CAMP.accentColor}
+                  onCopied={() => {
+                    setCodeCopied(true);
+                    codeInputRef.current?.focus();
+                  }}
+                />
+              </div>
               <p className="cm-email__muted">
                 This code expires in 10 minutes. If you didn&rsquo;t request
                 this, you can safely ignore this email.

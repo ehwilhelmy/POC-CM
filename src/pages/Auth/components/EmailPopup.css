@@ -95,3 +95,30 @@
   color: #ffffff;
   opacity: 0.9;
 }
+
+/* ── Mobile: full-screen sheet ── */
+@media (max-width: 600px) {
+  .cm-email-popup {
+    width: 100%;
+    height: 80dvh;
+    left: 0;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .cm-email-popup .cm-gmail-inbox__content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .cm-email-popup .cm-gmail-inbox__reader {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+  }
+
+  .cm-email-popup__close {
+    width: 40px;
+    height: 40px;
+  }
+}
