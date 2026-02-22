@@ -15,6 +15,7 @@ import {
   MultiCampFlow,
   EmailPreviewFlow,
   AccountLookupFlow,
+  CampanionFlow,
 } from './pages/Auth';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/auth/multi-camp" element={<MultiCampFlow />} />
         <Route path="/auth/emails" element={<EmailPreviewFlow />} />
         <Route path="/auth/account-lookup" element={<AccountLookupFlow />} />
+        <Route path="/auth/campanion" element={<CampanionFlow />} />
 
         {/* Management tool — wrapped in AppShell */}
         <Route path="/app" element={<AppShell />}>

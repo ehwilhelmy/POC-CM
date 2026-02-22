@@ -1,6 +1,7 @@
 import type { CampBranding } from './components/AuthLayout';
 import campTallPinesLogo from '@/assets/camp-tall-pines-logo.svg';
 import campTallPinesBg from '@/assets/camp-bg.jpeg';
+import campanionLogo from '@/assets/logo/campanion-logo-color-vert-md.svg';
 
 /**
  * Shared camp brand config — single source of truth.
@@ -24,6 +25,15 @@ export const CAMP_BLUE_RIDGE: CampBranding = {
   name: 'Camp Blue Ridge',
   accentColor: '#2266cc',
   initials: 'BR',
+};
+
+/** Campanion product branding (not a camp — the mobile app itself) */
+export const CAMPANION: CampBranding = {
+  name: 'CAMPANION',
+  accentColor: '#1a1a2e',
+  initials: 'C',
+  logoUrl: campanionLogo,
+  backgroundUrl: campTallPinesBg,
 };
 
 /** Default camp for most flows */

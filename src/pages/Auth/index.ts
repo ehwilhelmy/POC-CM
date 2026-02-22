@@ -8,3 +8,4 @@ export { GuestAccountFlow } from './flows/GuestAccountFlow';
 export { MultiCampFlow } from './flows/MultiCampFlow';
 export { EmailPreviewFlow } from './flows/EmailPreviewFlow';
 export { AccountLookupFlow } from './flows/AccountLookupFlow';
+export { CampanionFlow } from './flows/CampanionFlow';

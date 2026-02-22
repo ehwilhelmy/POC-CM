@@ -1,0 +1,353 @@
+/* ── Campanion app flow — page wrapper ── */
+.cm-campanion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #1a1a2e;
+  font-family: var(--font-family-body);
+  padding: var(--space-xl);
+  gap: var(--space-xl);
+}
+
+/* ── Phone frame ── */
+.cm-campanion__phone {
+  position: relative;
+  width: 100%;
+  max-width: 375px;
+  background: #000;
+  border-radius: 40px;
+  border: 3px solid #444;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  min-height: 700px;
+}
+
+/* ── Status bar ── */
+.cm-campanion__status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 28px 4px;
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+  color: #fff;
+  z-index: 2;
+}
+
+/* ── Onboarding screen (Step 1) ── */
+.cm-campanion__onboarding {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.cm-campanion__hero-img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+}
+
+.cm-campanion__hero-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xl) var(--space-xxl) var(--space-xxl);
+  gap: var(--space-md);
+  text-align: center;
+  background: #000;
+}
+
+.cm-campanion__hero-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+.cm-campanion__hero-subtitle {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  max-width: 280px;
+}
+
+.cm-campanion__hero-dots {
+  display: flex;
+  gap: 6px;
+  margin: var(--space-sm) 0;
+}
+
+.cm-campanion__hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.cm-campanion__hero-dot--active {
+  background: #ffffff;
+}
+
+.cm-campanion__login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px var(--space-xl);
+  margin-top: auto;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-xl);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  background: #e07c24;
+  color: #ffffff;
+}
+
+.cm-campanion__login-btn:hover {
+  background: #c96a18;
+}
+
+/* ── Auth0 in-app browser sheet (Steps 2 & 3) ── */
+.cm-campanion__sheet {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f2;
+  border-radius: 12px 12px 0 0;
+  margin-top: 4px;
+}
+
+.cm-campanion__sheet-handle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 8px;
+  border-bottom: 1px solid #e0e0e0;
+  background: #f8f8f8;
+  border-radius: 12px 12px 0 0;
+}
+
+.cm-campanion__sheet-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: #e8e8e8;
+  color: #666;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cm-campanion__sheet-url {
+  font-size: 12px;
+  color: #666;
+  font-weight: var(--font-weight-medium);
+}
+
+.cm-campanion__sheet-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Branding area inside the sheet */
+.cm-campanion__sheet-branding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xl) var(--space-xl) var(--space-lg);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(26, 26, 46, 0.92) 0%,
+      rgba(26, 26, 46, 0.85) 40%,
+      rgba(40, 40, 60, 0.9) 100%
+    );
+  position: relative;
+}
+
+.cm-campanion__sheet-branding::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../../../../assets/camp-bg.jpeg') center / cover no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.cm-campanion__sheet-logo {
+  position: relative;
+  z-index: 1;
+  height: 80px;
+  width: auto;
+}
+
+/* Form area inside the sheet */
+.cm-campanion__sheet-form {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-xl) var(--space-xl) var(--space-lg);
+  gap: var(--space-lg);
+  background: #ffffff;
+}
+
+.cm-campanion__sheet-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: #1a1a1a;
+  margin: 0;
+  text-align: center;
+}
+
+.cm-campanion__sheet-subtitle {
+  font-size: var(--font-size-sm);
+  color: #666;
+  margin: calc(-1 * var(--space-sm)) 0 0;
+  text-align: center;
+  line-height: var(--line-height-normal);
+}
+
+.cm-campanion__sheet-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.cm-campanion__sheet-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  font-family: var(--font-family-body);
+  border: 1px solid #c9cace;
+  border-radius: 6px;
+  background: #fff;
+  color: #1a1a1a;
+  box-sizing: border-box;
+}
+
+.cm-campanion__sheet-input::placeholder {
+  color: #999;
+}
+
+.cm-campanion__sheet-input:focus {
+  outline: none;
+  border-color: #1a1a2e;
+}
+
+.cm-campanion__sheet-input--readonly {
+  background: #f5f5f5;
+  color: #666;
+  cursor: default;
+}
+
+.cm-campanion__sheet-label {
+  font-size: 13px;
+  color: #282828;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cm-campanion__sheet-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 14px var(--space-xl);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  background: #1a1a2e;
+  color: #ffffff;
+}
+
+.cm-campanion__sheet-btn:hover {
+  background: #0d0d1a;
+}
+
+.cm-campanion__sheet-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cm-campanion__sheet-link {
+  font-size: var(--font-size-sm);
+  color: #1a1a2e;
+  font-weight: var(--font-weight-medium);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  text-align: center;
+}
+
+.cm-campanion__sheet-link:hover {
+  text-decoration: underline;
+}
+
+/* Terms below form */
+.cm-campanion__sheet-terms {
+  padding: var(--space-md) var(--space-xl);
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+  line-height: var(--line-height-normal);
+  border-top: 1px solid #eee;
+}
+
+.cm-campanion__sheet-terms a {
+  color: #999;
+}
+
+/* ── Annotations (below phone) ── */
+.cm-campanion__annotations {
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ── Return link ── */
+.cm-campanion__return {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: var(--font-weight-medium);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+}
+
+.cm-campanion__return:hover {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: underline;
+}
