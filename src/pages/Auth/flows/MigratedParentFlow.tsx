@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { CampWebsite } from '../components/CampWebsite';
 import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { AuthLayout } from '../components/AuthLayout';

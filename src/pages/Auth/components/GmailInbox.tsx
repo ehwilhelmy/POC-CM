@@ -86,8 +86,8 @@ export const GmailInbox: React.FC<GmailInboxProps> = ({
   senderEmail,
   subject,
   accentColor,
-  verificationCode,
-  onCodeCopied,
+  verificationCode: _verificationCode,
+  onCodeCopied: _onCodeCopied,
   compact,
   children,
 }) => {

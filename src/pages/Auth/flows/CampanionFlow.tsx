@@ -20,7 +20,7 @@ export const CampanionFlow: React.FC = () => {
   const [step, setStep] = useState<Step>('app-onboarding');
   const [email, setEmail] = useState('jane.smith@email.com');
   const [password, setPassword] = useState('');
-  const [selectedCamp, setSelectedCamp] = useState<CampBranding>(CAMPS[0]);
+  const [, setSelectedCamp] = useState<CampBranding>(CAMPS[0]);
 
   return (
     <div className="cm-campanion">

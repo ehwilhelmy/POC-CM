@@ -42,7 +42,7 @@ export const UnifiedEntryFlow: React.FC = () => {
   return (
     <AuthLayout
       camp={CAMP}
-      onBack={step !== 'email' && step !== 'success' && step !== 'dashboard' ? handleBack : undefined}
+      onBack={step !== 'email' && step !== 'success' ? handleBack : undefined}
     >
       {step === 'email' && (
         <>
