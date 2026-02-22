@@ -19,32 +19,32 @@ import './AppShell.css';
 
 const routeMap: Record<string, string> = {
   'Home': '/',
-  'Reports': '/reports',
-  'Communication': '/communication',
-  'Camper': '/camper',
-  'Staff': '/staff/pipeline',
-  'Alumni': '/alumni',
-  'Financial': '/financial',
-  'Accounts': '/accounts',
-  'Medical': '/medical',
-  'Travel': '/travel',
-  'Scheduling': '/scheduling',
-  'Admin': '/admin',
+  'Reports': '/app/reports',
+  'Communication': '/app/communication',
+  'Camper': '/app/camper',
+  'Staff': '/app/staff/pipeline',
+  'Alumni': '/app/alumni',
+  'Financial': '/app/financial',
+  'Accounts': '/app/accounts',
+  'Medical': '/app/medical',
+  'Travel': '/app/travel',
+  'Scheduling': '/app/scheduling',
+  'Admin': '/app/admin',
 };
 
 const pageTitles: Record<string, string> = {
-  '/': 'Home',
-  '/reports': 'Reports',
-  '/staff/pipeline': 'Staff',
-  '/communication': 'Communication',
-  '/camper': 'Camper',
-  '/alumni': 'Alumni',
-  '/financial': 'Financial',
-  '/accounts': 'Accounts',
-  '/medical': 'Medical',
-  '/travel': 'Travel',
-  '/scheduling': 'Scheduling',
-  '/admin': 'Admin',
+  '/app': 'Home',
+  '/app/reports': 'Reports',
+  '/app/staff/pipeline': 'Staff',
+  '/app/communication': 'Communication',
+  '/app/camper': 'Camper',
+  '/app/alumni': 'Alumni',
+  '/app/financial': 'Financial',
+  '/app/accounts': 'Accounts',
+  '/app/medical': 'Medical',
+  '/app/travel': 'Travel',
+  '/app/scheduling': 'Scheduling',
+  '/app/admin': 'Admin',
 };
 
 const baseNavItems: Omit<NavItem, 'active' | 'href'>[] = [
@@ -78,7 +78,7 @@ export const AppShell: React.FC = () => {
     };
   });
 
-  const pageTitle = pageTitles[location.pathname] || 'CampMinder';
+  const pageTitle = pageTitles[location.pathname] || 'campminder';
 
   const handleNavigate = (href: string) => {
     navigate(href);

@@ -9,6 +9,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import GroupsIcon from '@mui/icons-material/Groups';
 import EmailIcon from '@mui/icons-material/Email';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import logoSrc from '../../assets/logo/cm-logo-hortizontal-color.svg';
 import './AuthIndex.css';
 
 interface FlowCard {
@@ -112,10 +113,7 @@ export const AuthIndex: React.FC = () => {
     <div className="cm-auth-index">
       <div className="cm-auth-index__container">
         <div className="cm-auth-index__header">
-          <div className="cm-auth-index__wordmark">
-            <span className="cm-auth-index__wordmark-camp">Camp</span>
-            <span className="cm-auth-index__wordmark-minder">Minder</span>
-          </div>
+          <img src={logoSrc} alt="campminder" className="cm-auth-index__logo" />
           <h1 className="cm-auth-index__title">Auth Flow Prototypes</h1>
           <p className="cm-auth-index__subtitle">
             Caregiver journey prototypes for user testing. Each flow walks through

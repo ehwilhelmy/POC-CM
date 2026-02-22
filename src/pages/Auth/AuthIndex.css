@@ -22,18 +22,9 @@
   gap: var(--space-sm);
 }
 
-.cm-auth-index__wordmark {
-  font-size: var(--font-size-xxl);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: -0.5px;
-}
-
-.cm-auth-index__wordmark-camp {
-  color: var(--color-primary-default);
-}
-
-.cm-auth-index__wordmark-minder {
-  color: var(--color-neutral-700);
+.cm-auth-index__logo {
+  height: 40px;
+  width: auto;
 }
 
 .cm-auth-index__title {

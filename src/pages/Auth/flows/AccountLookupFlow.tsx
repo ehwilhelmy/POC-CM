@@ -156,7 +156,7 @@ export const AccountLookupFlow: React.FC = () => {
 
           {result.status === 'not-found' && (
             <p className="cm-lookup__not-found-hint">
-              This email doesn't have a CampMinder account. The parent may need
+              This email doesn't have a campminder account. The parent may need
               to create one, or they may be using a different email address.
             </p>
           )}

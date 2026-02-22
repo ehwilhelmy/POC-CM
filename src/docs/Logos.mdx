@@ -1,0 +1,49 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Logos" />
+
+# Logos
+
+The campminder logo system includes **5 types** across **3 color modes** each. All assets live in `src/assets/logo/`.
+
+## Logo Types
+
+| Type | File prefix | Use case |
+|------|-------------|----------|
+| **Horizontal** | `cm-logo-hortizontal` | Primary — headers, nav bars |
+| **Horizontal + Tagline** | `cm-logo-hortizontal-tagline` | Marketing, landing pages |
+| **Stacked** | `cm-logo-stacked` | Compact spaces, favicons at larger sizes |
+| **Slug** | `cm-logo-slug` | Minimal mark — avatars, app icons |
+| **Slug + Tagline** | `cm-logo-slug-tagline` | Compact with tagline |
+
+## Color Modes
+
+| Mode | Suffix | Background |
+|------|--------|------------|
+| **Color** | `-color` | White/light backgrounds — purple bracket accents |
+| **Dark** | `-dark` | White/light backgrounds — all black |
+| **Light** | `-light` | Dark/purple backgrounds — all white |
+
+## Usage
+
+```tsx
+// Import as image source
+import logoSrc from '../../assets/logo/cm-logo-hortizontal-color.svg';
+
+<img src={logoSrc} alt="campminder" />
+
+// For dark backgrounds, use the light variant
+import logoLightSrc from '../../assets/logo/cm-logo-hortizontal-light.svg';
+```
+
+## Guidelines
+
+- Always maintain clear space around the logo (minimum `--space-xl` / 24px)
+- Never stretch, rotate, or recolor the logo
+- On dark or purple backgrounds, use the `-light` variant
+- On white or light backgrounds, use `-color` (preferred) or `-dark`
+- The slug mark can be used alone when the full name is visible elsewhere
+
+## Visual Reference
+
+See the **Logo Gallery** story for a visual preview of all variants.

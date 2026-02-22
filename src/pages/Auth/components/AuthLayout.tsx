@@ -60,13 +60,13 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
 
       {/* Below-card zone (Auth0 page template) */}
       <p className="cm-auth__terms">
-        By signing in, you agree to CampMinder&rsquo;s{' '}
+        By signing in, you agree to campminder&rsquo;s{' '}
         <button className="cm-auth__terms-link">Terms of Service</button> and{' '}
         <button className="cm-auth__terms-link">Privacy Policy</button>.
       </p>
       <div className="cm-auth__wordmark">
         <LockOutlinedIcon className="cm-auth__wordmark-lock" sx={{ fontSize: 12 }} />
-        Powered by CampMinder
+        Powered by campminder
       </div>
 
       <button

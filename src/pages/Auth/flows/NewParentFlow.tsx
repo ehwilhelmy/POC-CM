@@ -129,7 +129,7 @@ export const NewParentFlow: React.FC = () => {
           <EmailPopup
             open={emailOpen}
             onClose={() => setEmailOpen(false)}
-            senderName={`${CAMP.name} via CampMinder`}
+            senderName={`${CAMP.name} via campminder`}
             senderEmail="noreply@campminder.com"
             subject={`Your verification code — ${CAMP.name}`}
             accentColor={CAMP.accentColor}
@@ -155,7 +155,7 @@ export const NewParentFlow: React.FC = () => {
               <p className="cm-email__greeting">Hi there,</p>
               <p>
                 Your verification code for <strong>{CAMP.name}</strong> on
-                CampMinder is:
+                campminder is:
               </p>
               <div style={{ textAlign: 'center', margin: '16px 0' }}>
                 <ClickableCode
@@ -173,7 +173,7 @@ export const NewParentFlow: React.FC = () => {
               </p>
             </div>
             <div className="cm-email__footer">
-              <span className="cm-email__footer-brand">Powered by CampMinder</span>
+              <span className="cm-email__footer-brand">Powered by campminder</span>
               <span className="cm-email__footer-links">
                 Help Center &middot; Privacy Policy
               </span>

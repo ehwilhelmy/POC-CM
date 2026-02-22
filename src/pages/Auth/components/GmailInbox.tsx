@@ -162,7 +162,7 @@ export const GmailInbox: React.FC<GmailInboxProps> = ({
         <div className="cm-gmail-inbox__content">
           {view === 'list' ? (
             <div className="cm-gmail-inbox__list">
-              {/* The real CampMinder email — unread */}
+              {/* The real campminder email — unread */}
               <div
                 className="cm-gmail-inbox__row cm-gmail-inbox__row--unread"
                 onClick={() => setView('reader')}

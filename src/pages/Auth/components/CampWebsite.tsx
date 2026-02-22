@@ -190,7 +190,7 @@ export const CampWebsite: React.FC<CampWebsiteProps> = ({ onPortalClick }) => {
         </div>
         <div className="border-t border-gray-800 px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-500 max-w-5xl mx-auto w-full">
           <span>&copy; 2026 Camp Tall Pines. All rights reserved.</span>
-          <span>Powered by CampMinder</span>
+          <span>Powered by campminder</span>
         </div>
       </footer>
     </div>

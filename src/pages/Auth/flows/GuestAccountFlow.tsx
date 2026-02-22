@@ -55,7 +55,7 @@ export const GuestAccountFlow: React.FC = () => {
               <p style={{ margin: '0 0 12px' }}>Hi there,</p>
               <p style={{ margin: '0 0 12px' }}>
                 Jane Smith has invited you to view <strong>Tommy Smith's</strong> profile
-                on CampMinder for <strong>Camp Tall Pines</strong>.
+                on campminder for <strong>Camp Tall Pines</strong>.
               </p>
               <button
                 onClick={() => setStep('click-link')}
@@ -82,7 +82,7 @@ export const GuestAccountFlow: React.FC = () => {
             <WarningAmberIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
             <span>
               <strong>Note:</strong> The email comes from "noreply@campminder.com" with no
-              camp branding. Grandma may not trust it or understand what CampMinder is.
+              camp branding. Grandma may not trust it or understand what campminder is.
             </span>
           </div>
         </>

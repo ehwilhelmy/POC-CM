@@ -136,7 +136,7 @@ export const UnifiedEntryFlow: React.FC = () => {
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
             <span>
               We'll send a verification email later. You can start using
-              CampMinder right away.
+              campminder right away.
             </span>
           </div>
         </>

@@ -22,7 +22,7 @@ export const SignupFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Create your account</h1>
           <p className="cm-auth-subtitle">
-            Join Camp Tall Pines on CampMinder. It only takes a minute.
+            Join Camp Tall Pines on campminder. It only takes a minute.
           </p>
           <div className="cm-auth-form">
             <TextInput label="First name" placeholder="Jane" />
@@ -68,7 +68,7 @@ export const SignupFlow: React.FC = () => {
           </div>
           <h1 className="cm-auth-title">Welcome, Jane!</h1>
           <p className="cm-auth-subtitle">
-            Your account is ready. You can start using CampMinder right away.
+            Your account is ready. You can start using campminder right away.
           </p>
 
           <div className="cm-auth-info-banner">

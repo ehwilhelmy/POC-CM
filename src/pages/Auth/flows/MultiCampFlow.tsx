@@ -41,7 +41,7 @@ export const MultiCampFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Welcome</h1>
           <p className="cm-auth-subtitle">
-            Log in to CampMinder with your email to continue.
+            Log in to campminder with your email to continue.
           </p>
           <div className="cm-auth-form">
             <TextInput

@@ -14,7 +14,7 @@ const emails: Record<EmailType, { subject: string; body: React.ReactNode }> = {
         <p className="cm-email__greeting">Hi Jane,</p>
         <p>
           Thanks for creating your account with <strong>{CAMP.name}</strong> on
-          CampMinder. Please verify your email address by clicking the button
+          campminder. Please verify your email address by clicking the button
           below.
         </p>
         <a href="#" className="cm-email__cta" style={{ backgroundColor: CAMP.accentColor }}>
@@ -34,7 +34,7 @@ const emails: Record<EmailType, { subject: string; body: React.ReactNode }> = {
         <p className="cm-email__greeting">Hi Jane,</p>
         <p>
           We received a request to reset your password for your{' '}
-          <strong>{CAMP.name}</strong> CampMinder account. Click the button
+          <strong>{CAMP.name}</strong> campminder account. Click the button
           below to choose a new password.
         </p>
         <a href="#" className="cm-email__cta" style={{ backgroundColor: CAMP.accentColor }}>
@@ -48,12 +48,12 @@ const emails: Record<EmailType, { subject: string; body: React.ReactNode }> = {
     ),
   },
   invitation: {
-    subject: `You're invited to ${CAMP.name} on CampMinder`,
+    subject: `You're invited to ${CAMP.name} on campminder`,
     body: (
       <>
         <p className="cm-email__greeting">Hi there,</p>
         <p>
-          <strong>{CAMP.name}</strong> has invited you to join CampMinder,
+          <strong>{CAMP.name}</strong> has invited you to join campminder,
           the platform your camp uses for enrollment, communication, and more.
         </p>
         <p>
@@ -103,7 +103,7 @@ export const EmailPreviewFlow: React.FC = () => {
         <div className="cm-email-preview__header">
           <div className="cm-email-preview__meta">
             <span className="cm-email-preview__from">
-              From: {CAMP.name} via CampMinder
+              From: {CAMP.name} via campminder
             </span>
             <span className="cm-email-preview__subject">{email.subject}</span>
           </div>
@@ -121,7 +121,7 @@ export const EmailPreviewFlow: React.FC = () => {
           {/* Footer */}
           <div className="cm-email__footer">
             <span className="cm-email__footer-brand">
-              Powered by CampMinder
+              Powered by campminder
             </span>
             <span className="cm-email__footer-links">
               Help Center &middot; Privacy Policy &middot; Unsubscribe
