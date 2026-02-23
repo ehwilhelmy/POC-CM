@@ -3,10 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LoginIcon from '@mui/icons-material/Login';
 import LockResetIcon from '@mui/icons-material/LockReset';
-import SyncProblemIcon from '@mui/icons-material/SyncProblem';
-import WrongLocationIcon from '@mui/icons-material/WrongLocation';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import GroupsIcon from '@mui/icons-material/Groups';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
@@ -50,26 +47,10 @@ const journeys: FlowCard[] = [
     icon: <LockResetIcon />,
     tag: 'Account Status Confusion',
   },
+  // Migrated Caretaker hidden — backend concern, not a user-facing flow for testing
+  // Route still exists at /auth/migrated if needed
   {
     id: 4,
-    title: 'Migrated Caretaker',
-    description:
-      'Returning from last year, doesn\'t know the system changed. Old password doesn\'t work. No idea they were migrated to Auth0.',
-    route: '/auth/migrated',
-    icon: <SyncProblemIcon />,
-    tag: 'Account Status Confusion',
-  },
-  {
-    id: 5,
-    title: 'Wrong Path',
-    description:
-      'Guesses wrong at login vs. signup. Hits duplicate account error or forgot password dead end.',
-    route: '/auth/wrong-path',
-    icon: <WrongLocationIcon />,
-    tag: 'Multi-Step Friction',
-  },
-  {
-    id: 6,
     title: 'Guest Account',
     description:
       'Non-primary caretaker (grandparent, co-parent) gets an invite. Different flow, different confusion.',
@@ -77,17 +58,8 @@ const journeys: FlowCard[] = [
     icon: <SupervisorAccountIcon />,
     tag: 'Broken Messages',
   },
-  {
-    id: 7,
-    title: 'Multi-Camp Caretaker',
-    description:
-      'Caretaker with kids at two camps. Which camp are they logging into? Which account?',
-    route: '/auth/multi-camp',
-    icon: <GroupsIcon />,
-    tag: 'Account Status Confusion',
-  },
-  {
-    id: 8,
+{
+    id: 5,
     title: 'Campanion App',
     description:
       'Parent opens the Campanion mobile app and logs in via Auth0. One login, all their camps — Campanion branding gives multi-camp context.',
@@ -99,7 +71,7 @@ const journeys: FlowCard[] = [
 
 const tools: FlowCard[] = [
   {
-    id: 9,
+    id: 6,
     title: 'Branded Emails',
     description: 'Preview camp-branded transactional emails: verification, password reset, invitation.',
     route: '/auth/emails',
@@ -107,7 +79,7 @@ const tools: FlowCard[] = [
     tag: 'Reference',
   },
   {
-    id: 10,
+    id: 7,
     title: 'Account Lookup',
     description: 'Camp staff tool to search parent email and see account status.',
     route: '/auth/account-lookup',

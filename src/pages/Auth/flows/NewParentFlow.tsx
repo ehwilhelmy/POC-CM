@@ -53,10 +53,8 @@ export const NewParentFlow: React.FC = () => {
         step === 'email-entry'
           ? () => setStep('camp-website')
           : step === 'verify-code'
-            ? () => setStep('email-entry')
-            : step === 'create-account'
-              ? () => setStep('verify-code')
-              : undefined
+            ? () => setStep('create-account')
+            : undefined
       }
     >
       {/* Step 1: Identifier-first entry */}
@@ -77,14 +75,14 @@ export const NewParentFlow: React.FC = () => {
             <button
               className="cm-auth-btn cm-auth-btn--primary"
               disabled={!email.trim()}
-              onClick={() => setStep('verify-code')}
+              onClick={() => setStep('create-account')}
             >
               Continue
             </button>
           </div>
           <p className="cm-auth-signup-prompt">
             Don&rsquo;t have an account?{' '}
-            <button className="cm-auth-link" onClick={() => setStep('verify-code')}>
+            <button className="cm-auth-link" onClick={() => setStep('create-account')}>
               Sign up
             </button>
           </p>
@@ -99,12 +97,63 @@ export const NewParentFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 2: Verify code */}
+      {/* Step 2: Create account */}
+      {step === 'create-account' && (
+        <>
+          <h1 className="cm-auth-title">Create your account</h1>
+          <p className="cm-auth-notice">
+            We didn&rsquo;t find an account for <strong>{email}</strong>.
+            Fill in the details below to get started with {CAMP.name}.
+          </p>
+          <div className="cm-auth-form">
+            <TextInput label="First name" placeholder="Jane" />
+            <TextInput label="Last name" placeholder="Smith" />
+            <TextInput label="Email" value={email} disabled />
+            <TextInput
+              label="Password"
+              placeholder="Create a password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <TextInput
+              label="Confirm password"
+              placeholder="Re-enter your password"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <PasswordRequirements password={password} confirmPassword={confirmPassword} />
+            <button
+              className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!allValid}
+              onClick={() => setStep('verify-code')}
+            >
+              Create Account
+            </button>
+          </div>
+          <p className="cm-auth-signup-prompt">
+            <button className="cm-auth-link" onClick={() => setStep('email-entry')}>
+              Try another email
+            </button>
+          </p>
+          <div className="cm-auth-info-banner">
+            <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
+            <span>
+              <strong>No account found.</strong> The system detected this email
+              doesn&rsquo;t have an account, so we skip straight to signup. No
+              guessing between &ldquo;Log In&rdquo; and &ldquo;Sign Up.&rdquo;
+            </span>
+          </div>
+        </>
+      )}
+
+      {/* Step 3: Verify email */}
       {step === 'verify-code' && (
         <>
-          <h1 className="cm-auth-title">Verify your identity</h1>
+          <h1 className="cm-auth-title">Verify your email</h1>
           <p className="cm-auth-subtitle">
-            We&rsquo;ve sent an email with your code to:<br />
+            We&rsquo;ve sent a verification code to:<br />
             <strong>{email}</strong>
           </p>
 
@@ -120,9 +169,9 @@ export const NewParentFlow: React.FC = () => {
               <button
                 className="cm-auth-btn cm-auth-btn--primary"
                 disabled={!code.trim()}
-                onClick={() => setStep('create-account')}
+                onClick={() => setStep('welcome')}
               >
-                Continue
+                Verify &amp; Continue
               </button>
             ) : (
               <button
@@ -195,54 +244,9 @@ export const NewParentFlow: React.FC = () => {
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
             <span>
-              <strong>Real-world email flow.</strong> Click &ldquo;Check your email&rdquo;
-              to see the Gmail popup — find the code, click to copy, then paste it
-              into the input. Just like real life.
-            </span>
-          </div>
-        </>
-      )}
-
-      {/* Step 3: Set password + name */}
-      {step === 'create-account' && (
-        <>
-          <h1 className="cm-auth-title">Create your account</h1>
-          <p className="cm-auth-subtitle">
-            Set a password to finish setting up your {CAMP.name} portal.
-          </p>
-          <div className="cm-auth-form">
-            <TextInput label="First name" placeholder="Jane" />
-            <TextInput label="Last name" placeholder="Smith" />
-            <TextInput
-              label="Password"
-              placeholder="Create a password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <TextInput
-              label="Confirm password"
-              placeholder="Re-enter your password"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-            <PasswordRequirements password={password} confirmPassword={confirmPassword} />
-            <button
-              className="cm-auth-btn cm-auth-btn--primary"
-              disabled={!allValid}
-              onClick={() => setStep('welcome')}
-            >
-              Create Account
-            </button>
-          </div>
-          <div className="cm-auth-info-banner">
-            <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
-            <span>
-              <strong>Email already verified.</strong> The parent proved ownership in the
-              previous step, so there&rsquo;s no blocking verification here. Just set a
-              password and name — one clean step to finish. This is Auth0&rsquo;s{' '}
-              <em>signup-password</em> prompt.
+              <strong>Verify after account creation.</strong> The account is created
+              first, then we verify email ownership. Click &ldquo;Check your
+              email&rdquo; to see the branded verification email.
             </span>
           </div>
         </>
@@ -262,9 +266,9 @@ export const NewParentFlow: React.FC = () => {
           <div className="cm-auth-info-banner" style={{ textAlign: 'left' }}>
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
             <span>
-              <strong>3 steps, no dead ends.</strong> Email → verify code → set password.
-              The parent never had to choose between login and signup. No blocking
-              verification email. No wrong-path confusion.
+              <strong>3 steps, no dead ends.</strong> Email → create account → verify.
+              The parent never had to choose between login and signup. The system
+              detected no account and routed them straight to signup.
             </span>
           </div>
           <button

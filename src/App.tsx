@@ -11,9 +11,7 @@ import {
   ReturningParentFlow,
   ForgotPasswordFlow,
   MigratedParentFlow,
-  WrongPathFlow,
   GuestAccountFlow,
-  MultiCampFlow,
   EmailPreviewFlow,
   AccountLookupFlow,
   CampanionFlow,
@@ -50,9 +48,7 @@ function App() {
         <Route path="/auth/returning-parent" element={<ReturningParentFlow />} />
         <Route path="/auth/forgot-password" element={<ForgotPasswordFlow />} />
         <Route path="/auth/migrated" element={<MigratedParentFlow />} />
-        <Route path="/auth/wrong-path" element={<WrongPathFlow />} />
         <Route path="/auth/guest" element={<GuestAccountFlow />} />
-        <Route path="/auth/multi-camp" element={<MultiCampFlow />} />
         <Route path="/auth/emails" element={<EmailPreviewFlow />} />
         <Route path="/auth/account-lookup" element={<AccountLookupFlow />} />
         <Route path="/auth/campanion" element={<CampanionFlow />} />

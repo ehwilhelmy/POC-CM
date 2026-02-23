@@ -308,6 +308,15 @@
   margin-top: 2px;
 }
 
+.cm-auth-notice {
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-blue-100);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  color: var(--color-blue-800);
+  line-height: var(--line-height-normal);
+}
+
 .cm-auth-error-banner {
   display: flex;
   align-items: flex-start;
