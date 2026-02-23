@@ -4,12 +4,13 @@ import { GmailInbox } from '../components/GmailInbox';
 import { CAMP } from '../campBrand';
 import './EmailPreviewFlow.css';
 
-type EmailType = 'verification' | 'password-reset' | 'invitation';
+type EmailType = 'verification' | 'password-reset' | 'invitation' | 'guest-invite';
 
 const EMAIL_LABELS: Record<EmailType, string> = {
   verification: 'Verification',
   'password-reset': 'Password Reset',
   invitation: 'Invitation',
+  'guest-invite': 'Guest Invite',
 };
 
 function getEmail(type: EmailType) {
@@ -138,6 +139,57 @@ function getEmail(type: EmailType) {
               <span className="cm-email__footer-brand">Powered by campminder</span>
               <span className="cm-email__footer-links">
                 Help Center &middot; Privacy Policy &middot; Unsubscribe
+              </span>
+            </div>
+          </>
+        ),
+      };
+    case 'guest-invite':
+      return {
+        subject: `Jane Smith invited you to see Tommy's camp updates`,
+        senderName: `${CAMP.name} via campminder`,
+        body: (
+          <>
+            <div className="cm-email__camp-banner" style={{ backgroundColor: CAMP.accentColor }}>
+              {CAMP.logoUrl ? (
+                <img
+                  src={CAMP.logoUrl}
+                  alt={CAMP.name}
+                  style={{ width: 36, height: 36, borderRadius: '50%' }}
+                />
+              ) : (
+                <div className="cm-email__camp-banner-logo">{CAMP.initials}</div>
+              )}
+              <span className="cm-email__camp-banner-name">{CAMP.name}</span>
+            </div>
+            <div className="cm-email__content">
+              <p className="cm-email__greeting">Hi Ruth,</p>
+              <p>
+                <strong>Jane Smith</strong> has invited you to be a guest on{' '}
+                <strong>Tommy Smith&rsquo;s</strong> {CAMP.name} account.
+              </p>
+              <p>As a guest, you can:</p>
+              <ul className="cm-email__list">
+                <li>View photos from camp</li>
+                <li>Watch camp videos</li>
+                <li>Send notes to Tommy</li>
+              </ul>
+              <div className="cm-email__note">
+                <strong className="cm-email__note-label">A note from Jane:</strong>
+                Hi Grandma! This is Tommy&rsquo;s new camp, you can see videos, photos,
+                and send him a personal message. ❤️
+              </div>
+              <a href="#" className="cm-email__cta" style={{ backgroundColor: CAMP.accentColor }}>
+                Create Guest Account
+              </a>
+              <p className="cm-email__muted">
+                If you didn&rsquo;t expect this email, you can safely ignore it.
+              </p>
+            </div>
+            <div className="cm-email__footer">
+              <span className="cm-email__footer-brand">Powered by campminder</span>
+              <span className="cm-email__footer-links">
+                Help Center &middot; Privacy Policy
               </span>
             </div>
           </>

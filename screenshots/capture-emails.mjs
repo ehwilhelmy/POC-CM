@@ -46,6 +46,16 @@ async function run() {
   await page.waitForTimeout(400);
   await shot(page, '21b-email-invitation-reader');
 
+  // Guest Invite — inbox list
+  await page.click('text=Guest Invite');
+  await page.waitForTimeout(400);
+  await shot(page, '24-email-guest-invite-inbox');
+
+  // Open reader
+  await page.click('.cm-gmail-inbox__row--unread');
+  await page.waitForTimeout(400);
+  await shot(page, '24b-email-guest-invite-reader');
+
   // Also capture the in-flow email popups
   console.log('In-flow email popups...');
 

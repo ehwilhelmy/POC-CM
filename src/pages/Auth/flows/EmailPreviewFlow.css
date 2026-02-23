@@ -164,3 +164,27 @@
   font-size: 11px;
   color: var(--color-neutral-600);
 }
+
+/* ── Guest invite email ── */
+.cm-email__list {
+  margin: 0 0 var(--space-lg);
+  padding-left: var(--space-xl);
+  font-size: var(--font-size-xs);
+  line-height: 1.8;
+}
+
+.cm-email__note {
+  background: var(--color-neutral-200);
+  border-left: 3px solid var(--color-neutral-500);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-lg);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-neutral-800);
+}
+
+.cm-email__note-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+}
