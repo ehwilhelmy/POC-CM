@@ -1,4 +1,5 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { AppShell } from './layouts/AppShell';
 import { HomePage } from './pages/Home';
 import { ReportsPage } from './pages/Reports';
@@ -18,9 +19,27 @@ import {
   CampanionFlow,
 } from './pages/Auth';
 
+const GlobalShortcuts: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.metaKey && e.shiftKey && e.key.toUpperCase() === 'I') {
+        e.preventDefault();
+        navigate('/auth');
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [navigate]);
+
+  return null;
+};
+
 function App() {
   return (
     <HashRouter>
+      <GlobalShortcuts />
       <Routes>
         {/* Landing page */}
         <Route path="/" element={<HomePage />} />
