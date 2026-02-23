@@ -1,14 +1,14 @@
 # Auth Flow Prototypes
 
-Caretaker journey prototypes for user testing. Each flow walks through a real scenario camp staff are dealing with after the Auth0 migration.
+Caregiver journey prototypes for user testing. Each flow walks through a real scenario camp staff are dealing with after the Auth0 migration.
 
 ---
 
-## Caretaker Journeys
+## Caregiver Journeys
 
-### 1. New Caretaker Auth Flow
+### 1. New Caregiver Auth Flow
 
-**Problem:** New caretakers get an invite from camp, click through to register, and hit an Auth0 login screen that looks nothing like their camp. They don't recognize it, don't trust it, and drop off — or call camp staff confused about where they ended up.
+**Problem:** New caregivers get an invite from camp, click through to register, and hit an Auth0 login screen that looks nothing like their camp. They don't recognize it, don't trust it, and drop off — or call camp staff confused about where they ended up.
 
 **Journey:** Gets invite from camp, visits camp website, registers, creates account, gets verified, lands in portal.
 
@@ -17,9 +17,9 @@ Caretaker journey prototypes for user testing. Each flow walks through a real sc
 
 ---
 
-### 2. Returning Caretaker Auth Flow
+### 2. Returning Caregiver Auth Flow
 
-**Problem:** Caretakers who logged in last summer come back and the login page looks completely different. They're not sure they're in the right place, can't tell if they already have an account, and the generic Auth0 branding gives them no confidence they're logging into their camp.
+**Problem:** Caregivers who logged in last summer come back and the login page looks completely different. They're not sure they're in the right place, can't tell if they already have an account, and the generic Auth0 branding gives them no confidence they're logging into their camp.
 
 **Journey:** Returns to camp site, enters email*, enters password, lands in portal.
 
@@ -32,7 +32,7 @@ Caretaker journey prototypes for user testing. Each flow walks through a real sc
 
 ### 3. Forgot Password Flow
 
-**Problem:** Caretakers don't remember their password — or never set one after migration. They don't know if they even have an account, the reset emails look unfamiliar, and the multi-step process loses people along the way.
+**Problem:** Caregivers don't remember their password — or never set one after migration. They don't know if they even have an account, the reset emails look unfamiliar, and the multi-step process loses people along the way.
 
 **Journey:** Can't remember password, requests reset, receives branded email, enters code, sets new password, back to login.
 
@@ -43,9 +43,9 @@ Caretaker journey prototypes for user testing. Each flow walks through a real sc
 
 ### 4. Guest Account Flow
 
-**Problem:** Grandparents and co-caretakers receive a guest invite email but have no idea what campminder is. The messaging doesn't explain what they're signing up for, what access they'll have, or why they need yet another account. Many ignore the email entirely.
+**Problem:** Grandparents and co-caregivers receive a guest invite email but have no idea what campminder is. The messaging doesn't explain what they're signing up for, what access they'll have, or why they need yet another account. Many ignore the email entirely.
 
-**Journey:** Primary caretaker invites a guest (grandparent, co-caretaker) from their dashboard. Guest receives email, creates account, lands in limited portal.
+**Journey:** Primary caregiver invites a guest (grandparent, co-caregiver) from their dashboard. Guest receives email, creates account, lands in limited portal.
 
 **Proposal focuses on:**
 `Broken Messages` `Multi-Step Friction`
@@ -54,9 +54,9 @@ Caretaker journey prototypes for user testing. Each flow walks through a real sc
 
 ### 5. Campanion Branding Login Confusion
 
-**Problem:** Caretakers open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don't understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion.
+**Problem:** Caregivers open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don't understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion.
 
-**Journey:** Caretaker opens the Campanion mobile app and logs in. One login, all their camps — Campanion branding gives multi-camp context.
+**Journey:** Caregiver opens the Campanion mobile app and logs in. One login, all their camps — Campanion branding gives multi-camp context.
 
 **Proposal focuses on:**
 `Branding & Identity`
@@ -71,8 +71,8 @@ Preview camp-branded transactional emails: verification, password reset, invitat
 
 ### Account Lookup
 
-Camp staff tool to search caretaker email and see account status.
+Camp staff tool to search caregiver email and see account status.
 
 ### Expired Link
 
-What caretakers see when a verification or reset link has expired. Clear recovery, no dead ends.
+What caregivers see when a verification or reset link has expired. Clear recovery, no dead ends.

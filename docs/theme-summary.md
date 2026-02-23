@@ -57,11 +57,11 @@
 | Camps can't see account status | Covered |
 | Wrong path → dead ends | Covered |
 | Pre-Auth0 password expectations | Covered |
-| Dual caretaker/staff accounts | Not covered |
+| Dual caregiver/staff accounts | Not covered |
 
 **How the prototype addresses it:** Identifier-first pattern means the system decides the path — no guessing. Account Lookup tool gives camp staff visibility into account status, verification state, and last login. Migration warning banner on the password error screen explains why old passwords may not work without blaming the parent.
 
-**Remaining gap:** Dual caretaker/staff accounts (same email, separate Auth0 accounts with different MFA) is an identity architecture question outside the scope of this prototype. Worth raising in the Auth0 implementation discussion.
+**Remaining gap:** Dual caregiver/staff accounts (same email, separate Auth0 accounts with different MFA) is an identity architecture question outside the scope of this prototype. Worth raising in the Auth0 implementation discussion.
 
 ---
 
@@ -87,11 +87,11 @@
 
 ## What the Prototype Demonstrates
 
-### Caretaker Journeys (5)
-1. **New Caretaker** — Camp website → identifier-first → create account → verify email → dashboard
-2. **Returning Caretaker** — Camp website → identifier-first → password → dashboard
+### Caregiver Journeys (5)
+1. **New Caregiver** — Camp website → identifier-first → create account → verify email → dashboard
+2. **Returning Caregiver** — Camp website → identifier-first → password → dashboard
 3. **Forgot Password** — Wrong password → migration warning → reset → auto-login
-4. **Guest Account** — Primary caretaker invites guest → branded email → pre-filled signup
+4. **Guest Account** — Primary caregiver invites guest → branded email → pre-filled signup
 5. **Campanion App** — Mobile login → Campanion branding → camp picker → stream
 
 ### Reference Tools (3)

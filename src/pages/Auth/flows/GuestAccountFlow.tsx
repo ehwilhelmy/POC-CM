@@ -13,7 +13,7 @@ import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 import './EmailPreviewFlow.css';
 
 type Step =
-  | 'caretaker-dashboard'
+  | 'caregiver-dashboard'
   | 'guest-accounts-page'
   | 'guest-email'
   | 'create-account'
@@ -24,7 +24,7 @@ export const GuestAccountFlow: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
-  const [step, setStep] = useState<Step>('caretaker-dashboard');
+  const [step, setStep] = useState<Step>('caregiver-dashboard');
   const [emailOpen, setEmailOpen] = useState(false);
   const [guestNote, setGuestNote] = useState('');
   const [password, setPassword] = useState('');
@@ -39,8 +39,8 @@ export const GuestAccountFlow: React.FC = () => {
     }
   }, [step]);
 
-  // Step 1: Caretaker's CampInTouch dashboard
-  if (step === 'caretaker-dashboard') {
+  // Step 1: Caregiver's CampInTouch dashboard
+  if (step === 'caregiver-dashboard') {
     return (
       <CampInTouchDashboard
         firstName="Jane"

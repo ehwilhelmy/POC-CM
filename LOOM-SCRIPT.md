@@ -8,23 +8,23 @@ Estimated total: ~8–10 min. You can record one Loom for all flows or one per f
 
 > Hey team — I'm going to walk you through the auth flow prototypes we've been working on. These are interactive prototypes, not mockups — you can actually click through them.
 >
-> Quick context: after the Auth0 migration, we've been hearing from camp staff about caretakers getting confused during login, registration, and password reset. These prototypes address the specific pain points we've identified.
+> Quick context: after the Auth0 migration, we've been hearing from camp staff about caregivers getting confused during login, registration, and password reset. These prototypes address the specific pain points we've identified.
 >
 > I'll walk through each flow, explain the problem it solves, and show what we're proposing. I'd love your feedback — I'll drop a link in Notion where you can leave comments.
 
 ---
 
-## Flow 1: New Caretaker Auth Flow (~2 min)
+## Flow 1: New Caregiver Auth Flow (~2 min)
 
-**Setup — start on the auth index page, click into New Caretaker**
+**Setup — start on the auth index page, click into New Caregiver**
 
-> **The problem:** A new caretaker gets an invite from their camp, clicks through to register, and lands on an Auth0 login screen that looks nothing like the camp they just came from. They don't recognize it, don't trust it, and either drop off or call camp staff asking "where did I end up?"
+> **The problem:** A new caregiver gets an invite from their camp, clicks through to register, and lands on an Auth0 login screen that looks nothing like the camp they just came from. They don't recognize it, don't trust it, and either drop off or call camp staff asking "where did I end up?"
 >
 > **What we're proposing:**
 
 *Click "Parent Portal" on the camp website*
 
-> The caretaker starts on the camp's website — this is familiar territory. When they click Parent Portal, they land on a login page that's branded to the camp. Same colors, same logo. There's no jarring transition to a generic Auth0 page.
+> The caregiver starts on the camp's website — this is familiar territory. When they click Parent Portal, they land on a login page that's branded to the camp. Same colors, same logo. There's no jarring transition to a generic Auth0 page.
 
 *Click Continue on email entry*
 
@@ -42,15 +42,15 @@ Estimated total: ~8–10 min. You can record one Loom for all flows or one per f
 
 > And look — we preview what the email looks like in their inbox. Camp branded, recognizable sender. They click through, verify, and land in their portal.
 >
-> The key themes here are **multi-step friction** — reducing the number of confusing steps — and **branding & identity** — making sure caretakers always know where they are.
+> The key themes here are **multi-step friction** — reducing the number of confusing steps — and **branding & identity** — making sure caregivers always know where they are.
 
 ---
 
-## Flow 2: Returning Caretaker Auth Flow (~1.5 min)
+## Flow 2: Returning Caregiver Auth Flow (~1.5 min)
 
-**Navigate back, click into Returning Caretaker**
+**Navigate back, click into Returning Caregiver**
 
-> **The problem:** A caretaker who logged in last summer comes back and the login page looks completely different. They're not sure they're in the right place. The generic Auth0 branding gives them zero confidence they're logging into their camp.
+> **The problem:** A caregiver who logged in last summer comes back and the login page looks completely different. They're not sure they're in the right place. The generic Auth0 branding gives them zero confidence they're logging into their camp.
 >
 > **What we're proposing:**
 
@@ -68,7 +68,7 @@ Estimated total: ~8–10 min. You can record one Loom for all flows or one per f
 >
 > One thing to note: this flow focuses on the happy path. We're not proposing the forgot password experience here — that's a separate flow we'll look at next.
 >
-> The themes here are **branding & identity** and **account status confusion** — making sure returning caretakers feel recognized, not lost.
+> The themes here are **branding & identity** and **account status confusion** — making sure returning caregivers feel recognized, not lost.
 
 ---
 
@@ -76,7 +76,7 @@ Estimated total: ~8–10 min. You can record one Loom for all flows or one per f
 
 **Navigate back, click into Forgot Password**
 
-> **The problem:** Caretakers don't remember their password — or in some cases, never set one after migration. They don't know if they even have an account. The reset emails look unfamiliar, and the multi-step process loses people along the way.
+> **The problem:** Caregivers don't remember their password — or in some cases, never set one after migration. They don't know if they even have an account. The reset emails look unfamiliar, and the multi-step process loses people along the way.
 >
 > **What we're proposing:**
 
@@ -108,13 +108,13 @@ Estimated total: ~8–10 min. You can record one Loom for all flows or one per f
 
 **Navigate back, click into Guest Account**
 
-> **The problem:** This is a different kind of user entirely. Grandparents, co-caretakers — people who aren't the primary account holder. They receive a guest invite email and have no idea what campminder is. The current messaging doesn't explain what they're signing up for, what access they'll have, or why they need another account. A lot of them just ignore the email.
+> **The problem:** This is a different kind of user entirely. Grandparents, co-caregivers — people who aren't the primary account holder. They receive a guest invite email and have no idea what campminder is. The current messaging doesn't explain what they're signing up for, what access they'll have, or why they need another account. A lot of them just ignore the email.
 >
 > **What we're proposing:**
 
 *Show the CampInTouch dashboard*
 
-> It starts from the primary caretaker's side. Jane is logged into her dashboard and wants to invite Grandma to see Tommy's camp updates.
+> It starts from the primary caregiver's side. Jane is logged into her dashboard and wants to invite Grandma to see Tommy's camp updates.
 
 *Click Guest Accounts, then submit the invite*
 
@@ -136,13 +136,13 @@ Estimated total: ~8–10 min. You can record one Loom for all flows or one per f
 
 **Navigate back, click into Campanion**
 
-> **The problem:** Caretakers open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don't understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion.
+> **The problem:** Caregivers open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don't understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion.
 >
 > **What we're proposing:**
 
 *Show the Campanion login screen*
 
-> When a caretaker opens Campanion, the login is Campanion-branded. Not Auth0, not a random camp — Campanion. This makes sense because Campanion is the multi-camp app. One login, all their camps.
+> When a caregiver opens Campanion, the login is Campanion-branded. Not Auth0, not a random camp — Campanion. This makes sense because Campanion is the multi-camp app. One login, all their camps.
 
 *Click through the login*
 
@@ -156,8 +156,8 @@ Estimated total: ~8–10 min. You can record one Loom for all flows or one per f
 
 > That's all five flows. To recap:
 >
-> - **New Caretaker** — branded registration that builds trust from step one
-> - **Returning Caretaker** — familiar, recognizable login that says "welcome back"
+> - **New Caregiver** — branded registration that builds trust from step one
+> - **Returning Caregiver** — familiar, recognizable login that says "welcome back"
 > - **Forgot Password** — clear recovery with branded emails at every step
 > - **Guest Account** — contextual invites that explain what campminder is and why Grandma should care
 > - **Campanion** — login branding that matches the app

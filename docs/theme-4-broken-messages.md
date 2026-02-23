@@ -3,7 +3,7 @@
 **Workshop Priority:** #4 (7 votes)
 **Owner:** @Megan Moore
 **Flows:** Guest Account
-**Also addressed by:** New Caretaker (identifier-first), Returning Caretaker (error states), Forgot Password (error + migration messaging), Branded Emails (reference)
+**Also addressed by:** New Caregiver (identifier-first), Returning Caregiver (error states), Forgot Password (error + migration messaging), Branded Emails (reference)
 
 ---
 
@@ -12,14 +12,14 @@
 ### 1. "Forgot Password" confirms a code was sent even when no account exists
 **Status:** Covered
 
-The identifier-first pattern eliminates this scenario. The system checks whether the email has an account *before* the parent ever reaches a password or reset flow. If no account exists, the parent is routed to signup (New Caretaker flow) — they never hit "Forgot Password" for a nonexistent account. The misleading "we sent a code" message can't happen because the system already knows the account status.
+The identifier-first pattern eliminates this scenario. The system checks whether the email has an account *before* the parent ever reaches a password or reset flow. If no account exists, the parent is routed to signup (New Caregiver flow) — they never hit "Forgot Password" for a nonexistent account. The misleading "we sent a code" message can't happen because the system already knows the account status.
 
 ---
 
 ### 2. Duplicate account error message doesn't provide a clear recovery path
 **Status:** Covered
 
-This error can't occur in our flows. The identifier-first pattern checks the email first — if an account already exists, the parent is routed to the password screen (Returning Caretaker), not to a signup form. The parent never fills out a form only to be told the email is taken. No ambiguous "it's possible you already have an account" messaging needed.
+This error can't occur in our flows. The identifier-first pattern checks the email first — if an account already exists, the parent is routed to the password screen (Returning Caregiver), not to a signup form. The parent never fills out a form only to be told the email is taken. No ambiguous "it's possible you already have an account" messaging needed.
 
 ---
 

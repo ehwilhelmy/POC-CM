@@ -268,7 +268,7 @@ export const CampanionFlow: React.FC = () => {
             <div className="cm-auth-info-banner">
               <InfoOutlinedIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
               <span>
-                <strong>No &ldquo;Sign Up&rdquo; option in the app.</strong> Caretakers
+                <strong>No &ldquo;Sign Up&rdquo; option in the app.</strong> Caregivers
                 must already have a CampMinder account (created when the camp
                 registered their family). This is intentional &mdash; account
                 creation happens through the camp, not through a third-party app.

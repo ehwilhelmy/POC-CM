@@ -2,7 +2,7 @@
 
 **Workshop Priority:** #1 (10 votes)
 **Owner:** @Megan Moore
-**Flows:** Returning Caretaker, Campanion App
+**Flows:** Returning Caregiver, Campanion App
 **Reference Tools:** Branded Emails
 
 ---
@@ -12,7 +12,7 @@
 ### 1. No camp branding on login or signup screens
 **Status:** Covered
 
-New Caretaker + Returning Caretaker flows both use `AuthLayout` with full camp branding — logo, camp name, accent color, and background image are visible on every auth screen. The parent always sees their camp's identity before entering any personal information.
+New Caregiver + Returning Caregiver flows both use `AuthLayout` with full camp branding — logo, camp name, accent color, and background image are visible on every auth screen. The parent always sees their camp's identity before entering any personal information.
 
 ---
 
@@ -33,7 +33,7 @@ This problem exists because today's login page is generic — there's nothing te
 ### 4. Auth0-generated emails lack recognizable sender identity
 **Status:** Covered
 
-Verification emails in the New Caretaker and Forgot Password flows show camp-branded headers (accent-colored banner with camp logo/initials and name). Sender shows as "Camp Tall Pines via campminder" instead of a generic noreply address. The Branded Emails reference tool previews all three email types (verification, password reset, invitation) with consistent camp branding.
+Verification emails in the New Caregiver and Forgot Password flows show camp-branded headers (accent-colored banner with camp logo/initials and name). Sender shows as "Camp Tall Pines via campminder" instead of a generic noreply address. The Branded Emails reference tool previews all three email types (verification, password reset, invitation) with consistent camp branding.
 
 ---
 

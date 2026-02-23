@@ -4,7 +4,7 @@
 **Owner:** @Megan Moore
 **Flows:** Forgot Password
 **Reference Tools:** Account Lookup
-**Also addressed by:** New Caretaker (identifier-first), Returning Caretaker (identifier-first)
+**Also addressed by:** New Caregiver (identifier-first), Returning Caregiver (identifier-first)
 
 ---
 
@@ -17,7 +17,7 @@ The identifier-first pattern eliminates this entirely. Every parent enters their
 
 ---
 
-### 2. Camps have no visibility into whether a caretaker has an Auth0 account
+### 2. Camps have no visibility into whether a caregiver has an Auth0 account
 **Status:** Covered
 
 The Account Lookup reference tool gives camp staff a way to search by email and see: account status (verified / unverified / not found), camp association, last login date, and account creation date. For unverified accounts, staff can resend the verification email. For "not found" results, the tool tells staff the parent may need to create an account or try a different email.
@@ -27,7 +27,7 @@ The Account Lookup reference tool gives camp staff a way to search by email and 
 ### 3. Choosing the wrong path leads to confusing dead ends
 **Status:** Covered
 
-There is no wrong path to choose. The system decides the path based on the email entered. A parent with an existing account is routed to the password screen (Returning Caretaker). A parent without an account is routed to the signup form (New Caretaker) with a notice explaining why. The duplicate-account dead end is impossible — the system already knows the email exists before showing any form.
+There is no wrong path to choose. The system decides the path based on the email entered. A parent with an existing account is routed to the password screen (Returning Caregiver). A parent without an account is routed to the signup form (New Caregiver) with a notice explaining why. The duplicate-account dead end is impossible — the system already knows the email exists before showing any form.
 
 ---
 
@@ -38,10 +38,10 @@ The Forgot Password flow handles the case where a returning parent's password do
 
 ---
 
-### 5. Caretakers who are also camp staff have two discrete accounts
+### 5. Caregivers who are also camp staff have two discrete accounts
 **Status:** Not covered
 
-The prototype doesn't address the dual-account scenario (same email, separate caretaker and staff Auth0 accounts with different MFA requirements). This is an identity architecture question — whether to merge accounts, add role switching, or keep them separate with clearer disambiguation. Not something the prototype can solve with UX alone.
+The prototype doesn't address the dual-account scenario (same email, separate caregiver and staff Auth0 accounts with different MFA requirements). This is an identity architecture question — whether to merge accounts, add role switching, or keep them separate with clearer disambiguation. Not something the prototype can solve with UX alone.
 
 **Worth noting:** This is likely a lower-frequency edge case compared to the other problems in this theme, but it's worth flagging for the Auth0 identity architecture discussion.
 
@@ -55,7 +55,7 @@ The prototype doesn't address the dual-account scenario (same email, separate ca
 | Camps can't see account status | Covered |
 | Wrong path → dead ends | Covered |
 | Pre-Auth0 password expectations | Covered |
-| Dual caretaker/staff accounts | Not covered |
+| Dual caregiver/staff accounts | Not covered |
 
 **Strengths:**
 - Identifier-first is the single biggest unlock — it eliminates the root cause of 3 out of 5 problems in this theme
@@ -63,4 +63,4 @@ The prototype doesn't address the dual-account scenario (same email, separate ca
 - Forgot Password flow has no dead ends and auto-logs in after reset
 
 **Gap:**
-- **Dual caretaker/staff accounts** — an identity architecture question outside the scope of this prototype. Worth raising in the Auth0 implementation discussion.
+- **Dual caregiver/staff accounts** — an identity architecture question outside the scope of this prototype. Worth raising in the Auth0 implementation discussion.

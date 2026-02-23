@@ -24,7 +24,7 @@ export const HomePage: React.FC = () => {
     {
       title: 'Auth Flow Prototypes',
       description:
-        '7 caretaker journeys and reference tools for testing the Auth0 migration experience.',
+        '7 caregiver journeys and reference tools for testing the Auth0 migration experience.',
       icon: <LockIcon />,
       action: () => navigate('/auth'),
       actionLabel: 'View flows',

@@ -2,7 +2,7 @@
 
 **Workshop Priority:** #2 (9 votes)
 **Owner:** @Megan Moore
-**Flows:** New Caretaker, Forgot Password, Guest Account
+**Flows:** New Caregiver, Forgot Password, Guest Account
 
 ---
 
@@ -11,14 +11,14 @@
 ### 1. New account creation requires several steps before the parent reaches their goal
 **Status:** Covered
 
-The New Caretaker flow reduces the journey to: email → create account → verify → done. The identifier-first pattern eliminates the "Login vs Sign Up" choice entirely — the system checks the email and routes automatically. The parent never has to guess which button to click. The info banner on the success screen calls this out: "3 steps, no dead ends."
+The New Caregiver flow reduces the journey to: email → create account → verify → done. The identifier-first pattern eliminates the "Login vs Sign Up" choice entirely — the system checks the email and routes automatically. The parent never has to guess which button to click. The info banner on the success screen calls this out: "3 steps, no dead ends."
 
 ---
 
 ### 2. Duplicate account error surfaces only after completing most of signup
 **Status:** Covered
 
-The identifier-first pattern solves this at the root. The parent enters their email *first*, and the system checks whether an account exists before showing any signup form. If an account exists, it routes to login (Returning Caretaker flow). If not, it routes to signup. The parent never fills out a form only to be told their email is taken.
+The identifier-first pattern solves this at the root. The parent enters their email *first*, and the system checks whether an account exists before showing any signup form. If an account exists, it routes to login (Returning Caregiver flow). If not, it routes to signup. The parent never fills out a form only to be told their email is taken.
 
 ---
 
@@ -52,7 +52,7 @@ The `PasswordRequirements` component shows real-time feedback as the parent type
 ### 6. Guest account login experience is "particularly egregious"
 **Status:** Covered
 
-The Guest Account flow demonstrates a streamlined invitation experience: the primary caretaker sends an invite from their dashboard, the guest receives a camp-branded email with their name and permissions listed, and the create-account form pre-fills first name, last name, and email (read-only). The guest only needs to set a password. The email popup auto-opens to reduce clicks.
+The Guest Account flow demonstrates a streamlined invitation experience: the primary caregiver sends an invite from their dashboard, the guest receives a camp-branded email with their name and permissions listed, and the create-account form pre-fills first name, last name, and email (read-only). The guest only needs to set a password. The email popup auto-opens to reduce clicks.
 
 ---
 
