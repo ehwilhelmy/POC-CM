@@ -55,11 +55,9 @@ The prototype demonstrates what properly branded emails look like — recognizab
 ---
 
 ### 6. Expired link error page is a dead end
-**Status:** Not covered
+**Status:** Covered
 
-The prototype doesn't demonstrate what happens when a parent clicks an expired link. This is an edge case that matters — the current Auth0 behavior shows a generic error page with no recovery path.
-
-**Worth noting:** The fix is straightforward — an expired-link page should show the camp's branding and a clear message: "This link has expired. [Request a new one]" with a button that routes back to the reset or verification flow. This could be added as a step in the Forgot Password flow.
+The Expired Link reference tool demonstrates what parents see when a verification or reset link has expired. Instead of a generic Auth0 error page, the parent sees camp branding, a clear explanation of what happened, and a one-click "Resend" button to get a new link. Covers both verification and password reset scenarios. No dead end — the parent goes from "expired" to "new email sent" in one click.
 
 ---
 
@@ -81,7 +79,7 @@ This is an infrastructure/redirect concern, not a UX flow. Camps have old CampIn
 | Error messages don't guide toward resolution | Covered |
 | Verification emails show broken Auth0 logo | Covered |
 | Gmail flags emails as suspicious | Partially covered (design-level) |
-| Expired link error page is a dead end | Not covered |
+| Expired link error page is a dead end | Covered |
 | Old pre-Auth0 links broken | Not covered |
 
 **Strengths:**
@@ -91,6 +89,5 @@ This is an infrastructure/redirect concern, not a UX flow. Camps have old CampIn
 - Migration warning on password error explains system changes without blaming the parent
 
 **Gaps:**
-- **Expired link page** — not demonstrated in the prototype. Could be added as a step in the Forgot Password flow showing a branded error page with a "Request a new link" button.
 - **Old link redirects** — infrastructure concern outside prototype scope. Should be tracked as a migration checklist item.
 - **Email deliverability** — the design helps with visual trust, but DKIM/SPF/email provider configuration is a separate infrastructure workstream.
