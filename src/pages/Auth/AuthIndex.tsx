@@ -14,59 +14,68 @@ import './AuthIndex.css';
 interface FlowCard {
   id: number;
   title: string;
+  problem?: string;
   description: string;
   route: string;
   icon: React.ReactNode;
-  tag: string;
+  tags: string[];
 }
 
 const journeys: FlowCard[] = [
   {
     id: 1,
-    title: 'New Caretaker',
+    title: 'New Caretaker Auth Flow',
+    problem:
+      'New parents get an invite from camp, click through to register, and hit an Auth0 login screen that looks nothing like their camp. They don\u2019t recognize it, don\u2019t trust it, and drop off\u2009\u2014\u2009or call camp staff confused about where they ended up.',
     description:
       'Gets invite from camp, visits camp website, registers, creates account, gets verified, lands in portal.',
     route: '/auth/new-parent',
     icon: <PersonAddIcon />,
-    tag: 'Multi-Step Friction',
+    tags: ['Multi-Step Friction', 'Branding & Identity'],
   },
   {
     id: 2,
-    title: 'Returning Caretaker',
+    title: 'Returning Caretaker Auth Flow',
+    problem:
+      'Parents who logged in last summer come back and the login page looks completely different. They\u2019re not sure they\u2019re in the right place, can\u2019t tell if they already have an account, and the generic Auth0 branding gives them no confidence they\u2019re logging into their camp.',
     description:
-      'Returns to camp site, signs in. Success path + error paths (wrong password, confusion).',
+      'Returns to camp site, enters email, enters password, lands in portal. Includes wrong password and account-not-found error paths.',
     route: '/auth/returning-parent',
     icon: <LoginIcon />,
-    tag: 'Branding & Identity',
+    tags: ['Branding & Identity', 'Account Status Confusion'],
   },
   {
     id: 3,
-    title: 'Forgot Password',
+    title: 'Forgot Password Flow',
+    problem:
+      'Parents don\u2019t remember their password\u2009\u2014\u2009or never set one after migration. They don\u2019t know if they even have an account, the reset emails look unfamiliar, and the multi-step process loses people along the way.',
     description:
-      'Can\'t remember password, reset flow, branded emails, back to login.',
+      'Can\'t remember password, requests reset, receives branded email, enters code, sets new password, back to login.',
     route: '/auth/forgot-password',
     icon: <LockResetIcon />,
-    tag: 'Account Status Confusion',
+    tags: ['Multi-Step Friction', 'Account Status Confusion'],
   },
-  // Migrated Caretaker hidden — backend concern, not a user-facing flow for testing
-  // Route still exists at /auth/migrated if needed
   {
     id: 4,
-    title: 'Guest Account',
+    title: 'Guest Account Flow',
+    problem:
+      'Grandparents and co-parents receive a guest invite email but have no idea what campminder is. The messaging doesn\u2019t explain what they\u2019re signing up for, what access they\u2019ll have, or why they need yet another account. Many ignore the email entirely.',
     description:
-      'Non-primary caretaker (grandparent, co-parent) gets an invite. Different flow, different confusion.',
+      'Primary caretaker invites a guest (grandparent, co-parent) from their dashboard. Guest receives email, creates account, lands in limited portal.',
     route: '/auth/guest',
     icon: <SupervisorAccountIcon />,
-    tag: 'Broken Messages',
+    tags: ['Broken Messages', 'Multi-Step Friction'],
   },
-{
+  {
     id: 5,
-    title: 'Campanion App',
+    title: 'Campanion App Flow',
+    problem:
+      'Parents open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don\u2019t understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion.',
     description:
-      'Parent opens the Campanion mobile app and logs in via Auth0. One login, all their camps — Campanion branding gives multi-camp context.',
+      'Parent opens the Campanion mobile app and logs in. One login, all their camps \u2014 Campanion branding gives multi-camp context.',
     route: '/auth/campanion',
     icon: <PhoneIphoneIcon />,
-    tag: 'Branding & Identity',
+    tags: ['Branding & Identity'],
   },
 ];
 
@@ -74,10 +83,10 @@ const tools: FlowCard[] = [
   {
     id: 6,
     title: 'Branded Emails',
-    description: 'Preview camp-branded transactional emails: verification, password reset, invitation.',
+    description: 'Preview camp-branded transactional emails: verification, password reset, invitation, and guest invite.',
     route: '/auth/emails',
     icon: <EmailIcon />,
-    tag: 'Reference',
+    tags: ['Reference'],
   },
   {
     id: 7,
@@ -85,15 +94,15 @@ const tools: FlowCard[] = [
     description: 'Camp staff tool to search parent email and see account status.',
     route: '/auth/account-lookup',
     icon: <ManageSearchIcon />,
-    tag: 'Reference',
+    tags: ['Reference'],
   },
   {
     id: 8,
     title: 'Expired Link',
-    description: 'What parents see when a verification or reset link has expired. Clear recovery, no dead ends.',
+    description: 'What caretakers see when a verification or reset link has expired. Clear recovery, no dead ends.',
     route: '/auth/expired-link',
     icon: <LinkOffIcon />,
-    tag: 'Reference',
+    tags: ['Reference'],
   },
 ];
 
@@ -134,7 +143,7 @@ export const AuthIndex: React.FC = () => {
 
         <div>
           <h2 className="cm-auth-index__section-title">Caretaker Journeys</h2>
-          <div className="cm-auth-index__grid">
+          <div className="cm-auth-index__grid cm-auth-index__grid--journeys">
             {journeys.map((flow) => (
               <button
                 key={flow.route}
@@ -144,9 +153,22 @@ export const AuthIndex: React.FC = () => {
                 <div className="cm-auth-index__card-number">{flow.id}</div>
                 <div className="cm-auth-index__card-icon">{flow.icon}</div>
                 <div className="cm-auth-index__card-content">
-                  <span className="cm-auth-index__card-tag">{flow.tag}</span>
                   <h3 className="cm-auth-index__card-title">{flow.title}</h3>
-                  <p className="cm-auth-index__card-desc">{flow.description}</p>
+                  {flow.problem && (
+                    <p className="cm-auth-index__card-problem">{flow.problem}</p>
+                  )}
+                  <p className="cm-auth-index__card-journey">
+                    <span className="cm-auth-index__card-journey-label">Journey: </span>
+                    {flow.description}
+                  </p>
+                  <div className="cm-auth-index__card-focus">
+                    <span className="cm-auth-index__card-focus-label">Proposal focuses on :</span>
+                    <div className="cm-auth-index__card-tags">
+                      {flow.tags.map((tag) => (
+                        <span key={tag} className="cm-auth-index__card-tag">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </button>
             ))}
@@ -164,7 +186,6 @@ export const AuthIndex: React.FC = () => {
               >
                 <div className="cm-auth-index__card-icon">{flow.icon}</div>
                 <div className="cm-auth-index__card-content">
-                  <span className="cm-auth-index__card-tag">{flow.tag}</span>
                   <h3 className="cm-auth-index__card-title">{flow.title}</h3>
                   <p className="cm-auth-index__card-desc">{flow.description}</p>
                 </div>
