@@ -100,7 +100,7 @@ export const NewParentFlow: React.FC = () => {
       {/* Step 2: Create account */}
       {step === 'create-account' && (
         <>
-          <h1 className="cm-auth-title">Create your account</h1>
+          <h1 className="cm-auth-title">Create your {CAMP.name} account</h1>
           <p className="cm-auth-notice">
             We didn&rsquo;t find an account for <strong>{email}</strong>.
             Fill in the details below to get started with {CAMP.name}.
