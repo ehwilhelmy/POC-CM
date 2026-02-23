@@ -141,3 +141,39 @@
 .cm-auth-index__grid--narrow {
   grid-template-columns: repeat(2, 1fr);
 }
+
+/* ── Brand toggle ── */
+.cm-auth-index__brand-toggle {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  background: var(--color-neutral-300);
+  border-radius: var(--radius-xl);
+  padding: 2px;
+  margin-top: var(--space-sm);
+  align-self: center;
+}
+
+.cm-auth-index__brand-pill {
+  padding: var(--space-sm) var(--space-lg);
+  border: none;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--color-neutral-700);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-body);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.cm-auth-index__brand-pill:hover {
+  color: var(--color-neutral-900);
+}
+
+.cm-auth-index__brand-pill--active {
+  background: var(--color-white);
+  color: var(--color-neutral-900);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--shadow-sm);
+}

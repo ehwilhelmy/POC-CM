@@ -2,6 +2,7 @@ import type { CampBranding } from './components/AuthLayout';
 import campTallPinesLogo from '@/assets/camp-tall-pines-logo.svg';
 import campTallPinesBg from '@/assets/camp-bg.jpeg';
 import campanionLogo from '@/assets/logo/campanion-logo-color-vert-md.svg';
+import cmLogoLight from '@/assets/logo/cm-logo-hortizontal-light.svg';
 
 /**
  * Shared camp brand config — single source of truth.
@@ -34,6 +35,16 @@ export const CAMPANION: CampBranding = {
   initials: 'C',
   logoUrl: campanionLogo,
   backgroundUrl: campTallPinesBg,
+};
+
+/** campminder default — fallback when a camp hasn't set up branding */
+export const CAMPMINDER_DEFAULT: CampBranding = {
+  name: 'campminder',
+  accentColor: '#635dff',
+  initials: 'CM',
+  logoUrl: cmLogoLight,
+  logoFit: 'wide',
+  tagline: 'Where camp families stay connected',
 };
 
 /** Default camp for most flows */

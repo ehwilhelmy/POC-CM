@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { AuthLayout } from '../components/AuthLayout';
 import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
@@ -9,7 +9,7 @@ import { EmailPopup } from '../components/EmailPopup';
 import { PasswordRequirements } from '../components/PasswordRequirements';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
-import { CAMP } from '../campBrand';
+import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 import './EmailPreviewFlow.css';
 
 type Step =
@@ -22,6 +22,8 @@ type Step =
 
 export const GuestAccountFlow: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
   const [step, setStep] = useState<Step>('caretaker-dashboard');
   const [emailOpen, setEmailOpen] = useState(false);
   const [guestNote, setGuestNote] = useState('');
@@ -76,7 +78,7 @@ export const GuestAccountFlow: React.FC = () => {
   // Steps 3-5 use AuthLayout
   return (
     <AuthLayout
-      camp={CAMP}
+      camp={brand}
       onBack={
         step === 'create-account'
           ? () => setStep('guest-email')
@@ -102,7 +104,7 @@ export const GuestAccountFlow: React.FC = () => {
           <h1 className="cm-auth-title">Check your email</h1>
           <p className="cm-auth-subtitle">
             Ruth, Jane Smith has sent you an invitation to create a guest
-            account for Tommy at {CAMP.name}.
+            account for Tommy at {brand.name}.
           </p>
 
           <button
@@ -115,24 +117,24 @@ export const GuestAccountFlow: React.FC = () => {
           <EmailPopup
             open={emailOpen}
             onClose={() => setEmailOpen(false)}
-            senderName={`${CAMP.name} via campminder`}
+            senderName={`${brand.name} via campminder`}
             senderEmail="noreply@campminder.com"
             subject={`You've been invited to Camp Tall Pines`}
-            accentColor={CAMP.accentColor}
+            accentColor={brand.accentColor}
             verificationCode=""
           >
             {/* Camp-branded email content */}
-            <div className="cm-email__camp-banner" style={{ backgroundColor: CAMP.accentColor }}>
-              {CAMP.logoUrl ? (
+            <div className="cm-email__camp-banner" style={{ backgroundColor: brand.accentColor }}>
+              {brand.logoUrl ? (
                 <img
-                  src={CAMP.logoUrl}
-                  alt={CAMP.name}
+                  src={brand.logoUrl}
+                  alt={brand.name}
                   style={{ width: 36, height: 36, borderRadius: '50%' }}
                 />
               ) : (
-                <div className="cm-email__camp-banner-logo">{CAMP.initials}</div>
+                <div className="cm-email__camp-banner-logo">{brand.initials}</div>
               )}
-              <span className="cm-email__camp-banner-name">{CAMP.name}</span>
+              <span className="cm-email__camp-banner-name">{brand.name}</span>
             </div>
             <div className="cm-email__content">
               <p className="cm-email__greeting">Hi Ruth,</p>
@@ -149,7 +151,7 @@ export const GuestAccountFlow: React.FC = () => {
               {guestNote && (
                 <div style={{
                   background: '#f5f5f5',
-                  borderLeft: `3px solid ${CAMP.accentColor}`,
+                  borderLeft: `3px solid ${brand.accentColor}`,
                   padding: '10px 14px',
                   borderRadius: 4,
                   marginBottom: 16,
@@ -167,7 +169,7 @@ export const GuestAccountFlow: React.FC = () => {
                 <button
                   type="button"
                   className="cm-email__cta"
-                  style={{ backgroundColor: CAMP.accentColor, border: 'none', cursor: 'pointer', fontFamily: 'var(--font-family-body)' }}
+                  style={{ backgroundColor: brand.accentColor, border: 'none', cursor: 'pointer', fontFamily: 'var(--font-family-body)' }}
                   onClick={() => {
                     setEmailOpen(false);
                     setStep('create-account');
@@ -195,7 +197,7 @@ export const GuestAccountFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Create your guest account</h1>
           <p className="cm-auth-subtitle">
-            Set a password to access Tommy&rsquo;s updates at {CAMP.name}.
+            Set a password to access Tommy&rsquo;s updates at {brand.name}.
           </p>
           <div className="cm-auth-form">
             <TextInput label="First name" value="Ruth" />
@@ -235,7 +237,7 @@ export const GuestAccountFlow: React.FC = () => {
           </div>
           <h1 className="cm-auth-title">Welcome, Ruth!</h1>
           <p className="cm-auth-subtitle">
-            You can now view Tommy&rsquo;s photos and updates at {CAMP.name}.
+            You can now view Tommy&rsquo;s photos and updates at {brand.name}.
           </p>
           <button
             className="cm-auth-btn cm-auth-btn--primary"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LoginIcon from '@mui/icons-material/Login';
@@ -99,6 +99,12 @@ const tools: FlowCard[] = [
 
 export const AuthIndex: React.FC = () => {
   const navigate = useNavigate();
+  const [brand, setBrand] = useState<'camp' | 'default'>('camp');
+
+  const handleNavigate = (route: string) => {
+    const url = brand === 'default' ? `${route}?brand=default` : route;
+    navigate(url);
+  };
 
   return (
     <div className="cm-auth-index">
@@ -110,6 +116,20 @@ export const AuthIndex: React.FC = () => {
             Caretaker journey prototypes for user testing. Each flow walks through
             a real scenario camp staff are dealing with after the Auth0 migration.
           </p>
+          <div className="cm-auth-index__brand-toggle">
+            <button
+              className={`cm-auth-index__brand-pill ${brand === 'camp' ? 'cm-auth-index__brand-pill--active' : ''}`}
+              onClick={() => setBrand('camp')}
+            >
+              Camp Branded
+            </button>
+            <button
+              className={`cm-auth-index__brand-pill ${brand === 'default' ? 'cm-auth-index__brand-pill--active' : ''}`}
+              onClick={() => setBrand('default')}
+            >
+              campminder Branded
+            </button>
+          </div>
         </div>
 
         <div>
@@ -119,7 +139,7 @@ export const AuthIndex: React.FC = () => {
               <button
                 key={flow.route}
                 className="cm-auth-index__card"
-                onClick={() => navigate(flow.route)}
+                onClick={() => handleNavigate(flow.route)}
               >
                 <div className="cm-auth-index__card-number">{flow.id}</div>
                 <div className="cm-auth-index__card-icon">{flow.icon}</div>
@@ -140,7 +160,7 @@ export const AuthIndex: React.FC = () => {
               <button
                 key={flow.route}
                 className="cm-auth-index__card"
-                onClick={() => navigate(flow.route)}
+                onClick={() => handleNavigate(flow.route)}
               >
                 <div className="cm-auth-index__card-icon">{flow.icon}</div>
                 <div className="cm-auth-index__card-content">

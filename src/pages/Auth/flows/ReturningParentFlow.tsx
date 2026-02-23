@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { CampWebsite } from '../components/CampWebsite';
 import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { AuthLayout } from '../components/AuthLayout';
 import { TextInput } from '../../../components/TextInput';
-import { CAMP } from '../campBrand';
+import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 
 type Step =
   | 'camp-website'
   | 'email-entry'
   | 'password'
-  | 'password-error'
   | 'success'
   | 'dashboard';
 
 export const ReturningParentFlow: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
   const [step, setStep] = useState<Step>('camp-website');
   const [email, setEmail] = useState('jane.smith@email.com');
-  const [simulateError, setSimulateError] = useState(false);
   const [loginPassword, setLoginPassword] = useState('');
 
   if (step === 'camp-website') {
@@ -39,11 +38,11 @@ export const ReturningParentFlow: React.FC = () => {
 
   return (
     <AuthLayout
-      camp={CAMP}
+      camp={brand}
       onBack={
         step === 'email-entry'
           ? () => setStep('camp-website')
-          : step === 'password' || step === 'password-error'
+          : step === 'password'
             ? () => setStep('email-entry')
             : undefined
       }
@@ -51,9 +50,9 @@ export const ReturningParentFlow: React.FC = () => {
       {/* Step 1: Identifier-first — email only (Auth0 login-id prompt) */}
       {step === 'email-entry' && (
         <>
-          <h1 className="cm-auth-title">Welcome</h1>
+          <h1 className="cm-auth-title">Log in</h1>
           <p className="cm-auth-subtitle">
-            Log in to {CAMP.name} with your email to continue.
+            Enter your email to continue.
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -86,43 +85,16 @@ export const ReturningParentFlow: React.FC = () => {
             </span>
           </div>
 
-          {/* Testing toggle */}
-          <label className="cm-auth-test-toggle">
-            <input
-              type="checkbox"
-              checked={simulateError}
-              onChange={(e) => setSimulateError(e.target.checked)}
-            />
-            Simulate: wrong password on next step
-          </label>
         </>
       )}
 
       {/* Step 2: Password entry (Auth0 login-password prompt) */}
-      {(step === 'password' || step === 'password-error') && (
+      {step === 'password' && (
         <>
-          <h1 className="cm-auth-title">Enter your password</h1>
+          <h1 className="cm-auth-title">Welcome back, Jane</h1>
           <p className="cm-auth-subtitle">
-            Log in to {CAMP.name} as <strong>{email}</strong>
+            Enter password for <strong>{email}</strong>
           </p>
-
-          {step === 'password-error' && (
-            <div className="cm-auth-error-banner">
-              <ErrorOutlineIcon className="cm-auth-error-banner__icon" fontSize="small" />
-              <div>
-                <strong>Wrong email or password.</strong>
-                <br />
-                Please check your credentials and try again, or{' '}
-                <button
-                  className="cm-auth-link"
-                  style={{ color: 'inherit', textDecoration: 'underline', fontSize: 'inherit' }}
-                  onClick={() => navigate('/auth/forgot-password')}
-                >
-                  reset your password
-                </button>.
-              </div>
-            </div>
-          )}
 
           <div className="cm-auth-form">
             <TextInput
@@ -131,18 +103,11 @@ export const ReturningParentFlow: React.FC = () => {
               type="password"
               value={loginPassword}
               onChange={(e) => setLoginPassword(e.target.value)}
-              error={step === 'password-error' ? 'The email or password for this account is incorrect' : undefined}
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
               disabled={!loginPassword.trim()}
-              onClick={() => {
-                if (simulateError) {
-                  setStep('password-error');
-                } else {
-                  setStep('success');
-                }
-              }}
+              onClick={() => setStep('success')}
             >
               Continue
             </button>
@@ -173,7 +138,7 @@ export const ReturningParentFlow: React.FC = () => {
           </div>
           <h1 className="cm-auth-title">Welcome back, Jane!</h1>
           <p className="cm-auth-subtitle">
-            You&rsquo;re signed in to {CAMP.name}. Taking you to your dashboard...
+            You&rsquo;re signed in to {brand.name}. Taking you to your dashboard...
           </p>
           <div className="cm-auth-info-banner" style={{ textAlign: 'left' }}>
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />

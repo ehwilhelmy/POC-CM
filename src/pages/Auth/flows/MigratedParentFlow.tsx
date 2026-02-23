@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
@@ -11,7 +11,7 @@ import { ClickableCode } from '../components/GmailInbox';
 import { PasswordRequirements } from '../components/PasswordRequirements';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
-import { CAMP } from '../campBrand';
+import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 import './EmailPreviewFlow.css';
 
 type Step =
@@ -28,6 +28,8 @@ type Step =
 
 export const MigratedParentFlow: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
   const [step, setStep] = useState<Step>('camp-website');
   const [emailOpen, setEmailOpen] = useState(false);
   const [codeCopied, setCodeCopied] = useState(false);
@@ -55,7 +57,7 @@ export const MigratedParentFlow: React.FC = () => {
 
   return (
     <AuthLayout
-      camp={CAMP}
+      camp={brand}
       onBack={
         step === 'email-entry'
           ? () => setStep('camp-website')
@@ -73,9 +75,9 @@ export const MigratedParentFlow: React.FC = () => {
       {/* Step 1: Identifier-first — email only */}
       {step === 'email-entry' && (
         <>
-          <h1 className="cm-auth-title">Welcome</h1>
+          <h1 className="cm-auth-title">Log in</h1>
           <p className="cm-auth-subtitle">
-            Log in to {CAMP.name} with your email to continue.
+            Enter your email to continue.
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -100,9 +102,9 @@ export const MigratedParentFlow: React.FC = () => {
       {/* Step 2: Password entry */}
       {step === 'password' && (
         <>
-          <h1 className="cm-auth-title">Enter your password</h1>
+          <h1 className="cm-auth-title">Welcome back, Jane</h1>
           <p className="cm-auth-subtitle">
-            Log in as <strong>jane.smith@email.com</strong>
+            Enter password for <strong>jane.smith@email.com</strong>
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -133,9 +135,9 @@ export const MigratedParentFlow: React.FC = () => {
               <strong>Wrong email or password.</strong>
             </div>
           </div>
-          <h1 className="cm-auth-title">Enter your password</h1>
+          <h1 className="cm-auth-title">Welcome back, Jane</h1>
           <p className="cm-auth-subtitle">
-            Log in as <strong>jane.smith@email.com</strong>
+            Enter password for <strong>jane.smith@email.com</strong>
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -183,7 +185,7 @@ export const MigratedParentFlow: React.FC = () => {
               You have 2 attempts remaining before your account is locked.
             </div>
           </div>
-          <h1 className="cm-auth-title">Enter your password</h1>
+          <h1 className="cm-auth-title">Welcome back, Jane</h1>
           <p className="cm-auth-subtitle">
             Still using their old password. Getting frustrated. About to call camp.
           </p>
@@ -276,38 +278,38 @@ export const MigratedParentFlow: React.FC = () => {
           <EmailPopup
             open={emailOpen}
             onClose={() => setEmailOpen(false)}
-            senderName={`${CAMP.name} via campminder`}
+            senderName={`${brand.name} via campminder`}
             senderEmail="noreply@campminder.com"
-            subject={`Your password reset code — ${CAMP.name}`}
-            accentColor={CAMP.accentColor}
+            subject={`Your password reset code — ${brand.name}`}
+            accentColor={brand.accentColor}
             verificationCode="847291"
             onCodeCopied={() => {
               setCodeCopied(true);
               codeInputRef.current?.focus();
             }}
           >
-            <div className="cm-email__camp-banner" style={{ backgroundColor: CAMP.accentColor }}>
-              {CAMP.logoUrl ? (
+            <div className="cm-email__camp-banner" style={{ backgroundColor: brand.accentColor }}>
+              {brand.logoUrl ? (
                 <img
-                  src={CAMP.logoUrl}
-                  alt={CAMP.name}
+                  src={brand.logoUrl}
+                  alt={brand.name}
                   style={{ width: 36, height: 36, borderRadius: '50%' }}
                 />
               ) : (
-                <div className="cm-email__camp-banner-logo">{CAMP.initials}</div>
+                <div className="cm-email__camp-banner-logo">{brand.initials}</div>
               )}
-              <span className="cm-email__camp-banner-name">{CAMP.name}</span>
+              <span className="cm-email__camp-banner-name">{brand.name}</span>
             </div>
             <div className="cm-email__content">
               <p className="cm-email__greeting">Hi Jane,</p>
               <p>
-                Your password reset code for <strong>{CAMP.name}</strong> on
+                Your password reset code for <strong>{brand.name}</strong> on
                 campminder is:
               </p>
               <div style={{ textAlign: 'center', margin: '16px 0' }}>
                 <ClickableCode
                   code="847291"
-                  accentColor={CAMP.accentColor}
+                  accentColor={brand.accentColor}
                   onCopied={() => {
                     setCodeCopied(true);
                     codeInputRef.current?.focus();
@@ -375,7 +377,7 @@ export const MigratedParentFlow: React.FC = () => {
           </div>
           <h1 className="cm-auth-title">You're back in</h1>
           <p className="cm-auth-subtitle">
-            Password updated. The parent can now access {CAMP.name}.
+            Password updated. The parent can now access {brand.name}.
           </p>
           <div className="cm-auth-warning-banner" style={{ textAlign: 'left' }}>
             <WarningAmberIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />

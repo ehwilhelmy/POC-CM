@@ -11,6 +11,9 @@ export interface CampBranding {
   initials: string;
   logoUrl?: string;
   backgroundUrl?: string;
+  /** 'circle' (default) crops to a round avatar; 'wide' renders at natural aspect ratio */
+  logoFit?: 'circle' | 'wide';
+  tagline?: string;
 }
 
 export interface AuthLayoutProps {
@@ -38,11 +41,20 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
       {camp && (
         <div className="cm-auth__branding">
           {camp.logoUrl ? (
-            <img src={camp.logoUrl} alt={camp.name} className="cm-auth__branding-logo" />
+            <img
+              src={camp.logoUrl}
+              alt={camp.name}
+              className={clsx('cm-auth__branding-logo', camp.logoFit === 'wide' && 'cm-auth__branding-logo--wide')}
+            />
           ) : (
             <div className="cm-auth__branding-initials">{camp.initials}</div>
           )}
-          <span className="cm-auth__branding-name">{camp.name}</span>
+          {camp.logoFit !== 'wide' && (
+            <span className="cm-auth__branding-name">{camp.name}</span>
+          )}
+          {camp.tagline && (
+            <span className="cm-auth__branding-tagline">{camp.tagline}</span>
+          )}
         </div>
       )}
 

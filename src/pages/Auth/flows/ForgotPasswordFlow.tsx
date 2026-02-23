@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -11,7 +11,7 @@ import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { PasswordRequirements } from '../components/PasswordRequirements';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
-import { CAMP } from '../campBrand';
+import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 import './EmailPreviewFlow.css';
 
 type Step =
@@ -27,6 +27,8 @@ type Step =
 
 export const ForgotPasswordFlow: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
   const [step, setStep] = useState<Step>('camp-website');
   const [email, setEmail] = useState('jane.smith@email.com');
   const [emailOpen, setEmailOpen] = useState(false);
@@ -53,7 +55,7 @@ export const ForgotPasswordFlow: React.FC = () => {
 
   return (
     <AuthLayout
-      camp={CAMP}
+      camp={brand}
       onBack={
         step === 'email-entry'
           ? () => setStep('camp-website')
@@ -69,9 +71,9 @@ export const ForgotPasswordFlow: React.FC = () => {
       {/* Step 1: Identifier-first — email only */}
       {step === 'email-entry' && (
         <>
-          <h1 className="cm-auth-title">Welcome</h1>
+          <h1 className="cm-auth-title">Log in</h1>
           <p className="cm-auth-subtitle">
-            Log in to {CAMP.name} with your email to continue.
+            Enter your email to continue.
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -101,9 +103,9 @@ export const ForgotPasswordFlow: React.FC = () => {
       {/* Step 2: Password entry — clean, no error yet */}
       {step === 'password' && (
         <>
-          <h1 className="cm-auth-title">Enter your password</h1>
+          <h1 className="cm-auth-title">Welcome back, Jane</h1>
           <p className="cm-auth-subtitle">
-            Log in to {CAMP.name} as <strong>{email}</strong>
+            Enter password for <strong>{email}</strong>
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -133,9 +135,9 @@ export const ForgotPasswordFlow: React.FC = () => {
       {/* Step 3: Password error — after failed attempt */}
       {step === 'password-error' && (
         <>
-          <h1 className="cm-auth-title">Enter your password</h1>
+          <h1 className="cm-auth-title">Welcome back, Jane</h1>
           <p className="cm-auth-subtitle">
-            Log in to {CAMP.name} as <strong>{email}</strong>
+            Enter password for <strong>{email}</strong>
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -188,7 +190,7 @@ export const ForgotPasswordFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Reset your password</h1>
           <p className="cm-auth-subtitle">
-            Enter the email address you use for your {CAMP.name} account.
+            Enter the email address you use for your {brand.name} account.
             We&rsquo;ll send you a code to create a new password.
           </p>
           <div className="cm-auth-form">
@@ -256,38 +258,38 @@ export const ForgotPasswordFlow: React.FC = () => {
           <EmailPopup
             open={emailOpen}
             onClose={() => setEmailOpen(false)}
-            senderName={`${CAMP.name} via campminder`}
+            senderName={`${brand.name} via campminder`}
             senderEmail="noreply@campminder.com"
-            subject={`Your password reset code — ${CAMP.name}`}
-            accentColor={CAMP.accentColor}
+            subject={`Your password reset code — ${brand.name}`}
+            accentColor={brand.accentColor}
             verificationCode="847291"
             onCodeCopied={() => {
               setCodeCopied(true);
               codeInputRef.current?.focus();
             }}
           >
-            <div className="cm-email__camp-banner" style={{ backgroundColor: CAMP.accentColor }}>
-              {CAMP.logoUrl ? (
+            <div className="cm-email__camp-banner" style={{ backgroundColor: brand.accentColor }}>
+              {brand.logoUrl ? (
                 <img
-                  src={CAMP.logoUrl}
-                  alt={CAMP.name}
+                  src={brand.logoUrl}
+                  alt={brand.name}
                   style={{ width: 36, height: 36, borderRadius: '50%' }}
                 />
               ) : (
-                <div className="cm-email__camp-banner-logo">{CAMP.initials}</div>
+                <div className="cm-email__camp-banner-logo">{brand.initials}</div>
               )}
-              <span className="cm-email__camp-banner-name">{CAMP.name}</span>
+              <span className="cm-email__camp-banner-name">{brand.name}</span>
             </div>
             <div className="cm-email__content">
               <p className="cm-email__greeting">Hi Jane,</p>
               <p>
-                Your password reset code for <strong>{CAMP.name}</strong> on
+                Your password reset code for <strong>{brand.name}</strong> on
                 campminder is:
               </p>
               <div style={{ textAlign: 'center', margin: '16px 0' }}>
                 <ClickableCode
                   code="847291"
-                  accentColor={CAMP.accentColor}
+                  accentColor={brand.accentColor}
                   onCopied={() => {
                     setCodeCopied(true);
                     codeInputRef.current?.focus();
@@ -329,7 +331,7 @@ export const ForgotPasswordFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Create new password</h1>
           <p className="cm-auth-subtitle">
-            Choose a new password for your {CAMP.name} account.
+            Choose a new password for your {brand.name} account.
           </p>
           <div className="cm-auth-form">
             <TextInput

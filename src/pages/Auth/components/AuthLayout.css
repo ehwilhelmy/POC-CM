@@ -74,6 +74,13 @@
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
 }
 
+.cm-auth__branding-logo--wide {
+  width: auto;
+  height: 40px;
+  border-radius: 0;
+  object-fit: contain;
+}
+
 .cm-auth__branding-initials {
   width: 64px;
   height: 64px;
@@ -92,6 +99,13 @@
   font-weight: var(--font-weight-bold);
   color: #ffffff;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.cm-auth__branding-tagline {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: calc(-1 * var(--space-xs));
 }
 
 /* ── Terms below card (Auth0 page template zone) ── */
@@ -549,6 +563,11 @@
   .cm-auth__branding-logo {
     width: 36px;
     height: 36px;
+  }
+
+  .cm-auth__branding-logo--wide {
+    width: auto;
+    height: 28px;
   }
 
   .cm-auth__branding-initials {

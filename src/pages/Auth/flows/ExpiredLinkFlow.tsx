@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { AuthLayout } from '../components/AuthLayout';
-import { CAMP } from '../campBrand';
+import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 
 type Scenario = 'verification' | 'reset';
 type Step = 'expired' | 'resent';
 
 export const ExpiredLinkFlow: React.FC = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
   const [scenario, setScenario] = useState<Scenario>('verification');
   const [step, setStep] = useState<Step>('expired');
 
   const email = 'jane.smith@email.com';
 
   return (
-    <AuthLayout camp={CAMP}>
+    <AuthLayout camp={brand}>
       {step === 'expired' && (
         <>
           <div className="cm-auth-success">
