@@ -21,7 +21,9 @@ Caretaker journey prototypes for user testing. Each flow walks through a real sc
 
 **Problem:** Parents who logged in last summer come back and the login page looks completely different. They're not sure they're in the right place, can't tell if they already have an account, and the generic Auth0 branding gives them no confidence they're logging into their camp.
 
-**Journey:** Returns to camp site, enters email, enters password, lands in portal. Includes wrong password and account-not-found error paths.
+**Journey:** Returns to camp site, enters email*, enters password, lands in portal.
+
+> \* This flow does not directly propose the forgot password and potential for new system in place.
 
 **Proposal focuses on:**
 `Branding & Identity` `Account Status Confusion`

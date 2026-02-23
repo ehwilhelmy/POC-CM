@@ -151,6 +151,14 @@
   color: var(--color-neutral-700);
 }
 
+.cm-auth-index__card-footnote {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--color-neutral-600);
+  line-height: var(--line-height-normal);
+  margin: calc(-1 * var(--space-xs)) 0 0;
+}
+
 .cm-auth-index__card-desc {
   font-size: var(--font-size-sm);
   color: var(--color-neutral-700);

@@ -16,6 +16,7 @@ interface FlowCard {
   title: string;
   problem?: string;
   description: string;
+  footnote?: string;
   route: string;
   icon: React.ReactNode;
   tags: string[];
@@ -39,7 +40,9 @@ const journeys: FlowCard[] = [
     problem:
       'Parents who logged in last summer come back and the login page looks completely different. They\u2019re not sure they\u2019re in the right place, can\u2019t tell if they already have an account, and the generic Auth0 branding gives them no confidence they\u2019re logging into their camp.',
     description:
-      'Returns to camp site, enters email, enters password, lands in portal. Includes wrong password and account-not-found error paths.',
+      'Returns to camp site, enters email*, enters password, lands in portal.',
+    footnote:
+      '* This flow does not directly propose the forgot password and potential for new system in place.',
     route: '/auth/returning-parent',
     icon: <LoginIcon />,
     tags: ['Branding & Identity', 'Account Status Confusion'],
@@ -161,6 +164,9 @@ export const AuthIndex: React.FC = () => {
                     <span className="cm-auth-index__card-journey-label">Journey: </span>
                     {flow.description}
                   </p>
+                  {flow.footnote && (
+                    <p className="cm-auth-index__card-footnote">{flow.footnote}</p>
+                  )}
                   <div className="cm-auth-index__card-focus">
                     <span className="cm-auth-index__card-focus-label">Proposal focuses on :</span>
                     <div className="cm-auth-index__card-tags">
