@@ -15,6 +15,7 @@ import {
   EmailPreviewFlow,
   AccountLookupFlow,
   CampanionFlow,
+  ExpiredLinkFlow,
 } from './pages/Auth';
 
 const GlobalShortcuts: React.FC = () => {
@@ -52,6 +53,7 @@ function App() {
         <Route path="/auth/emails" element={<EmailPreviewFlow />} />
         <Route path="/auth/account-lookup" element={<AccountLookupFlow />} />
         <Route path="/auth/campanion" element={<CampanionFlow />} />
+        <Route path="/auth/expired-link" element={<ExpiredLinkFlow />} />
 
         {/* Management tool — wrapped in AppShell */}
         <Route path="/app" element={<AppShell />}>

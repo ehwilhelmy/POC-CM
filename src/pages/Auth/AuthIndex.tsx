@@ -7,6 +7,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import LinkOffIcon from '@mui/icons-material/LinkOff';
 import logoSrc from '../../assets/logo/cm-logo-hortizontal-color.svg';
 import './AuthIndex.css';
 
@@ -84,6 +85,14 @@ const tools: FlowCard[] = [
     description: 'Camp staff tool to search parent email and see account status.',
     route: '/auth/account-lookup',
     icon: <ManageSearchIcon />,
+    tag: 'Reference',
+  },
+  {
+    id: 8,
+    title: 'Expired Link',
+    description: 'What parents see when a verification or reset link has expired. Clear recovery, no dead ends.',
+    route: '/auth/expired-link',
+    icon: <LinkOffIcon />,
     tag: 'Reference',
   },
 ];

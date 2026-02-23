@@ -334,6 +334,24 @@
   margin-top: 2px;
 }
 
+/* ── Migration banner (always visible, not a design note) ── */
+.cm-auth-migration-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-orange-100);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  color: var(--color-orange-800);
+  line-height: var(--line-height-normal);
+}
+
+.cm-auth-migration-banner__icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 .cm-auth-warning-banner {
   display: flex;
   align-items: flex-start;
@@ -494,9 +512,7 @@
 
 /* ── Hide notes mode ── */
 .cm-auth--hide-notes .cm-auth-info-banner,
-.cm-auth--hide-notes .cm-auth-warning-banner,
-.cm-auth--hide-notes .cm-auth-error-banner,
-.cm-auth--hide-notes .cm-auth-test-toggle {
+.cm-auth--hide-notes .cm-auth-warning-banner {
   display: none;
 }
 

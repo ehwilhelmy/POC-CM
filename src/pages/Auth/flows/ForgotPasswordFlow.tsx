@@ -175,12 +175,24 @@ export const ForgotPasswordFlow: React.FC = () => {
               Forgot password?
             </button>
           </div>
+          <div className="cm-auth-migration-banner">
+            <InfoOutlinedIcon className="cm-auth-migration-banner__icon" fontSize="small" />
+            <span>
+              Our security system was recently updated. If you haven&rsquo;t
+              logged in recently, your previous password may no longer work.
+              Use <button
+                className="cm-auth-link"
+                style={{ color: 'inherit', textDecoration: 'underline', fontSize: 'inherit' }}
+                onClick={() => setStep('request')}
+              >&ldquo;Forgot password?&rdquo;</button> to set a new one.
+            </span>
+          </div>
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
             <span>
-              <strong>Password failed.</strong> The parent typed the wrong password.
-              The error banner and &ldquo;Forgot password?&rdquo; link guide them to
-              the reset flow.
+              <strong>Migration context.</strong> This warning addresses pre-Auth0
+              parents whose passwords changed during migration. It explains why
+              their old password might not work without blaming them.
             </span>
           </div>
         </>
