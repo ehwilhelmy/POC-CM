@@ -1,3 +1,25 @@
+/* ── Full-screen email preview layout ── */
+.cm-email-fullscreen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-neutral-100);
+}
+
+.cm-email-fullscreen__tabs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-neutral-400);
+}
+
+.cm-email-fullscreen__back {
+  margin-left: auto;
+  font-size: var(--font-size-sm);
+}
+
 /* ── Email type tabs ── */
 .cm-email-tabs {
   display: flex;
