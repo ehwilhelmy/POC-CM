@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -38,6 +38,14 @@ export const ForgotPasswordFlow: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { allValid } = usePasswordValidation(password, confirmPassword);
+
+  // Auto-open email popup when reaching check-email step
+  useEffect(() => {
+    if (step === 'check-email') {
+      const timer = setTimeout(() => setEmailOpen(true), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
 
   if (step === 'camp-website') {
     return <CampWebsite onPortalClick={() => setStep('email-entry')} />;

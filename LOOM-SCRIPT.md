@@ -38,9 +38,9 @@ Estimated total: ~8–10 min. You can record one Loom for all flows or one per f
 
 > ...and now we need them to verify their email. Instead of just saying "check your email" and hoping for the best, we show them exactly what to look for.
 
-*Click "Check your email" to open the Gmail popup*
+*The Gmail popup auto-opens*
 
-> We even preview what the email looks like in their inbox — camp branded, recognizable sender. They click through, verify, and land in their portal.
+> And look — we preview what the email looks like in their inbox. Camp branded, recognizable sender. They click through, verify, and land in their portal.
 >
 > The key themes here are **multi-step friction** — reducing the number of confusing steps — and **branding & identity** — making sure caretakers always know where they are.
 
@@ -96,9 +96,9 @@ Estimated total: ~8–10 min. You can record one Loom for all flows or one per f
 
 > Hit Continue, and now we show them what to expect.
 
-*Click "Check your email" to open the Gmail popup*
+*The Gmail popup auto-opens*
 
-> Again, we show the actual email in their inbox. Camp branded, clear subject line, obvious call to action. They click through, enter a new code, set a new password, and they're back in.
+> And again, we show the actual email in their inbox. Camp branded, clear subject line, obvious call to action. They click through, enter a new code, set a new password, and they're back in.
 >
 > Themes: **multi-step friction** — each step is clear about what's happening and what's next — and **account status confusion** — we never leave them wondering "do I even have an account?"
 

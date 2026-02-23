@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -39,6 +39,14 @@ export const MigratedParentFlow: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { allValid } = usePasswordValidation(password, confirmPassword);
+
+  // Auto-open email popup when reaching check-email step
+  useEffect(() => {
+    if (step === 'check-email') {
+      const timer = setTimeout(() => setEmailOpen(true), 500);
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
 
   if (step === 'camp-website') {
     return (
