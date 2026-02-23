@@ -133,21 +133,6 @@ export const ForgotPasswordFlow: React.FC = () => {
       {/* Step 3: Password error — after failed attempt */}
       {step === 'password-error' && (
         <>
-          <div className="cm-auth-error-banner">
-            <ErrorOutlineIcon className="cm-auth-error-banner__icon" fontSize="small" />
-            <div>
-              <strong>Wrong email or password.</strong>
-              <br />
-              Please check your credentials and try again, or{' '}
-              <button
-                className="cm-auth-link"
-                style={{ color: 'inherit', textDecoration: 'underline', fontSize: 'inherit' }}
-                onClick={() => setStep('request')}
-              >
-                reset your password
-              </button>.
-            </div>
-          </div>
           <h1 className="cm-auth-title">Enter your password</h1>
           <p className="cm-auth-subtitle">
             Log in to {CAMP.name} as <strong>{email}</strong>
