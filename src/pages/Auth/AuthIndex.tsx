@@ -27,7 +27,7 @@ const journeys: FlowCard[] = [
     id: 1,
     title: 'New Caretaker Auth Flow',
     problem:
-      'New parents get an invite from camp, click through to register, and hit an Auth0 login screen that looks nothing like their camp. They don\u2019t recognize it, don\u2019t trust it, and drop off\u2009\u2014\u2009or call camp staff confused about where they ended up.',
+      'New caretakers get an invite from camp, click through to register, and hit an Auth0 login screen that looks nothing like their camp. They don\u2019t recognize it, don\u2019t trust it, and drop off\u2009\u2014\u2009or call camp staff confused about where they ended up.',
     description:
       'Gets invite from camp, visits camp website, registers, creates account, gets verified, lands in portal.',
     route: '/auth/new-parent',
@@ -38,7 +38,7 @@ const journeys: FlowCard[] = [
     id: 2,
     title: 'Returning Caretaker Auth Flow',
     problem:
-      'Parents who logged in last summer come back and the login page looks completely different. They\u2019re not sure they\u2019re in the right place, can\u2019t tell if they already have an account, and the generic Auth0 branding gives them no confidence they\u2019re logging into their camp.',
+      'Caretakers who logged in last summer come back and the login page looks completely different. They\u2019re not sure they\u2019re in the right place, can\u2019t tell if they already have an account, and the generic Auth0 branding gives them no confidence they\u2019re logging into their camp.',
     description:
       'Returns to camp site, enters email*, enters password, lands in portal.',
     footnote:
@@ -51,7 +51,7 @@ const journeys: FlowCard[] = [
     id: 3,
     title: 'Forgot Password Flow',
     problem:
-      'Parents don\u2019t remember their password\u2009\u2014\u2009or never set one after migration. They don\u2019t know if they even have an account, the reset emails look unfamiliar, and the multi-step process loses people along the way.',
+      'Caretakers don\u2019t remember their password\u2009\u2014\u2009or never set one after migration. They don\u2019t know if they even have an account, the reset emails look unfamiliar, and the multi-step process loses people along the way.',
     description:
       'Can\'t remember password, requests reset, receives branded email, enters code, sets new password, back to login.',
     route: '/auth/forgot-password',
@@ -62,7 +62,7 @@ const journeys: FlowCard[] = [
     id: 4,
     title: 'Guest Account Flow',
     problem:
-      'Grandparents and co-parents receive a guest invite email but have no idea what campminder is. The messaging doesn\u2019t explain what they\u2019re signing up for, what access they\u2019ll have, or why they need yet another account. Many ignore the email entirely.',
+      'Grandparents and co-caretakers receive a guest invite email but have no idea what campminder is. The messaging doesn\u2019t explain what they\u2019re signing up for, what access they\u2019ll have, or why they need yet another account. Many ignore the email entirely.',
     description:
       'Primary caretaker invites a guest (grandparent, co-parent) from their dashboard. Guest receives email, creates account, lands in limited portal.',
     route: '/auth/guest',
@@ -71,11 +71,11 @@ const journeys: FlowCard[] = [
   },
   {
     id: 5,
-    title: 'Campanion App Flow',
+    title: 'Campanion Branding Login Confusion',
     problem:
-      'Parents open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don\u2019t understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion.',
+      'Caretakers open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don\u2019t understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion.',
     description:
-      'Parent opens the Campanion mobile app and logs in. One login, all their camps \u2014 Campanion branding gives multi-camp context.',
+      'Caretaker opens the Campanion mobile app and logs in. One login, all their camps \u2014 Campanion branding gives multi-camp context.',
     route: '/auth/campanion',
     icon: <PhoneIphoneIcon />,
     tags: ['Branding & Identity'],
@@ -94,7 +94,7 @@ const tools: FlowCard[] = [
   {
     id: 7,
     title: 'Account Lookup',
-    description: 'Camp staff tool to search parent email and see account status.',
+    description: 'Camp staff tool to search caretaker email and see account status.',
     route: '/auth/account-lookup',
     icon: <ManageSearchIcon />,
     tags: ['Reference'],

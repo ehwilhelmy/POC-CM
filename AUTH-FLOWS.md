@@ -8,7 +8,7 @@ Caretaker journey prototypes for user testing. Each flow walks through a real sc
 
 ### 1. New Caretaker Auth Flow
 
-**Problem:** New parents get an invite from camp, click through to register, and hit an Auth0 login screen that looks nothing like their camp. They don't recognize it, don't trust it, and drop off — or they call camp staff confused about where they ended up.
+**Problem:** New caretakers get an invite from camp, click through to register, and hit an Auth0 login screen that looks nothing like their camp. They don't recognize it, don't trust it, and drop off — or call camp staff confused about where they ended up.
 
 **Journey:** Gets invite from camp, visits camp website, registers, creates account, gets verified, lands in portal.
 
@@ -19,7 +19,7 @@ Caretaker journey prototypes for user testing. Each flow walks through a real sc
 
 ### 2. Returning Caretaker Auth Flow
 
-**Problem:** Parents who logged in last summer come back and the login page looks completely different. They're not sure they're in the right place, can't tell if they already have an account, and the generic Auth0 branding gives them no confidence they're logging into their camp.
+**Problem:** Caretakers who logged in last summer come back and the login page looks completely different. They're not sure they're in the right place, can't tell if they already have an account, and the generic Auth0 branding gives them no confidence they're logging into their camp.
 
 **Journey:** Returns to camp site, enters email*, enters password, lands in portal.
 
@@ -32,7 +32,7 @@ Caretaker journey prototypes for user testing. Each flow walks through a real sc
 
 ### 3. Forgot Password Flow
 
-**Problem:** Parents don't remember their password — or never set one after migration. They don't know if they even have an account, the reset emails look unfamiliar, and the multi-step process (request reset → check email → enter code → new password) loses people along the way.
+**Problem:** Caretakers don't remember their password — or never set one after migration. They don't know if they even have an account, the reset emails look unfamiliar, and the multi-step process loses people along the way.
 
 **Journey:** Can't remember password, requests reset, receives branded email, enters code, sets new password, back to login.
 
@@ -43,20 +43,20 @@ Caretaker journey prototypes for user testing. Each flow walks through a real sc
 
 ### 4. Guest Account Flow
 
-**Problem:** Grandparents and co-parents receive a guest invite email but have no idea what campminder is. The messaging doesn't explain what they're signing up for, what access they'll have, or why they need yet another account. Many ignore the email entirely.
+**Problem:** Grandparents and co-caretakers receive a guest invite email but have no idea what campminder is. The messaging doesn't explain what they're signing up for, what access they'll have, or why they need yet another account. Many ignore the email entirely.
 
-**Journey:** Primary caretaker invites a guest (grandparent, co-parent) from their dashboard. Guest receives email, creates account, lands in limited portal.
+**Journey:** Primary caretaker invites a guest (grandparent, co-caretaker) from their dashboard. Guest receives email, creates account, lands in limited portal.
 
 **Proposal focuses on:**
 `Broken Messages` `Multi-Step Friction`
 
 ---
 
-### 5. Campanion App Flow
+### 5. Campanion Branding Login Confusion
 
-**Problem:** Parents open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don't understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion.
+**Problem:** Caretakers open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don't understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion.
 
-**Journey:** Parent opens the Campanion mobile app and logs in. One login, all their camps — Campanion branding gives multi-camp context.
+**Journey:** Caretaker opens the Campanion mobile app and logs in. One login, all their camps — Campanion branding gives multi-camp context.
 
 **Proposal focuses on:**
 `Branding & Identity`
@@ -71,7 +71,7 @@ Preview camp-branded transactional emails: verification, password reset, invitat
 
 ### Account Lookup
 
-Camp staff tool to search parent email and see account status.
+Camp staff tool to search caretaker email and see account status.
 
 ### Expired Link
 
