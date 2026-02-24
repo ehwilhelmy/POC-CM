@@ -80,8 +80,8 @@ export const GuestDashboard: React.FC<GuestDashboardProps> = ({
           <div className="cm-guest-dash__info">
             <InfoOutlined style={{ flexShrink: 0, marginTop: 1 }} fontSize="small" />
             <span>
-              As a guest, you can view photos, watch videos, and send notes
-              to Tommy during their time at camp.
+              You have guest access to Tommy&rsquo;s camp account.
+              What you can see and do depends on your camp&rsquo;s settings.
             </span>
           </div>
 

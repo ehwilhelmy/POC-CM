@@ -124,12 +124,6 @@ function getEmail(type: EmailType) {
                 <strong>Jane Smith</strong> has invited you to be a guest on{' '}
                 <strong>Tommy Smith&rsquo;s</strong> {CAMP.name} account.
               </p>
-              <p>As a guest, you can:</p>
-              <ul className="cm-email__list">
-                <li>View photos from camp</li>
-                <li>Watch camp videos</li>
-                <li>Send notes to Tommy</li>
-              </ul>
               <div className="cm-email__note">
                 <strong className="cm-email__note-label">A note from Jane:</strong>
                 Hi Grandma! This is Tommy&rsquo;s new camp, you can see videos, photos,

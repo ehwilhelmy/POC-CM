@@ -142,12 +142,6 @@ export const GuestAccountFlow: React.FC = () => {
                 <strong>Jane Smith</strong> has invited you to be a guest on{' '}
                 <strong>Tommy Smith&rsquo;s</strong> Camp Tall Pines account.
               </p>
-              <p>As a guest, you can:</p>
-              <ul style={{ margin: '0 0 16px', paddingLeft: 20, fontSize: 13, lineHeight: 1.8 }}>
-                <li>View photos from camp</li>
-                <li>Watch camp videos</li>
-                <li>Send notes to Tommy</li>
-              </ul>
               {guestNote && (
                 <div style={{
                   background: '#f5f5f5',
