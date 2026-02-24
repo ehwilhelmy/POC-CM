@@ -39,7 +39,7 @@ export const CAMPANION: CampBranding = {
 /** campminder default — fallback when a camp hasn't set up branding */
 export const CAMPMINDER_DEFAULT: CampBranding = {
   name: 'campminder',
-  accentColor: '#635dff',
+  accentColor: '#773DBD',
   initials: 'CM',
   logoUrl: cmLogoLight,
   logoFit: 'wide',

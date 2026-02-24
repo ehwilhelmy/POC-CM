@@ -8,6 +8,11 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import LinkOffIcon from '@mui/icons-material/LinkOff';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import AddHomeIcon from '@mui/icons-material/AddHome';
+import BadgeIcon from '@mui/icons-material/Badge';
+import UpgradeIcon from '@mui/icons-material/Upgrade';
 import logoSrc from '../../assets/logo/cm-logo-hortizontal-color.svg';
 import './AuthIndex.css';
 
@@ -80,6 +85,64 @@ const journeys: FlowCard[] = [
     icon: <PhoneIphoneIcon />,
     tags: ['Branding & Identity'],
   },
+  {
+    id: 6,
+    title: 'Existing Account, New Camp',
+    problem:
+      'A caregiver already has a campminder account at another camp. Their child is now attending a new camp. How do they sign in without creating a duplicate account?',
+    description:
+      'Caregiver visits new camp site \u2192 enters email \u2192 system finds existing account \u2192 confirms password \u2192 new camp added to account \u2192 dashboard',
+    route: '/auth/existing-account-new-camp',
+    icon: <PersonAddAlt1Icon />,
+    tags: ['Edge Case', 'Account Linking'],
+  },
+];
+
+const guestEdgeCases: FlowCard[] = [
+  {
+    id: 7,
+    title: 'Guest Invited by Multiple Caregivers (Same Camp)',
+    problem:
+      'A guest already has access at a camp via one caregiver. A second caregiver at the same camp sends another invite. Without detection, the system would create a duplicate guest account.',
+    description:
+      'Guest receives second invite at same camp \u2192 system detects existing access \u2192 merges camper connections \u2192 updated dashboard.',
+    route: '/auth/guest-multi-caregiver',
+    icon: <GroupAddIcon />,
+    tags: ['Edge Case', 'Account Merge'],
+  },
+  {
+    id: 8,
+    title: 'Guest Invited at Multiple Camps',
+    problem:
+      'A guest (e.g. grandparent) has an account at one camp and gets invited to a second camp. Without account linking, they\u2019d have to create a new account and manage two separate logins.',
+    description:
+      'Guest receives invite at new camp \u2192 system finds existing account \u2192 confirms identity \u2192 second camp linked.',
+    route: '/auth/guest-multi-camp',
+    icon: <AddHomeIcon />,
+    tags: ['Edge Case', 'Account Linking'],
+  },
+  {
+    id: 9,
+    title: 'Caregiver at Camp A, Guest at Camp B',
+    problem:
+      'A caregiver at one camp receives a guest invite at a different camp. They already have a full account \u2014 the system needs to add a lower-privilege role without creating a duplicate.',
+    description:
+      'Caregiver receives guest invite at new camp \u2192 system finds existing caregiver account \u2192 confirms identity \u2192 guest role added.',
+    route: '/auth/caregiver-plus-guest',
+    icon: <BadgeIcon />,
+    tags: ['Edge Case', 'Mixed Roles'],
+  },
+  {
+    id: 10,
+    title: 'Guest Upgrading to Caregiver at New Camp',
+    problem:
+      'A guest at one camp is now registering their own child at a different camp. They need a caregiver role, which requires more information than a guest account provides.',
+    description:
+      'Guest starts registration at new camp \u2192 system finds existing account \u2192 collects additional caregiver info \u2192 role upgrade complete.',
+    route: '/auth/guest-to-caregiver',
+    icon: <UpgradeIcon />,
+    tags: ['Edge Case', 'Role Upgrade'],
+  },
 ];
 
 const tools: FlowCard[] = [
@@ -112,6 +175,7 @@ const tools: FlowCard[] = [
 export const AuthIndex: React.FC = () => {
   const navigate = useNavigate();
   const [brand, setBrand] = useState<'camp' | 'default'>('camp');
+  const [edgeCasesOpen, setEdgeCasesOpen] = useState(false);
 
   const handleNavigate = (route: string) => {
     const url = brand === 'default' ? `${route}?brand=default` : route;
@@ -128,6 +192,7 @@ export const AuthIndex: React.FC = () => {
             Caregiver journey prototypes for user testing. Each flow walks through
             a real scenario camp staff are dealing with after the Auth0 migration.
           </p>
+          <p className="cm-auth-index__updated">Last updated Feb 24, 2025</p>
           <div className="cm-auth-index__brand-toggle">
             <button
               className={`cm-auth-index__brand-pill ${brand === 'camp' ? 'cm-auth-index__brand-pill--active' : ''}`}
@@ -198,6 +263,58 @@ export const AuthIndex: React.FC = () => {
               </button>
             ))}
           </div>
+        </div>
+
+        <div className="cm-auth-index__accordion">
+          <button
+            className="cm-auth-index__accordion-trigger"
+            onClick={() => setEdgeCasesOpen(!edgeCasesOpen)}
+            aria-expanded={edgeCasesOpen}
+          >
+            <h2 className="cm-auth-index__section-title" style={{ margin: 0 }}>
+              Guest Edge Cases
+            </h2>
+            <span className="cm-auth-index__card-tag cm-auth-index__card-tag--discussion">
+              Needs Discussion
+            </span>
+            <span className={`cm-auth-index__accordion-chevron ${edgeCasesOpen ? 'cm-auth-index__accordion-chevron--open' : ''}`}>
+              &#9662;
+            </span>
+          </button>
+          {edgeCasesOpen && (
+            <div className="cm-auth-index__accordion-body">
+              <div className="cm-auth-index__grid cm-auth-index__grid--journeys">
+                {guestEdgeCases.map((flow) => (
+                  <button
+                    key={flow.route}
+                    className="cm-auth-index__card"
+                    onClick={() => handleNavigate(flow.route)}
+                  >
+                    <div className="cm-auth-index__card-number">{flow.id}</div>
+                    <div className="cm-auth-index__card-icon">{flow.icon}</div>
+                    <div className="cm-auth-index__card-content">
+                      <h3 className="cm-auth-index__card-title">{flow.title}</h3>
+                      {flow.problem && (
+                        <p className="cm-auth-index__card-problem">{flow.problem}</p>
+                      )}
+                      <p className="cm-auth-index__card-journey">
+                        <span className="cm-auth-index__card-journey-label">Journey: </span>
+                        {flow.description}
+                      </p>
+                      <div className="cm-auth-index__card-focus">
+                        <span className="cm-auth-index__card-focus-label">Proposal focuses on :</span>
+                        <div className="cm-auth-index__card-tags">
+                          {flow.tags.map((tag) => (
+                            <span key={tag} className="cm-auth-index__card-tag">{tag}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <button

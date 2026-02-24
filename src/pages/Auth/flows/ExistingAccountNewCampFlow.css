@@ -1,0 +1,84 @@
+/* ── "Account Found" screen — two camp badges with connector ── */
+
+.cm-auth-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.cm-auth-found__camps {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  justify-content: center;
+}
+
+.cm-auth-found__camp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--color-neutral-400);
+  background: var(--color-white);
+  min-width: 120px;
+  position: relative;
+}
+
+.cm-auth-found__camp--existing {
+  opacity: 0.7;
+  border-color: var(--color-neutral-400);
+}
+
+.cm-auth-found__camp--new {
+  border-color: var(--camp-accent, #635dff);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--camp-accent, #635dff) 20%, transparent);
+}
+
+.cm-auth-found__camp-initials {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  color: #ffffff;
+}
+
+.cm-auth-found__camp-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+}
+
+.cm-auth-found__camp-badge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cm-auth-found__camp-badge--adding {
+  color: var(--camp-accent, #635dff);
+}
+
+.cm-auth-found__connector {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-600);
+  flex-shrink: 0;
+}
+
+.cm-auth-found__explanation {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-700);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}

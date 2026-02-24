@@ -16,6 +16,11 @@ import {
   AccountLookupFlow,
   CampanionFlow,
   ExpiredLinkFlow,
+  ExistingAccountNewCampFlow,
+  GuestMultiCaregiverFlow,
+  GuestMultiCampFlow,
+  CaregiverPlusGuestFlow,
+  GuestToCaregiverFlow,
 } from './pages/Auth';
 
 const GlobalShortcuts: React.FC = () => {
@@ -54,6 +59,11 @@ function App() {
         <Route path="/auth/account-lookup" element={<AccountLookupFlow />} />
         <Route path="/auth/campanion" element={<CampanionFlow />} />
         <Route path="/auth/expired-link" element={<ExpiredLinkFlow />} />
+        <Route path="/auth/existing-account-new-camp" element={<ExistingAccountNewCampFlow />} />
+        <Route path="/auth/guest-multi-caregiver" element={<GuestMultiCaregiverFlow />} />
+        <Route path="/auth/guest-multi-camp" element={<GuestMultiCampFlow />} />
+        <Route path="/auth/caregiver-plus-guest" element={<CaregiverPlusGuestFlow />} />
+        <Route path="/auth/guest-to-caregiver" element={<GuestToCaregiverFlow />} />
 
         {/* Management tool — wrapped in AppShell */}
         <Route path="/app" element={<AppShell />}>

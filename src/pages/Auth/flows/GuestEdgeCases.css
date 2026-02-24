@@ -1,0 +1,126 @@
+/* ── Guest Edge Cases — shared styles for role pills, camper list, upgrade banner ── */
+
+/* ── Role pill (under camp name in badge) ── */
+.cm-auth-found__camp-role {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  padding: 2px var(--space-sm);
+  border-radius: 999px;
+  line-height: var(--line-height-normal);
+}
+
+.cm-auth-found__camp-role--caregiver {
+  background: var(--color-green-100);
+  color: var(--color-green-800);
+}
+
+.cm-auth-found__camp-role--guest {
+  background: var(--color-neutral-300);
+  color: var(--color-neutral-800);
+}
+
+/* ── Camper access list (Flow A) ── */
+.cm-auth-camper-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  text-align: left;
+}
+
+.cm-auth-camper-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-white);
+  border: 1px solid var(--color-neutral-400);
+  border-radius: var(--radius-lg);
+}
+
+.cm-auth-camper-list__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cm-auth-camper-list__name {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+}
+
+.cm-auth-camper-list__detail {
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-700);
+}
+
+.cm-auth-camper-list__badge--new {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: 2px var(--space-sm);
+  border-radius: 999px;
+  background: var(--color-green-100);
+  color: var(--color-green-800);
+  white-space: nowrap;
+}
+
+/* ── Upgrade banner (Flow D) ── */
+.cm-auth-upgrade-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-purple-100);
+  border: 1px solid var(--color-purple-300);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  color: var(--color-purple-800);
+  line-height: var(--line-height-normal);
+}
+
+.cm-auth-upgrade-banner__icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Role summary (success screens) ── */
+.cm-auth-role-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.cm-auth-role-summary__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+}
+
+.cm-auth-role-summary__camp {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.cm-auth-role-summary__camp-initials {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xs);
+  color: #ffffff;
+}
+
+.cm-auth-role-summary__camp-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-900);
+}
