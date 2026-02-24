@@ -1,22 +1,29 @@
 /* ── Campanion app flow — page wrapper ── */
 .cm-campanion {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   min-height: 100vh;
   min-height: 100dvh;
   background: #1a1a2e;
   font-family: var(--font-family-body);
   padding: var(--space-xl);
+  gap: var(--space-xxl);
+}
+
+.cm-campanion__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--space-xl);
 }
 
-/* ── Phone frame ── */
+/* ── Phone frame (iPhone 17 — 393×852 logical pts) ── */
 .cm-campanion__phone {
   position: relative;
-  width: 100%;
-  max-width: 375px;
+  width: 393px;
+  height: 852px;
+  flex-shrink: 0;
   background: #000;
   border-radius: 40px;
   border: 3px solid #444;
@@ -26,7 +33,6 @@
     0 0 0 1px rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  min-height: 700px;
 }
 
 /* ── Status bar ── */
@@ -39,6 +45,12 @@
   font-weight: var(--font-weight-semibold);
   color: #fff;
   z-index: 2;
+}
+
+.cm-campanion__status-bar-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* ── Onboarding screen (Step 1) ── */
@@ -434,13 +446,43 @@
   border-top: 1px solid #eee;
 }
 
-/* ── Annotations (below phone) ── */
+/* ── Annotations (right sidebar) ── */
 .cm-campanion__annotations {
-  max-width: 420px;
-  width: 100%;
+  width: 340px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  padding-top: var(--space-xl);
+}
+
+.cm-campanion--hide-notes .cm-campanion__annotations {
+  display: none;
+}
+
+/* ── Notes FAB (fixed bottom-right) ── */
+.cm-campanion__notes-fab {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.cm-campanion__notes-fab:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
 }
 
 /* ── Return link ── */

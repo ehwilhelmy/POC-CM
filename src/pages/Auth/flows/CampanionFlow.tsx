@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import SignalCellular4BarIcon from '@mui/icons-material/SignalCellular4Bar';
+import WifiIcon from '@mui/icons-material/Wifi';
+import BatteryFullIcon from '@mui/icons-material/BatteryFull';
 import MenuIcon from '@mui/icons-material/Menu';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
 import { CAMP_TALL_PINES, CAMP_SUNSHINE } from '../campBrand';
@@ -22,13 +27,19 @@ export const CampanionFlow: React.FC = () => {
   const [password, setPassword] = useState('');
   const [, setSelectedCamp] = useState<CampBranding>(CAMPS[0]);
   const [showCampPicker, setShowCampPicker] = useState(true);
+  const [showNotes, setShowNotes] = useState(false);
 
   return (
-    <div className="cm-campanion">
+    <div className={clsx('cm-campanion', !showNotes && 'cm-campanion--hide-notes')}>
+      <div className="cm-campanion__main">
       <div className="cm-campanion__phone">
         <div className={clsx('cm-campanion__status-bar', step === 'dashboard' && 'cm-campanion__status-bar--light')}>
           <span>9:41</span>
-          <span>&#x25C0; &#x1F4F6; &#x1F50B;</span>
+          <span className="cm-campanion__status-bar-icons">
+            <SignalCellular4BarIcon sx={{ fontSize: 14 }} />
+            <WifiIcon sx={{ fontSize: 14 }} />
+            <BatteryFullIcon sx={{ fontSize: 14 }} />
+          </span>
         </div>
 
         {/* ── Step 1: Onboarding ── */}
@@ -253,6 +264,14 @@ export const CampanionFlow: React.FC = () => {
         )}
       </div>
 
+      <button
+        className="cm-campanion__return"
+        onClick={() => navigate('/auth')}
+      >
+        &larr; Return to Index
+      </button>
+      </div>
+
       {/* ── Annotations ── */}
       <div className="cm-campanion__annotations">
         {step === 'app-onboarding' && (
@@ -358,10 +377,14 @@ export const CampanionFlow: React.FC = () => {
       </div>
 
       <button
-        className="cm-campanion__return"
-        onClick={() => navigate('/auth')}
+        className="cm-campanion__notes-fab"
+        onClick={() => setShowNotes((v) => !v)}
+        title={showNotes ? 'Hide design notes' : 'Show design notes'}
       >
-        &larr; Return to Index
+        {showNotes
+          ? <VisibilityOffIcon sx={{ fontSize: 16 }} />
+          : <VisibilityIcon sx={{ fontSize: 16 }} />
+        }
       </button>
     </div>
   );
