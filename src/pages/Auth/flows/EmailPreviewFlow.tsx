@@ -17,7 +17,7 @@ function getEmail(type: EmailType) {
   switch (type) {
     case 'verification':
       return {
-        subject: `Verify your email for ${CAMP.name}`,
+        subject: `Your verification code — ${CAMP.name}`,
         senderName: `${CAMP.name} via campminder`,
         body: (
           <>
@@ -34,24 +34,25 @@ function getEmail(type: EmailType) {
               <span className="cm-email__camp-banner-name">{CAMP.name}</span>
             </div>
             <div className="cm-email__content">
-              <p className="cm-email__greeting">Hi Jane,</p>
+              <p className="cm-email__greeting">Hi there,</p>
               <p>
-                Thanks for creating your account with <strong>{CAMP.name}</strong> on
-                campminder. Please verify your email address by clicking the button
-                below.
+                Your verification code for <strong>{CAMP.name}</strong> on
+                campminder is:
               </p>
-              <a href="#" className="cm-email__cta" style={{ backgroundColor: CAMP.accentColor }}>
-                Verify Email Address
-              </a>
+              <div style={{ textAlign: 'center', margin: '16px 0' }}>
+                <span className="cm-email__code" style={{ color: CAMP.accentColor }}>
+                  523816
+                </span>
+              </div>
               <p className="cm-email__muted">
-                This link will expire in 7 days. If you didn&rsquo;t create this account,
-                you can safely ignore this email.
+                This code expires in 10 minutes. If you didn&rsquo;t request
+                this, you can safely ignore this email.
               </p>
             </div>
             <div className="cm-email__footer">
               <span className="cm-email__footer-brand">Powered by campminder</span>
               <span className="cm-email__footer-links">
-                Help Center &middot; Privacy Policy &middot; Unsubscribe
+                Help Center &middot; Privacy Policy
               </span>
             </div>
           </>
@@ -59,7 +60,7 @@ function getEmail(type: EmailType) {
       };
     case 'password-reset':
       return {
-        subject: `Reset your password — ${CAMP.name}`,
+        subject: `Your password reset code — ${CAMP.name}`,
         senderName: `${CAMP.name} via campminder`,
         body: (
           <>
@@ -78,22 +79,23 @@ function getEmail(type: EmailType) {
             <div className="cm-email__content">
               <p className="cm-email__greeting">Hi Jane,</p>
               <p>
-                We received a request to reset your password for your{' '}
-                <strong>{CAMP.name}</strong> campminder account. Click the button
-                below to choose a new password.
+                Your password reset code for <strong>{CAMP.name}</strong> on
+                campminder is:
               </p>
-              <a href="#" className="cm-email__cta" style={{ backgroundColor: CAMP.accentColor }}>
-                Reset Password
-              </a>
+              <div style={{ textAlign: 'center', margin: '16px 0' }}>
+                <span className="cm-email__code" style={{ color: CAMP.accentColor }}>
+                  847291
+                </span>
+              </div>
               <p className="cm-email__muted">
-                This link will expire in 1 hour. If you didn&rsquo;t request this, no
-                changes will be made to your account.
+                This code expires in 10 minutes. If you didn&rsquo;t request
+                this, you can safely ignore this email.
               </p>
             </div>
             <div className="cm-email__footer">
               <span className="cm-email__footer-brand">Powered by campminder</span>
               <span className="cm-email__footer-links">
-                Help Center &middot; Privacy Policy &middot; Unsubscribe
+                Help Center &middot; Privacy Policy
               </span>
             </div>
           </>
@@ -146,7 +148,7 @@ function getEmail(type: EmailType) {
       };
     case 'guest-invite':
       return {
-        subject: `Jane Smith invited you to see Tommy's camp updates`,
+        subject: `You've been invited to ${CAMP.name}`,
         senderName: `${CAMP.name} via campminder`,
         body: (
           <>
