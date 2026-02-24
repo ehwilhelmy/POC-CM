@@ -44,6 +44,12 @@
   margin-right: auto;
 }
 
+.cm-auth-index__updated {
+  font-size: var(--font-size-xs);
+  color: var(--color-neutral-600);
+  margin: var(--space-xs) 0 0;
+}
+
 /* ── Flow cards grid ── */
 .cm-auth-index__grid {
   display: grid;
@@ -230,4 +236,53 @@
   color: var(--color-neutral-900);
   font-weight: var(--font-weight-semibold);
   box-shadow: var(--shadow-sm);
+}
+
+/* ── "Needs Discussion" tag variant ── */
+.cm-auth-index__card-tag--discussion {
+  background: var(--color-orange-100);
+  border-color: var(--color-orange-300);
+  color: var(--color-orange-800);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ── Accordion ── */
+.cm-auth-index__accordion {
+  border: 1px solid var(--color-neutral-400);
+  border-radius: var(--radius-xl);
+  background: var(--color-white);
+  overflow: hidden;
+}
+
+.cm-auth-index__accordion-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+  padding: var(--space-xl);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-body);
+  text-align: left;
+  transition: background-color 0.15s ease;
+}
+
+.cm-auth-index__accordion-trigger:hover {
+  background: var(--color-neutral-200);
+}
+
+.cm-auth-index__accordion-chevron {
+  margin-left: auto;
+  font-size: var(--font-size-md);
+  color: var(--color-neutral-600);
+  transition: transform 0.2s ease;
+}
+
+.cm-auth-index__accordion-chevron--open {
+  transform: rotate(180deg);
+}
+
+.cm-auth-index__accordion-body {
+  padding: 0 var(--space-xl) var(--space-xl);
 }

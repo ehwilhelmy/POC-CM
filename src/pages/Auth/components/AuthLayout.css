@@ -138,11 +138,11 @@
 }
 
 .cm-auth:not(.cm-auth--branded) .cm-auth__terms-link {
-  color: #635dff;
+  color: #773DBD;
 }
 
 .cm-auth:not(.cm-auth--branded) .cm-auth__terms-link:hover {
-  color: #4a44e0;
+  color: #5f2e9e;
 }
 
 /* ── Card body ── */
@@ -161,7 +161,7 @@
   font-family: var(--font-family-body);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  color: #635dff;
+  color: #773DBD;
   cursor: pointer;
   align-self: center;
   text-decoration: none;
@@ -207,7 +207,7 @@
 }
 
 .cm-auth .cm-text-input__field:focus {
-  border-color: #635dff;
+  border-color: #773DBD;
   box-shadow: none;
 }
 
@@ -248,7 +248,7 @@
 
 .cm-auth-link {
   font-size: var(--font-size-sm);
-  color: #635dff;
+  color: #773DBD;
   font-weight: var(--font-weight-medium);
   background: none;
   border: none;
@@ -419,12 +419,12 @@
 }
 
 .cm-auth-btn--primary {
-  background: #635dff;
+  background: #773DBD;
   color: #ffffff;
 }
 
 .cm-auth-btn--primary:hover {
-  background: #4a44e0;
+  background: #5f2e9e;
 }
 
 /* Branded variants — use camp accent color */
@@ -446,7 +446,7 @@
 }
 
 .cm-auth-btn--primary:disabled:hover {
-  background: #635dff;
+  background: #773DBD;
 }
 
 .cm-auth--branded .cm-auth-btn--primary:disabled:hover {
