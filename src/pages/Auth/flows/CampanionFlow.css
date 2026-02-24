@@ -325,6 +325,49 @@
   color: #999;
 }
 
+/* ── Camp picker bottom sheet ── */
+@keyframes cm-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cm-slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.cm-campanion__camp-sheet-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  animation: cm-fade-in 0.3s ease forwards;
+}
+
+.cm-campanion__camp-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-radius: var(--radius-xxl) var(--radius-xxl) 0 0;
+  padding: var(--space-sm) var(--space-xl) var(--space-xl);
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  animation: cm-slide-up 0.35s ease forwards;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.cm-campanion__camp-sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: #d1d1d6;
+  border-radius: 2px;
+  margin: var(--space-xs) auto var(--space-sm);
+}
+
 /* ── Camp picker list ── */
 .cm-campanion__camp-list {
   display: flex;

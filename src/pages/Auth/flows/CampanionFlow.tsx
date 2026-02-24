@@ -11,7 +11,7 @@ import campHero from '@/assets/welcome-2@2x.jpg';
 import campBg from '@/assets/camp-bg.jpeg';
 import './CampanionFlow.css';
 
-type Step = 'app-onboarding' | 'campanion-login' | 'password' | 'camp-picker' | 'dashboard';
+type Step = 'app-onboarding' | 'campanion-login' | 'password' | 'dashboard';
 
 const CAMPS = [CAMP_TALL_PINES, CAMP_SUNSHINE];
 
@@ -21,6 +21,7 @@ export const CampanionFlow: React.FC = () => {
   const [email, setEmail] = useState('jane.smith@email.com');
   const [password, setPassword] = useState('');
   const [, setSelectedCamp] = useState<CampBranding>(CAMPS[0]);
+  const [showCampPicker, setShowCampPicker] = useState(true);
 
   return (
     <div className="cm-campanion">
@@ -63,17 +64,13 @@ export const CampanionFlow: React.FC = () => {
           </div>
         )}
 
-        {/* ── Steps 2, 3 & 4: Auth0 in-app sheet ── */}
-        {(step === 'campanion-login' || step === 'password' || step === 'camp-picker') && (
+        {/* ── Steps 2 & 3: Auth0 in-app sheet ── */}
+        {(step === 'campanion-login' || step === 'password') && (
           <div className="cm-campanion__sheet">
             <div className="cm-campanion__sheet-handle">
               <button
                 className="cm-campanion__sheet-close"
-                onClick={() =>
-                  step === 'camp-picker'
-                    ? setStep('password')
-                    : setStep('app-onboarding')
-                }
+                onClick={() => setStep('app-onboarding')}
               >
                 &times;
               </button>
@@ -146,7 +143,7 @@ export const CampanionFlow: React.FC = () => {
                     <button
                       className="cm-campanion__sheet-btn"
                       disabled={!password.trim()}
-                      onClick={() => setStep('camp-picker')}
+                      onClick={() => setStep('dashboard')}
                     >
                       Continue
                     </button>
@@ -160,37 +157,6 @@ export const CampanionFlow: React.FC = () => {
                 </div>
               )}
 
-              {/* ── Camp picker ── */}
-              {step === 'camp-picker' && (
-                <div className="cm-campanion__sheet-form">
-                  <h2 className="cm-campanion__sheet-title">Your Camps</h2>
-                  <p className="cm-campanion__sheet-subtitle">
-                    Welcome back, Jane! You have access to {CAMPS.length} camps.
-                    Which one would you like to view?
-                  </p>
-                  <div className="cm-campanion__camp-list">
-                    {CAMPS.map((camp) => (
-                      <button
-                        key={camp.name}
-                        className="cm-campanion__camp-card"
-                        onClick={() => {
-                          setSelectedCamp(camp);
-                          setStep('dashboard');
-                        }}
-                      >
-                        <div
-                          className="cm-campanion__camp-card-initials"
-                          style={{ backgroundColor: camp.accentColor }}
-                        >
-                          {camp.initials}
-                        </div>
-                        <span className="cm-campanion__camp-card-name">{camp.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               <div className="cm-campanion__sheet-terms">
                 By signing in, you agree to campminder&rsquo;s{' '}
                 <a href="#">Terms of Service</a> and{' '}
@@ -200,7 +166,7 @@ export const CampanionFlow: React.FC = () => {
           </div>
         )}
 
-        {/* ── Step 5: Stream ── */}
+        {/* ── Step 4: Stream ── */}
         {step === 'dashboard' && (
           <div className="cm-campanion__stream">
             <div className="cm-campanion__stream-nav">
@@ -248,6 +214,41 @@ export const CampanionFlow: React.FC = () => {
                 </div>
               </div>
             </div>
+
+            {/* ── Camp picker bottom sheet ── */}
+            {showCampPicker && (
+              <>
+                <div className="cm-campanion__camp-sheet-scrim" />
+                <div className="cm-campanion__camp-sheet">
+                  <div className="cm-campanion__camp-sheet-handle" />
+                  <h2 className="cm-campanion__sheet-title">Your Camps</h2>
+                  <p className="cm-campanion__sheet-subtitle">
+                    Welcome back, Jane! You have access to {CAMPS.length} camps.
+                    Which one would you like to view?
+                  </p>
+                  <div className="cm-campanion__camp-list">
+                    {CAMPS.map((camp) => (
+                      <button
+                        key={camp.name}
+                        className="cm-campanion__camp-card"
+                        onClick={() => {
+                          setSelectedCamp(camp);
+                          setShowCampPicker(false);
+                        }}
+                      >
+                        <div
+                          className="cm-campanion__camp-card-initials"
+                          style={{ backgroundColor: camp.accentColor }}
+                        >
+                          {camp.initials}
+                        </div>
+                        <span className="cm-campanion__camp-card-name">{camp.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>
@@ -319,21 +320,21 @@ export const CampanionFlow: React.FC = () => {
           </div>
         )}
 
-        {step === 'camp-picker' && (
+        {step === 'dashboard' && showCampPicker && (
           <>
             <div className="cm-auth-info-banner">
               <InfoOutlinedIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
               <span>
-                <strong>This is the key multi-camp moment.</strong> After
-                authentication, the system knows which camps this parent
-                has access to and shows them all. No more &ldquo;which
-                camp am I logging into?&rdquo; confusion.
+                <strong>Login is done &mdash; camp picking is separate.</strong> The
+                Auth0 sheet closes after password entry, and the dashboard
+                appears behind a native bottom sheet. This reinforces that
+                authentication is complete and camp selection is an in-app action.
               </span>
             </div>
             <div className="cm-auth-info-banner">
               <InfoOutlinedIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
               <span>
-                <strong>One sign-in, multiple camps.</strong> The parent
+                <strong>One sign-in, multiple camps.</strong> The caregiver
                 picks a camp context to view. They can switch camps later
                 without re-authenticating &mdash; this is the core value
                 of Campanion over individual camp logins.
@@ -342,7 +343,7 @@ export const CampanionFlow: React.FC = () => {
           </>
         )}
 
-        {step === 'dashboard' && (
+        {step === 'dashboard' && !showCampPicker && (
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
             <span>
