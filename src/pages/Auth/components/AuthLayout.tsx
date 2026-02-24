@@ -10,7 +10,6 @@ export interface CampBranding {
   accentColor: string;
   initials: string;
   logoUrl?: string;
-  backgroundUrl?: string;
   /** 'circle' (default) crops to a round avatar; 'wide' renders at natural aspect ratio */
   logoFit?: 'circle' | 'wide';
   tagline?: string;
@@ -34,7 +33,6 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
       className={clsx('cm-auth', camp && 'cm-auth--branded', !showNotes && 'cm-auth--hide-notes')}
       style={camp ? {
         '--camp-accent': camp.accentColor,
-        ...(camp.backgroundUrl ? { '--camp-bg': `url(${camp.backgroundUrl})` } : {}),
       } as React.CSSProperties : undefined}
     >
       {/* Camp branding above the card (Auth0 page template zone) */}

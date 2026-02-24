@@ -29,8 +29,15 @@ export const ForgotPasswordFlow: React.FC = () => {
   const [searchParams] = useSearchParams();
   const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
   const [step, setStep] = useState<Step>('camp-website');
-  const [email, setEmail] = useState('jane.smith@email.com');
+  const [email, setEmail] = useState('');
+  const [emailTouched, setEmailTouched] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
+
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const emailError = emailTouched && email.trim() && !isValidEmail
+    ? 'Please enter a valid email address'
+    : undefined;
+  const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
   const [codeCopied, setCodeCopied] = useState(false);
   const codeInputRef = useRef<HTMLInputElement>(null);
   const [loginPassword, setLoginPassword] = useState('');
@@ -54,7 +61,7 @@ export const ForgotPasswordFlow: React.FC = () => {
   if (step === 'dashboard') {
     return (
       <CampInTouchDashboard
-        firstName="Jane"
+        firstName={firstName || 'Jane'}
         onHome={() => navigate('/auth')}
       />
     );
@@ -89,10 +96,12 @@ export const ForgotPasswordFlow: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => setEmailTouched(true)}
+              error={emailError}
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
-              disabled={!email.trim()}
+              disabled={!isValidEmail}
               onClick={() => setStep('password')}
             >
               Continue
@@ -110,7 +119,7 @@ export const ForgotPasswordFlow: React.FC = () => {
       {/* Step 2: Password entry — clean, no error yet */}
       {step === 'password' && (
         <>
-          <h1 className="cm-auth-title">Welcome back, Jane</h1>
+          <h1 className="cm-auth-title">Welcome back, {firstName}</h1>
           <p className="cm-auth-subtitle">
             Enter password for <strong>{email}</strong>
           </p>
@@ -142,7 +151,7 @@ export const ForgotPasswordFlow: React.FC = () => {
       {/* Step 3: Password error — after failed attempt */}
       {step === 'password-error' && (
         <>
-          <h1 className="cm-auth-title">Welcome back, Jane</h1>
+          <h1 className="cm-auth-title">Welcome back, {firstName}</h1>
           <p className="cm-auth-subtitle">
             Enter password for <strong>{email}</strong>
           </p>
@@ -197,8 +206,8 @@ export const ForgotPasswordFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Reset your password</h1>
           <p className="cm-auth-subtitle">
-            Enter the email address you use for your {brand.name} account.
-            We&rsquo;ll send you a code to create a new password.
+            Enter your email address and we&rsquo;ll send you a code
+            to create a new password.
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -288,7 +297,7 @@ export const ForgotPasswordFlow: React.FC = () => {
               <span className="cm-email__camp-banner-name">{brand.name}</span>
             </div>
             <div className="cm-email__content">
-              <p className="cm-email__greeting">Hi Jane,</p>
+              <p className="cm-email__greeting">Hi {firstName},</p>
               <p>
                 Your password reset code for <strong>{brand.name}</strong> on
                 campminder is:
@@ -338,7 +347,8 @@ export const ForgotPasswordFlow: React.FC = () => {
         <>
           <h1 className="cm-auth-title">Create new password</h1>
           <p className="cm-auth-subtitle">
-            Choose a new password for your {brand.name} account.
+            This password will apply to all camps connected to
+            your account.
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -367,9 +377,11 @@ export const ForgotPasswordFlow: React.FC = () => {
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
             <span>
-              <strong>Identity already verified.</strong> The parent proved
-              ownership with the 6-digit code, so this is just setting a new
-              password. Clean and fast.
+              <strong>One password, all camps.</strong> Even though the
+              caregiver entered through {brand.name}&rsquo;s branded page,
+              this reset applies to their entire campminder account. If
+              they&rsquo;re part of 2+ camps, the new password works
+              everywhere &mdash; the copy makes that clear.
             </span>
           </div>
         </>
@@ -383,7 +395,8 @@ export const ForgotPasswordFlow: React.FC = () => {
           </div>
           <h1 className="cm-auth-title">Password Changed!</h1>
           <p className="cm-auth-subtitle">
-            Your password has been changed successfully.
+            Your new password is set. Use it to sign in to any
+            camp connected to your account.
           </p>
           <button
             className="cm-auth-btn cm-auth-btn--primary"

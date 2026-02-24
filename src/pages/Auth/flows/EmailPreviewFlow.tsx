@@ -4,12 +4,11 @@ import { GmailInbox } from '../components/GmailInbox';
 import { CAMP } from '../campBrand';
 import './EmailPreviewFlow.css';
 
-type EmailType = 'verification' | 'password-reset' | 'invitation' | 'guest-invite';
+type EmailType = 'verification' | 'password-reset' | 'guest-invite';
 
 const EMAIL_LABELS: Record<EmailType, string> = {
   verification: 'Verification',
   'password-reset': 'Password Reset',
-  invitation: 'Invitation',
   'guest-invite': 'Guest Invite',
 };
 
@@ -96,51 +95,6 @@ function getEmail(type: EmailType) {
               <span className="cm-email__footer-brand">Powered by campminder</span>
               <span className="cm-email__footer-links">
                 Help Center &middot; Privacy Policy
-              </span>
-            </div>
-          </>
-        ),
-      };
-    case 'invitation':
-      return {
-        subject: `You're invited to ${CAMP.name} on campminder`,
-        senderName: `${CAMP.name} via campminder`,
-        body: (
-          <>
-            <div className="cm-email__camp-banner" style={{ backgroundColor: CAMP.accentColor }}>
-              {CAMP.logoUrl ? (
-                <img
-                  src={CAMP.logoUrl}
-                  alt={CAMP.name}
-                  style={{ width: 36, height: 36, borderRadius: '50%' }}
-                />
-              ) : (
-                <div className="cm-email__camp-banner-logo">{CAMP.initials}</div>
-              )}
-              <span className="cm-email__camp-banner-name">{CAMP.name}</span>
-            </div>
-            <div className="cm-email__content">
-              <p className="cm-email__greeting">Hi there,</p>
-              <p>
-                <strong>{CAMP.name}</strong> has invited you to join campminder,
-                the platform your camp uses for enrollment, communication, and more.
-              </p>
-              <p>
-                Getting started only takes a minute — create your account and you&rsquo;ll
-                be connected to your camp right away.
-              </p>
-              <a href="#" className="cm-email__cta" style={{ backgroundColor: CAMP.accentColor }}>
-                Accept Invitation
-              </a>
-              <p className="cm-email__muted">
-                Questions? Contact {CAMP.name} directly at{' '}
-                <a href="#">info@camptallpines.com</a>
-              </p>
-            </div>
-            <div className="cm-email__footer">
-              <span className="cm-email__footer-brand">Powered by campminder</span>
-              <span className="cm-email__footer-links">
-                Help Center &middot; Privacy Policy &middot; Unsubscribe
               </span>
             </div>
           </>

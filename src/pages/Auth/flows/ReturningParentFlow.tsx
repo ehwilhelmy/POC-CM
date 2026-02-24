@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { CampWebsite } from '../components/CampWebsite';
 import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
@@ -12,7 +11,7 @@ type Step =
   | 'camp-website'
   | 'email-entry'
   | 'password'
-  | 'success'
+  | 'loading'
   | 'dashboard';
 
 export const ReturningParentFlow: React.FC = () => {
@@ -20,8 +19,22 @@ export const ReturningParentFlow: React.FC = () => {
   const [searchParams] = useSearchParams();
   const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
   const [step, setStep] = useState<Step>('camp-website');
-  const [email, setEmail] = useState('jane.smith@email.com');
+  const [email, setEmail] = useState('');
+  const [emailTouched, setEmailTouched] = useState(false);
   const [loginPassword, setLoginPassword] = useState('');
+
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const emailError = emailTouched && email.trim() && !isValidEmail
+    ? 'Please enter a valid email address'
+    : undefined;
+  const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
+
+  useEffect(() => {
+    if (step === 'loading') {
+      const timer = setTimeout(() => setStep('dashboard'), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
 
   if (step === 'camp-website') {
     return <CampWebsite onPortalClick={() => setStep('email-entry')} />;
@@ -30,7 +43,7 @@ export const ReturningParentFlow: React.FC = () => {
   if (step === 'dashboard') {
     return (
       <CampInTouchDashboard
-        firstName="Jane"
+        firstName={firstName || 'Jane'}
         onHome={() => navigate('/auth')}
       />
     );
@@ -61,10 +74,12 @@ export const ReturningParentFlow: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => setEmailTouched(true)}
+              error={emailError}
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
-              disabled={!email.trim()}
+              disabled={!isValidEmail}
               onClick={() => setStep('password')}
             >
               Continue
@@ -91,7 +106,7 @@ export const ReturningParentFlow: React.FC = () => {
       {/* Step 2: Password entry (Auth0 login-password prompt) */}
       {step === 'password' && (
         <>
-          <h1 className="cm-auth-title">Welcome back, Jane</h1>
+          <h1 className="cm-auth-title">Welcome back, {firstName}</h1>
           <p className="cm-auth-subtitle">
             Enter password for <strong>{email}</strong>
           </p>
@@ -107,7 +122,7 @@ export const ReturningParentFlow: React.FC = () => {
             <button
               className="cm-auth-btn cm-auth-btn--primary"
               disabled={!loginPassword.trim()}
-              onClick={() => setStep('success')}
+              onClick={() => setStep('loading')}
             >
               Continue
             </button>
@@ -130,30 +145,11 @@ export const ReturningParentFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 3: Success */}
-      {step === 'success' && (
-        <div className="cm-auth-success">
-          <div className="cm-auth-success__icon">
-            <CheckCircleOutlineIcon style={{ fontSize: 32 }} />
-          </div>
-          <h1 className="cm-auth-title">Welcome back, Jane!</h1>
-          <p className="cm-auth-subtitle">
-            You&rsquo;re signed in to {brand.name}. Taking you to your dashboard...
-          </p>
-          <div className="cm-auth-info-banner" style={{ textAlign: 'left' }}>
-            <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
-            <span>
-              <strong>2 steps: email → password.</strong> The parent never had to choose
-              between login and signup. The system knew they had an account and went
-              straight to the password screen.
-            </span>
-          </div>
-          <button
-            className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('dashboard')}
-          >
-            Go to My Dashboard
-          </button>
+      {/* Step 3: Loading transition */}
+      {step === 'loading' && (
+        <div className="cm-auth-loading">
+          <div className="cm-auth-loading__spinner" />
+          <p className="cm-auth-subtitle">Signing you in&hellip;</p>
         </div>
       )}
     </AuthLayout>

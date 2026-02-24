@@ -23,8 +23,10 @@ const CAMPS = [CAMP_TALL_PINES, CAMP_SUNSHINE];
 export const CampanionFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('app-onboarding');
-  const [email, setEmail] = useState('jane.smith@email.com');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
   const [, setSelectedCamp] = useState<CampBranding>(CAMPS[0]);
   const [showCampPicker, setShowCampPicker] = useState(true);
   const [showNotes, setShowNotes] = useState(false);
@@ -104,8 +106,8 @@ export const CampanionFlow: React.FC = () => {
                 <div className="cm-campanion__sheet-form">
                   <h2 className="cm-campanion__sheet-title">Welcome</h2>
                   <p className="cm-campanion__sheet-subtitle">
-                    One app that gives you access to every camp your
-                    family is connected to.
+                    Use the same email and password you use for your
+                    camp account.
                   </p>
                   <div className="cm-campanion__sheet-input-group">
                     <label className="cm-campanion__sheet-label">
@@ -120,13 +122,13 @@ export const CampanionFlow: React.FC = () => {
                     </label>
                     <button
                       className="cm-campanion__sheet-btn"
-                      disabled={!email.trim()}
+                      disabled={!isValidEmail}
                       onClick={() => setStep('password')}
                     >
                       Continue
                     </button>
                     <p className="cm-campanion__sheet-no-signup">
-                      Don&rsquo;t have a campanion account? Contact your
+                      Don&rsquo;t have an account? Contact your
                       camp directly to get set up.
                     </p>
                   </div>
@@ -234,7 +236,7 @@ export const CampanionFlow: React.FC = () => {
                   <div className="cm-campanion__camp-sheet-handle" />
                   <h2 className="cm-campanion__sheet-title">Your Camps</h2>
                   <p className="cm-campanion__sheet-subtitle">
-                    Welcome back, Jane! You have access to {CAMPS.length} camps.
+                    Welcome back, {firstName || 'Jane'}! You have access to {CAMPS.length} camps.
                     Which one would you like to view?
                   </p>
                   <div className="cm-campanion__camp-list">
@@ -257,6 +259,10 @@ export const CampanionFlow: React.FC = () => {
                       </button>
                     ))}
                   </div>
+                  <p className="cm-campanion__sheet-missing-camp">
+                    Don&rsquo;t see your camp? Contact your camp directly
+                    to make sure your account is set up.
+                  </p>
                 </div>
               </>
             )}
@@ -319,10 +325,10 @@ export const CampanionFlow: React.FC = () => {
             <div className="cm-auth-info-banner">
               <InfoOutlinedIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
               <span>
-                <strong>Copy explains the branding.</strong> The in-screen text
-                tells the parent why they see Campanion branding (not their
-                camp&rsquo;s) and that an existing CampMinder account is
-                required &mdash; preventing confusion and failed signup attempts.
+                <strong>Same credentials, no &ldquo;Campanion account.&rdquo;</strong> The
+                copy says &ldquo;campminder account&rdquo; &mdash; not &ldquo;Campanion
+                account&rdquo; &mdash; because caregivers already know their camp credentials.
+                Campanion is just the app; the account is the same one they use for CampInTouch.
               </span>
             </div>
           </>

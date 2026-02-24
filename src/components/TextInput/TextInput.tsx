@@ -13,6 +13,7 @@ export interface TextInputProps {
   readOnly?: boolean;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   type?: string;
   ref?: React.Ref<HTMLInputElement>;
 }
@@ -26,6 +27,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   readOnly = false,
   value,
   onChange,
+  onBlur,
   type = 'text',
   ref,
 }) => {
@@ -45,6 +47,7 @@ export const TextInput: React.FC<TextInputProps> = ({
           readOnly={readOnly}
           value={value}
           onChange={onChange}
+          onBlur={onBlur}
           ref={ref}
         />
         {isPassword && (

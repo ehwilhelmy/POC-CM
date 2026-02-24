@@ -446,6 +446,14 @@
   border-top: 1px solid #eee;
 }
 
+.cm-campanion__sheet-missing-camp {
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+  line-height: var(--line-height-normal);
+  margin: var(--space-md) 0 0;
+}
+
 /* ── Annotations (right sidebar) ── */
 .cm-campanion__annotations {
   width: 340px;

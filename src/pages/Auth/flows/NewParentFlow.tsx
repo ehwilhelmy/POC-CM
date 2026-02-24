@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { CampWebsite } from '../components/CampWebsite';
 import { AuthLayout } from '../components/AuthLayout';
@@ -18,7 +17,7 @@ type Step =
   | 'email-entry'
   | 'verify-code'
   | 'create-account'
-  | 'welcome'
+  | 'loading'
   | 'dashboard';
 
 export const NewParentFlow: React.FC = () => {
@@ -26,8 +25,15 @@ export const NewParentFlow: React.FC = () => {
   const [searchParams] = useSearchParams();
   const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
   const [step, setStep] = useState<Step>('camp-website');
-  const [email, setEmail] = useState('jane.smith@email.com');
+  const [email, setEmail] = useState('');
+  const [emailTouched, setEmailTouched] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
+
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const emailError = emailTouched && email.trim() && !isValidEmail
+    ? 'Please enter a valid email address'
+    : undefined;
+  const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
   const [codeCopied, setCodeCopied] = useState(false);
   const codeInputRef = useRef<HTMLInputElement>(null);
   const [code, setCode] = useState('');
@@ -41,6 +47,10 @@ export const NewParentFlow: React.FC = () => {
       const timer = setTimeout(() => setEmailOpen(true), 500);
       return () => clearTimeout(timer);
     }
+    if (step === 'loading') {
+      const timer = setTimeout(() => setStep('dashboard'), 1500);
+      return () => clearTimeout(timer);
+    }
   }, [step]);
 
   if (step === 'camp-website') {
@@ -50,7 +60,7 @@ export const NewParentFlow: React.FC = () => {
   if (step === 'dashboard') {
     return (
       <CampInTouchDashboard
-        firstName="Jane"
+        firstName={firstName || 'Jane'}
         onHome={() => navigate('/auth')}
       />
     );
@@ -81,10 +91,12 @@ export const NewParentFlow: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onBlur={() => setEmailTouched(true)}
+              error={emailError}
             />
             <button
               className="cm-auth-btn cm-auth-btn--primary"
-              disabled={!email.trim()}
+              disabled={!isValidEmail}
               onClick={() => setStep('create-account')}
             >
               Continue
@@ -179,7 +191,7 @@ export const NewParentFlow: React.FC = () => {
               <button
                 className="cm-auth-btn cm-auth-btn--primary"
                 disabled={!code.trim()}
-                onClick={() => setStep('welcome')}
+                onClick={() => setStep('loading')}
               >
                 Verify &amp; Continue
               </button>
@@ -219,7 +231,7 @@ export const NewParentFlow: React.FC = () => {
               <span className="cm-email__camp-banner-name">{brand.name}</span>
             </div>
             <div className="cm-email__content">
-              <p className="cm-email__greeting">Hi there,</p>
+              <p className="cm-email__greeting">Hi {firstName},</p>
               <p>
                 Your verification code for <strong>{brand.name}</strong> on
                 campminder is:
@@ -262,31 +274,11 @@ export const NewParentFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 4: Success */}
-      {step === 'welcome' && (
-        <div className="cm-auth-success">
-          <div className="cm-auth-success__icon">
-            <CheckCircleOutlineIcon style={{ fontSize: 32 }} />
-          </div>
-          <h1 className="cm-auth-title">Welcome to {brand.name}!</h1>
-          <p className="cm-auth-subtitle">
-            Your account is ready. You can manage enrollment, view forms, and
-            stay connected with camp.
-          </p>
-          <div className="cm-auth-info-banner" style={{ textAlign: 'left' }}>
-            <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
-            <span>
-              <strong>3 steps, no dead ends.</strong> Email → create account → verify.
-              The parent never had to choose between login and signup. The system
-              detected no account and routed them straight to signup.
-            </span>
-          </div>
-          <button
-            className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('dashboard')}
-          >
-            Go to My Dashboard
-          </button>
+      {/* Step 4: Loading transition */}
+      {step === 'loading' && (
+        <div className="cm-auth-loading">
+          <div className="cm-auth-loading__spinner" />
+          <p className="cm-auth-subtitle">Setting up your account&hellip;</p>
         </div>
       )}
     </AuthLayout>

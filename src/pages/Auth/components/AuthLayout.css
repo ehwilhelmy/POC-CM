@@ -23,16 +23,6 @@
     );
 }
 
-/* Background image overlay (Auth0 Organizations background_url) */
-.cm-auth--branded::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--camp-bg, none) center / cover no-repeat;
-  opacity: 0.15;
-  pointer-events: none;
-}
-
 /* ── Auth card ── */
 .cm-auth__card {
   width: 100%;
@@ -53,11 +43,6 @@
 }
 
 /* ── Camp branding above card (Auth0 page template zone) ── */
-.cm-auth--branded > * {
-  position: relative;
-  z-index: 1;
-}
-
 .cm-auth__branding {
   display: flex;
   flex-direction: column;
@@ -303,6 +288,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ── Loading transition ── */
+.cm-auth-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xxxl) 0;
+}
+
+.cm-auth-loading__spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-neutral-300);
+  border-top-color: var(--color-primary-default);
+  border-radius: 50%;
+  animation: cm-spin 0.8s linear infinite;
+}
+
+@keyframes cm-spin {
+  to { transform: rotate(360deg); }
 }
 
 .cm-auth-info-banner {
