@@ -1,5 +1,6 @@
 import type { CampBranding } from './components/AuthLayout';
 import campTallPinesLogo from '@/assets/camp-tall-pines-logo.svg';
+import campTallPinesBg from '@/assets/camp-bg.jpeg';
 import campanionLogo from '@/assets/logo/campanion-logo-color-vert-md.svg';
 import cmLogoLight from '@/assets/logo/cm-logo-hortizontal-light.svg';
 
@@ -12,6 +13,7 @@ export const CAMP_TALL_PINES: CampBranding = {
   accentColor: '#2d6a4f',
   initials: 'TP',
   logoUrl: campTallPinesLogo,
+  backgroundUrl: campTallPinesBg,
 };
 
 export const CAMP_SUNSHINE: CampBranding = {

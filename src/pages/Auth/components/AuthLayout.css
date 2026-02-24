@@ -23,6 +23,21 @@
     );
 }
 
+/* Background image overlay (optional per camp) */
+.cm-auth--branded::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--camp-bg, none) center / cover no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.cm-auth--branded > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* ── Auth card ── */
 .cm-auth__card {
   width: 100%;
