@@ -152,9 +152,17 @@ function getEmail(type: EmailType) {
         senderName: `${CAMP.name} via campminder`,
         body: (
           <>
-            <div className="cm-email__wordmark-header">
-              <span className="cm-email__wordmark">campminder</span>
-              <div className="cm-email__wordmark-divider" />
+            <div className="cm-email__camp-banner" style={{ backgroundColor: CAMP.accentColor }}>
+              {CAMP.logoUrl ? (
+                <img
+                  src={CAMP.logoUrl}
+                  alt={CAMP.name}
+                  style={{ width: 36, height: 36, borderRadius: '50%' }}
+                />
+              ) : (
+                <div className="cm-email__camp-banner-logo">{CAMP.initials}</div>
+              )}
+              <span className="cm-email__camp-banner-name">{CAMP.name}</span>
             </div>
             <div className="cm-email__content cm-email__content--centered">
               <h2 className="cm-email__heading">Welcome to {CAMP.name}!</h2>
@@ -169,7 +177,7 @@ function getEmail(type: EmailType) {
             <div className="cm-email__footer">
               <span className="cm-email__muted">
                 You&rsquo;re receiving this email because you have a {CAMP.name} account.
-                If you are not sure why you&rsquo;re receiving this, please ignore this email.
+                If you don&rsquo;t recognize this, please contact {CAMP.name} directly.
               </span>
             </div>
           </>
