@@ -9,6 +9,15 @@ import WifiIcon from '@mui/icons-material/Wifi';
 import BatteryFullIcon from '@mui/icons-material/BatteryFull';
 import MenuIcon from '@mui/icons-material/Menu';
 import LocalActivityIcon from '@mui/icons-material/LocalActivity';
+import ViewStreamIcon from '@mui/icons-material/ViewStream';
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import StarIcon from '@mui/icons-material/Star';
+import PersonIcon from '@mui/icons-material/Person';
+import MailIcon from '@mui/icons-material/Mail';
+import HelpIcon from '@mui/icons-material/Help';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { CAMP_TALL_PINES, CAMP_SUNSHINE } from '../campBrand';
 import type { CampBranding } from '../components/AuthLayout';
 import campanionLogo from '@/assets/logo/campanion-logo-color-vert-md.svg';
@@ -26,9 +35,7 @@ export const CampanionFlow: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
-  const [, setSelectedCamp] = useState<CampBranding>(CAMPS[0]);
-  const [showCampPicker, setShowCampPicker] = useState(true);
+  const [showSideNav, setShowSideNav] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
 
   return (
@@ -183,7 +190,12 @@ export const CampanionFlow: React.FC = () => {
         {step === 'dashboard' && (
           <div className="cm-campanion__stream">
             <div className="cm-campanion__stream-nav">
-              <MenuIcon className="cm-campanion__stream-nav-icon" />
+              <button
+                className="cm-campanion__stream-nav-btn"
+                onClick={() => setShowSideNav(true)}
+              >
+                <MenuIcon className="cm-campanion__stream-nav-icon" />
+              </button>
               <span className="cm-campanion__stream-nav-title">Stream</span>
               <LocalActivityIcon className="cm-campanion__stream-nav-icon" />
             </div>
@@ -228,41 +240,60 @@ export const CampanionFlow: React.FC = () => {
               </div>
             </div>
 
-            {/* ── Camp picker bottom sheet ── */}
-            {showCampPicker && (
+            {/* ── Side nav drawer ── */}
+            {showSideNav && (
               <>
-                <div className="cm-campanion__camp-sheet-scrim" />
-                <div className="cm-campanion__camp-sheet">
-                  <div className="cm-campanion__camp-sheet-handle" />
-                  <h2 className="cm-campanion__sheet-title">Your Camps</h2>
-                  <p className="cm-campanion__sheet-subtitle">
-                    Welcome back, {firstName || 'Jane'}! You have access to {CAMPS.length} camps.
-                    Which one would you like to view?
-                  </p>
-                  <div className="cm-campanion__camp-list">
-                    {CAMPS.map((camp) => (
-                      <button
-                        key={camp.name}
-                        className="cm-campanion__camp-card"
-                        onClick={() => {
-                          setSelectedCamp(camp);
-                          setShowCampPicker(false);
-                        }}
-                      >
-                        <div
-                          className="cm-campanion__camp-card-initials"
-                          style={{ backgroundColor: camp.accentColor }}
-                        >
-                          {camp.initials}
-                        </div>
-                        <span className="cm-campanion__camp-card-name">{camp.name}</span>
-                      </button>
-                    ))}
+                <div
+                  className="cm-campanion__sidenav-scrim"
+                  onClick={() => setShowSideNav(false)}
+                />
+                <div className="cm-campanion__sidenav">
+                  <div className="cm-campanion__sidenav-header">
+                    <span className="cm-campanion__sidenav-camp-name">{CAMP_TALL_PINES.name}</span>
                   </div>
-                  <p className="cm-campanion__sheet-missing-camp">
-                    Don&rsquo;t see your camp? Contact your camp directly
-                    to make sure your account is set up.
-                  </p>
+                  <div className="cm-campanion__sidenav-divider" />
+                  <nav className="cm-campanion__sidenav-links">
+                    <button className="cm-campanion__sidenav-item">
+                      <ViewStreamIcon sx={{ fontSize: 22 }} />
+                      <span>Stream</span>
+                    </button>
+                    <button className="cm-campanion__sidenav-item">
+                      <PhotoLibraryIcon sx={{ fontSize: 22 }} />
+                      <span>Photos</span>
+                    </button>
+                    <button className="cm-campanion__sidenav-item">
+                      <StarIcon sx={{ fontSize: 22 }} />
+                      <span>Favorites</span>
+                    </button>
+                    <button className="cm-campanion__sidenav-item">
+                      <PersonIcon sx={{ fontSize: 22 }} />
+                      <span>My Campers</span>
+                    </button>
+                    <button className="cm-campanion__sidenav-item">
+                      <MailIcon sx={{ fontSize: 22 }} />
+                      <span>Letters</span>
+                    </button>
+                  </nav>
+                  <div className="cm-campanion__sidenav-divider" />
+                  <nav className="cm-campanion__sidenav-links">
+                    <button className="cm-campanion__sidenav-item">
+                      <HelpIcon sx={{ fontSize: 22 }} />
+                      <span>Help</span>
+                    </button>
+                    <button className="cm-campanion__sidenav-item">
+                      <ChatBubbleIcon sx={{ fontSize: 22 }} />
+                      <span>Feedback</span>
+                    </button>
+                  </nav>
+                  <div className="cm-campanion__sidenav-footer">
+                    <div className="cm-campanion__sidenav-footer-row">
+                      <button className="cm-campanion__sidenav-footer-btn">
+                        <ArrowBackIcon sx={{ fontSize: 20 }} />
+                        <span>My Camps</span>
+                      </button>
+                      <SettingsIcon sx={{ fontSize: 20, color: '#999' }} />
+                    </div>
+                  </div>
                 </div>
               </>
             )}
@@ -345,40 +376,27 @@ export const CampanionFlow: React.FC = () => {
           </div>
         )}
 
-        {step === 'dashboard' && showCampPicker && (
+        {step === 'dashboard' && (
           <>
             <div className="cm-auth-info-banner">
               <InfoOutlinedIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
               <span>
-                <strong>Login is done &mdash; camp picking is separate.</strong> The
-                Auth0 sheet closes after password entry, and the dashboard
-                appears behind a native bottom sheet. This reinforces that
-                authentication is complete and camp selection is an in-app action.
+                <strong>Straight to the Stream.</strong> After login,
+                caregivers land directly on the photo stream &mdash; no
+                camp picker in the way. The stream shows updates from
+                their camp.
               </span>
             </div>
             <div className="cm-auth-info-banner">
               <InfoOutlinedIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
               <span>
-                <strong>One sign-in, multiple camps.</strong> The caregiver
-                picks a camp context to view. They can switch camps later
-                without re-authenticating &mdash; this is the core value
-                of Campanion over individual camp logins.
+                <strong>Hamburger opens the side nav.</strong> Tap the
+                menu icon to access Stream, Photos, Favorites, My Campers,
+                Letters, Help, Feedback, and &ldquo;My Camps&rdquo; to
+                switch between camps.
               </span>
             </div>
           </>
-        )}
-
-        {step === 'dashboard' && !showCampPicker && (
-          <div className="cm-auth-info-banner">
-            <InfoOutlinedIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
-            <span>
-              <strong>This is the Campanion Stream.</strong> After selecting
-              a camp, caregivers land here &mdash; a curated photo feed
-              showing updates from all their connected camps. This is the
-              core value of Campanion: one app, all your camps&rsquo; photos
-              in one place.
-            </span>
-          </div>
         )}
       </div>
 

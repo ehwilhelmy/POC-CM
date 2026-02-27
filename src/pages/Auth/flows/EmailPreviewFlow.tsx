@@ -4,12 +4,13 @@ import { GmailInbox } from '../components/GmailInbox';
 import { CAMP } from '../campBrand';
 import './EmailPreviewFlow.css';
 
-type EmailType = 'verification' | 'password-reset' | 'guest-invite';
+type EmailType = 'verification' | 'password-reset' | 'guest-invite' | 'camper-account';
 
 const EMAIL_LABELS: Record<EmailType, string> = {
   verification: 'Verification',
   'password-reset': 'Password Reset',
   'guest-invite': 'Guest Invite',
+  'camper-account': 'Camper Account',
 };
 
 function getEmail(type: EmailType) {
@@ -140,6 +141,35 @@ function getEmail(type: EmailType) {
               <span className="cm-email__footer-brand">Powered by campminder</span>
               <span className="cm-email__footer-links">
                 Help Center &middot; Privacy Policy
+              </span>
+            </div>
+          </>
+        ),
+      };
+    case 'camper-account':
+      return {
+        subject: `Welcome to ${CAMP.name}`,
+        senderName: `${CAMP.name} via campminder`,
+        body: (
+          <>
+            <div className="cm-email__wordmark-header">
+              <span className="cm-email__wordmark">campminder</span>
+              <div className="cm-email__wordmark-divider" />
+            </div>
+            <div className="cm-email__content cm-email__content--centered">
+              <h2 className="cm-email__heading">Welcome to {CAMP.name}!</h2>
+              <p>
+                You now have an account for <strong>Tommy Smith</strong> in{' '}
+                {CAMP.name}! Click below to log in to register for camp and more.
+              </p>
+              <a href="#" className="cm-email__cta" style={{ backgroundColor: CAMP.accentColor }}>
+                Log In
+              </a>
+            </div>
+            <div className="cm-email__footer">
+              <span className="cm-email__muted">
+                You&rsquo;re receiving this email because you have a {CAMP.name} account.
+                If you are not sure why you&rsquo;re receiving this, please ignore this email.
               </span>
             </div>
           </>

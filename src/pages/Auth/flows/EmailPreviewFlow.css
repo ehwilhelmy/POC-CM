@@ -177,6 +177,37 @@
   font-family: var(--font-family-body);
 }
 
+/* ── Camper account email (wordmark style) ── */
+.cm-email__wordmark-header {
+  padding: var(--space-xxl) var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.cm-email__wordmark {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-xxl);
+  color: var(--color-neutral-900);
+  letter-spacing: 0.5px;
+}
+
+.cm-email__wordmark-divider {
+  margin: var(--space-lg) auto 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-neutral-400);
+}
+
+.cm-email__content--centered {
+  text-align: center;
+}
+
+.cm-email__heading {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-900);
+  margin: 0 0 var(--space-lg);
+}
+
 /* ── Guest invite email ── */
 .cm-email__list {
   margin: 0 0 var(--space-lg);
