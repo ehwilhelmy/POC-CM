@@ -18,16 +18,13 @@ import HelpIcon from '@mui/icons-material/Help';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { CAMP_TALL_PINES, CAMP_SUNSHINE } from '../campBrand';
-import type { CampBranding } from '../components/AuthLayout';
+import { CAMP_TALL_PINES } from '../campBrand';
 import campanionLogo from '@/assets/logo/campanion-logo-color-vert-md.svg';
 import campHero from '@/assets/welcome-2@2x.jpg';
 import campBg from '@/assets/camp-bg.jpeg';
 import './CampanionFlow.css';
 
 type Step = 'app-onboarding' | 'campanion-login' | 'password' | 'dashboard';
-
-const CAMPS = [CAMP_TALL_PINES, CAMP_SUNSHINE];
 
 export const CampanionFlow: React.FC = () => {
   const navigate = useNavigate();

@@ -192,7 +192,7 @@ export const AuthIndex: React.FC = () => {
             Caregiver journey prototypes for user testing. Each flow walks through
             a real scenario camp staff are dealing with after the Auth0 migration.
           </p>
-          <p className="cm-auth-index__updated">Last updated Feb 24, 2025</p>
+          <p className="cm-auth-index__updated">Last updated Feb 26, 2026</p>
           <div className="cm-auth-index__brand-toggle">
             <button
               className={`cm-auth-index__brand-pill ${brand === 'camp' ? 'cm-auth-index__brand-pill--active' : ''}`}
