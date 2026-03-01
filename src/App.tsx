@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { AppShell } from './layouts/AppShell';
 import { HomePage } from './pages/Home';
+import { UserTestingIndex } from './pages/UserTesting';
 import { ReportsPage } from './pages/Reports';
 import { StaffPipelinePage } from './pages/StaffPipeline';
 import { PlaceholderPage } from './pages/Placeholder';
@@ -47,6 +48,9 @@ function App() {
       <Routes>
         {/* Landing page */}
         <Route path="/" element={<HomePage />} />
+
+        {/* User testing — simple external-facing flow picker */}
+        <Route path="/testing" element={<UserTestingIndex />} />
 
         {/* Auth flows — standalone, no AppShell */}
         <Route path="/auth" element={<AuthIndex />} />

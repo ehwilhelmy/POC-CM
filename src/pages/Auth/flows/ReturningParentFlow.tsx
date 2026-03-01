@@ -12,7 +12,7 @@ type Step =
   | 'email-entry'
   | 'password'
   | 'loading'
-  | 'dashboard';
+  | 'home';
 
 export const ReturningParentFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export const ReturningParentFlow: React.FC = () => {
 
   useEffect(() => {
     if (step === 'loading') {
-      const timer = setTimeout(() => setStep('dashboard'), 1500);
+      const timer = setTimeout(() => setStep('home'), 1500);
       return () => clearTimeout(timer);
     }
   }, [step]);
@@ -40,7 +40,7 @@ export const ReturningParentFlow: React.FC = () => {
     return <CampWebsite onPortalClick={() => setStep('email-entry')} />;
   }
 
-  if (step === 'dashboard') {
+  if (step === 'home') {
     return (
       <CampInTouchDashboard
         firstName={firstName || 'Jane'}

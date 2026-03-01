@@ -9,7 +9,7 @@ import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
 import { CAMP } from '../campBrand';
 
-type Step = 'form' | 'welcome' | 'dashboard';
+type Step = 'form' | 'welcome' | 'home';
 
 export const SignupFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export const SignupFlow: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { allValid } = usePasswordValidation(password, confirmPassword);
 
-  if (step === 'dashboard') {
+  if (step === 'home') {
     return (
       <CampInTouchDashboard
         firstName="Jane"
@@ -108,9 +108,9 @@ export const SignupFlow: React.FC = () => {
 
           <button
             className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('dashboard')}
+            onClick={() => setStep('home')}
           >
-            Go to My Dashboard
+            Go to My Account
           </button>
         </div>
       )}

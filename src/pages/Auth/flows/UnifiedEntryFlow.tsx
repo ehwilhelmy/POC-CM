@@ -10,7 +10,7 @@ import { TextInput } from '../../../components/TextInput';
 
 import { CAMP } from '../campBrand';
 
-type Step = 'email' | 'existing-user' | 'new-user' | 'success' | 'dashboard';
+type Step = 'email' | 'existing-user' | 'new-user' | 'success' | 'home';
 
 export const UnifiedEntryFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export const UnifiedEntryFlow: React.FC = () => {
     if (step === 'existing-user' || step === 'new-user') setStep('email');
   };
 
-  if (step === 'dashboard') {
+  if (step === 'home') {
     return (
       <CampInTouchDashboard
         firstName="Jane"
@@ -184,9 +184,9 @@ export const UnifiedEntryFlow: React.FC = () => {
           </p>
           <button
             className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('dashboard')}
+            onClick={() => setStep('home')}
           >
-            Go to My Dashboard
+            Go to My Account
           </button>
         </div>
       )}

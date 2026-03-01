@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { AuthLayout } from '../components/AuthLayout';
 import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { GuestAccountsPage } from '../components/GuestAccountsPage';
@@ -17,8 +16,8 @@ type Step =
   | 'guest-accounts-page'
   | 'guest-email'
   | 'create-account'
-  | 'success'
-  | 'guest-dashboard';
+  | 'loading'
+  | 'guest-home';
 
 export const GuestAccountFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -35,6 +34,14 @@ export const GuestAccountFlow: React.FC = () => {
   useEffect(() => {
     if (step === 'guest-email') {
       const timer = setTimeout(() => setEmailOpen(true), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [step]);
+
+  // Auto sign-in after account creation
+  useEffect(() => {
+    if (step === 'loading') {
+      const timer = setTimeout(() => setStep('guest-home'), 1500);
       return () => clearTimeout(timer);
     }
   }, [step]);
@@ -66,7 +73,7 @@ export const GuestAccountFlow: React.FC = () => {
   }
 
   // Step 6: Guest dashboard
-  if (step === 'guest-dashboard') {
+  if (step === 'guest-home') {
     return (
       <GuestDashboard
         firstName="Ruth"
@@ -215,7 +222,7 @@ export const GuestAccountFlow: React.FC = () => {
             <button
               className="cm-auth-btn cm-auth-btn--primary"
               disabled={!allValid}
-              onClick={() => setStep('success')}
+              onClick={() => setStep('loading')}
             >
               Create Account
             </button>
@@ -223,22 +230,11 @@ export const GuestAccountFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 5: Success */}
-      {step === 'success' && (
-        <div className="cm-auth-success">
-          <div className="cm-auth-success__icon">
-            <CheckCircleOutlineIcon style={{ fontSize: 32 }} />
-          </div>
-          <h1 className="cm-auth-title">Welcome, Ruth!</h1>
-          <p className="cm-auth-subtitle">
-            You can now view Tommy&rsquo;s photos and updates at {brand.name}.
-          </p>
-          <button
-            className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('guest-dashboard')}
-          >
-            Go to My Dashboard
-          </button>
+      {/* Step 5: Loading — auto sign-in */}
+      {step === 'loading' && (
+        <div className="cm-auth-loading">
+          <div className="cm-auth-loading__spinner" />
+          <p className="cm-auth-subtitle">Signing you in&hellip;</p>
         </div>
       )}
     </AuthLayout>

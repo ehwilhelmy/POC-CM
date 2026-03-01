@@ -10,7 +10,7 @@ import { TextInput } from '../../../components/TextInput';
 
 const CAMP = { name: 'Camp Tall Pines', accentColor: '#2d6a4f', initials: 'TP' };
 
-type Step = 'request' | 'check-email' | 'new-password' | 'success' | 'dashboard';
+type Step = 'request' | 'check-email' | 'new-password' | 'success' | 'home';
 
 export const PasswordResetFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export const PasswordResetFlow: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { allValid } = usePasswordValidation(password, confirmPassword);
 
-  if (step === 'dashboard') {
+  if (step === 'home') {
     return (
       <CampInTouchDashboard
         firstName="Jane"
@@ -146,9 +146,9 @@ export const PasswordResetFlow: React.FC = () => {
           </p>
           <button
             className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('dashboard')}
+            onClick={() => setStep('home')}
           >
-            Go to My Dashboard
+            Go to My Account
           </button>
         </div>
       )}

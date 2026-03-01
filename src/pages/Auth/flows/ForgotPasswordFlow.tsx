@@ -22,7 +22,7 @@ type Step =
   | 'check-email'
   | 'new-password'
   | 'success'
-  | 'dashboard';
+  | 'home';
 
 export const ForgotPasswordFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -54,11 +54,12 @@ export const ForgotPasswordFlow: React.FC = () => {
     }
   }, [step]);
 
+
   if (step === 'camp-website') {
     return <CampWebsite onPortalClick={() => setStep('email-entry')} />;
   }
 
-  if (step === 'dashboard') {
+  if (step === 'home') {
     return (
       <CampInTouchDashboard
         firstName={firstName || 'Jane'}
@@ -181,21 +182,33 @@ export const ForgotPasswordFlow: React.FC = () => {
           <div className="cm-auth-migration-banner">
             <InfoOutlinedIcon className="cm-auth-migration-banner__icon" fontSize="small" />
             <span>
-              Our security system was recently updated. If you haven&rsquo;t
-              logged in recently, your previous password may no longer work.
-              Use <button
+              If you&rsquo;ve forgotten your password, no worries &mdash; use{' '}
+              <button
                 className="cm-auth-link"
                 style={{ color: 'inherit', textDecoration: 'underline', fontSize: 'inherit' }}
                 onClick={() => setStep('request')}
               >&ldquo;Forgot password?&rdquo;</button> to set a new one.
+              Note: resetting your password will update it for all camps
+              connected to your account.
             </span>
           </div>
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
             <span>
-              <strong>Migration context.</strong> This warning addresses pre-Auth0
-              parents whose passwords changed during migration. It explains why
-              their old password might not work without blaming them.
+              <strong>&ldquo;Forgot password?&rdquo; only appears after account
+              is confirmed.</strong> The caregiver entered their email on the
+              previous screen &mdash; the system verified the account exists
+              before showing the password step. No information is leaked about
+              whether an email is registered until after confirmation.
+            </span>
+          </div>
+          <div className="cm-auth-info-banner">
+            <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
+            <span>
+              <strong>Multi-camp heads-up.</strong> The yellow banner mentions
+              that a password reset applies to all connected camps. This sets
+              expectations early &mdash; before they start the reset flow &mdash;
+              so there are no surprises.
             </span>
           </div>
         </>
@@ -400,9 +413,9 @@ export const ForgotPasswordFlow: React.FC = () => {
           </p>
           <button
             className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('dashboard')}
+            onClick={() => setStep('home')}
           >
-            Go to My Dashboard
+            Go to My Account
           </button>
           <div className="cm-auth-info-banner" style={{ textAlign: 'left' }}>
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />

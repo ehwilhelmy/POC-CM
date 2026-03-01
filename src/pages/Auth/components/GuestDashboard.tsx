@@ -8,6 +8,7 @@ import {
 } from '@mui/icons-material';
 import campBg from '@/assets/camp-bg.jpeg';
 import campLogo from '@/assets/camp-tall-pines-logo.svg';
+import { TestingReturnModal } from './TestingReturnModal';
 import './CampInTouchDashboard.css';
 import './GuestDashboard.css';
 
@@ -103,6 +104,7 @@ export const GuestDashboard: React.FC<GuestDashboardProps> = ({
           </div>
         </div>
       </div>
+      <TestingReturnModal />
     </div>
   );
 };

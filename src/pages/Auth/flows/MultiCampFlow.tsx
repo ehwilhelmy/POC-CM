@@ -15,7 +15,7 @@ type Step =
   | 'wrong-camp'
   | 'camp-picker'
   | 'success'
-  | 'dashboard';
+  | 'home';
 
 const CAMPS = [CAMP_TALL_PINES, CAMP_SUNSHINE];
 
@@ -24,7 +24,7 @@ export const MultiCampFlow: React.FC = () => {
   const [step, setStep] = useState<Step>('email-entry');
   const [selectedCamp, setSelectedCamp] = useState(CAMPS[0]);
 
-  if (step === 'dashboard') {
+  if (step === 'home') {
     return (
       <CampInTouchDashboard
         firstName="Jane"
@@ -224,9 +224,9 @@ export const MultiCampFlow: React.FC = () => {
           </p>
           <button
             className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('dashboard')}
+            onClick={() => setStep('home')}
           >
-            Go to My Dashboard
+            Go to My Account
           </button>
         </div>
       )}

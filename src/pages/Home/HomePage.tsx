@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LockIcon from '@mui/icons-material/Lock';
+import ScienceIcon from '@mui/icons-material/Science';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -21,6 +22,14 @@ export const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
   const cards: SectionCard[] = [
+    {
+      title: 'User Testing',
+      description:
+        'Shareable link for external user testing — simple flow picker, no internal context.',
+      icon: <ScienceIcon />,
+      action: () => navigate('/testing'),
+      actionLabel: 'Open testing',
+    },
     {
       title: 'Auth Flow Prototypes',
       description:

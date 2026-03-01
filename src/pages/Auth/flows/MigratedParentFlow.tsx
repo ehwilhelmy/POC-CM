@@ -24,7 +24,7 @@ type Step =
   | 'check-email'
   | 'new-password'
   | 'success'
-  | 'dashboard';
+  | 'home';
 
 export const MigratedParentFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ export const MigratedParentFlow: React.FC = () => {
     );
   }
 
-  if (step === 'dashboard') {
+  if (step === 'home') {
     return (
       <CampInTouchDashboard
         firstName="Jane"
@@ -397,9 +397,9 @@ export const MigratedParentFlow: React.FC = () => {
           </div>
           <button
             className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('dashboard')}
+            onClick={() => setStep('home')}
           >
-            Go to My Dashboard
+            Go to My Account
           </button>
         </div>
       )}

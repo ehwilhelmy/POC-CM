@@ -22,9 +22,10 @@ import { CAMP_TALL_PINES } from '../campBrand';
 import campanionLogo from '@/assets/logo/campanion-logo-color-vert-md.svg';
 import campHero from '@/assets/welcome-2@2x.jpg';
 import campBg from '@/assets/camp-bg.jpeg';
+import { TestingReturnModal } from '../components/TestingReturnModal';
 import './CampanionFlow.css';
 
-type Step = 'app-onboarding' | 'campanion-login' | 'password' | 'dashboard';
+type Step = 'app-onboarding' | 'campanion-login' | 'password' | 'home';
 
 export const CampanionFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ export const CampanionFlow: React.FC = () => {
     <div className={clsx('cm-campanion', !showNotes && 'cm-campanion--hide-notes')}>
       <div className="cm-campanion__main">
       <div className="cm-campanion__phone">
-        <div className={clsx('cm-campanion__status-bar', step === 'dashboard' && 'cm-campanion__status-bar--light')}>
+        <div className={clsx('cm-campanion__status-bar', step === 'home' && 'cm-campanion__status-bar--light')}>
           <span>9:41</span>
           <span className="cm-campanion__status-bar-icons">
             <SignalCellular4BarIcon sx={{ fontSize: 14 }} />
@@ -160,7 +161,7 @@ export const CampanionFlow: React.FC = () => {
                     <button
                       className="cm-campanion__sheet-btn"
                       disabled={!password.trim()}
-                      onClick={() => setStep('dashboard')}
+                      onClick={() => setStep('home')}
                     >
                       Continue
                     </button>
@@ -184,7 +185,7 @@ export const CampanionFlow: React.FC = () => {
         )}
 
         {/* ── Step 4: Stream ── */}
-        {step === 'dashboard' && (
+        {step === 'home' && (
           <div className="cm-campanion__stream">
             <div className="cm-campanion__stream-nav">
               <button
@@ -373,7 +374,7 @@ export const CampanionFlow: React.FC = () => {
           </div>
         )}
 
-        {step === 'dashboard' && (
+        {step === 'home' && (
           <>
             <div className="cm-auth-info-banner">
               <InfoOutlinedIcon style={{ flexShrink: 0, marginTop: 2 }} fontSize="small" />
@@ -407,6 +408,8 @@ export const CampanionFlow: React.FC = () => {
           : <VisibilityIcon sx={{ fontSize: 16 }} />
         }
       </button>
+
+      {step === 'home' && <TestingReturnModal />}
     </div>
   );
 };

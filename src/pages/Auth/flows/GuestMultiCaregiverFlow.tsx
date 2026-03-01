@@ -66,7 +66,7 @@ export const GuestMultiCaregiverFlow: React.FC = () => {
               className="cm-auth-btn cm-auth-btn--primary"
               onClick={() => setStep('access-updated')}
             >
-              Continue to Dashboard
+              Continue to My Account
             </button>
           </div>
 
@@ -96,7 +96,7 @@ export const GuestMultiCaregiverFlow: React.FC = () => {
               className="cm-auth-btn cm-auth-btn--primary"
               onClick={() => navigate('/auth')}
             >
-              Go to My Dashboard
+              Go to My Account
             </button>
           </div>
         </div>

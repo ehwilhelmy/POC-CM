@@ -9,14 +9,14 @@ import { ALL_CAMPS } from '../campBrand';
 
 const CAMPS = ALL_CAMPS;
 
-type Step = 'pick-camp' | 'login' | 'success' | 'dashboard';
+type Step = 'pick-camp' | 'login' | 'success' | 'home';
 
 export const CampBrandedFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('pick-camp');
   const [selectedCamp, setSelectedCamp] = useState<CampBranding>(CAMPS[0]);
 
-  if (step === 'dashboard') {
+  if (step === 'home') {
     return (
       <CampInTouchDashboard
         firstName="Jane"
@@ -114,9 +114,9 @@ export const CampBrandedFlow: React.FC = () => {
           </p>
           <button
             className="cm-auth-btn cm-auth-btn--primary"
-            onClick={() => setStep('dashboard')}
+            onClick={() => setStep('home')}
           >
-            Go to My Dashboard
+            Go to My Account
           </button>
         </div>
       )}
