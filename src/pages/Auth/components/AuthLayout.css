@@ -376,10 +376,10 @@
   align-items: flex-start;
   gap: var(--space-md);
   padding: var(--space-md) var(--space-lg);
-  background: var(--color-orange-100);
+  background: var(--color-blue-100);
   border-radius: var(--radius-lg);
   font-size: var(--font-size-sm);
-  color: var(--color-orange-800);
+  color: var(--color-blue-800);
   line-height: var(--line-height-normal);
 }
 
