@@ -100,9 +100,9 @@ export const ForgotPasswordFlow: React.FC = () => {
       {/* Step 1: Identifier-first — email only */}
       {step === 'email-entry' && (
         <>
-          <h1 className="cm-auth-title">Log in</h1>
+          <h1 className="cm-auth-title">Welcome</h1>
           <p className="cm-auth-subtitle">
-            Enter your email to continue.
+            Enter your email to get started.
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -122,12 +122,6 @@ export const ForgotPasswordFlow: React.FC = () => {
               Continue
             </button>
           </div>
-          <p className="cm-auth-signup-prompt">
-            Don&rsquo;t have an account?{' '}
-            <button className="cm-auth-link" onClick={() => navigate('/auth/new-parent')}>
-              Sign up
-            </button>
-          </p>
         </>
       )}
 

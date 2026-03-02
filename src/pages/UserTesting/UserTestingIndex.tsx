@@ -12,8 +12,6 @@ const flows: TestFlow[] = [
   { label: 'New Account Login', route: '/auth/new-parent' },
   { label: 'Returning Login', route: '/auth/returning-parent' },
   { label: 'Forgot Password', route: '/auth/forgot-password' },
-  { label: 'Guest Account', route: '/auth/guest' },
-  { label: 'Campanion Mobile', route: '/auth/campanion' },
 ];
 
 export const UserTestingIndex: React.FC = () => {
