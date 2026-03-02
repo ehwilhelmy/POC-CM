@@ -18,6 +18,8 @@ import HelpIcon from '@mui/icons-material/Help';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { useStepNav } from '../hooks/useStepNav';
+import { StepNav } from '../components/StepNav';
 import { CAMP_TALL_PINES } from '../campBrand';
 import campanionLogo from '@/assets/logo/campanion-logo-color-vert-md.svg';
 import campHero from '@/assets/welcome-2@2x.jpg';
@@ -27,6 +29,8 @@ import './CampanionFlow.css';
 
 type Step = 'app-onboarding' | 'campanion-login' | 'password' | 'home';
 
+const STEPS: readonly Step[] = ['app-onboarding', 'campanion-login', 'password', 'home'] as const;
+
 export const CampanionFlow: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<Step>('app-onboarding');
@@ -35,6 +39,7 @@ export const CampanionFlow: React.FC = () => {
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const [showSideNav, setShowSideNav] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
+  const stepNav = useStepNav(STEPS, step, setStep);
 
   return (
     <div className={clsx('cm-campanion', !showNotes && 'cm-campanion--hide-notes')}>
@@ -410,6 +415,7 @@ export const CampanionFlow: React.FC = () => {
       </button>
 
       {step === 'home' && <TestingReturnModal />}
+      <StepNav {...stepNav} />
     </div>
   );
 };

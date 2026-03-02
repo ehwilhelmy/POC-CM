@@ -5,6 +5,8 @@ import { CampWebsite } from '../components/CampWebsite';
 import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { AuthLayout } from '../components/AuthLayout';
 import { TextInput } from '../../../components/TextInput';
+import { useStepNav } from '../hooks/useStepNav';
+import { StepNav } from '../components/StepNav';
 import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 
 type Step =
@@ -13,6 +15,8 @@ type Step =
   | 'password'
   | 'loading'
   | 'home';
+
+const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'password', 'loading', 'home'] as const;
 
 export const ReturningParentFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -28,6 +32,7 @@ export const ReturningParentFlow: React.FC = () => {
     ? 'Please enter a valid email address'
     : undefined;
   const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
+  const stepNav = useStepNav(STEPS, step, setStep);
 
   useEffect(() => {
     if (step === 'loading') {
@@ -37,19 +42,28 @@ export const ReturningParentFlow: React.FC = () => {
   }, [step]);
 
   if (step === 'camp-website') {
-    return <CampWebsite onPortalClick={() => setStep('email-entry')} />;
+    return (
+      <>
+        <CampWebsite onPortalClick={() => setStep('email-entry')} />
+        <StepNav {...stepNav} />
+      </>
+    );
   }
 
   if (step === 'home') {
     return (
-      <CampInTouchDashboard
-        firstName={firstName || 'Jane'}
-        onHome={() => navigate('/auth')}
-      />
+      <>
+        <CampInTouchDashboard
+          firstName={firstName || 'Jane'}
+          onHome={() => navigate('/auth')}
+        />
+        <StepNav {...stepNav} />
+      </>
     );
   }
 
   return (
+    <>
     <AuthLayout
       camp={brand}
       onBack={
@@ -153,5 +167,7 @@ export const ReturningParentFlow: React.FC = () => {
         </div>
       )}
     </AuthLayout>
+    <StepNav {...stepNav} />
+    </>
   );
 };

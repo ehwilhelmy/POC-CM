@@ -1,0 +1,54 @@
+.cm-step-nav {
+  position: fixed;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-neutral-900);
+  color: var(--color-neutral-100);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-xxl);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  box-shadow: var(--shadow-lg);
+  z-index: 9000;
+  user-select: none;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+.cm-step-nav:hover {
+  opacity: 1;
+}
+
+.cm-step-nav__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-neutral-100);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.cm-step-nav__btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cm-step-nav__btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cm-step-nav__label {
+  min-width: 36px;
+  text-align: center;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.5px;
+}

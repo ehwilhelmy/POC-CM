@@ -10,6 +10,8 @@ import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { PasswordRequirements } from '../components/PasswordRequirements';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
+import { useStepNav } from '../hooks/useStepNav';
+import { StepNav } from '../components/StepNav';
 import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 import './EmailPreviewFlow.css';
 
@@ -23,6 +25,8 @@ type Step =
   | 'new-password'
   | 'success'
   | 'home';
+
+const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'password', 'password-error', 'request', 'check-email', 'new-password', 'success', 'home'] as const;
 
 export const ForgotPasswordFlow: React.FC = () => {
   const navigate = useNavigate();
@@ -45,6 +49,7 @@ export const ForgotPasswordFlow: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { allValid } = usePasswordValidation(password, confirmPassword);
+  const stepNav = useStepNav(STEPS, step, setStep);
 
   // Auto-open email popup when reaching check-email step
   useEffect(() => {
@@ -56,19 +61,28 @@ export const ForgotPasswordFlow: React.FC = () => {
 
 
   if (step === 'camp-website') {
-    return <CampWebsite onPortalClick={() => setStep('email-entry')} />;
+    return (
+      <>
+        <CampWebsite onPortalClick={() => setStep('email-entry')} />
+        <StepNav {...stepNav} />
+      </>
+    );
   }
 
   if (step === 'home') {
     return (
-      <CampInTouchDashboard
-        firstName={firstName || 'Jane'}
-        onHome={() => navigate('/auth')}
-      />
+      <>
+        <CampInTouchDashboard
+          firstName={firstName || 'Jane'}
+          onHome={() => navigate('/auth')}
+        />
+        <StepNav {...stepNav} />
+      </>
     );
   }
 
   return (
+    <>
     <AuthLayout
       camp={brand}
       onBack={
@@ -428,5 +442,7 @@ export const ForgotPasswordFlow: React.FC = () => {
         </div>
       )}
     </AuthLayout>
+    <StepNav {...stepNav} />
+    </>
   );
 };

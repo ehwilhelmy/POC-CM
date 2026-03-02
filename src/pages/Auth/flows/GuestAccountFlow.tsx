@@ -8,6 +8,8 @@ import { EmailPopup } from '../components/EmailPopup';
 import { PasswordRequirements } from '../components/PasswordRequirements';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { TextInput } from '../../../components/TextInput';
+import { useStepNav } from '../hooks/useStepNav';
+import { StepNav } from '../components/StepNav';
 import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 import './EmailPreviewFlow.css';
 
@@ -19,6 +21,8 @@ type Step =
   | 'loading'
   | 'guest-home';
 
+const STEPS: readonly Step[] = ['caregiver-dashboard', 'guest-accounts-page', 'guest-email', 'create-account', 'loading', 'guest-home'] as const;
+
 export const GuestAccountFlow: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -29,6 +33,7 @@ export const GuestAccountFlow: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { allValid } = usePasswordValidation(password, confirmPassword);
+  const stepNav = useStepNav(STEPS, step, setStep);
 
   // Auto-open email popup when entering the guest-email step
   useEffect(() => {
@@ -49,41 +54,51 @@ export const GuestAccountFlow: React.FC = () => {
   // Step 1: Caregiver's CampInTouch dashboard
   if (step === 'caregiver-dashboard') {
     return (
-      <CampInTouchDashboard
-        firstName="Jane"
-        onHome={() => navigate('/auth')}
-        onLinkClick={{
-          'Guest Accounts': () => setStep('guest-accounts-page'),
-        }}
-      />
+      <>
+        <CampInTouchDashboard
+          firstName="Jane"
+          onHome={() => navigate('/auth')}
+          onLinkClick={{
+            'Guest Accounts': () => setStep('guest-accounts-page'),
+          }}
+        />
+        <StepNav {...stepNav} />
+      </>
     );
   }
 
   // Step 2: Guest accounts invite page
   if (step === 'guest-accounts-page') {
     return (
-      <GuestAccountsPage
-        onSubmit={(note) => {
-          setGuestNote(note);
-          setStep('guest-email');
-        }}
-        onHome={() => navigate('/auth')}
-      />
+      <>
+        <GuestAccountsPage
+          onSubmit={(note) => {
+            setGuestNote(note);
+            setStep('guest-email');
+          }}
+          onHome={() => navigate('/auth')}
+        />
+        <StepNav {...stepNav} />
+      </>
     );
   }
 
   // Step 6: Guest dashboard
   if (step === 'guest-home') {
     return (
-      <GuestDashboard
-        firstName="Ruth"
-        onHome={() => navigate('/auth')}
-      />
+      <>
+        <GuestDashboard
+          firstName="Ruth"
+          onHome={() => navigate('/auth')}
+        />
+        <StepNav {...stepNav} />
+      </>
     );
   }
 
   // Steps 3-5 use AuthLayout
   return (
+    <>
     <AuthLayout
       camp={brand}
       onBack={
@@ -238,5 +253,7 @@ export const GuestAccountFlow: React.FC = () => {
         </div>
       )}
     </AuthLayout>
+    <StepNav {...stepNav} />
+    </>
   );
 };
