@@ -46,6 +46,12 @@
   cursor: not-allowed;
 }
 
+.cm-step-nav__divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
 .cm-step-nav__label {
   min-width: 36px;
   text-align: center;
