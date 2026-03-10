@@ -13,3 +13,4 @@ export { GuestMultiCaregiverFlow } from './flows/GuestMultiCaregiverFlow';
 export { GuestMultiCampFlow } from './flows/GuestMultiCampFlow';
 export { CaregiverPlusGuestFlow } from './flows/CaregiverPlusGuestFlow';
 export { GuestToCaregiverFlow } from './flows/GuestToCaregiverFlow';
+export { ClaimAccountFlow } from './flows/ClaimAccountFlow';

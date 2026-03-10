@@ -12,6 +12,7 @@ const flows: TestFlow[] = [
   { label: 'New Account Login', route: '/auth/new-parent' },
   { label: 'Returning Login', route: '/auth/returning-parent' },
   { label: 'Forgot Password', route: '/auth/forgot-password' },
+  { label: 'Claim Account (Camp Pre-Created)', route: '/auth/claim-account' },
 ];
 
 export const UserTestingIndex: React.FC = () => {

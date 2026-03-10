@@ -22,6 +22,7 @@ import {
   GuestMultiCampFlow,
   CaregiverPlusGuestFlow,
   GuestToCaregiverFlow,
+  ClaimAccountFlow,
 } from './pages/Auth';
 
 const GlobalShortcuts: React.FC = () => {
@@ -68,6 +69,7 @@ function App() {
         <Route path="/auth/guest-multi-camp" element={<GuestMultiCampFlow />} />
         <Route path="/auth/caregiver-plus-guest" element={<CaregiverPlusGuestFlow />} />
         <Route path="/auth/guest-to-caregiver" element={<GuestToCaregiverFlow />} />
+        <Route path="/auth/claim-account" element={<ClaimAccountFlow />} />
 
         {/* Management tool — wrapped in AppShell */}
         <Route path="/app" element={<AppShell />}>
