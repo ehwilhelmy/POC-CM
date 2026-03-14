@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { AppShell } from './layouts/AppShell';
 import { HomePage } from './pages/Home';
+import { PrototypesIndex, Auth0Hub, DesignKickoff } from './pages/Prototypes';
 import { UserTestingIndex } from './pages/UserTesting';
 import { ReportsPage } from './pages/Reports';
 import { StaffPipelinePage } from './pages/StaffPipeline';
@@ -32,7 +33,7 @@ const GlobalShortcuts: React.FC = () => {
     const handler = (e: KeyboardEvent) => {
       if (e.metaKey && e.shiftKey && e.key.toUpperCase() === 'I') {
         e.preventDefault();
-        navigate('/auth');
+        navigate('/prototypes/auth0/exploration');
       }
     };
     window.addEventListener('keydown', handler);
@@ -50,11 +51,18 @@ function App() {
         {/* Landing page */}
         <Route path="/" element={<HomePage />} />
 
-        {/* User testing — simple external-facing flow picker */}
-        <Route path="/testing" element={<UserTestingIndex />} />
+        {/* Prototypes hub */}
+        <Route path="/prototypes" element={<PrototypesIndex />} />
+        <Route path="/prototypes/auth0" element={<Auth0Hub />} />
+        <Route path="/prototypes/auth0/exploration" element={<AuthIndex />} />
+        <Route path="/prototypes/auth0/conviction-building" element={<UserTestingIndex />} />
+        <Route path="/prototypes/auth0/design-kickoff" element={<DesignKickoff />} />
+
+        {/* Redirects for old URLs */}
+        <Route path="/testing" element={<Navigate to="/prototypes/auth0/conviction-building" replace />} />
+        <Route path="/auth" element={<Navigate to="/prototypes/auth0/exploration" replace />} />
 
         {/* Auth flows — standalone, no AppShell */}
-        <Route path="/auth" element={<AuthIndex />} />
         <Route path="/auth/new-parent" element={<NewParentFlow />} />
         <Route path="/auth/returning-parent" element={<ReturningParentFlow />} />
         <Route path="/auth/forgot-password" element={<ForgotPasswordFlow />} />

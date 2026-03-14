@@ -320,9 +320,9 @@ export const AuthIndex: React.FC = () => {
         <button
           className="cm-auth-link"
           style={{ textAlign: 'center', marginTop: 8 }}
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/prototypes/auth0')}
         >
-          &larr; Back to app
+          &larr; Back to Auth0
         </button>
       </div>
     </div>

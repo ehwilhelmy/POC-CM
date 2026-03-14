@@ -52,6 +52,11 @@
   background: rgba(255, 255, 255, 0.25);
 }
 
+.cm-step-nav__btn--scope-active {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-purple-300);
+}
+
 .cm-step-nav__label {
   min-width: 36px;
   text-align: center;

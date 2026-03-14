@@ -28,6 +28,45 @@ type Step =
 
 const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'password', 'password-error', 'request', 'check-email', 'new-password', 'success', 'home'] as const;
 
+const SCOPE_ANNOTATIONS: Record<Step, string[]> = {
+  'camp-website': [],
+  'email-entry': [
+    'Identifier-first login form',
+    'Auth0 email lookup — detect existing account',
+  ],
+  'password': [
+    'Password entry screen',
+    'Forgot password link',
+    'Auth0 authentication attempt',
+  ],
+  'password-error': [
+    'Wrong password error state',
+    'Migration banner for unmigrated accounts',
+    'Forgot password redirect',
+  ],
+  'request': [
+    'Password reset request form',
+    'Email pre-filled from previous step',
+    'Trigger Auth0 password reset email',
+  ],
+  'check-email': [
+    '6-digit reset code entry',
+    'Auth0 reset code email template',
+    'Code validation and resend logic',
+  ],
+  'new-password': [
+    'New password + confirm fields',
+    'Password strength requirements',
+    '"Applies to all camps" messaging',
+    'Auth0 password update',
+  ],
+  'success': [
+    '"Password Changed!" confirmation',
+    'Auto-login after reset',
+  ],
+  'home': [],
+};
+
 export const ForgotPasswordFlow: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -36,6 +75,7 @@ export const ForgotPasswordFlow: React.FC = () => {
   const [email, setEmail] = useState('');
   const [emailTouched, setEmailTouched] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
+  const [scopeActive, setScopeActive] = useState(false);
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const emailError = emailTouched && email.trim() && !isValidEmail
@@ -51,6 +91,11 @@ export const ForgotPasswordFlow: React.FC = () => {
   const { allValid } = usePasswordValidation(password, confirmPassword);
   const stepNav = useStepNav(STEPS, step, setStep);
 
+  const scopeToggleProps = {
+    scopeActive,
+    onScopeToggle: () => setScopeActive(!scopeActive),
+  };
+
   // Auto-open email popup when reaching check-email step
   useEffect(() => {
     if (step === 'check-email') {
@@ -64,7 +109,7 @@ export const ForgotPasswordFlow: React.FC = () => {
     return (
       <>
         <CampWebsite onPortalClick={() => setStep('email-entry')} />
-        <StepNav {...stepNav} />
+        <StepNav {...stepNav} {...scopeToggleProps} />
       </>
     );
   }
@@ -76,7 +121,7 @@ export const ForgotPasswordFlow: React.FC = () => {
           firstName={firstName || 'Jane'}
           onHome={() => navigate('/auth')}
         />
-        <StepNav {...stepNav} />
+        <StepNav {...stepNav} {...scopeToggleProps} />
       </>
     );
   }
@@ -85,6 +130,8 @@ export const ForgotPasswordFlow: React.FC = () => {
     <>
     <AuthLayout
       camp={brand}
+      scopeActive={scopeActive}
+      scopeAnnotations={SCOPE_ANNOTATIONS[step]}
       onBack={
         step === 'email-entry'
           ? () => setStep('camp-website')
@@ -97,7 +144,6 @@ export const ForgotPasswordFlow: React.FC = () => {
                 : undefined
       }
     >
-      {/* Step 1: Identifier-first — email only */}
       {step === 'email-entry' && (
         <>
           <h1 className="cm-auth-title">Welcome</h1>
@@ -125,7 +171,6 @@ export const ForgotPasswordFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 2: Password entry — clean, no error yet */}
       {step === 'password' && (
         <>
           <h1 className="cm-auth-title">Welcome back, {firstName}</h1>
@@ -157,7 +202,6 @@ export const ForgotPasswordFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 3: Password error — after failed attempt */}
       {step === 'password-error' && (
         <>
           <h1 className="cm-auth-title">Welcome back, {firstName}</h1>
@@ -222,7 +266,6 @@ export const ForgotPasswordFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 3: Enter email for reset */}
       {step === 'request' && (
         <>
           <h1 className="cm-auth-title">Reset your password</h1>
@@ -257,7 +300,6 @@ export const ForgotPasswordFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 4: Check email */}
       {step === 'check-email' && (
         <>
           <h1 className="cm-auth-title">Check your email</h1>
@@ -363,7 +405,6 @@ export const ForgotPasswordFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 5: Set new password */}
       {step === 'new-password' && (
         <>
           <h1 className="cm-auth-title">Create new password</h1>
@@ -408,7 +449,6 @@ export const ForgotPasswordFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 6: Success — matches Auth0's minimal "Password Changed!" screen */}
       {step === 'success' && (
         <div className="cm-auth-success">
           <div className="cm-auth-success__icon" style={{ background: 'none', border: '2px solid var(--color-success)', color: 'var(--color-success)' }}>
@@ -436,7 +476,7 @@ export const ForgotPasswordFlow: React.FC = () => {
         </div>
       )}
     </AuthLayout>
-    <StepNav {...stepNav} />
+    <StepNav {...stepNav} {...scopeToggleProps} />
     </>
   );
 };

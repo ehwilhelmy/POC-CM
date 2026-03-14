@@ -20,18 +20,22 @@ export interface AuthLayoutProps {
   children: React.ReactNode;
   camp?: CampBranding;
   onBack?: () => void;
+  scopeActive?: boolean;
+  scopeAnnotations?: string[];
 }
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({
   children,
   camp,
   onBack,
+  scopeActive = false,
+  scopeAnnotations,
 }) => {
   const [showNotes, setShowNotes] = useState(false);
 
   return (
     <div
-      className={clsx('cm-auth', camp && 'cm-auth--branded', !showNotes && 'cm-auth--hide-notes')}
+      className={clsx('cm-auth', camp && 'cm-auth--branded', !showNotes && 'cm-auth--hide-notes', scopeActive && 'cm-auth--scope')}
       style={camp ? {
         '--camp-accent': camp.accentColor,
         ...(camp.backgroundUrl ? { '--camp-bg': `url(${camp.backgroundUrl})` } : {}),
@@ -80,6 +84,17 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
         <LockOutlinedIcon className="cm-auth__wordmark-lock" sx={{ fontSize: 12 }} />
         Powered by campminder
       </div>
+
+      {scopeActive && scopeAnnotations && scopeAnnotations.length > 0 && (
+        <div className="cm-auth__scope-panel">
+          <span className="cm-auth__scope-panel-title">Your team will build:</span>
+          <ul className="cm-auth__scope-panel-list">
+            {scopeAnnotations.map((note, i) => (
+              <li key={i} className="cm-auth__scope-panel-item">{note}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <button
         className="cm-auth__notes-fab"

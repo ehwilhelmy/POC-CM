@@ -24,6 +24,30 @@ type Step =
 
 const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'create-account', 'verify-code', 'loading', 'home'] as const;
 
+const SCOPE_ANNOTATIONS: Record<Step, string[]> = {
+  'camp-website': [],
+  'email-entry': [
+    'Identifier-first login form',
+    'Auth0 email lookup — detect existing vs. new',
+    'Route to signup or password automatically',
+  ],
+  'create-account': [
+    'Account creation form with validation',
+    'Password strength requirements',
+    'Auth0 user provisioning on submit',
+  ],
+  'verify-code': [
+    'Email verification code screen',
+    'Auth0 verification email trigger',
+    'Code validation and resend logic',
+  ],
+  'loading': [
+    'Auto sign-in after account creation',
+    'Auth0 token exchange',
+  ],
+  'home': [],
+};
+
 export const NewParentFlow: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -32,6 +56,7 @@ export const NewParentFlow: React.FC = () => {
   const [email, setEmail] = useState('');
   const [emailTouched, setEmailTouched] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
+  const [scopeActive, setScopeActive] = useState(false);
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const emailError = emailTouched && email.trim() && !isValidEmail
@@ -58,11 +83,16 @@ export const NewParentFlow: React.FC = () => {
     }
   }, [step]);
 
+  const scopeToggleProps = {
+    scopeActive,
+    onScopeToggle: () => setScopeActive(!scopeActive),
+  };
+
   if (step === 'camp-website') {
     return (
       <>
         <CampWebsite onPortalClick={() => setStep('email-entry')} />
-        <StepNav {...stepNav} />
+        <StepNav {...stepNav} {...scopeToggleProps} />
       </>
     );
   }
@@ -74,7 +104,7 @@ export const NewParentFlow: React.FC = () => {
           firstName={firstName || 'Jane'}
           onHome={() => navigate('/auth')}
         />
-        <StepNav {...stepNav} />
+        <StepNav {...stepNav} {...scopeToggleProps} />
       </>
     );
   }
@@ -83,6 +113,8 @@ export const NewParentFlow: React.FC = () => {
     <>
     <AuthLayout
       camp={brand}
+      scopeActive={scopeActive}
+      scopeAnnotations={SCOPE_ANNOTATIONS[step]}
       onBack={
         step === 'email-entry'
           ? () => setStep('camp-website')
@@ -290,7 +322,7 @@ export const NewParentFlow: React.FC = () => {
         </div>
       )}
     </AuthLayout>
-    <StepNav {...stepNav} />
+    <StepNav {...stepNav} {...scopeToggleProps} />
     </>
   );
 };

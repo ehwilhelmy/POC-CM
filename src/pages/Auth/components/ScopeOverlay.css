@@ -1,0 +1,108 @@
+.cm-scope {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ── Other team — grayscale + overlay ── */
+.cm-scope--other .cm-scope__content {
+  filter: grayscale(1) opacity(0.5);
+  pointer-events: none;
+}
+
+.cm-scope__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 8000;
+  pointer-events: none;
+}
+
+.cm-scope__overlay-label {
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--color-white);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-lg);
+}
+
+/* ── Team owned — subtle highlight ── */
+.cm-scope--team .cm-scope__content {
+  /* No filter, full color */
+}
+
+/* ── Annotation panel ── */
+.cm-scope__panel {
+  position: fixed;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  width: 280px;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-sm);
+  z-index: 8500;
+  box-shadow: var(--shadow-lg);
+  animation: cm-scope-slide-in 0.25s ease;
+}
+
+@keyframes cm-scope-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.cm-scope__panel--team {
+  background: var(--color-white);
+  border: 2px solid var(--color-primary-default);
+}
+
+.cm-scope__panel--other {
+  background: var(--color-neutral-200);
+  border: 2px solid var(--color-neutral-500);
+}
+
+.cm-scope__panel-title {
+  display: block;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-sm);
+  color: var(--color-neutral-900);
+}
+
+.cm-scope__panel--team .cm-scope__panel-title {
+  color: var(--color-primary-default);
+}
+
+.cm-scope__panel-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cm-scope__panel-item {
+  padding: 3px 0;
+  line-height: var(--line-height-normal);
+  color: var(--color-dark-gray);
+}
+
+.cm-scope__panel--team .cm-scope__panel-item::before {
+  content: '→ ';
+  color: var(--color-primary-default);
+  font-weight: var(--font-weight-bold);
+}
+
+.cm-scope__panel--other .cm-scope__panel-item::before {
+  content: '— ';
+  color: var(--color-neutral-600);
+}

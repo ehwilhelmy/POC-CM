@@ -63,10 +63,10 @@ export const UserTestingIndex: React.FC = () => {
 
       <button
         className="cm-testing__back"
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/prototypes/auth0')}
         type="button"
       >
-        &larr; Back
+        &larr; Back to Auth0
       </button>
     </div>
   );

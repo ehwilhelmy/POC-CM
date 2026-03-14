@@ -24,6 +24,31 @@ type Step =
 
 const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'create-password', 'verify-code', 'loading', 'home'] as const;
 
+const SCOPE_ANNOTATIONS: Record<Step, string[]> = {
+  'camp-website': [],
+  'email-entry': [
+    'Identifier-first login form',
+    'Auth0 lookup — detect pre-created account',
+    'Route to set-password screen',
+  ],
+  'create-password': [
+    '"Your account is ready" messaging',
+    'Password + confirm fields (no name needed)',
+    'Password strength validation',
+    'Auth0 password set',
+  ],
+  'verify-code': [
+    'Email verification code screen',
+    'Auth0 verification email template',
+    'Code validation and resend logic',
+  ],
+  'loading': [
+    'Auth0 token exchange after verification',
+    'Loading state and redirect',
+  ],
+  'home': [],
+};
+
 export const ClaimAccountFlow: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -32,6 +57,7 @@ export const ClaimAccountFlow: React.FC = () => {
   const [email, setEmail] = useState('');
   const [emailTouched, setEmailTouched] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
+  const [scopeActive, setScopeActive] = useState(false);
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const emailError = emailTouched && email.trim() && !isValidEmail
@@ -45,6 +71,11 @@ export const ClaimAccountFlow: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const { allValid } = usePasswordValidation(password, confirmPassword);
   const stepNav = useStepNav(STEPS, step, setStep);
+
+  const scopeToggleProps = {
+    scopeActive,
+    onScopeToggle: () => setScopeActive(!scopeActive),
+  };
 
   // Auto-open email popup when reaching verify-code step
   useEffect(() => {
@@ -62,7 +93,7 @@ export const ClaimAccountFlow: React.FC = () => {
     return (
       <>
         <CampWebsite onPortalClick={() => setStep('email-entry')} />
-        <StepNav {...stepNav} />
+        <StepNav {...stepNav} {...scopeToggleProps} />
       </>
     );
   }
@@ -74,7 +105,7 @@ export const ClaimAccountFlow: React.FC = () => {
           firstName={firstName || 'Jane'}
           onHome={() => navigate('/auth')}
         />
-        <StepNav {...stepNav} />
+        <StepNav {...stepNav} {...scopeToggleProps} />
       </>
     );
   }
@@ -83,6 +114,8 @@ export const ClaimAccountFlow: React.FC = () => {
     <>
     <AuthLayout
       camp={brand}
+      scopeActive={scopeActive}
+      scopeAnnotations={SCOPE_ANNOTATIONS[step]}
       onBack={
         step === 'email-entry'
           ? () => setStep('camp-website')
@@ -93,7 +126,6 @@ export const ClaimAccountFlow: React.FC = () => {
               : undefined
       }
     >
-      {/* Step 1: Identifier-first entry */}
       {step === 'email-entry' && (
         <>
           <h1 className="cm-auth-title">Welcome</h1>
@@ -128,7 +160,6 @@ export const ClaimAccountFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 2: Create password for pre-created account */}
       {step === 'create-password' && (
         <>
           <h1 className="cm-auth-title">Set up your password</h1>
@@ -176,7 +207,6 @@ export const ClaimAccountFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 3: Verify email */}
       {step === 'verify-code' && (
         <>
           <h1 className="cm-auth-title">Verify your email</h1>
@@ -280,7 +310,6 @@ export const ClaimAccountFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 4: Loading transition */}
       {step === 'loading' && (
         <div className="cm-auth-loading">
           <div className="cm-auth-loading__spinner" />
@@ -288,7 +317,7 @@ export const ClaimAccountFlow: React.FC = () => {
         </div>
       )}
     </AuthLayout>
-    <StepNav {...stepNav} />
+    <StepNav {...stepNav} {...scopeToggleProps} />
     </>
   );
 };

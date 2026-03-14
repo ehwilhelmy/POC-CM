@@ -18,6 +18,25 @@ type Step =
 
 const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'password', 'loading', 'home'] as const;
 
+const SCOPE_ANNOTATIONS: Record<Step, string[]> = {
+  'camp-website': [],
+  'email-entry': [
+    'Identifier-first login form',
+    'Auth0 email lookup — detect existing account',
+    'Route to password screen for known emails',
+  ],
+  'password': [
+    'Password entry for known accounts',
+    'Forgot password link and redirect',
+    'Auth0 authentication call',
+  ],
+  'loading': [
+    'Auth0 token exchange',
+    'Session creation and redirect',
+  ],
+  'home': [],
+};
+
 export const ReturningParentFlow: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -26,6 +45,7 @@ export const ReturningParentFlow: React.FC = () => {
   const [email, setEmail] = useState('');
   const [emailTouched, setEmailTouched] = useState(false);
   const [loginPassword, setLoginPassword] = useState('');
+  const [scopeActive, setScopeActive] = useState(false);
 
   const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const emailError = emailTouched && email.trim() && !isValidEmail
@@ -33,6 +53,11 @@ export const ReturningParentFlow: React.FC = () => {
     : undefined;
   const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
   const stepNav = useStepNav(STEPS, step, setStep);
+
+  const scopeToggleProps = {
+    scopeActive,
+    onScopeToggle: () => setScopeActive(!scopeActive),
+  };
 
   useEffect(() => {
     if (step === 'loading') {
@@ -45,7 +70,7 @@ export const ReturningParentFlow: React.FC = () => {
     return (
       <>
         <CampWebsite onPortalClick={() => setStep('email-entry')} />
-        <StepNav {...stepNav} />
+        <StepNav {...stepNav} {...scopeToggleProps} />
       </>
     );
   }
@@ -57,7 +82,7 @@ export const ReturningParentFlow: React.FC = () => {
           firstName={firstName || 'Jane'}
           onHome={() => navigate('/auth')}
         />
-        <StepNav {...stepNav} />
+        <StepNav {...stepNav} {...scopeToggleProps} />
       </>
     );
   }
@@ -66,6 +91,8 @@ export const ReturningParentFlow: React.FC = () => {
     <>
     <AuthLayout
       camp={brand}
+      scopeActive={scopeActive}
+      scopeAnnotations={SCOPE_ANNOTATIONS[step]}
       onBack={
         step === 'email-entry'
           ? () => setStep('camp-website')
@@ -74,7 +101,6 @@ export const ReturningParentFlow: React.FC = () => {
             : undefined
       }
     >
-      {/* Step 1: Identifier-first — email only (Auth0 login-id prompt) */}
       {step === 'email-entry' && (
         <>
           <h1 className="cm-auth-title">Welcome</h1>
@@ -111,7 +137,6 @@ export const ReturningParentFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 2: Password entry (Auth0 login-password prompt) */}
       {step === 'password' && (
         <>
           <h1 className="cm-auth-title">Welcome back, {firstName}</h1>
@@ -153,7 +178,6 @@ export const ReturningParentFlow: React.FC = () => {
         </>
       )}
 
-      {/* Step 3: Loading transition */}
       {step === 'loading' && (
         <div className="cm-auth-loading">
           <div className="cm-auth-loading__spinner" />
@@ -161,7 +185,7 @@ export const ReturningParentFlow: React.FC = () => {
         </div>
       )}
     </AuthLayout>
-    <StepNav {...stepNav} />
+    <StepNav {...stepNav} {...scopeToggleProps} />
     </>
   );
 };
