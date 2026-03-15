@@ -31,38 +31,37 @@ const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'password', 'pass
 const SCOPE_ANNOTATIONS: Record<Step, string[]> = {
   'camp-website': [],
   'email-entry': [
-    'Identifier-first login form',
-    'Auth0 email lookup — detect existing account',
+    'Input: Email address',
+    'Messaging: "Enter your email to get started"',
+    'Logic: Email lookup detects existing account → routes to password',
   ],
   'password': [
-    'Password entry screen',
-    'Forgot password link',
-    'Auth0 authentication attempt',
+    'Input: Password',
+    'Messaging: "Welcome back, [name]"',
+    'Link: "Forgot password?"',
   ],
   'password-error': [
-    'Wrong password error state',
-    'Migration banner for unmigrated accounts',
-    'Forgot password redirect',
+    'Input: Password (with error)',
+    'Messaging: "The email or password for this account is incorrect"',
+    'Link: "Forgot password?"',
   ],
   'request': [
-    'Password reset request form',
-    'Email pre-filled from previous step',
-    'Trigger Auth0 password reset email',
+    'Input: Email address (pre-filled)',
+    'Messaging: "Enter your email and we\'ll send you a code"',
   ],
   'check-email': [
-    '6-digit reset code entry',
-    'Auth0 reset code email template',
-    'Code validation and resend logic',
+    'Input: 6-digit reset code',
+    'Messaging: "We sent a 6-digit code to [email]"',
+    'Note: Email template is not in scope — just this screen',
   ],
   'new-password': [
-    'New password + confirm fields',
-    'Password strength requirements',
-    '"Applies to all camps" messaging',
-    'Auth0 password update',
+    'Inputs: New password, Confirm new password',
+    'Messaging: "This password will apply to all camps connected to your account"',
+    'Validation: Password strength requirements',
   ],
   'success': [
-    '"Password Changed!" confirmation',
-    'Auto-login after reset',
+    'Messaging: "Password Changed!" with clear next step',
+    'Button: "Go to My Account"',
   ],
   'home': [],
 };
@@ -231,19 +230,6 @@ export const ForgotPasswordFlow: React.FC = () => {
               Forgot password?
             </button>
           </div>
-          <div className="cm-auth-migration-banner">
-            <InfoOutlinedIcon className="cm-auth-migration-banner__icon" fontSize="small" />
-            <span>
-              If you&rsquo;ve forgotten your password, no worries &mdash; use{' '}
-              <button
-                className="cm-auth-link"
-                style={{ color: 'inherit', textDecoration: 'underline', fontSize: 'inherit' }}
-                onClick={() => setStep('request')}
-              >&ldquo;Forgot password?&rdquo;</button> to set a new one.
-              Note: resetting your password will update it for all camps
-              connected to your account.
-            </span>
-          </div>
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
             <span>
@@ -408,10 +394,16 @@ export const ForgotPasswordFlow: React.FC = () => {
       {step === 'new-password' && (
         <>
           <h1 className="cm-auth-title">Create new password</h1>
-          <p className="cm-auth-subtitle">
-            This password will apply to all camps connected to
-            your account.
-          </p>
+          <div className="cm-auth-migration-banner">
+            <InfoOutlinedIcon className="cm-auth-migration-banner__icon" fontSize="small" />
+            <span>
+              Resetting your password will update it for all camps
+              connected to your account.{' '}
+              <button className="cm-auth-link" style={{ color: 'inherit', textDecoration: 'underline', fontSize: 'inherit' }}>
+                Learn more
+              </button>
+            </span>
+          </div>
           <div className="cm-auth-form">
             <TextInput
               label="New password"

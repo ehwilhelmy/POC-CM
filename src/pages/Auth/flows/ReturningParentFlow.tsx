@@ -21,18 +21,17 @@ const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'password', 'load
 const SCOPE_ANNOTATIONS: Record<Step, string[]> = {
   'camp-website': [],
   'email-entry': [
-    'Identifier-first login form',
-    'Auth0 email lookup — detect existing account',
-    'Route to password screen for known emails',
+    'Input: Email address',
+    'Messaging: "Enter your email to get started"',
+    'Logic: Email lookup detects existing account → routes to password',
   ],
   'password': [
-    'Password entry for known accounts',
-    'Forgot password link and redirect',
-    'Auth0 authentication call',
+    'Input: Password',
+    'Messaging: "Welcome back, [name]" — personalized greeting',
+    'Link: "Forgot password?" → forgot password flow',
   ],
   'loading': [
-    'Auth0 token exchange',
-    'Session creation and redirect',
+    'Auto sign-in',
   ],
   'home': [],
 };

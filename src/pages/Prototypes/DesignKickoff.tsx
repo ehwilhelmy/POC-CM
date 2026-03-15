@@ -17,6 +17,23 @@ import current08 from '../../assets/current-experience/08-create-account-detail.
 import current09 from '../../assets/current-experience/09-login-after-creation.png';
 import current10 from '../../assets/current-experience/10-login-with-password.png';
 
+// Current experience screenshots — Existing Account flow
+import existing01 from '../../assets/current-experience/existing-01-camp-homepage.png';
+import existing02 from '../../assets/current-experience/existing-02-prompted-to-login.png';
+import existing03 from '../../assets/current-experience/existing-03-try-create-account.png';
+import existing04 from '../../assets/current-experience/existing-04-creating-account.png';
+import existing05 from '../../assets/current-experience/existing-05-creating-account-2.png';
+import existing06 from '../../assets/current-experience/existing-06-surprise-have-account.png';
+import existing07 from '../../assets/current-experience/existing-07-password-autofill.png';
+import existing08 from '../../assets/current-experience/existing-08-logged-in.png';
+
+// Current experience screenshots — Forgot Password flow
+import forgot01 from '../../assets/current-experience/forgot-01-enter-email.png';
+import forgot02 from '../../assets/current-experience/forgot-02-weird-email.png';
+import forgot03 from '../../assets/current-experience/forgot-03-verify-identity.png';
+import forgot04 from '../../assets/current-experience/forgot-04-reset-password.png';
+import forgot05 from '../../assets/current-experience/forgot-05-changed-now-what.png';
+
 import './DesignKickoff.css';
 
 interface FlowScreen {
@@ -32,6 +49,11 @@ interface ProposedStep {
   annotations: string[];
 }
 
+interface FlowNote {
+  label: string;
+  text: string;
+}
+
 interface FlowSection {
   id: string;
   title: string;
@@ -40,6 +62,7 @@ interface FlowSection {
   currentScreens: FlowScreen[];
   proposedSteps: ProposedStep[];
   tags: string[];
+  notes?: FlowNote[];
 }
 
 const flows: FlowSection[] = [
@@ -87,10 +110,9 @@ const flows: FlowSection[] = [
       {
         label: 'Verification email',
         src: current06,
-        teamOwned: true,
+        teamOwned: false,
         annotations: [
-          'Verification email template',
-          'Clear code display and expiry info',
+          'Email template — not in scope for this phase',
         ],
       },
       {
@@ -140,50 +162,54 @@ const flows: FlowSection[] = [
         label: 'Identifier-first entry',
         teamOwned: true,
         annotations: [
-          'Single email input — "Enter your email to get started"',
-          'Auth0 email lookup to detect existing vs. new account',
-          'Route to signup (this flow) or password (returning flow)',
+          'Input: Email address',
+          'Messaging: "Enter your email to get started"',
+          'Logic: Email lookup routes to signup (this flow) or password (returning)',
         ],
       },
       {
         label: 'Create account form',
         teamOwned: true,
         annotations: [
-          'Pre-filled email from previous step',
-          'Name, password, confirm password fields',
-          'Password strength validation',
-          'Auth0 user provisioning on submit',
+          'Inputs: First name, Last name, Email (pre-filled), Password, Confirm password',
+          'Messaging: "We didn\'t find an account for [email]"',
+          'Validation: Password strength requirements',
         ],
       },
       {
-        label: 'Email verification',
+        label: 'Verification screen',
         teamOwned: true,
         annotations: [
-          '6-digit code entry screen',
-          'Trigger Auth0 verification email',
-          'Code validation and resend logic',
-        ],
-      },
-      {
-        label: 'Verification email',
-        teamOwned: true,
-        annotations: [
-          'Auth0 email template',
-          'Verification code with expiry',
+          'Input: 6-digit verification code',
+          'Messaging: "We\'ve sent a verification code to [email]"',
+          'Note: Email template is not in scope — just this screen',
         ],
       },
       {
         label: 'Auto sign-in',
         teamOwned: true,
         annotations: [
-          'Auth0 token exchange after verification',
-          'Loading state → redirect to portal',
+          'Auto sign-in after account creation',
         ],
       },
       {
         label: 'Portal / Dashboard',
         teamOwned: false,
         annotations: ['CampInTouch portal — managed by CIT team'],
+      },
+    ],
+    notes: [
+      {
+        label: 'Dynamic messaging',
+        text: 'Title and messaging are dynamic — camp name and email are injected (e.g., "Create your Camp Tall Pines account", "We didn\'t find an account for erica@gmail.com"). Need to confirm how Auth0 templates handle this.',
+      },
+      {
+        label: 'Password strength',
+        text: 'Password strength validation already exists in Auth0. Team may only need to restyle the existing Auth0 screen rather than rebuild. Need to assess: configure Auth0 Universal Login vs. custom screen?',
+      },
+      {
+        label: 'Email templates not in scope',
+        text: 'Verification/reset email templates are not in scope for this phase. The Auth0 screens that reference emails (code entry, messaging) are in scope — just not the emails themselves.',
       },
     ],
   },
@@ -194,7 +220,73 @@ const flows: FlowSection[] = [
       'Caregiver with an existing account signs in. Identifier-first entry detects the account and routes to password.',
     prototypeRoute: '/auth/returning-parent',
     tags: ['Branding & Identity', 'Account Status Confusion'],
-    currentScreens: [],
+    currentScreens: [
+      {
+        label: 'Camp homepage',
+        src: existing01,
+        teamOwned: false,
+        annotations: ['Camp-owned page — not in scope'],
+      },
+      {
+        label: 'Prompted to login',
+        src: existing02,
+        teamOwned: true,
+        annotations: [
+          'Auth0 login page — login and signup shown together',
+          'No identifier-first — caregiver guesses which path',
+        ],
+      },
+      {
+        label: 'Try to create account',
+        src: existing03,
+        teamOwned: true,
+        annotations: [
+          'Caregiver doesn\'t know if they have an account',
+          'Tries signup — confusing path',
+        ],
+      },
+      {
+        label: 'Creating account',
+        src: existing04,
+        teamOwned: true,
+        annotations: [
+          'Account creation form',
+          'No email verification step',
+        ],
+      },
+      {
+        label: 'Account creation continued',
+        src: existing05,
+        teamOwned: true,
+        annotations: [
+          'More account details',
+        ],
+      },
+      {
+        label: 'Surprise — account exists',
+        src: existing06,
+        teamOwned: true,
+        annotations: [
+          'System discovers existing account mid-flow',
+          '"Should I try forgot password?" — confusing',
+        ],
+      },
+      {
+        label: 'Password autofill',
+        src: existing07,
+        teamOwned: true,
+        annotations: [
+          'Password manager saves the day',
+          'Without it, caregiver would be stuck',
+        ],
+      },
+      {
+        label: 'Logged in',
+        src: existing08,
+        teamOwned: false,
+        annotations: ['Portal — not in scope'],
+      },
+    ],
     proposedSteps: [
       {
         label: 'Camp homepage',
@@ -205,33 +297,41 @@ const flows: FlowSection[] = [
         label: 'Identifier-first entry',
         teamOwned: true,
         annotations: [
-          'Same email-first screen as all flows',
-          'Auth0 email lookup — detect existing account',
-          'Route to password screen (this flow)',
+          'Input: Email address',
+          'Messaging: "Enter your email to get started"',
+          'Logic: Email lookup detects existing account → routes to password',
         ],
       },
       {
         label: 'Password entry',
         teamOwned: true,
         annotations: [
-          'Personalized greeting — "Welcome back, [name]"',
-          'Password field only (email carried from previous step)',
-          'Forgot password link → forgot password flow',
-          'Auth0 authentication on submit',
+          'Input: Password',
+          'Messaging: "Welcome back, [name]"',
+          'Link: "Forgot password?" → forgot password flow',
         ],
       },
       {
-        label: 'Sign-in',
+        label: 'Auto sign-in',
         teamOwned: true,
         annotations: [
-          'Auth0 token exchange',
-          'Session creation and redirect',
+          'Auto sign-in',
         ],
       },
       {
         label: 'Portal / Dashboard',
         teamOwned: false,
         annotations: ['CampInTouch portal — managed by CIT team'],
+      },
+    ],
+    notes: [
+      {
+        label: 'Identifier-first routing',
+        text: 'The email lookup determines if the account exists and routes to password. This is the same entry point as all flows — the branching logic is the key piece.',
+      },
+      {
+        label: 'Personalized greeting',
+        text: '"Welcome back, [name]" — requires the email lookup to return the user\'s first name. Confirm Auth0 API returns this on identifier check.',
       },
     ],
   },
@@ -242,7 +342,54 @@ const flows: FlowSection[] = [
       'Caregiver resets a forgotten password via email verification code.',
     prototypeRoute: '/auth/forgot-password',
     tags: ['Multi-Step Friction', 'Account Status Confusion'],
-    currentScreens: [],
+    currentScreens: [
+      {
+        label: 'Enter email for reset',
+        src: forgot01,
+        teamOwned: true,
+        annotations: [
+          'Forgot password entry screen',
+          'Generic Auth0 styling — no camp branding',
+        ],
+      },
+      {
+        label: 'Weird reset email',
+        src: forgot02,
+        teamOwned: true,
+        annotations: [
+          'Unfamiliar sender address',
+          'Broken logo in email',
+          'Confusing subject line',
+        ],
+      },
+      {
+        label: 'Verify identity',
+        src: forgot03,
+        teamOwned: true,
+        annotations: [
+          'Verification screen',
+          'No camp branding context',
+        ],
+      },
+      {
+        label: 'Reset password',
+        src: forgot04,
+        teamOwned: true,
+        annotations: [
+          'New password form',
+          'No mention of multi-camp impact',
+        ],
+      },
+      {
+        label: 'Changed — now what?',
+        src: forgot05,
+        teamOwned: true,
+        annotations: [
+          'Success screen but no clear path back',
+          'Caregiver doesn\'t know how to return to camp',
+        ],
+      },
+    ],
     proposedSteps: [
       {
         label: 'Camp homepage',
@@ -253,57 +400,73 @@ const flows: FlowSection[] = [
         label: 'Identifier-first entry',
         teamOwned: true,
         annotations: [
-          'Email entry — routes to password for known account',
+          'Input: Email address',
+          'Messaging: "Enter your email to get started"',
+          'Logic: Email lookup detects existing account → routes to password',
         ],
       },
       {
         label: 'Password attempt',
         teamOwned: true,
         annotations: [
-          'Wrong password → error state',
-          'Migration banner for accounts that never set a password',
-          '"Forgot password?" link triggers reset flow',
+          'Input: Password',
+          'Messaging: "Welcome back, [name]"',
+          'Error: "The email or password for this account is incorrect"',
+          'Link: "Forgot password?"',
         ],
       },
       {
         label: 'Reset request',
         teamOwned: true,
         annotations: [
-          'Email pre-filled from previous steps',
-          'Trigger Auth0 password reset email',
+          'Input: Email address (pre-filled)',
+          'Messaging: "Enter your email and we\'ll send you a code"',
         ],
       },
       {
         label: 'Check email / enter code',
         teamOwned: true,
         annotations: [
-          '6-digit reset code entry',
-          'Reset code email template',
-          'Code validation and resend logic',
+          'Input: 6-digit reset code',
+          'Messaging: "We sent a 6-digit code to [email]"',
+          'Note: Email template is not in scope — just this screen',
         ],
       },
       {
         label: 'Create new password',
         teamOwned: true,
         annotations: [
-          'New password + confirm fields',
-          'Password strength requirements',
-          '"Applies to all camps" messaging',
-          'Auth0 password update on submit',
+          'Inputs: New password, Confirm new password',
+          'Messaging: "This password will apply to all camps connected to your account"',
+          'Validation: Password strength requirements',
         ],
       },
       {
         label: 'Success confirmation',
         teamOwned: true,
         annotations: [
-          '"Password Changed!" confirmation',
-          'Auto-login option → portal',
+          'Messaging: "Password Changed!"',
+          'Button: "Go to My Account"',
         ],
       },
       {
         label: 'Portal / Dashboard',
         teamOwned: false,
         annotations: ['CampInTouch portal — managed by CIT team'],
+      },
+    ],
+    notes: [
+      {
+        label: 'Email templates not in scope',
+        text: 'Reset email templates are not in scope for this phase. The Auth0 screens that reference emails (code entry, messaging) are in scope — just not the emails themselves.',
+      },
+      {
+        label: 'Multi-camp messaging',
+        text: '"This password will apply to all camps connected to your account" — lives on the Create new password screen, not earlier. Important for multi-camp caregivers. Doesn\'t exist in current experience.',
+      },
+      {
+        label: 'Auto-login after reset',
+        text: 'Current flow dumps caregiver at a dead end after password change. Proposed flow auto-logs them in. Confirm Auth0 supports session creation after password reset.',
       },
     ],
   },
@@ -325,28 +488,27 @@ const flows: FlowSection[] = [
         label: 'Identifier-first entry',
         teamOwned: true,
         annotations: [
-          'Email entry',
-          'Auth0 lookup — detect pre-created account (no password set)',
-          'Route to claim/set-password screen',
+          'Input: Email address',
+          'Messaging: "Enter your email to get started"',
+          'Logic: Email lookup detects pre-created account → routes to set password',
         ],
       },
       {
         label: 'Set password',
         teamOwned: true,
         annotations: [
-          '"Your account is ready" messaging',
-          'Password + confirm fields only (no name — camp already provided it)',
-          'Password strength validation',
-          'Auth0 password set on submit',
+          'Inputs: Password, Confirm password',
+          'Messaging: "[Camp] has already set up your account for [email]. Create a password to activate it."',
+          'Validation: Password strength requirements',
         ],
       },
       {
-        label: 'Email verification',
+        label: 'Verification screen',
         teamOwned: true,
         annotations: [
-          '6-digit verification code entry',
-          'Verification email template',
-          'Code validation and resend logic',
+          'Input: 6-digit verification code',
+          'Messaging: "We\'ve sent a verification code to [email]"',
+          'Note: Email template is not in scope — just this screen',
         ],
       },
       {
@@ -361,6 +523,16 @@ const flows: FlowSection[] = [
         label: 'Portal / Dashboard',
         teamOwned: false,
         annotations: ['CampInTouch portal — managed by CIT team'],
+      },
+    ],
+    notes: [
+      {
+        label: 'Pre-created account detection',
+        text: 'Auth0 needs to detect that this email has a pre-created account with no password set and route to the "Set up your password" screen instead of signup or login.',
+      },
+      {
+        label: 'No name fields needed',
+        text: 'Camp already provided name and camper info when pre-creating the account. Caregiver only sets a password — simpler flow than new account.',
       },
     ],
   },
@@ -515,6 +687,18 @@ export const DesignKickoff: React.FC = () => {
                     {showScope && step.teamOwned && (
                       <span className="cm-kickoff__screen-badge cm-kickoff__screen-badge--inline">Your team</span>
                     )}
+                  </div>
+                ))}
+              </div>
+            )}
+            {/* Notes section */}
+            {flow.notes && flow.notes.length > 0 && (
+              <div className="cm-kickoff__notes">
+                <h3 className="cm-kickoff__notes-title">Notes & Open Questions</h3>
+                {flow.notes.map((note, i) => (
+                  <div key={i} className="cm-kickoff__note">
+                    <span className="cm-kickoff__note-label">{note.label}</span>
+                    <p className="cm-kickoff__note-text">{note.text}</p>
                   </div>
                 ))}
               </div>

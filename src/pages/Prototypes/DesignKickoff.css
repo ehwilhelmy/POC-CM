@@ -471,6 +471,49 @@
   text-align: left;
 }
 
+/* ── Notes section ── */
+.cm-kickoff__notes {
+  padding: var(--space-xl);
+  border-top: 1px solid var(--color-neutral-300);
+  background: var(--color-neutral-200);
+}
+
+.cm-kickoff__notes-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-neutral-800);
+  margin: 0 0 var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cm-kickoff__note {
+  padding: var(--space-md);
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-orange-600);
+  margin-bottom: var(--space-sm);
+}
+
+.cm-kickoff__note:last-child {
+  margin-bottom: 0;
+}
+
+.cm-kickoff__note-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-orange-800);
+  margin-bottom: var(--space-xs);
+}
+
+.cm-kickoff__note-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-dark-gray);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
 /* ── Back link ── */
 .cm-kickoff__back {
   display: block;

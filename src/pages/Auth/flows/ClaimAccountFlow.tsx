@@ -27,24 +27,22 @@ const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'create-password'
 const SCOPE_ANNOTATIONS: Record<Step, string[]> = {
   'camp-website': [],
   'email-entry': [
-    'Identifier-first login form',
-    'Auth0 lookup — detect pre-created account',
-    'Route to set-password screen',
+    'Input: Email address',
+    'Messaging: "Enter your email to get started"',
+    'Logic: Email lookup detects pre-created account → routes to set password',
   ],
   'create-password': [
-    '"Your account is ready" messaging',
-    'Password + confirm fields (no name needed)',
-    'Password strength validation',
-    'Auth0 password set',
+    'Inputs: Password, Confirm password',
+    'Messaging: "[Camp] has already set up your account for [email]. Create a password to activate it."',
+    'Validation: Password strength requirements',
   ],
   'verify-code': [
-    'Email verification code screen',
-    'Auth0 verification email template',
-    'Code validation and resend logic',
+    'Input: 6-digit verification code',
+    'Messaging: "We\'ve sent a verification code to [email]"',
+    'Note: Email template is not in scope — just this screen',
   ],
   'loading': [
-    'Auth0 token exchange after verification',
-    'Loading state and redirect',
+    'Auto sign-in after verification',
   ],
   'home': [],
 };
