@@ -127,7 +127,7 @@ const flows: FlowSection[] = [
         label: 'Camp homepage',
         src: current01,
         teamOwned: false,
-        annotations: ['Camp-owned page — not in scope'],
+        annotations: ['Team Phoenix — camp-owned page'],
       },
       {
         label: 'Prompted to login',
@@ -203,12 +203,6 @@ const flows: FlowSection[] = [
     ],
     proposedSteps: [
       {
-        label: 'Camp homepage',
-        src: newAcct01,
-        teamOwned: false,
-        annotations: ['Camp-managed website — not in scope'],
-      },
-      {
         label: 'Identifier-first entry',
         src: newAcct02,
         teamOwned: true,
@@ -255,7 +249,7 @@ const flows: FlowSection[] = [
         label: 'Portal / Dashboard',
         src: newAcct06,
         teamOwned: false,
-        annotations: ['CampInTouch portal — managed by CIT team'],
+        annotations: ['Team Phoenix — CampInTouch portal'],
       },
     ],
     notes: [
@@ -307,7 +301,7 @@ const flows: FlowSection[] = [
         label: 'Camp homepage',
         src: existing01,
         teamOwned: false,
-        annotations: ['Camp-owned page — not in scope'],
+        annotations: ['Team Phoenix — camp-owned page'],
       },
       {
         label: 'Prompted to login',
@@ -366,16 +360,10 @@ const flows: FlowSection[] = [
         label: 'Logged in',
         src: existing08,
         teamOwned: false,
-        annotations: ['Portal — not in scope'],
+        annotations: ['Team Phoenix — portal'],
       },
     ],
     proposedSteps: [
-      {
-        label: 'Camp homepage',
-        src: returning01,
-        teamOwned: false,
-        annotations: ['Camp-managed website — not in scope'],
-      },
       {
         label: 'Identifier-first entry',
         src: returning02,
@@ -408,7 +396,7 @@ const flows: FlowSection[] = [
         label: 'Portal / Dashboard',
         src: returning05,
         teamOwned: false,
-        annotations: ['CampInTouch portal — managed by CIT team'],
+        annotations: ['Team Phoenix — CampInTouch portal'],
       },
     ],
     notes: [
@@ -498,12 +486,6 @@ const flows: FlowSection[] = [
     ],
     proposedSteps: [
       {
-        label: 'Camp homepage',
-        src: forgotNew01,
-        teamOwned: false,
-        annotations: ['Camp-managed website — not in scope'],
-      },
-      {
         label: 'Identifier-first entry',
         src: forgotNew02,
         teamOwned: true,
@@ -574,7 +556,7 @@ const flows: FlowSection[] = [
         label: 'Portal / Dashboard',
         src: forgotNew09,
         teamOwned: false,
-        annotations: ['CampInTouch portal — managed by CIT team'],
+        annotations: ['Team Phoenix — CampInTouch portal'],
       },
     ],
     notes: [
@@ -620,12 +602,6 @@ const flows: FlowSection[] = [
     tags: ['Multi-Step Friction', 'Branding & Identity'],
     currentScreens: [],
     proposedSteps: [
-      {
-        label: 'Camp homepage',
-        src: claim01,
-        teamOwned: false,
-        annotations: ['Camp-managed website — not in scope'],
-      },
       {
         label: 'Identifier-first entry',
         src: claim02,
@@ -674,7 +650,7 @@ const flows: FlowSection[] = [
         label: 'Portal / Dashboard',
         src: claim06,
         teamOwned: false,
-        annotations: ['CampInTouch portal — managed by CIT team'],
+        annotations: ['Team Phoenix — CampInTouch portal'],
       },
     ],
     notes: [
@@ -718,7 +694,7 @@ export const DesignKickoff: React.FC = () => {
         <img src={logoSrc} alt="campminder" className="cm-kickoff__logo" />
         <h1 className="cm-kickoff__title">Design Kickoff</h1>
         <p className="cm-kickoff__subtitle">
-          Current vs. new design — toggle scope view to see what your team owns.
+          Current vs. new design — toggle scope view to see what Team Delta owns.
         </p>
       </div>
 
@@ -747,14 +723,14 @@ export const DesignKickoff: React.FC = () => {
           </button>
         </div>
 
-        {activeView !== 'diagram' && (
+        {activeView === 'proposed' && (
           <button
             className={clsx('cm-kickoff__scope-toggle', showScope && 'cm-kickoff__scope-toggle--active')}
             onClick={() => setShowScope(!showScope)}
             type="button"
           >
             {showScope ? <VisibilityIcon /> : <VisibilityOffIcon />}
-            {showScope ? 'Showing scope' : 'Show team scope'}
+            {showScope ? 'Showing scope' : 'Show Team Delta scope'}
           </button>
         )}
       </div>
@@ -763,11 +739,7 @@ export const DesignKickoff: React.FC = () => {
         <div className="cm-kickoff__legend">
           <span className="cm-kickoff__legend-item">
             <span className="cm-kickoff__legend-swatch cm-kickoff__legend-swatch--team" />
-            Your team
-          </span>
-          <span className="cm-kickoff__legend-item">
-            <span className="cm-kickoff__legend-swatch cm-kickoff__legend-swatch--other" />
-            Other team
+            Team Delta
           </span>
         </div>
       )}
@@ -779,11 +751,6 @@ export const DesignKickoff: React.FC = () => {
               <div>
                 <h2 className="cm-kickoff__flow-title">{flow.title}</h2>
                 <p className="cm-kickoff__flow-desc">{flow.description}</p>
-                <div className="cm-kickoff__flow-tags">
-                  {flow.tags.map((tag) => (
-                    <span key={tag} className="cm-kickoff__tag">{tag}</span>
-                  ))}
-                </div>
               </div>
               <button
                 className="cm-kickoff__try-btn"
@@ -815,7 +782,7 @@ export const DesignKickoff: React.FC = () => {
                       {i + 1}. {screen.label}
                     </span>
                     {showScope && screen.teamOwned && (
-                      <span className="cm-kickoff__screen-badge">Your team</span>
+                      <span className="cm-kickoff__screen-badge">Team Delta</span>
                     )}
                     {showScope && screen.annotations && screen.annotations.length > 0 && (
                       <ul className={clsx(
@@ -851,18 +818,31 @@ export const DesignKickoff: React.FC = () => {
                       showScope && step.teamOwned && 'cm-kickoff__screen--team-owned',
                     )}
                   >
-                    {step.src && (
+                    {step.src && showScope && step.teamOwned ? (
+                      <div className="cm-kickoff__screen-img-wrapper">
+                        <img
+                          src={step.src}
+                          alt={step.label}
+                          className="cm-kickoff__screen-img cm-kickoff__screen-img--grayscale"
+                        />
+                        <img
+                          src={step.src}
+                          alt=""
+                          className="cm-kickoff__screen-img cm-kickoff__screen-img--card-highlight"
+                        />
+                      </div>
+                    ) : step.src ? (
                       <img
                         src={step.src}
                         alt={step.label}
                         className="cm-kickoff__screen-img"
                       />
-                    )}
+                    ) : null}
                     <span className="cm-kickoff__screen-label">
                       {i + 1}. {step.label}
                     </span>
                     {showScope && step.teamOwned && (
-                      <span className="cm-kickoff__screen-badge">Your team</span>
+                      <span className="cm-kickoff__screen-badge">Team Delta</span>
                     )}
                     {showScope && step.annotations && step.annotations.length > 0 && (
                       <ul className={clsx(

@@ -87,7 +87,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
 
       {scopeActive && scopeAnnotations && scopeAnnotations.length > 0 && (
         <div className="cm-auth__scope-panel">
-          <span className="cm-auth__scope-panel-title">Your team will build:</span>
+          <span className="cm-auth__scope-panel-title">Team Delta will build:</span>
           <ul className="cm-auth__scope-panel-list">
             {scopeAnnotations.map((note, i) => (
               <li key={i} className="cm-auth__scope-panel-item">{note}</li>

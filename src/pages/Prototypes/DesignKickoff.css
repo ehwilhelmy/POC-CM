@@ -113,6 +113,22 @@
   gap: var(--space-sm);
   font-size: var(--font-size-sm);
   color: var(--color-medium-gray);
+  background: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  transition: border-color 0.15s ease, opacity 0.15s ease;
+}
+
+.cm-kickoff__legend-item:hover {
+  opacity: 0.8;
+}
+
+.cm-kickoff__legend-item--active {
+  border-color: var(--color-primary-default);
+  color: var(--color-dark-gray);
+  font-weight: var(--font-weight-semibold);
 }
 
 .cm-kickoff__legend-swatch {
@@ -268,10 +284,67 @@
   color: var(--color-neutral-500);
 }
 
-/* Scope: team owned — highlight ring */
-.cm-kickoff__screen--team-owned .cm-kickoff__screen-img {
+/* Scope: team owned — split view: grayscale bg + color card */
+.cm-kickoff__screen-img-wrapper {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.cm-kickoff__screen-img--grayscale {
+  filter: grayscale(1) opacity(0.4);
+}
+
+.cm-kickoff__screen-img--card-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: inset(27% 26% 10% 26% round 8px);
+  border: none;
+  filter: none;
+}
+
+/* Purple outline around the clipped card */
+.cm-kickoff__screen-img-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 27%;
+  left: 26%;
+  right: 26%;
+  bottom: 10%;
   border: 2px solid var(--color-primary-default);
+  border-radius: 8px;
   box-shadow: 0 0 0 3px var(--color-purple-200);
+  pointer-events: none;
+}
+
+/* Phoenix view — background in color, card grayed */
+.cm-kickoff__screen-img--bg-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 100%, 0% 100%,
+    0% 27%, 26% 27%, 26% 90%, 74% 90%, 74% 27%, 0% 27%
+  );
+  filter: none;
+}
+
+/* Phoenix outline — highlight the background area */
+.cm-kickoff__screen-img-wrapper--phoenix::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid var(--color-orange-600, #d97706);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 3px var(--color-orange-200, #fde68a);
 }
 
 .cm-kickoff__screen-badge {

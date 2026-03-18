@@ -35,7 +35,7 @@ const sections: HubCard[] = [
   {
     title: 'Design Kickoff',
     description:
-      'Current vs. new design side-by-side. Toggle to see scope — what your team owns highlighted, everything else in black & white.',
+      'Current vs. new design side-by-side. Toggle to see scope — what Team Delta owns highlighted, everything else in black & white.',
     icon: <RocketLaunchIcon />,
     route: '/prototypes/auth0/design-kickoff',
     actionLabel: 'View kickoff',

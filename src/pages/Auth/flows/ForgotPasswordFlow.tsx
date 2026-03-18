@@ -139,9 +139,7 @@ export const ForgotPasswordFlow: React.FC = () => {
             ? () => setStep('email-entry')
             : step === 'request'
               ? () => setStep('password-error')
-              : step === 'check-email'
-                ? () => setStep('request')
-                : undefined
+              : undefined
       }
     >
       {step === 'email-entry' && (
@@ -303,23 +301,20 @@ export const ForgotPasswordFlow: React.FC = () => {
               value={code}
               onChange={(e) => setCode(e.target.value)}
             />
-            {codeCopied ? (
-              <button
-                className="cm-auth-btn cm-auth-btn--primary"
-                disabled={!code.trim()}
-                onClick={() => setStep('new-password')}
-              >
-                Continue
-              </button>
-            ) : (
-              <button
-                className="cm-email-popup-trigger"
-                onClick={() => setEmailOpen(true)}
-              >
-                Check your email
-              </button>
-            )}
+            <button
+              className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!code.trim()}
+              onClick={() => setStep('new-password')}
+            >
+              Continue
+            </button>
           </div>
+
+          <p className="cm-auth-signup-prompt">
+            <button className="cm-auth-link" onClick={() => setEmailOpen(true)}>
+              Check your email
+            </button>
+          </p>
 
           <EmailPopup
             open={emailOpen}

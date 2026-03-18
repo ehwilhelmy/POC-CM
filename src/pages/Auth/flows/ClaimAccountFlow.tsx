@@ -119,9 +119,7 @@ export const ClaimAccountFlow: React.FC = () => {
       onBack={
         step === 'email-entry'
           ? () => setStep('camp-website')
-          : step === 'verify-code'
-            ? () => setStep('create-password')
-            : undefined
+          : undefined
       }
     >
       {step === 'email-entry' && (
@@ -221,23 +219,20 @@ export const ClaimAccountFlow: React.FC = () => {
               value={code}
               onChange={(e) => setCode(e.target.value)}
             />
-            {codeCopied ? (
-              <button
-                className="cm-auth-btn cm-auth-btn--primary"
-                disabled={!code.trim()}
-                onClick={() => setStep('loading')}
-              >
-                Verify &amp; Continue
-              </button>
-            ) : (
-              <button
-                className="cm-email-popup-trigger"
-                onClick={() => setEmailOpen(true)}
-              >
-                Check your email
-              </button>
-            )}
+            <button
+              className="cm-auth-btn cm-auth-btn--primary"
+              disabled={!code.trim()}
+              onClick={() => setStep('loading')}
+            >
+              Verify &amp; Continue
+            </button>
           </div>
+
+          <p className="cm-auth-signup-prompt">
+            <button className="cm-auth-link" onClick={() => setEmailOpen(true)}>
+              Check your email
+            </button>
+          </p>
 
           <EmailPopup
             open={emailOpen}
