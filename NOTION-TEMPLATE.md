@@ -1,114 +1,419 @@
-# Auth Flow Prototypes — Internal Review
+# Auth Flow Prototypes — Design Kickoff
 
-> We've built interactive prototypes addressing the top caregiver pain points after the Auth0 migration. Please review the flows below and leave your feedback — gut reactions, things that feel off, and anything that doesn't match what you're hearing from camps.
+> Screen-by-screen walkthrough of each new design flow. Each screen has editable copy — update labels, messaging, and annotations directly.
 
-**Live Prototype:** [link to GitHub Pages]
-**Figma File:** [link to Figma]
-
----
-
-## How to Review
-
-1. Watch the Loom walkthrough for each flow (~1–2 min each)
-2. Click through the live prototype yourself if you want to explore
-3. Leave feedback in the table at the bottom — or comment directly on this page
+**Live Prototype:** https://campminder-prototype.vercel.app
+**Design Kickoff:** https://campminder-prototype.vercel.app/#/prototypes/auth0/design-kickoff
 
 ---
 
-## Flow 1: New Caregiver Auth Flow
+## Flow: New Account
 
-| | |
-|---|---|
-| **Problem** | New caregivers get an invite from camp, click through to register, and hit an Auth0 login screen that looks nothing like their camp. They don't recognize it, don't trust it, and drop off — or call camp staff confused about where they ended up. |
-| **Proposed Journey** | Gets invite from camp → visits camp website → registers → creates account → gets verified → lands in portal. |
-| **Themes** | `Multi-Step Friction` `Branding & Identity` |
-| **Loom** | [link] |
-| **Figma** | [link to Figma frame] |
-| **Prototype** | [link to flow] |
+**Prototype:** https://campminder-prototype.vercel.app/#/auth/new-parent
 
----
+### 1. Camp Homepage
 
-## Flow 2: Returning Caregiver Auth Flow
+![](screenshots/new-account-step-01.png)
 
-| | |
-|---|---|
-| **Problem** | Caregivers who logged in last summer come back and the login page looks completely different. They're not sure they're in the right place, can't tell if they already have an account, and the generic Auth0 branding gives them no confidence they're logging into their camp. |
-| **Proposed Journey** | Returns to camp site → enters email* → enters password → lands in portal. |
-| **Themes** | `Branding & Identity` `Account Status Confusion` |
-| **Loom** | [link] |
-| **Figma** | [link to Figma frame] |
-| **Prototype** | [link to flow] |
-
-> *\* This flow does not directly propose the forgot password and potential for new system in place.*
+| Type | Copy |
+|------|------|
+| Screen | Camp homepage (not in scope) |
+| Owner | Camp |
 
 ---
 
-## Flow 3: Forgot Password Flow
+### 2. Welcome Screen
 
-| | |
-|---|---|
-| **Problem** | Caregivers don't remember their password — or never set one after migration. They don't know if they even have an account, the reset emails look unfamiliar, and the multi-step process loses people along the way. |
-| **Proposed Journey** | Can't remember password → requests reset → receives branded email → enters code → sets new password → back to login. |
-| **Themes** | `Multi-Step Friction` `Account Status Confusion` |
-| **Loom** | [link] |
-| **Figma** | [link to Figma frame] |
-| **Prototype** | [link to flow] |
+![](screenshots/new-account-step-02.png)
 
----
-
-## Flow 4: Guest Account Flow
-
-| | |
-|---|---|
-| **Problem** | Grandparents and co-caregivers receive a guest invite email but have no idea what campminder is. The messaging doesn't explain what they're signing up for, what access they'll have, or why they need yet another account. Many ignore the email entirely. |
-| **Proposed Journey** | Primary caregiver invites a guest from their dashboard → guest receives email with personal note → creates account → lands in limited portal. |
-| **Themes** | `Broken Messages` `Multi-Step Friction` |
-| **Loom** | [link] |
-| **Figma** | [link to Figma frame] |
-| **Prototype** | [link to flow] |
+| Type | Copy |
+|------|------|
+| Title | Welcome |
+| Subtext | Enter your email to get started. |
+| Input label | Email address * |
+| Placeholder | yourname@email.com |
+| Button | Continue |
+| Owner | Your team |
 
 ---
 
-## Flow 5: Campanion Branding Login Confusion
+### 3. Create Account
 
-| | |
-|---|---|
-| **Problem** | Caregivers open the Campanion mobile app and see a generic Auth0 screen with no Campanion branding. They don't understand that one login covers all their camps, and the disconnect between the app and the login page creates confusion. |
-| **Proposed Journey** | Caregiver opens the Campanion mobile app → logs in → one login, all their camps — Campanion branding gives multi-camp context. |
-| **Themes** | `Branding & Identity` |
-| **Loom** | [link] |
-| **Figma** | [link to Figma frame] |
-| **Prototype** | [link to flow] |
+![](screenshots/new-account-step-03.png)
 
----
-
-## Reference Screens
-
-These are supporting screens included in the prototype for context:
-
-| Screen | Description | Link |
-|--------|-------------|------|
-| Branded Emails | Verification, password reset, invitation, and guest invite emails in a Gmail inbox mockup | [link] |
-| Account Lookup | Camp staff tool to search caregiver email and see account status | [link] |
-| Expired Link | What caregivers see when a verification or reset link has expired | [link] |
+| Type | Copy |
+|------|------|
+| Title | Create your [Camp Name] account |
+| Notice | We didn't find an account for [email]. Fill in the details below to get started with [Camp Name]. |
+| Input label | First name |
+| Input label | Last name |
+| Input label | Email |
+| Input label | Password |
+| Placeholder | Create a password |
+| Input label | Confirm password |
+| Placeholder | Re-enter your password |
+| Button | Create Account |
+| Link | Try another email |
+| Owner | Your team |
 
 ---
 
-## Feedback
+### 4. Verify Email
 
-Please add your name, which flow(s) you reviewed, and your thoughts:
+![](screenshots/new-account-step-04.png)
 
-| Name | Flow(s) | What feels right | What feels off | Questions / Ideas |
-|------|---------|-----------------|----------------|-------------------|
-| | | | | |
-| | | | | |
-| | | | | |
-| | | | | |
+| Type | Copy |
+|------|------|
+| Title | Verify your email |
+| Subtext | We've sent a verification code to: [email] |
+| Input label | Enter the 6-digit code * |
+| Placeholder | 000000 |
+| Button | Verify & Continue |
+| Button (alt) | Check your email |
+| Link | Didn't receive a code? Resend |
+| Owner | Your team |
 
-### Key questions we'd love input on:
+---
 
-1. **Branding** — Does the camp-branded login feel trustworthy? Would this reduce the "where am I?" calls from caregivers?
-2. **Guest flow** — Does the personal note from the primary caregiver make the guest invite feel less like spam?
-3. **Forgot password** — Is the branded email preview (showing what to look for in your inbox) helpful or overkill?
-4. **Campanion** — Does Campanion-branded login make the multi-camp experience clearer?
-5. **Anything missing?** — Are there scenarios or edge cases we're not covering that camps are asking about?
+### 5. Auto Sign-in
+
+![](screenshots/new-account-step-05.png)
+
+| Type | Copy |
+|------|------|
+| Subtext | Setting up your account... |
+| Owner | Your team |
+
+---
+
+### 6. Portal / Dashboard
+
+![](screenshots/new-account-step-06.png)
+
+| Type | Copy |
+|------|------|
+| Screen | CampInTouch portal (not in scope) |
+| Owner | CIT team |
+
+---
+
+### Notes — New Account
+
+- **Dynamic messaging:** Camp name and email are injected dynamically (e.g., "Create your Camp Tall Pines account", "We didn't find an account for erica@gmail.com"). Need to confirm how Auth0 templates handle this.
+- **Password strength:** Validation already exists in Auth0. Team may only need to restyle the existing Auth0 screen rather than rebuild. Assess: configure Auth0 Universal Login vs. custom screen?
+- **Email templates not in scope:** Verification email templates are not in scope for this phase. The Auth0 screens that reference emails (code entry, messaging) are in scope — just not the emails themselves.
+
+---
+---
+
+## Flow: Returning Login
+
+**Prototype:** https://campminder-prototype.vercel.app/#/auth/returning-parent
+
+### 1. Camp Homepage
+
+![](screenshots/returning-step-01.png)
+
+| Type | Copy |
+|------|------|
+| Screen | Camp homepage (not in scope) |
+| Owner | Camp |
+
+---
+
+### 2. Welcome Screen
+
+![](screenshots/returning-step-02.png)
+
+| Type | Copy |
+|------|------|
+| Title | Welcome |
+| Subtext | Enter your email to get started. |
+| Input label | Email address * |
+| Placeholder | yourname@email.com |
+| Button | Continue |
+| Owner | Your team |
+
+---
+
+### 3. Password Entry
+
+![](screenshots/returning-step-03.png)
+
+| Type | Copy |
+|------|------|
+| Title | Welcome back, [name] |
+| Subtext | Enter password for [email] |
+| Input label | Password |
+| Placeholder | Enter your password |
+| Button | Continue |
+| Link | Forgot password? |
+| Owner | Your team |
+
+---
+
+### 4. Auto Sign-in
+
+![](screenshots/returning-step-04.png)
+
+| Type | Copy |
+|------|------|
+| Subtext | Signing you in... |
+| Owner | Your team |
+
+---
+
+### 5. Portal / Dashboard
+
+![](screenshots/returning-step-05.png)
+
+| Type | Copy |
+|------|------|
+| Screen | CampInTouch portal (not in scope) |
+| Owner | CIT team |
+
+---
+
+### Notes — Returning Login
+
+- **Identifier-first routing:** The email lookup determines if the account exists and routes to password. Same entry point as all flows — branching logic is the key piece.
+- **Personalized greeting:** "Welcome back, [name]" requires the email lookup to return the user's first name. Confirm Auth0 API returns this on identifier check.
+
+---
+---
+
+## Flow: Forgot Password
+
+**Prototype:** https://campminder-prototype.vercel.app/#/auth/forgot-password
+
+### 1. Camp Homepage
+
+![](screenshots/forgot-password-step-01.png)
+
+| Type | Copy |
+|------|------|
+| Screen | Camp homepage (not in scope) |
+| Owner | Camp |
+
+---
+
+### 2. Welcome Screen
+
+![](screenshots/forgot-password-step-02.png)
+
+| Type | Copy |
+|------|------|
+| Title | Welcome |
+| Subtext | Enter your email to get started. |
+| Input label | Email address * |
+| Placeholder | yourname@email.com |
+| Button | Continue |
+| Owner | Your team |
+
+---
+
+### 3. Password Entry
+
+![](screenshots/forgot-password-step-03.png)
+
+| Type | Copy |
+|------|------|
+| Title | Welcome back, [name] |
+| Subtext | Enter password for [email] |
+| Input label | Password |
+| Placeholder | Enter your password |
+| Button | Continue |
+| Link | Forgot password? |
+| Owner | Your team |
+
+---
+
+### 4. Password Error
+
+![](screenshots/forgot-password-step-04.png)
+
+| Type | Copy |
+|------|------|
+| Title | Welcome back, [name] |
+| Subtext | Enter password for [email] |
+| Input label | Password |
+| Error | The email or password for this account is incorrect |
+| Button | Continue |
+| Link | Forgot password? |
+| Owner | Your team |
+
+---
+
+### 5. Reset Request
+
+![](screenshots/forgot-password-step-05.png)
+
+| Type | Copy |
+|------|------|
+| Title | Reset your password |
+| Subtext | Enter your email address and we'll send you a code to create a new password. |
+| Input label | Email address * |
+| Placeholder | yourname@email.com |
+| Button | Continue |
+| Owner | Your team |
+
+---
+
+### 6. Check Email / Enter Code
+
+![](screenshots/forgot-password-step-06.png)
+
+| Type | Copy |
+|------|------|
+| Title | Check your email |
+| Subtext | We sent a 6-digit code to [email] |
+| Input label | Enter the 6-digit code * |
+| Placeholder | 000000 |
+| Button | Continue |
+| Button (alt) | Check your email |
+| Link | Didn't receive a code? Resend |
+| Owner | Your team |
+
+---
+
+### 7. Create New Password
+
+![](screenshots/forgot-password-step-07.png)
+
+| Type | Copy |
+|------|------|
+| Title | Create new password |
+| Banner | Resetting your password will update it for all camps connected to your account. Learn more |
+| Input label | New password |
+| Placeholder | Enter new password |
+| Input label | Confirm new password |
+| Placeholder | Re-enter your new password |
+| Button | Update Password |
+| Owner | Your team |
+
+---
+
+### 8. Success
+
+![](screenshots/forgot-password-step-08.png)
+
+| Type | Copy |
+|------|------|
+| Title | Password Changed! |
+| Subtext | Your new password is set. Use it to sign in to any camp connected to your account. |
+| Button | Go to My Account |
+| Owner | Your team |
+
+---
+
+### 9. Portal / Dashboard
+
+![](screenshots/forgot-password-step-09.png)
+
+| Type | Copy |
+|------|------|
+| Screen | CampInTouch portal (not in scope) |
+| Owner | CIT team |
+
+---
+
+### Notes — Forgot Password
+
+- **Email templates not in scope:** Reset email templates are not in scope for this phase. Auth0 screens that reference emails are in scope — just not the emails themselves.
+- **Multi-camp messaging:** "Resetting your password will update it for all camps connected to your account" — lives on the Create new password screen. Important for multi-camp caregivers. Doesn't exist in current experience.
+- **Auto-login after reset:** Current flow dumps caregiver at a dead end after password change. New design auto-logs them in. Confirm Auth0 supports session creation after password reset.
+
+---
+---
+
+## Flow: Claim Account
+
+**Prototype:** https://campminder-prototype.vercel.app/#/auth/claim-account
+
+### 1. Camp Homepage
+
+![](screenshots/claim-account-step-01.png)
+
+| Type | Copy |
+|------|------|
+| Screen | Camp homepage (not in scope) |
+| Owner | Camp |
+
+---
+
+### 2. Welcome Screen
+
+![](screenshots/claim-account-step-02.png)
+
+| Type | Copy |
+|------|------|
+| Title | Welcome |
+| Subtext | Enter your email to get started. |
+| Input label | Email address * |
+| Placeholder | yourname@email.com |
+| Button | Continue |
+| Owner | Your team |
+
+---
+
+### 3. Set Password
+
+![](screenshots/claim-account-step-03.png)
+
+| Type | Copy |
+|------|------|
+| Title | Set up your password |
+| Notice | Great news! [Camp Name] has already set up your account for [email]. Create a password to activate it. |
+| Input label | Password |
+| Placeholder | Create a password |
+| Input label | Confirm password |
+| Placeholder | Re-enter your password |
+| Button | Set Password |
+| Link | Try another email |
+| Owner | Your team |
+
+---
+
+### 4. Verify Email
+
+![](screenshots/claim-account-step-04.png)
+
+| Type | Copy |
+|------|------|
+| Title | Verify your email |
+| Subtext | We've sent a verification code to: [email] |
+| Input label | Enter the 6-digit code * |
+| Placeholder | 000000 |
+| Button | Verify & Continue |
+| Button (alt) | Check your email |
+| Link | Didn't receive a code? Resend |
+| Owner | Your team |
+
+---
+
+### 5. Auto Sign-in
+
+![](screenshots/claim-account-step-05.png)
+
+| Type | Copy |
+|------|------|
+| Subtext | Activating your account... |
+| Owner | Your team |
+
+---
+
+### 6. Portal / Dashboard
+
+![](screenshots/claim-account-step-06.png)
+
+| Type | Copy |
+|------|------|
+| Screen | CampInTouch portal (not in scope) |
+| Owner | CIT team |
+
+---
+
+### Notes — Claim Account
+
+- **Pre-created account detection:** Auth0 needs to detect that this email has a pre-created account with no password set and route to the "Set up your password" screen instead of signup or login.
+- **No name fields needed:** Camp already provided name and camper info when pre-creating the account. Caregiver only sets a password — simpler flow than new account.

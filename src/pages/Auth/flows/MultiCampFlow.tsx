@@ -107,7 +107,7 @@ export const MultiCampFlow: React.FC = () => {
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
             <span>
-              <strong>Proposed:</strong> One account, multiple camp associations.
+              <strong>New design:</strong> One account, multiple camp associations.
               The parent picks which camp context to enter after signing in.
             </span>
           </div>
@@ -160,7 +160,7 @@ export const MultiCampFlow: React.FC = () => {
               className="cm-auth-btn cm-auth-btn--primary"
               onClick={() => setStep('camp-picker')}
             >
-              Switch Camp (proposed)
+              Switch Camp (new design)
             </button>
           </div>
         </>

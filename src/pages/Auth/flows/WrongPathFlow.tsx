@@ -205,7 +205,7 @@ export const WrongPathFlow: React.FC = () => {
           </p>
           <div className="cm-auth-info-banner" style={{ textAlign: 'left' }}>
             <span>
-              <strong>Proposed fix:</strong> Email-first entry point. System checks
+              <strong>New design:</strong> Email-first entry point. System checks
               if account exists and routes to the correct flow. Parent never has to
               guess between login and signup.
             </span>

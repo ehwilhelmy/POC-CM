@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Auth Flow Prototypes — Design Kickoff</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 40px; max-width: 1200px; margin: 0 auto; color: #1a1a1a; }
+  h1 { font-size: 28px; margin-bottom: 8px; }
+  .subtitle { color: #666; margin-bottom: 32px; font-size: 15px; }
+  h2 { font-size: 22px; margin-top: 48px; margin-bottom: 4px; padding-bottom: 8px; border-bottom: 2px solid #e0e0e0; }
+  .flow-link { color: #666; font-size: 13px; margin-bottom: 24px; display: block; }
+  .flow-link a { color: #5046e5; }
+  h3 { font-size: 16px; margin-top: 32px; margin-bottom: 12px; color: #333; }
+  .screen-row { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 32px; border-bottom: 1px solid #f0f0f0; padding-bottom: 24px; }
+  .screen-row img { width: 420px; border-radius: 8px; border: 1px solid #e0e0e0; flex-shrink: 0; }
+  .screen-row .copy-table { flex: 1; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th { text-align: left; padding: 6px 10px; background: #f5f5f5; border: 1px solid #e0e0e0; font-weight: 600; }
+  td { padding: 6px 10px; border: 1px solid #e0e0e0; vertical-align: top; }
+  td:first-child { white-space: nowrap; color: #666; width: 120px; }
+  .notes { background: #fafafa; border-radius: 8px; padding: 16px 20px; margin-top: 16px; margin-bottom: 24px; }
+  .notes h4 { font-size: 14px; margin-bottom: 8px; }
+  .notes ul { padding-left: 20px; font-size: 13px; color: #555; }
+  .notes li { margin-bottom: 4px; }
+  hr { border: none; border-top: 3px solid #e0e0e0; margin: 48px 0; }
+</style>
+</head>
+<body>
+
+<h1>Auth Flow Prototypes — Design Kickoff</h1>
+<p class="subtitle">Screen-by-screen walkthrough of each new design flow. Each screen has editable copy — update labels, messaging, and annotations directly.</p>
+<p class="subtitle"><strong>Live Prototype:</strong> https://campminder-prototype.vercel.app &nbsp;|&nbsp; <strong>Design Kickoff:</strong> https://campminder-prototype.vercel.app/#/prototypes/auth0/design-kickoff</p>
+
+<hr>
+
+<!-- ============ NEW ACCOUNT ============ -->
+<h2>Flow: New Account</h2>
+<span class="flow-link">Prototype: <a href="https://campminder-prototype.vercel.app/#/auth/new-parent">https://campminder-prototype.vercel.app/#/auth/new-parent</a></span>
+
+<h3>1. Camp Homepage</h3>
+<div class="screen-row">
+  <img src="new-account-step-01.png" alt="New Account Step 1">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Screen</td><td>Camp homepage (not in scope)</td></tr>
+      <tr><td>Owner</td><td>Camp</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>2. Welcome Screen</h3>
+<div class="screen-row">
+  <img src="new-account-step-02.png" alt="New Account Step 2">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Welcome</td></tr>
+      <tr><td>Subtext</td><td>Enter your email to get started.</td></tr>
+      <tr><td>Input label</td><td>Email address *</td></tr>
+      <tr><td>Placeholder</td><td>yourname@email.com</td></tr>
+      <tr><td>Button</td><td>Continue</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>3. Create Account</h3>
+<div class="screen-row">
+  <img src="new-account-step-03.png" alt="New Account Step 3">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Create your [Camp Name] account</td></tr>
+      <tr><td>Notice</td><td>We didn't find an account for [email]. Fill in the details below to get started with [Camp Name].</td></tr>
+      <tr><td>Input label</td><td>First name</td></tr>
+      <tr><td>Input label</td><td>Last name</td></tr>
+      <tr><td>Input label</td><td>Email</td></tr>
+      <tr><td>Input label</td><td>Password</td></tr>
+      <tr><td>Placeholder</td><td>Create a password</td></tr>
+      <tr><td>Input label</td><td>Confirm password</td></tr>
+      <tr><td>Placeholder</td><td>Re-enter your password</td></tr>
+      <tr><td>Button</td><td>Create Account</td></tr>
+      <tr><td>Link</td><td>Try another email</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>4. Verify Email</h3>
+<div class="screen-row">
+  <img src="new-account-step-04.png" alt="New Account Step 4">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Verify your email</td></tr>
+      <tr><td>Subtext</td><td>We've sent a verification code to: [email]</td></tr>
+      <tr><td>Input label</td><td>Enter the 6-digit code *</td></tr>
+      <tr><td>Placeholder</td><td>000000</td></tr>
+      <tr><td>Button</td><td>Verify & Continue</td></tr>
+      <tr><td>Button (alt)</td><td>Check your email</td></tr>
+      <tr><td>Link</td><td>Didn't receive a code? Resend</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>5. Auto Sign-in</h3>
+<div class="screen-row">
+  <img src="new-account-step-05.png" alt="New Account Step 5">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Subtext</td><td>Setting up your account...</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>6. Portal / Dashboard</h3>
+<div class="screen-row">
+  <img src="new-account-step-06.png" alt="New Account Step 6">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Screen</td><td>CampInTouch portal (not in scope)</td></tr>
+      <tr><td>Owner</td><td>CIT team</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="notes">
+  <h4>Notes — New Account</h4>
+  <ul>
+    <li><strong>Dynamic messaging:</strong> Camp name and email are injected dynamically (e.g., "Create your Camp Tall Pines account", "We didn't find an account for erica@gmail.com"). Need to confirm how Auth0 templates handle this.</li>
+    <li><strong>Password strength:</strong> Validation already exists in Auth0. Team may only need to restyle the existing Auth0 screen rather than rebuild. Assess: configure Auth0 Universal Login vs. custom screen?</li>
+    <li><strong>Email templates not in scope:</strong> Verification email templates are not in scope for this phase. The Auth0 screens that reference emails (code entry, messaging) are in scope — just not the emails themselves.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ============ RETURNING LOGIN ============ -->
+<h2>Flow: Returning Login</h2>
+<span class="flow-link">Prototype: <a href="https://campminder-prototype.vercel.app/#/auth/returning-parent">https://campminder-prototype.vercel.app/#/auth/returning-parent</a></span>
+
+<h3>1. Camp Homepage</h3>
+<div class="screen-row">
+  <img src="returning-step-01.png" alt="Returning Step 1">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Screen</td><td>Camp homepage (not in scope)</td></tr>
+      <tr><td>Owner</td><td>Camp</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>2. Welcome Screen</h3>
+<div class="screen-row">
+  <img src="returning-step-02.png" alt="Returning Step 2">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Welcome</td></tr>
+      <tr><td>Subtext</td><td>Enter your email to get started.</td></tr>
+      <tr><td>Input label</td><td>Email address *</td></tr>
+      <tr><td>Placeholder</td><td>yourname@email.com</td></tr>
+      <tr><td>Button</td><td>Continue</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>3. Password Entry</h3>
+<div class="screen-row">
+  <img src="returning-step-03.png" alt="Returning Step 3">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Welcome back, [name]</td></tr>
+      <tr><td>Subtext</td><td>Enter password for [email]</td></tr>
+      <tr><td>Input label</td><td>Password</td></tr>
+      <tr><td>Placeholder</td><td>Enter your password</td></tr>
+      <tr><td>Button</td><td>Continue</td></tr>
+      <tr><td>Link</td><td>Forgot password?</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>4. Auto Sign-in</h3>
+<div class="screen-row">
+  <img src="returning-step-04.png" alt="Returning Step 4">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Subtext</td><td>Signing you in...</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>5. Portal / Dashboard</h3>
+<div class="screen-row">
+  <img src="returning-step-05.png" alt="Returning Step 5">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Screen</td><td>CampInTouch portal (not in scope)</td></tr>
+      <tr><td>Owner</td><td>CIT team</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="notes">
+  <h4>Notes — Returning Login</h4>
+  <ul>
+    <li><strong>Identifier-first routing:</strong> The email lookup determines if the account exists and routes to password. Same entry point as all flows — branching logic is the key piece.</li>
+    <li><strong>Personalized greeting:</strong> "Welcome back, [name]" requires the email lookup to return the user's first name. Confirm Auth0 API returns this on identifier check.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ============ FORGOT PASSWORD ============ -->
+<h2>Flow: Forgot Password</h2>
+<span class="flow-link">Prototype: <a href="https://campminder-prototype.vercel.app/#/auth/forgot-password">https://campminder-prototype.vercel.app/#/auth/forgot-password</a></span>
+
+<h3>1. Camp Homepage</h3>
+<div class="screen-row">
+  <img src="forgot-password-step-01.png" alt="Forgot Password Step 1">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Screen</td><td>Camp homepage (not in scope)</td></tr>
+      <tr><td>Owner</td><td>Camp</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>2. Welcome Screen</h3>
+<div class="screen-row">
+  <img src="forgot-password-step-02.png" alt="Forgot Password Step 2">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Welcome</td></tr>
+      <tr><td>Subtext</td><td>Enter your email to get started.</td></tr>
+      <tr><td>Input label</td><td>Email address *</td></tr>
+      <tr><td>Placeholder</td><td>yourname@email.com</td></tr>
+      <tr><td>Button</td><td>Continue</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>3. Password Entry</h3>
+<div class="screen-row">
+  <img src="forgot-password-step-03.png" alt="Forgot Password Step 3">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Welcome back, [name]</td></tr>
+      <tr><td>Subtext</td><td>Enter password for [email]</td></tr>
+      <tr><td>Input label</td><td>Password</td></tr>
+      <tr><td>Placeholder</td><td>Enter your password</td></tr>
+      <tr><td>Button</td><td>Continue</td></tr>
+      <tr><td>Link</td><td>Forgot password?</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>4. Password Error</h3>
+<div class="screen-row">
+  <img src="forgot-password-step-04.png" alt="Forgot Password Step 4">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Welcome back, [name]</td></tr>
+      <tr><td>Subtext</td><td>Enter password for [email]</td></tr>
+      <tr><td>Input label</td><td>Password</td></tr>
+      <tr><td>Error</td><td>The email or password for this account is incorrect</td></tr>
+      <tr><td>Button</td><td>Continue</td></tr>
+      <tr><td>Link</td><td>Forgot password?</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>5. Reset Request</h3>
+<div class="screen-row">
+  <img src="forgot-password-step-05.png" alt="Forgot Password Step 5">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Reset your password</td></tr>
+      <tr><td>Subtext</td><td>Enter your email address and we'll send you a code to create a new password.</td></tr>
+      <tr><td>Input label</td><td>Email address *</td></tr>
+      <tr><td>Placeholder</td><td>yourname@email.com</td></tr>
+      <tr><td>Button</td><td>Continue</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>6. Check Email / Enter Code</h3>
+<div class="screen-row">
+  <img src="forgot-password-step-06.png" alt="Forgot Password Step 6">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Check your email</td></tr>
+      <tr><td>Subtext</td><td>We sent a 6-digit code to [email]</td></tr>
+      <tr><td>Input label</td><td>Enter the 6-digit code *</td></tr>
+      <tr><td>Placeholder</td><td>000000</td></tr>
+      <tr><td>Button</td><td>Continue</td></tr>
+      <tr><td>Button (alt)</td><td>Check your email</td></tr>
+      <tr><td>Link</td><td>Didn't receive a code? Resend</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>7. Create New Password</h3>
+<div class="screen-row">
+  <img src="forgot-password-step-07.png" alt="Forgot Password Step 7">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Create new password</td></tr>
+      <tr><td>Banner</td><td>Resetting your password will update it for all camps connected to your account. Learn more</td></tr>
+      <tr><td>Input label</td><td>New password</td></tr>
+      <tr><td>Placeholder</td><td>Enter new password</td></tr>
+      <tr><td>Input label</td><td>Confirm new password</td></tr>
+      <tr><td>Placeholder</td><td>Re-enter your new password</td></tr>
+      <tr><td>Button</td><td>Update Password</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>8. Success</h3>
+<div class="screen-row">
+  <img src="forgot-password-step-08.png" alt="Forgot Password Step 8">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Password Changed!</td></tr>
+      <tr><td>Subtext</td><td>Your new password is set. Use it to sign in to any camp connected to your account.</td></tr>
+      <tr><td>Button</td><td>Go to My Account</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>9. Portal / Dashboard</h3>
+<div class="screen-row">
+  <img src="forgot-password-step-09.png" alt="Forgot Password Step 9">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Screen</td><td>CampInTouch portal (not in scope)</td></tr>
+      <tr><td>Owner</td><td>CIT team</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="notes">
+  <h4>Notes — Forgot Password</h4>
+  <ul>
+    <li><strong>Email templates not in scope:</strong> Reset email templates are not in scope for this phase. Auth0 screens that reference emails are in scope — just not the emails themselves.</li>
+    <li><strong>Multi-camp messaging:</strong> "Resetting your password will update it for all camps connected to your account" — lives on the Create new password screen. Important for multi-camp caregivers. Doesn't exist in current experience.</li>
+    <li><strong>Auto-login after reset:</strong> Current flow dumps caregiver at a dead end after password change. New design auto-logs them in. Confirm Auth0 supports session creation after password reset.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ============ CLAIM ACCOUNT ============ -->
+<h2>Flow: Claim Account</h2>
+<span class="flow-link">Prototype: <a href="https://campminder-prototype.vercel.app/#/auth/claim-account">https://campminder-prototype.vercel.app/#/auth/claim-account</a></span>
+
+<h3>1. Camp Homepage</h3>
+<div class="screen-row">
+  <img src="claim-account-step-01.png" alt="Claim Account Step 1">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Screen</td><td>Camp homepage (not in scope)</td></tr>
+      <tr><td>Owner</td><td>Camp</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>2. Welcome Screen</h3>
+<div class="screen-row">
+  <img src="claim-account-step-02.png" alt="Claim Account Step 2">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Welcome</td></tr>
+      <tr><td>Subtext</td><td>Enter your email to get started.</td></tr>
+      <tr><td>Input label</td><td>Email address *</td></tr>
+      <tr><td>Placeholder</td><td>yourname@email.com</td></tr>
+      <tr><td>Button</td><td>Continue</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>3. Set Password</h3>
+<div class="screen-row">
+  <img src="claim-account-step-03.png" alt="Claim Account Step 3">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Set up your password</td></tr>
+      <tr><td>Notice</td><td>Great news! [Camp Name] has already set up your account for [email]. Create a password to activate it.</td></tr>
+      <tr><td>Input label</td><td>Password</td></tr>
+      <tr><td>Placeholder</td><td>Create a password</td></tr>
+      <tr><td>Input label</td><td>Confirm password</td></tr>
+      <tr><td>Placeholder</td><td>Re-enter your password</td></tr>
+      <tr><td>Button</td><td>Set Password</td></tr>
+      <tr><td>Link</td><td>Try another email</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>4. Verify Email</h3>
+<div class="screen-row">
+  <img src="claim-account-step-04.png" alt="Claim Account Step 4">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Title</td><td>Verify your email</td></tr>
+      <tr><td>Subtext</td><td>We've sent a verification code to: [email]</td></tr>
+      <tr><td>Input label</td><td>Enter the 6-digit code *</td></tr>
+      <tr><td>Placeholder</td><td>000000</td></tr>
+      <tr><td>Button</td><td>Verify & Continue</td></tr>
+      <tr><td>Button (alt)</td><td>Check your email</td></tr>
+      <tr><td>Link</td><td>Didn't receive a code? Resend</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>5. Auto Sign-in</h3>
+<div class="screen-row">
+  <img src="claim-account-step-05.png" alt="Claim Account Step 5">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Subtext</td><td>Activating your account...</td></tr>
+      <tr><td>Owner</td><td>Your team</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>6. Portal / Dashboard</h3>
+<div class="screen-row">
+  <img src="claim-account-step-06.png" alt="Claim Account Step 6">
+  <div class="copy-table">
+    <table>
+      <tr><th>Type</th><th>Copy</th></tr>
+      <tr><td>Screen</td><td>CampInTouch portal (not in scope)</td></tr>
+      <tr><td>Owner</td><td>CIT team</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="notes">
+  <h4>Notes — Claim Account</h4>
+  <ul>
+    <li><strong>Pre-created account detection:</strong> Auth0 needs to detect that this email has a pre-created account with no password set and route to the "Set up your password" screen instead of signup or login.</li>
+    <li><strong>No name fields needed:</strong> Camp already provided name and camper info when pre-creating the account. Caregiver only sets a password — simpler flow than new account.</li>
+  </ul>
+</div>
+
+</body>
+</html>

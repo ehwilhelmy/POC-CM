@@ -54,6 +54,17 @@ interface FlowNote {
   text: string;
 }
 
+interface DiagramStep {
+  label: string;
+  highlight?: boolean;
+  problem?: string;
+}
+
+interface FlowDiagram {
+  before: DiagramStep[];
+  after: DiagramStep[];
+}
+
 interface FlowSection {
   id: string;
   title: string;
@@ -63,6 +74,7 @@ interface FlowSection {
   proposedSteps: ProposedStep[];
   tags: string[];
   notes?: FlowNote[];
+  diagram?: FlowDiagram;
 }
 
 const flows: FlowSection[] = [
@@ -212,6 +224,28 @@ const flows: FlowSection[] = [
         text: 'Verification/reset email templates are not in scope for this phase. The Auth0 screens that reference emails (code entry, messaging) are in scope — just not the emails themselves.',
       },
     ],
+    diagram: {
+      before: [
+        { label: 'Camp website' },
+        { label: 'Auth0 login page', problem: 'Login + Signup shown together' },
+        { label: 'Click "Sign Up"', problem: 'Caregiver guesses which button' },
+        { label: 'Create account form' },
+        { label: 'Verify identity screen' },
+        { label: 'Verification email', problem: 'Unbranded, confusing sender' },
+        { label: 'Create account details' },
+        { label: 'Login again', problem: 'Re-enter credentials after signup' },
+        { label: 'Portal' },
+      ],
+      after: [
+        { label: 'Camp website' },
+        { label: 'Enter email', highlight: true },
+        { label: '"No account found"', highlight: true },
+        { label: 'Create account form', highlight: true },
+        { label: 'Verify code', highlight: true },
+        { label: 'Auto sign-in', highlight: true },
+        { label: 'Portal' },
+      ],
+    },
   },
   {
     id: 'returning-login',
@@ -334,6 +368,25 @@ const flows: FlowSection[] = [
         text: '"Welcome back, [name]" — requires the email lookup to return the user\'s first name. Confirm Auth0 API returns this on identifier check.',
       },
     ],
+    diagram: {
+      before: [
+        { label: 'Camp website' },
+        { label: 'Auth0 login page', problem: 'Login + Signup shown together' },
+        { label: 'Try to create account', problem: 'Doesn\'t know if they have one' },
+        { label: 'Fill out signup form' },
+        { label: '"Account exists"', problem: 'Surprise mid-flow' },
+        { label: 'Try password / forgot?', problem: 'Confused, stuck' },
+        { label: 'Portal' },
+      ],
+      after: [
+        { label: 'Camp website' },
+        { label: 'Enter email', highlight: true },
+        { label: '"Welcome back, [name]"', highlight: true },
+        { label: 'Enter password', highlight: true },
+        { label: 'Auto sign-in', highlight: true },
+        { label: 'Portal' },
+      ],
+    },
   },
   {
     id: 'forgot-password',
@@ -466,9 +519,28 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Auto-login after reset',
-        text: 'Current flow dumps caregiver at a dead end after password change. Proposed flow auto-logs them in. Confirm Auth0 supports session creation after password reset.',
+        text: 'Current flow dumps caregiver at a dead end after password change. New design auto-logs them in. Confirm Auth0 supports session creation after password reset.',
       },
     ],
+    diagram: {
+      before: [
+        { label: 'Enter email' },
+        { label: 'Reset email', problem: 'Weird sender, broken logo' },
+        { label: 'Verify identity', problem: 'No camp branding' },
+        { label: 'Reset password', problem: 'No multi-camp info' },
+        { label: '"Password changed!"', problem: 'Dead end — no way back' },
+      ],
+      after: [
+        { label: 'Enter email', highlight: true },
+        { label: '"Welcome back"', highlight: true },
+        { label: 'Wrong password', highlight: true },
+        { label: '"Forgot password?"', highlight: true },
+        { label: 'Enter reset code', highlight: true },
+        { label: 'Create new password', highlight: true },
+        { label: '"Password Changed!" → Go to My Account', highlight: true },
+        { label: 'Portal' },
+      ],
+    },
   },
   {
     id: 'claim-account',
@@ -535,13 +607,30 @@ const flows: FlowSection[] = [
         text: 'Camp already provided name and camper info when pre-creating the account. Caregiver only sets a password — simpler flow than new account.',
       },
     ],
+    diagram: {
+      before: [
+        { label: 'Camp website' },
+        { label: 'Auth0 login page', problem: 'No pre-created account detection' },
+        { label: 'Caregiver guesses: login or signup?', problem: 'Confusing' },
+        { label: 'Create full account', problem: 'Re-enters info camp already has' },
+        { label: 'Portal' },
+      ],
+      after: [
+        { label: 'Camp website' },
+        { label: 'Enter email', highlight: true },
+        { label: '"Account ready — set password"', highlight: true },
+        { label: 'Verify code', highlight: true },
+        { label: 'Auto sign-in', highlight: true },
+        { label: 'Portal' },
+      ],
+    },
   },
 ];
 
 export const DesignKickoff: React.FC = () => {
   const navigate = useNavigate();
   const [showScope, setShowScope] = useState(false);
-  const [activeView, setActiveView] = useState<'current' | 'proposed'>('proposed');
+  const [activeView, setActiveView] = useState<'current' | 'proposed' | 'diagram'>('proposed');
 
   return (
     <div className="cm-kickoff">
@@ -549,7 +638,7 @@ export const DesignKickoff: React.FC = () => {
         <img src={logoSrc} alt="campminder" className="cm-kickoff__logo" />
         <h1 className="cm-kickoff__title">Design Kickoff</h1>
         <p className="cm-kickoff__subtitle">
-          Current vs. proposed experience — toggle scope view to see what your team owns.
+          Current vs. new design — toggle scope view to see what your team owns.
         </p>
       </div>
 
@@ -567,18 +656,27 @@ export const DesignKickoff: React.FC = () => {
             onClick={() => setActiveView('proposed')}
             type="button"
           >
-            Proposed Experience
+            New Design
+          </button>
+          <button
+            className={clsx('cm-kickoff__view-pill', activeView === 'diagram' && 'cm-kickoff__view-pill--active')}
+            onClick={() => setActiveView('diagram')}
+            type="button"
+          >
+            Flow Diagram
           </button>
         </div>
 
-        <button
-          className={clsx('cm-kickoff__scope-toggle', showScope && 'cm-kickoff__scope-toggle--active')}
-          onClick={() => setShowScope(!showScope)}
-          type="button"
-        >
-          {showScope ? <VisibilityIcon /> : <VisibilityOffIcon />}
-          {showScope ? 'Showing scope' : 'Show team scope'}
-        </button>
+        {activeView !== 'diagram' && (
+          <button
+            className={clsx('cm-kickoff__scope-toggle', showScope && 'cm-kickoff__scope-toggle--active')}
+            onClick={() => setShowScope(!showScope)}
+            type="button"
+          >
+            {showScope ? <VisibilityIcon /> : <VisibilityOffIcon />}
+            {showScope ? 'Showing scope' : 'Show team scope'}
+          </button>
+        )}
       </div>
 
       {showScope && (
@@ -691,6 +789,49 @@ export const DesignKickoff: React.FC = () => {
                 ))}
               </div>
             )}
+            {/* Flow Diagram */}
+            {activeView === 'diagram' && flow.diagram && (
+              <div className="cm-kickoff__diagram">
+                <div className="cm-kickoff__diagram-row">
+                  <div className="cm-kickoff__diagram-col">
+                    <h4 className="cm-kickoff__diagram-heading cm-kickoff__diagram-heading--before">Before</h4>
+                    <div className="cm-kickoff__diagram-flow">
+                      {flow.diagram.before.map((step, i) => (
+                        <div key={i} className="cm-kickoff__diagram-step-wrapper">
+                          {i > 0 && <div className="cm-kickoff__diagram-arrow" />}
+                          <div className={clsx(
+                            'cm-kickoff__diagram-step',
+                            step.problem && 'cm-kickoff__diagram-step--problem',
+                          )}>
+                            <span className="cm-kickoff__diagram-step-label">{step.label}</span>
+                            {step.problem && (
+                              <span className="cm-kickoff__diagram-step-problem">{step.problem}</span>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="cm-kickoff__diagram-col">
+                    <h4 className="cm-kickoff__diagram-heading cm-kickoff__diagram-heading--after">After</h4>
+                    <div className="cm-kickoff__diagram-flow">
+                      {flow.diagram.after.map((step, i) => (
+                        <div key={i} className="cm-kickoff__diagram-step-wrapper">
+                          {i > 0 && <div className="cm-kickoff__diagram-arrow" />}
+                          <div className={clsx(
+                            'cm-kickoff__diagram-step',
+                            step.highlight && 'cm-kickoff__diagram-step--highlight',
+                          )}>
+                            <span className="cm-kickoff__diagram-step-label">{step.label}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Notes section */}
             {flow.notes && flow.notes.length > 0 && (
               <div className="cm-kickoff__notes">

@@ -2,12 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { Avatar } from '../Avatar';
 import './SearchBar.css';
 
 export interface SearchResult {
   label: string;
   value: string;
+  subtitle?: string;
 }
+
+export type NewTabMode = 'none' | 'hover-icon' | 'static-icon' | 'context-menu';
 
 export interface SearchBarProps {
   placeholder?: string;
@@ -17,8 +22,10 @@ export interface SearchBarProps {
   value?: string;
   onChange?: (value: string) => void;
   onSelect?: (result: SearchResult) => void;
+  onOpenNewTab?: (result: SearchResult) => void;
   onClear?: () => void;
   width?: number;
+  newTabMode?: NewTabMode;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
@@ -29,12 +36,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   value: controlledValue,
   onChange,
   onSelect,
+  onOpenNewTab,
   onClear,
   width = 342,
+  newTabMode = 'none',
 }) => {
   const [internalValue, setInternalValue] = useState('');
   const [focused, setFocused] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);
+  const [contextMenu, setContextMenu] = useState<{ x: number; y: number; result: SearchResult } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -77,14 +87,30 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
+  const handleContextMenu = (e: React.MouseEvent, result: SearchResult) => {
+    if (newTabMode !== 'context-menu') return;
+    e.preventDefault();
+    setContextMenu({ x: e.clientX, y: e.clientY, result });
+  };
+
+  const closeContextMenu = () => setContextMenu(null);
+
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
         setFocused(false);
       }
+      setContextMenu(null);
+    };
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setContextMenu(null);
     };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
   }, []);
 
   return (
@@ -132,19 +158,63 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               <span className="cm-search__loading-text">Loading results...</span>
             </div>
           ) : (
-            results?.map((result, i) => (
-              <button
-                key={result.value}
-                className={clsx('cm-search__result', {
-                  'cm-search__result--highlighted': i === highlightIndex,
-                })}
-                onMouseEnter={() => setHighlightIndex(i)}
-                onMouseDown={() => handleSelect(result)}
-              >
-                {result.label}
-              </button>
-            ))
+            <>
+              <div className="cm-search__section-header">Recently Viewed</div>
+              {results?.map((result, i) => (
+                <button
+                  key={result.value}
+                  className={clsx('cm-search__result', {
+                    'cm-search__result--highlighted': i === highlightIndex,
+                  })}
+                  onMouseEnter={() => setHighlightIndex(i)}
+                  onMouseDown={() => handleSelect(result)}
+                  onContextMenu={(e) => handleContextMenu(e, result)}
+                >
+                  <Avatar name={result.label} size="sm" />
+                  <div className="cm-search__result-text">
+                    <span className="cm-search__result-name">{result.label}</span>
+                    {result.subtitle && (
+                      <span className="cm-search__result-subtitle">{result.subtitle}</span>
+                    )}
+                  </div>
+                  {(newTabMode === 'hover-icon' || newTabMode === 'static-icon') && (
+                    <span
+                      className={clsx('cm-search__new-tab-icon', {
+                        'cm-search__new-tab-icon--static': newTabMode === 'static-icon',
+                      })}
+                      onMouseDown={(e) => {
+                        e.stopPropagation();
+                        onOpenNewTab?.(result);
+                      }}
+                      role="button"
+                      aria-label={`Open ${result.label} in new tab`}
+                    >
+                      <OpenInNewIcon style={{ fontSize: 14 }} />
+                    </span>
+                  )}
+                </button>
+              ))}
+            </>
           )}
+        </div>
+      )}
+
+      {contextMenu && (
+        <div
+          className="cm-search__context-menu"
+          style={{ top: contextMenu.y, left: contextMenu.x }}
+          onMouseDown={(e) => e.stopPropagation()}
+        >
+          <button
+            className="cm-search__context-menu-item"
+            onMouseDown={() => {
+              onOpenNewTab?.(contextMenu.result);
+              closeContextMenu();
+            }}
+          >
+            <OpenInNewIcon style={{ fontSize: 16 }} />
+            Open in new tab
+          </button>
         </div>
       )}
     </div>

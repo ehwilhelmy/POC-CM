@@ -471,6 +471,115 @@
   text-align: left;
 }
 
+/* ── Flow Diagram ── */
+.cm-kickoff__diagram {
+  padding: 0 var(--space-xl) var(--space-xl);
+}
+
+.cm-kickoff__diagram-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xxl);
+}
+
+.cm-kickoff__diagram-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.cm-kickoff__diagram-heading {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid;
+}
+
+.cm-kickoff__diagram-heading--before {
+  color: var(--color-neutral-700);
+  border-color: var(--color-neutral-500);
+}
+
+.cm-kickoff__diagram-heading--after {
+  color: var(--color-primary-default);
+  border-color: var(--color-primary-default);
+}
+
+.cm-kickoff__diagram-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.cm-kickoff__diagram-step-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cm-kickoff__diagram-arrow {
+  width: 2px;
+  height: 20px;
+  background: var(--color-neutral-400);
+  position: relative;
+}
+
+.cm-kickoff__diagram-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--color-neutral-400);
+}
+
+.cm-kickoff__diagram-step {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-neutral-400);
+  background: var(--color-white);
+  text-align: center;
+}
+
+.cm-kickoff__diagram-step-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-900);
+  display: block;
+}
+
+/* Problem step (before) */
+.cm-kickoff__diagram-step--problem {
+  border-color: var(--color-red-600);
+  background: var(--color-red-100);
+}
+
+.cm-kickoff__diagram-step-problem {
+  display: block;
+  font-size: 11px;
+  color: var(--color-red-700);
+  margin-top: 2px;
+  font-style: italic;
+}
+
+/* Highlight step (after — team owned) */
+.cm-kickoff__diagram-step--highlight {
+  border-color: var(--color-primary-default);
+  background: var(--color-purple-100);
+}
+
+.cm-kickoff__diagram-step--highlight .cm-kickoff__diagram-step-label {
+  color: var(--color-primary-default);
+  font-weight: var(--font-weight-semibold);
+}
+
 /* ── Notes section ── */
 .cm-kickoff__notes {
   padding: var(--space-xl);
