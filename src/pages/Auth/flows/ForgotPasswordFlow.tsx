@@ -81,7 +81,6 @@ export const ForgotPasswordFlow: React.FC = () => {
     ? 'Please enter a valid email address'
     : undefined;
   const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
-  const [codeCopied, setCodeCopied] = useState(false);
   const [codeResent, setCodeResent] = useState(false);
   const codeInputRef = useRef<HTMLInputElement>(null);
   const [loginPassword, setLoginPassword] = useState('');
@@ -325,7 +324,7 @@ export const ForgotPasswordFlow: React.FC = () => {
             accentColor={brand.accentColor}
             verificationCode="847291"
             onCodeCopied={() => {
-              setCodeCopied(true);
+
               codeInputRef.current?.focus();
             }}
           >
@@ -352,7 +351,7 @@ export const ForgotPasswordFlow: React.FC = () => {
                   code="847291"
                   accentColor={brand.accentColor}
                   onCopied={() => {
-                    setCodeCopied(true);
+      
                     codeInputRef.current?.focus();
                   }}
                 />

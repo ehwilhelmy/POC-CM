@@ -35,7 +35,6 @@ import forgot04 from '../../assets/current-experience/forgot-04-reset-password.p
 import forgot05 from '../../assets/current-experience/forgot-05-changed-now-what.png';
 
 // New design screenshots — New Account flow
-import newAcct01 from '../../assets/new-design/new-account-step-01.png';
 import newAcct02 from '../../assets/new-design/new-account-step-02.png';
 import newAcct03 from '../../assets/new-design/new-account-step-03.png';
 import newAcct04 from '../../assets/new-design/new-account-step-04.png';
@@ -44,14 +43,12 @@ import newAcct05 from '../../assets/new-design/new-account-step-05.png';
 import newAcct06 from '../../assets/new-design/new-account-step-06.png';
 
 // New design screenshots — Returning Login flow
-import returning01 from '../../assets/new-design/returning-step-01.png';
 import returning02 from '../../assets/new-design/returning-step-02.png';
 import returning03 from '../../assets/new-design/returning-step-03.png';
 import returning04 from '../../assets/new-design/returning-step-04.png';
 import returning05 from '../../assets/new-design/returning-step-05.png';
 
 // New design screenshots — Forgot Password flow
-import forgotNew01 from '../../assets/new-design/forgot-password-step-01.png';
 import forgotNew02 from '../../assets/new-design/forgot-password-step-02.png';
 import forgotNew03 from '../../assets/new-design/forgot-password-step-03.png';
 import forgotNew04 from '../../assets/new-design/forgot-password-step-04.png';
@@ -62,7 +59,6 @@ import forgotNew08 from '../../assets/new-design/forgot-password-step-08.png';
 import forgotNew09 from '../../assets/new-design/forgot-password-step-09.png';
 
 // New design screenshots — Claim Account flow
-import claim01 from '../../assets/new-design/claim-account-step-01.png';
 import claim02 from '../../assets/new-design/claim-account-step-02.png';
 import claim03 from '../../assets/new-design/claim-account-step-03.png';
 import claim04 from '../../assets/new-design/claim-account-step-04.png';

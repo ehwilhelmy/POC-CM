@@ -63,7 +63,6 @@ export const NewParentFlow: React.FC = () => {
     ? 'Please enter a valid email address'
     : undefined;
   const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
-  const [codeCopied, setCodeCopied] = useState(false);
   const [codeResent, setCodeResent] = useState(false);
   const codeInputRef = useRef<HTMLInputElement>(null);
   const [code, setCode] = useState('');
@@ -250,7 +249,7 @@ export const NewParentFlow: React.FC = () => {
             accentColor={brand.accentColor}
             verificationCode="523816"
             onCodeCopied={() => {
-              setCodeCopied(true);
+
               codeInputRef.current?.focus();
             }}
           >
@@ -277,7 +276,7 @@ export const NewParentFlow: React.FC = () => {
                   code="523816"
                   accentColor={brand.accentColor}
                   onCopied={() => {
-                    setCodeCopied(true);
+      
                     codeInputRef.current?.focus();
                   }}
                 />
