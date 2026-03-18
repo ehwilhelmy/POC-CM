@@ -34,6 +34,42 @@ import forgot03 from '../../assets/current-experience/forgot-03-verify-identity.
 import forgot04 from '../../assets/current-experience/forgot-04-reset-password.png';
 import forgot05 from '../../assets/current-experience/forgot-05-changed-now-what.png';
 
+// New design screenshots — New Account flow
+import newAcct01 from '../../assets/new-design/new-account-step-01.png';
+import newAcct02 from '../../assets/new-design/new-account-step-02.png';
+import newAcct03 from '../../assets/new-design/new-account-step-03.png';
+import newAcct04 from '../../assets/new-design/new-account-step-04.png';
+import newAcctEmail from '../../assets/new-design/new-account-verify-email.png';
+import newAcct05 from '../../assets/new-design/new-account-step-05.png';
+import newAcct06 from '../../assets/new-design/new-account-step-06.png';
+
+// New design screenshots — Returning Login flow
+import returning01 from '../../assets/new-design/returning-step-01.png';
+import returning02 from '../../assets/new-design/returning-step-02.png';
+import returning03 from '../../assets/new-design/returning-step-03.png';
+import returning04 from '../../assets/new-design/returning-step-04.png';
+import returning05 from '../../assets/new-design/returning-step-05.png';
+
+// New design screenshots — Forgot Password flow
+import forgotNew01 from '../../assets/new-design/forgot-password-step-01.png';
+import forgotNew02 from '../../assets/new-design/forgot-password-step-02.png';
+import forgotNew03 from '../../assets/new-design/forgot-password-step-03.png';
+import forgotNew04 from '../../assets/new-design/forgot-password-step-04.png';
+import forgotNew05 from '../../assets/new-design/forgot-password-step-05.png';
+import forgotNew06 from '../../assets/new-design/forgot-password-step-06.png';
+import forgotNew07 from '../../assets/new-design/forgot-password-step-07.png';
+import forgotNew08 from '../../assets/new-design/forgot-password-step-08.png';
+import forgotNew09 from '../../assets/new-design/forgot-password-step-09.png';
+
+// New design screenshots — Claim Account flow
+import claim01 from '../../assets/new-design/claim-account-step-01.png';
+import claim02 from '../../assets/new-design/claim-account-step-02.png';
+import claim03 from '../../assets/new-design/claim-account-step-03.png';
+import claim04 from '../../assets/new-design/claim-account-step-04.png';
+import claimEmail from '../../assets/new-design/claim-account-verify-email.png';
+import claim05 from '../../assets/new-design/claim-account-step-05.png';
+import claim06 from '../../assets/new-design/claim-account-step-06.png';
+
 import './DesignKickoff.css';
 
 interface FlowScreen {
@@ -45,6 +81,7 @@ interface FlowScreen {
 
 interface ProposedStep {
   label: string;
+  src?: string;
   teamOwned: boolean;
   annotations: string[];
 }
@@ -167,11 +204,13 @@ const flows: FlowSection[] = [
     proposedSteps: [
       {
         label: 'Camp homepage',
+        src: newAcct01,
         teamOwned: false,
         annotations: ['Camp-managed website — not in scope'],
       },
       {
         label: 'Identifier-first entry',
+        src: newAcct02,
         teamOwned: true,
         annotations: [
           'Input: Email address',
@@ -181,6 +220,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Create account form',
+        src: newAcct03,
         teamOwned: true,
         annotations: [
           'Inputs: First name, Last name, Email (pre-filled), Password, Confirm password',
@@ -189,16 +229,23 @@ const flows: FlowSection[] = [
         ],
       },
       {
-        label: 'Verification screen',
+        label: 'Verification email',
+        src: newAcctEmail,
+        teamOwned: false,
+        annotations: ['Email template — not in scope for this phase'],
+      },
+      {
+        label: 'Verify your email',
+        src: newAcct04,
         teamOwned: true,
         annotations: [
           'Input: 6-digit verification code',
           'Messaging: "We\'ve sent a verification code to [email]"',
-          'Note: Email template is not in scope — just this screen',
         ],
       },
       {
         label: 'Auto sign-in',
+        src: newAcct05,
         teamOwned: true,
         annotations: [
           'Auto sign-in after account creation',
@@ -206,6 +253,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Portal / Dashboard',
+        src: newAcct06,
         teamOwned: false,
         annotations: ['CampInTouch portal — managed by CIT team'],
       },
@@ -324,11 +372,13 @@ const flows: FlowSection[] = [
     proposedSteps: [
       {
         label: 'Camp homepage',
+        src: returning01,
         teamOwned: false,
         annotations: ['Camp-managed website — not in scope'],
       },
       {
         label: 'Identifier-first entry',
+        src: returning02,
         teamOwned: true,
         annotations: [
           'Input: Email address',
@@ -338,6 +388,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Password entry',
+        src: returning03,
         teamOwned: true,
         annotations: [
           'Input: Password',
@@ -347,6 +398,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Auto sign-in',
+        src: returning04,
         teamOwned: true,
         annotations: [
           'Auto sign-in',
@@ -354,6 +406,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Portal / Dashboard',
+        src: returning05,
         teamOwned: false,
         annotations: ['CampInTouch portal — managed by CIT team'],
       },
@@ -446,11 +499,13 @@ const flows: FlowSection[] = [
     proposedSteps: [
       {
         label: 'Camp homepage',
+        src: forgotNew01,
         teamOwned: false,
         annotations: ['Camp-managed website — not in scope'],
       },
       {
         label: 'Identifier-first entry',
+        src: forgotNew02,
         teamOwned: true,
         annotations: [
           'Input: Email address',
@@ -459,17 +514,27 @@ const flows: FlowSection[] = [
         ],
       },
       {
-        label: 'Password attempt',
+        label: 'Password entry',
+        src: forgotNew03,
         teamOwned: true,
         annotations: [
           'Input: Password',
           'Messaging: "Welcome back, [name]"',
+          'Link: "Forgot password?"',
+        ],
+      },
+      {
+        label: 'Password error',
+        src: forgotNew04,
+        teamOwned: true,
+        annotations: [
           'Error: "The email or password for this account is incorrect"',
           'Link: "Forgot password?"',
         ],
       },
       {
         label: 'Reset request',
+        src: forgotNew05,
         teamOwned: true,
         annotations: [
           'Input: Email address (pre-filled)',
@@ -478,6 +543,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Check email / enter code',
+        src: forgotNew06,
         teamOwned: true,
         annotations: [
           'Input: 6-digit reset code',
@@ -487,6 +553,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Create new password',
+        src: forgotNew07,
         teamOwned: true,
         annotations: [
           'Inputs: New password, Confirm new password',
@@ -496,6 +563,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Success confirmation',
+        src: forgotNew08,
         teamOwned: true,
         annotations: [
           'Messaging: "Password Changed!"',
@@ -504,6 +572,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Portal / Dashboard',
+        src: forgotNew09,
         teamOwned: false,
         annotations: ['CampInTouch portal — managed by CIT team'],
       },
@@ -553,11 +622,13 @@ const flows: FlowSection[] = [
     proposedSteps: [
       {
         label: 'Camp homepage',
+        src: claim01,
         teamOwned: false,
         annotations: ['Camp-managed website — not in scope'],
       },
       {
         label: 'Identifier-first entry',
+        src: claim02,
         teamOwned: true,
         annotations: [
           'Input: Email address',
@@ -567,6 +638,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Set password',
+        src: claim03,
         teamOwned: true,
         annotations: [
           'Inputs: Password, Confirm password',
@@ -575,16 +647,23 @@ const flows: FlowSection[] = [
         ],
       },
       {
-        label: 'Verification screen',
+        label: 'Verification email',
+        src: claimEmail,
+        teamOwned: false,
+        annotations: ['Email template — not in scope for this phase'],
+      },
+      {
+        label: 'Verify your email',
+        src: claim04,
         teamOwned: true,
         annotations: [
           'Input: 6-digit verification code',
           'Messaging: "We\'ve sent a verification code to [email]"',
-          'Note: Email template is not in scope — just this screen',
         ],
       },
       {
         label: 'Auto sign-in',
+        src: claim05,
         teamOwned: true,
         annotations: [
           'Auth0 token exchange after verification',
@@ -593,6 +672,7 @@ const flows: FlowSection[] = [
       },
       {
         label: 'Portal / Dashboard',
+        src: claim06,
         teamOwned: false,
         annotations: ['CampInTouch portal — managed by CIT team'],
       },
@@ -759,31 +839,41 @@ export const DesignKickoff: React.FC = () => {
               </div>
             )}
 
-            {/* Proposed experience — step cards */}
+            {/* Proposed experience — screenshot cards */}
             {activeView === 'proposed' && (
-              <div className="cm-kickoff__steps">
+              <div className="cm-kickoff__screens">
                 {flow.proposedSteps.map((step, i) => (
                   <div
                     key={i}
                     className={clsx(
-                      'cm-kickoff__step',
-                      showScope && !step.teamOwned && 'cm-kickoff__step--other-team',
-                      showScope && step.teamOwned && 'cm-kickoff__step--team-owned',
+                      'cm-kickoff__screen',
+                      showScope && !step.teamOwned && 'cm-kickoff__screen--other-team',
+                      showScope && step.teamOwned && 'cm-kickoff__screen--team-owned',
                     )}
                   >
-                    <div className="cm-kickoff__step-number">{i + 1}</div>
-                    <div className="cm-kickoff__step-content">
-                      <span className="cm-kickoff__step-label">{step.label}</span>
-                      {showScope && (
-                        <ul className="cm-kickoff__step-annotations">
-                          {step.annotations.map((note, j) => (
-                            <li key={j} className="cm-kickoff__step-annotation">{note}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
+                    {step.src && (
+                      <img
+                        src={step.src}
+                        alt={step.label}
+                        className="cm-kickoff__screen-img"
+                      />
+                    )}
+                    <span className="cm-kickoff__screen-label">
+                      {i + 1}. {step.label}
+                    </span>
                     {showScope && step.teamOwned && (
-                      <span className="cm-kickoff__screen-badge cm-kickoff__screen-badge--inline">Your team</span>
+                      <span className="cm-kickoff__screen-badge">Your team</span>
+                    )}
+                    {showScope && step.annotations && step.annotations.length > 0 && (
+                      <ul className={clsx(
+                        'cm-kickoff__annotations',
+                        step.teamOwned && 'cm-kickoff__annotations--team',
+                        !step.teamOwned && 'cm-kickoff__annotations--other',
+                      )}>
+                        {step.annotations.map((note, j) => (
+                          <li key={j} className="cm-kickoff__annotation">{note}</li>
+                        ))}
+                      </ul>
                     )}
                   </div>
                 ))}
@@ -832,18 +922,6 @@ export const DesignKickoff: React.FC = () => {
               </div>
             )}
 
-            {/* Notes section */}
-            {flow.notes && flow.notes.length > 0 && (
-              <div className="cm-kickoff__notes">
-                <h3 className="cm-kickoff__notes-title">Notes & Open Questions</h3>
-                {flow.notes.map((note, i) => (
-                  <div key={i} className="cm-kickoff__note">
-                    <span className="cm-kickoff__note-label">{note.label}</span>
-                    <p className="cm-kickoff__note-text">{note.text}</p>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         ))}
       </div>

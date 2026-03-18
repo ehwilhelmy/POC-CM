@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { CampWebsite } from '../components/CampWebsite';
 import { AuthLayout } from '../components/AuthLayout';
@@ -63,6 +64,7 @@ export const NewParentFlow: React.FC = () => {
     : undefined;
   const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
   const [codeCopied, setCodeCopied] = useState(false);
+  const [codeResent, setCodeResent] = useState(false);
   const codeInputRef = useRef<HTMLInputElement>(null);
   const [code, setCode] = useState('');
   const [password, setPassword] = useState('');
@@ -299,8 +301,19 @@ export const NewParentFlow: React.FC = () => {
           </EmailPopup>
 
           <p className="cm-auth-signup-prompt">
-            Didn&rsquo;t receive a code?{' '}
-            <button className="cm-auth-link">Resend</button>
+            {codeResent ? (
+              <span style={{ color: 'var(--color-success)' }}>
+                <CheckCircleOutlineIcon style={{ fontSize: 14, verticalAlign: 'middle', marginRight: 4 }} />
+                Code resent to {email}
+              </span>
+            ) : (
+              <>
+                Didn&rsquo;t receive a code?{' '}
+                <button className="cm-auth-link" onClick={() => setCodeResent(true)}>
+                  Resend
+                </button>
+              </>
+            )}
           </p>
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />

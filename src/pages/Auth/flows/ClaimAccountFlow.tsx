@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { CampWebsite } from '../components/CampWebsite';
 import { AuthLayout } from '../components/AuthLayout';
@@ -63,6 +64,7 @@ export const ClaimAccountFlow: React.FC = () => {
     : undefined;
   const firstName = email.split('@')[0]?.split(/[._-]/)[0]?.replace(/^./, c => c.toUpperCase()) || '';
   const [codeCopied, setCodeCopied] = useState(false);
+  const [codeResent, setCodeResent] = useState(false);
   const codeInputRef = useRef<HTMLInputElement>(null);
   const [code, setCode] = useState('');
   const [password, setPassword] = useState('');
@@ -117,11 +119,9 @@ export const ClaimAccountFlow: React.FC = () => {
       onBack={
         step === 'email-entry'
           ? () => setStep('camp-website')
-          : step === 'create-password'
-            ? () => setStep('email-entry')
-            : step === 'verify-code'
-              ? () => setStep('create-password')
-              : undefined
+          : step === 'verify-code'
+            ? () => setStep('create-password')
+            : undefined
       }
     >
       {step === 'email-entry' && (
@@ -160,10 +160,10 @@ export const ClaimAccountFlow: React.FC = () => {
 
       {step === 'create-password' && (
         <>
-          <h1 className="cm-auth-title">Set up your password</h1>
+          <h1 className="cm-auth-title">Create your password</h1>
           <p className="cm-auth-notice">
-            Great news! <strong>{brand.name}</strong> has already set up your account
-            for <strong>{email}</strong>. Create a password to activate it.
+            Good news! <strong>{brand.name}</strong> already has an account set up
+            for <strong>{email || 'your email'}</strong>. Just create a password to get started.
           </p>
           <div className="cm-auth-form">
             <TextInput
@@ -186,7 +186,7 @@ export const ClaimAccountFlow: React.FC = () => {
               disabled={!allValid}
               onClick={() => setStep('verify-code')}
             >
-              Set Password
+              Create Password
             </button>
           </div>
           <p className="cm-auth-signup-prompt">
@@ -294,8 +294,19 @@ export const ClaimAccountFlow: React.FC = () => {
           </EmailPopup>
 
           <p className="cm-auth-signup-prompt">
-            Didn&rsquo;t receive a code?{' '}
-            <button className="cm-auth-link">Resend</button>
+            {codeResent ? (
+              <span style={{ color: 'var(--color-success)' }}>
+                <CheckCircleOutlineIcon style={{ fontSize: 14, verticalAlign: 'middle', marginRight: 4 }} />
+                Code resent to {email}
+              </span>
+            ) : (
+              <>
+                Didn&rsquo;t receive a code?{' '}
+                <button className="cm-auth-link" onClick={() => setCodeResent(true)}>
+                  Resend
+                </button>
+              </>
+            )}
           </p>
           <div className="cm-auth-info-banner">
             <InfoOutlinedIcon className="cm-auth-info-banner__icon" fontSize="small" />
