@@ -35,6 +35,7 @@ import forgot04 from '../../assets/current-experience/forgot-04-reset-password.p
 import forgot05 from '../../assets/current-experience/forgot-05-changed-now-what.png';
 
 // New design screenshots — New Account flow
+import newAcct01 from '../../assets/new-design/new-account-step-01.png';
 import newAcct02 from '../../assets/new-design/new-account-step-02.png';
 import newAcct03 from '../../assets/new-design/new-account-step-03.png';
 import newAcct04 from '../../assets/new-design/new-account-step-04.png';
@@ -59,6 +60,7 @@ import forgotNew08 from '../../assets/new-design/forgot-password-step-08.png';
 import forgotNew09 from '../../assets/new-design/forgot-password-step-09.png';
 
 // New design screenshots — Claim Account flow
+import claimWelcome from '../../assets/new-design/claim-account-welcome-email.png';
 import claim02 from '../../assets/new-design/claim-account-step-02.png';
 import claim03 from '../../assets/new-design/claim-account-step-03.png';
 import claim04 from '../../assets/new-design/claim-account-step-04.png';
@@ -199,6 +201,12 @@ const flows: FlowSection[] = [
     ],
     proposedSteps: [
       {
+        label: 'Camp website',
+        src: newAcct01,
+        teamOwned: false,
+        annotations: ['Caregiver clicks "Parent Portal" on camp website'],
+      },
+      {
         label: 'Identifier-first entry',
         src: newAcct02,
         teamOwned: true,
@@ -279,7 +287,8 @@ const flows: FlowSection[] = [
         { label: 'Enter email', highlight: true },
         { label: '"No account found"', highlight: true },
         { label: 'Create account form', highlight: true },
-        { label: 'Verify code', highlight: true },
+        { label: 'Verification email sent' },
+        { label: 'Enter code', highlight: true },
         { label: 'Auto sign-in', highlight: true },
         { label: 'Portal' },
       ],
@@ -418,7 +427,6 @@ const flows: FlowSection[] = [
       after: [
         { label: 'Camp website' },
         { label: 'Enter email', highlight: true },
-        { label: '"Welcome back, [name]"', highlight: true },
         { label: 'Enter password', highlight: true },
         { label: 'Auto sign-in', highlight: true },
         { label: 'Portal' },
@@ -579,10 +587,9 @@ const flows: FlowSection[] = [
       ],
       after: [
         { label: 'Enter email', highlight: true },
-        { label: '"Welcome back"', highlight: true },
-        { label: 'Wrong password', highlight: true },
+        { label: 'Enter password', highlight: true },
         { label: '"Forgot password?"', highlight: true },
-        { label: 'Enter reset code', highlight: true },
+        { label: 'Reset code email sent' },
         { label: 'Create new password', highlight: true },
         { label: '"Password Changed!" → Go to My Account', highlight: true },
         { label: 'Portal' },
@@ -590,14 +597,20 @@ const flows: FlowSection[] = [
     },
   },
   {
-    id: 'claim-account',
-    title: 'Claim Account',
+    id: 'camp-created-account',
+    title: 'Account Created by Camp',
     description:
-      'Camp pre-creates the account with the caregiver\'s email. Caregiver only needs to set a password and verify.',
+      'Camp creates the Auth0 account for the caregiver. The caregiver receives a welcome email or visits the camp website, then sets a password to activate.',
     prototypeRoute: '/auth/claim-account',
     tags: ['Multi-Step Friction', 'Branding & Identity'],
     currentScreens: [],
     proposedSteps: [
+      {
+        label: 'Welcome email',
+        src: claimWelcome,
+        teamOwned: false,
+        annotations: ['Caregiver receives email from camp with "Get Started" link'],
+      },
       {
         label: 'Identifier-first entry',
         src: claim02,
@@ -661,18 +674,19 @@ const flows: FlowSection[] = [
     ],
     diagram: {
       before: [
-        { label: 'Camp website' },
-        { label: 'Auth0 login page', problem: 'No pre-created account detection' },
-        { label: 'Caregiver guesses: login or signup?', problem: 'Confusing' },
-        { label: 'Create full account', problem: 'Re-enters info camp already has' },
+        { label: 'Welcome email from camp' },
+        { label: 'Auth0 login page', problem: 'Login or signup? Caregiver doesn\'t know' },
+        { label: 'Create password' },
+        { label: 'Verification email sent' },
+        { label: 'Enter code' },
         { label: 'Portal' },
       ],
       after: [
-        { label: 'Camp website' },
+        { label: 'Welcome email from camp' },
         { label: 'Enter email', highlight: true },
-        { label: '"Account ready — set password"', highlight: true },
-        { label: 'Verify code', highlight: true },
-        { label: 'Auto sign-in', highlight: true },
+        { label: '"Account ready — create password"', highlight: true },
+        { label: 'Verification email sent' },
+        { label: 'Enter code', highlight: true },
         { label: 'Portal' },
       ],
     },
