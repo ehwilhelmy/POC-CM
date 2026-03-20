@@ -117,7 +117,7 @@ const flows: FlowSection[] = [
     id: 'new-account',
     title: 'New Account',
     description:
-      'Caregiver creates a brand-new account from the camp website. Identifier-first entry routes to signup automatically.',
+      'Caregiver creates a brand-new account from the camp website. Also applies when a camp has a contact record for the caregiver but hasn\'t created an Auth0 account. Identifier-first entry routes to signup automatically.',
     prototypeRoute: '/auth/new-parent',
     tags: ['Multi-Step Friction', 'Branding & Identity'],
     currentScreens: [
@@ -600,7 +600,7 @@ const flows: FlowSection[] = [
     id: 'camp-created-account',
     title: 'Account Created by Camp',
     description:
-      'Camp creates the Auth0 account for the caregiver. The caregiver receives a welcome email or visits the camp website, then sets a password to activate.',
+      'Camp creates the Auth0 account for the caregiver. The caregiver receives a welcome email or visits the camp website, then sets a password to activate. Current experience shown as understood — needs confirmation.',
     prototypeRoute: '/auth/claim-account',
     tags: ['Multi-Step Friction', 'Branding & Identity'],
     currentScreens: [],
@@ -873,6 +873,7 @@ export const DesignKickoff: React.FC = () => {
             {activeView === 'diagram' && flow.diagram && (
               <div className="cm-kickoff__diagram">
                 <div className="cm-kickoff__diagram-row">
+                  {flow.diagram.before.length > 0 && (
                   <div className="cm-kickoff__diagram-col">
                     <h4 className="cm-kickoff__diagram-heading cm-kickoff__diagram-heading--before">Before</h4>
                     <div className="cm-kickoff__diagram-flow">
@@ -892,8 +893,9 @@ export const DesignKickoff: React.FC = () => {
                       ))}
                     </div>
                   </div>
+                  )}
                   <div className="cm-kickoff__diagram-col">
-                    <h4 className="cm-kickoff__diagram-heading cm-kickoff__diagram-heading--after">After</h4>
+                    <h4 className="cm-kickoff__diagram-heading cm-kickoff__diagram-heading--after">{flow.diagram.before.length > 0 ? 'After' : 'New Design'}</h4>
                     <div className="cm-kickoff__diagram-flow">
                       {flow.diagram.after.map((step, i) => (
                         <div key={i} className="cm-kickoff__diagram-step-wrapper">

@@ -2,10 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { CampWebsite } from '../components/CampWebsite';
 import { AuthLayout } from '../components/AuthLayout';
 import { EmailPopup } from '../components/EmailPopup';
-import { ClickableCode } from '../components/GmailInbox';
+import { ClickableCode, GmailInbox } from '../components/GmailInbox';
 import { CampInTouchDashboard } from '../components/CampInTouchDashboard';
 import { PasswordRequirements } from '../components/PasswordRequirements';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
@@ -16,17 +15,17 @@ import { CAMP, CAMPMINDER_DEFAULT } from '../campBrand';
 import './EmailPreviewFlow.css';
 
 type Step =
-  | 'camp-website'
+  | 'welcome-email'
   | 'email-entry'
   | 'create-password'
   | 'verify-code'
   | 'loading'
   | 'home';
 
-const STEPS: readonly Step[] = ['camp-website', 'email-entry', 'create-password', 'verify-code', 'loading', 'home'] as const;
+const STEPS: readonly Step[] = ['welcome-email', 'email-entry', 'create-password', 'verify-code', 'loading', 'home'] as const;
 
 const SCOPE_ANNOTATIONS: Record<Step, string[]> = {
-  'camp-website': [],
+  'welcome-email': [],
   'email-entry': [
     'Input: Email address',
     'Messaging: "Enter your email to get started"',
@@ -88,10 +87,51 @@ export const ClaimAccountFlow: React.FC = () => {
     }
   }, [step]);
 
-  if (step === 'camp-website') {
+  if (step === 'welcome-email') {
     return (
       <>
-        <CampWebsite onPortalClick={() => setStep('email-entry')} />
+        <div style={{ minHeight: '100vh', background: '#f0f0f0', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 40 }}>
+          <GmailInbox
+            senderName={`${brand.name} via campminder`}
+            senderEmail="noreply@campminder.com"
+            subject={`Welcome to ${brand.name}!`}
+            accentColor={brand.accentColor}
+          >
+            <div className="cm-email__camp-banner" style={{ backgroundColor: brand.accentColor }}>
+              {brand.logoUrl ? (
+                <img src={brand.logoUrl} alt={brand.name} style={{ width: 36, height: 36, borderRadius: '50%' }} />
+              ) : (
+                <div className="cm-email__camp-banner-logo">{brand.initials}</div>
+              )}
+              <span className="cm-email__camp-banner-name">{brand.name}</span>
+            </div>
+            <div className="cm-email__content">
+              <p className="cm-email__greeting">Hi there,</p>
+              <p>
+                Great news — <strong>{brand.name}</strong> has set up an account for you
+                on campminder. You're just one step away from accessing your camp portal.
+              </p>
+              <p>Click the button below to create your password and activate your account:</p>
+              <div style={{ margin: '16px 0' }}>
+                <button
+                  className="cm-auth-btn cm-auth-btn--primary"
+                  style={{ maxWidth: 200 }}
+                  onClick={() => setStep('email-entry')}
+                >
+                  Get Started
+                </button>
+              </div>
+              <p className="cm-email__muted">
+                If you didn&rsquo;t expect this email, you can safely ignore it.
+                This link expires in 7 days.
+              </p>
+            </div>
+            <div className="cm-email__footer">
+              <span className="cm-email__footer-brand">Powered by campminder</span>
+              <span className="cm-email__footer-links">Help Center &middot; Privacy Policy</span>
+            </div>
+          </GmailInbox>
+        </div>
         <StepNav {...stepNav} {...scopeToggleProps} />
       </>
     );
@@ -117,7 +157,7 @@ export const ClaimAccountFlow: React.FC = () => {
       scopeAnnotations={SCOPE_ANNOTATIONS[step]}
       onBack={
         step === 'email-entry'
-          ? () => setStep('camp-website')
+          ? () => setStep('welcome-email')
           : undefined
       }
     >
