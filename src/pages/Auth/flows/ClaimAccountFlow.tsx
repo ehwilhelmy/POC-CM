@@ -51,7 +51,7 @@ export const ClaimAccountFlow: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const brand = searchParams.get('brand') === 'default' ? CAMPMINDER_DEFAULT : CAMP;
-  const [step, setStep] = useState<Step>('camp-website');
+  const [step, setStep] = useState<Step>('welcome-email');
   const [email, setEmail] = useState('');
   const [emailTouched, setEmailTouched] = useState(false);
   const [emailOpen, setEmailOpen] = useState(false);
